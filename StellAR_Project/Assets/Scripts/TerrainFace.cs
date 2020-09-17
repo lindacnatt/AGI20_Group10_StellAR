@@ -6,14 +6,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainFaceMesh{
+public class TerrainFace{
     Mesh mesh;
     int resolution;
     Vector3 localUp;
     Vector3 axisA;
     Vector3 axisB;
 
-    public void TerrainFace(Mesh mesh, int resolution, Vector3 localUp){
+    public TerrainFace(Mesh mesh, int resolution, Vector3 localUp){
         this.mesh = mesh;
         this.resolution = resolution;
         this.localUp = localUp;
@@ -41,8 +41,8 @@ public class TerrainFaceMesh{
                     triangles[triangleIndex + 2]  = i + resolution;
 
                     triangles[triangleIndex + 3]  = i;
-                    triangles[triangleIndex + 1]  = i + resolution +1;
-                    triangles[triangleIndex + 2]  = i + resolution;
+                    triangles[triangleIndex + 4]  = i + 1;
+                    triangles[triangleIndex + 5]  = i + resolution + 1;
                     triangleIndex += 6;
                 }
             }
