@@ -10,11 +10,29 @@ public class Attractor : MonoBehaviour
     public bool staticBody = false;
     
     public static List<Attractor> Attractors;
+    private TrailRenderer trail; 
 
     // Update call for the attractor. Runs through the static attractors list.
     void Awake(){
         if (staticBody)
-            rigidBody.isKinematic = true;
+           { rigidBody.isKinematic = true;
+            trail = null; }
+        else {
+            trail = gameObject.AddComponent(typeof(TrailRenderer)) as TrailRenderer;
+            trail.time=0.5f;
+            trail.material= new Material(Shader.Find("Sprites/Default"));
+            trail.material.SetColor("_TintColor",Color.white);
+            float alpha = 0.5f;
+            Gradient gradient = new Gradient();
+            gradient.SetKeys(
+            new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(Color.gray, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) });
+            trail.colorGradient=gradient;
+            trail.startWidth=0.05f;
+            trail.emitting=true;
+        }
+            
+
     }
 
     void FixedUpdate(){
