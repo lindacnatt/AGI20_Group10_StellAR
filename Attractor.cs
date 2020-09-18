@@ -7,17 +7,18 @@ public class Attractor : MonoBehaviour
     public Rigidbody rigidBody;
     const float gravityConstant = 667.408f;
 
+    public bool staticBody = false;
+    
     public static List<Attractor> Attractors;
 
     // Update call for the attractor. Runs through the static attractors list.
-    void FixedUpdate(){
-        
-        foreach(Attractor attractor in Attractors){
-            if (attractor != this){
-                Attract(attractor);
-            }
-        }
+    void Awake(){
+        if (staticBody)
+            rigidBody.isKinematic = true;
+    }
 
+    void FixedUpdate(){
+        SimulateStellarSystem();
     }
 
     // For adding attractors to the attractors list
@@ -35,6 +36,7 @@ public class Attractor : MonoBehaviour
 
     void Attract(Attractor attractedObj){
         
+
         Rigidbody rigidBodyToAttract = attractedObj.rigidBody;
         Vector3 distanceDirection = rigidBody.position - rigidBodyToAttract.position;
         float distance = distanceDirection.magnitude;
@@ -49,4 +51,14 @@ public class Attractor : MonoBehaviour
 
         rigidBodyToAttract.AddForce(forceDirection);
   }
+
+  public void SimulateStellarSystem(){
+      if(Attractors != null)
+        foreach(Attractor attractor in Attractors){
+                if ((attractor != this) && (attractor.gameObject.scene == this.gameObject.scene)&&(!attractor.staticBody)){
+                    Attract(attractor);
+                }
+            }
+  }
+
 }
