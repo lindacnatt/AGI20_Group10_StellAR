@@ -132,6 +132,8 @@ GameObject:
   - component: {fileID: 99639251}
   - component: {fileID: 99639250}
   - component: {fileID: 99639252}
+  - component: {fileID: 99639254}
+  - component: {fileID: 99639253}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -182,6 +184,34 @@ MonoBehaviour:
   m_PlanePrefab: {fileID: 7288022388050727156, guid: 492c0d5d83b7c8f479d35cd7a0d3c4e3,
     type: 3}
   m_DetectionMode: 1
+--- !u!114 &99639253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99639249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54861a17d04194d44bff3b4a586e5f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectToInstantiate: {fileID: 6550158357655270235, guid: c14270bed87c2ac46a1fa4938a1d8f1d,
+    type: 3}
+  ARCamera: {fileID: 1319951127}
+  distanceFromCamera: 1
+--- !u!114 &99639254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99639249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &375825372
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +375,7 @@ GameObject:
   - component: {fileID: 1054004084}
   - component: {fileID: 1054004083}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +450,7 @@ Transform:
   m_GameObject: {fileID: 1054004082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.99}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
