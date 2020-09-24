@@ -9,6 +9,7 @@ public class Planet : MonoBehaviour{
 
     public ColorSettings colorSettings;
     public ShapeSettings shapeSettings;
+    //public NoiseSettings noiseSettings;
     
     ShapeGenerator shapeGenerator;
     
@@ -60,8 +61,7 @@ public class Planet : MonoBehaviour{
         if(autoUpdate){
             Initialize();
             GenerateMesh();
-        }
-        
+        }    
     }
 
     void GenerateColors(){ // update color for every mesh given from the colorsettings
