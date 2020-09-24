@@ -74,27 +74,28 @@
       }
     },
     "com.unity.xr.arcore": {
-      "version": "2.1.11",
+      "version": "4.0.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.arsubsystems": "2.1.2",
-        "com.unity.xr.management": "3.2.13"
+        "com.unity.xr.arsubsystems": "4.0.8",
+        "com.unity.xr.management": "3.2.13",
+        "com.unity.modules.androidjni": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arfoundation": {
-      "version": "2.1.8",
+      "version": "4.0.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.xr.legacyinputhelpers": "2.1.1",
-        "com.unity.xr.arsubsystems": "2.1.2"
+        "com.unity.xr.arsubsystems": "4.0.8",
+        "com.unity.xr.management": "3.2.13"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.arsubsystems": {
-      "version": "2.1.2",
+      "version": "4.0.8",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -104,7 +105,7 @@
     },
     "com.unity.xr.legacyinputhelpers": {
       "version": "2.1.4",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
