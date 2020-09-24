@@ -8,8 +8,8 @@ public class PlanetEditor : Editor{
     Planet planet;
     Editor shapeEditor;
     Editor colorEditor;
+    Editor noiseEditor;
     public override void OnInspectorGUI(){
-
         using(var check = new EditorGUI.ChangeCheckScope()){
             base.OnInspectorGUI();
             if(check.changed){
@@ -22,6 +22,7 @@ public class PlanetEditor : Editor{
         }
         DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref shapeEditor);
         DrawSettingsEditor(planet.colorSettings, planet.OnColorSettingsUpdated, ref planet.colorSettingsFoldout, ref colorEditor);
+        //DrawSettingsEditor(planet.noiseSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref noiseEditor);
     }
     void DrawSettingsEditor(Object settings, System.Action onSettingsUpdated, ref bool foldout, ref Editor editor){
         if(settings != null){
