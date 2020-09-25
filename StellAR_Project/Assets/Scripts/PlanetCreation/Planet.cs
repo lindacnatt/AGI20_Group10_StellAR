@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Planet : MonoBehaviour{   
+
     [Range(2, 256)]
     public int resolution = 10;
     public bool autoUpdate = true;
@@ -10,6 +11,9 @@ public class Planet : MonoBehaviour{
     public ColorSettings colorSettings;
     public ShapeSettings shapeSettings;
     //public NoiseSettings noiseSettings;
+
+    // create mouseInteractions
+    MouseInteraction mouseInteraction;
     
     ShapeGenerator shapeGenerator;
     
