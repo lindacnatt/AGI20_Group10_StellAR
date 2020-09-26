@@ -21,6 +21,7 @@
 
 # Visual Studio cache directory
 .vs/
+.vscode
 
 # Gradle cache directory
 .gradle/
@@ -57,4 +58,7 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+#In the Apple macOS operating system, .DS_Store is a file that stores custom attributes of its containing folder.
+*.DS_Store
 
