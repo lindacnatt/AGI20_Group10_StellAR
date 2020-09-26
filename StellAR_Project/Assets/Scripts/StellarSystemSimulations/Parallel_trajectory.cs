@@ -12,15 +12,17 @@ public class Parallel_trajectory: MonoBehaviour
 
     public Vector3 initalVelocity;
     public GameObject mainObject;
-    public GameObject plane;
+    public GameObject sphere3;
     public GameObject sphere;
     public GameObject sphere2;
+    public GameObject sphere4;
     private LineRenderer lineRenderer;
 
     public static bool mainPhysics = true;
 
     void Start()
     {
+        Application.targetFrameRate = 30;
         Physics.autoSimulation = false;
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 1000;
@@ -65,9 +67,11 @@ public class Parallel_trajectory: MonoBehaviour
         SceneManager.SetActiveScene(parallelScene);
         
         GameObject simulationObject = Instantiate(mainObject);
-        GameObject simulationPlane = Instantiate(plane);
+        GameObject simulationSphere3 = Instantiate(sphere3);
         GameObject simulationSphere = Instantiate(sphere);
         GameObject simulationSphere2 = Instantiate(sphere2);
+        GameObject simulationSphere4 = Instantiate(sphere4);
+        
 
         simulationObject.GetComponent<Rigidbody>().velocity = mainObject.GetComponent<Rigidbody>().velocity+ initalVelocity;
         simulationObject.GetComponent<Rigidbody>().angularVelocity = mainObject.GetComponent<Rigidbody>().angularVelocity;
@@ -77,6 +81,12 @@ public class Parallel_trajectory: MonoBehaviour
 
         simulationSphere2.GetComponent<Rigidbody>().velocity = sphere2.GetComponent<Rigidbody>().velocity;
         simulationSphere2.GetComponent<Rigidbody>().angularVelocity = sphere2.GetComponent<Rigidbody>().angularVelocity;
+
+        simulationSphere3.GetComponent<Rigidbody>().velocity = sphere3.GetComponent<Rigidbody>().velocity;
+        simulationSphere3.GetComponent<Rigidbody>().angularVelocity = sphere3.GetComponent<Rigidbody>().angularVelocity;
+
+        simulationSphere4.GetComponent<Rigidbody>().velocity = sphere4.GetComponent<Rigidbody>().velocity;
+        simulationSphere4.GetComponent<Rigidbody>().angularVelocity = sphere4.GetComponent<Rigidbody>().angularVelocity;
 
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {   
@@ -91,9 +101,10 @@ public class Parallel_trajectory: MonoBehaviour
         }
 
         Destroy(simulationObject);
-        Destroy(simulationPlane);
+        Destroy(simulationSphere3);
         Destroy(simulationSphere2);
         Destroy(simulationSphere);
+        Destroy(simulationSphere4);
 
         SceneManager.SetActiveScene(mainScene);
     }
