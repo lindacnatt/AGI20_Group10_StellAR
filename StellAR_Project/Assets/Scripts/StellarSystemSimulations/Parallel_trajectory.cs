@@ -12,7 +12,6 @@ public class Parallel_trajectory: MonoBehaviour
 
     public Vector3 initalVelocity;
     public GameObject mainObject;
-    public GameObject plane;
     public GameObject sphere;
     public GameObject sphere2;
     private LineRenderer lineRenderer;
@@ -65,7 +64,6 @@ public class Parallel_trajectory: MonoBehaviour
         SceneManager.SetActiveScene(parallelScene);
         
         GameObject simulationObject = Instantiate(mainObject);
-        GameObject simulationPlane = Instantiate(plane);
         GameObject simulationSphere = Instantiate(sphere);
         GameObject simulationSphere2 = Instantiate(sphere2);
 
@@ -91,7 +89,7 @@ public class Parallel_trajectory: MonoBehaviour
         }
 
         Destroy(simulationObject);
-        Destroy(simulationPlane);
+      
         Destroy(simulationSphere2);
         Destroy(simulationSphere);
 

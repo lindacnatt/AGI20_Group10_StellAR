@@ -13,9 +13,6 @@ public class ArPlacement : MonoBehaviour
     private GameObject objectToPlace;//this is the object that is placed
     private bool placed = false;//of the object is placed or not
 
-
-    static List<ARRaycastHit> hits = new List<ARRaycastHit>(); //a list of raycasthits
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,7 +21,7 @@ public class ArPlacement : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (placed != true) //while it is not placed it will follow the cameras position
         {
@@ -33,7 +30,10 @@ public class ArPlacement : MonoBehaviour
         }
         if (Input.touchCount > 0)
         {
-           placed = true; //this places the object and it is locked to the latest position it had. Physics should take it from here.
+            placed = true; //this places the object and it is locked to the latest position it had. Physics should take it from here.
+            objectToPlace.GetComponent<Attractor>().enabled = true;
+            objectToPlace.GetComponent<Rigidbody>().AddRelativeForce(Mathf.Pow(objectToPlace.GetComponent<Rigidbody>().mass, 3) * Vector3.forward); //we need to dial this in
+            Destroy(this);
         }
     }
 }
