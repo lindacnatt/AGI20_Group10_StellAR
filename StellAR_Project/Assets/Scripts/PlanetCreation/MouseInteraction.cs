@@ -8,11 +8,12 @@ public class MouseInteraction : MonoBehaviour{
     RaycastHit hit;
     Transform selection;
     Renderer selectionRenderer;
-    [SerializeField]
-
     Mesh terrainFaceMesh;
-    Vector3 hitCoord;
+    public List<Vector3> hitCoords;
     Vector3[] vertices;
+
+    [SerializeField]
+    public float brushSize = 0.1f;
     void Update(){
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit)){
@@ -21,10 +22,9 @@ public class MouseInteraction : MonoBehaviour{
             
             if(selectionRenderer != null){
                 if(Input.GetMouseButtonDown(0)){
-                    hitCoord = transform.InverseTransformPoint(hit.point);
+                    hitCoords.Add(transform.InverseTransformPoint(hit.point)); 
                     terrainFaceMesh = getCurrentFace(ray.direction, selection);
                     vertices = terrainFaceMesh.vertices;
-                    Debug.Log(vertices[0]);
                 } 
             }
 
@@ -42,6 +42,9 @@ public class MouseInteraction : MonoBehaviour{
             }
         }
         return null;
+    }
+    List<Vector3> GetPaintedVertices(){
+        return hitCoords;
     }
     
 }
