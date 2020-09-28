@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attractor : MonoBehaviour
 {
     public Rigidbody rigidBody;
-    public const float gravityConstant = 0.0667408f; //we need to dial this in
+    public const float gravityConstant = 667.408f;
 
     public bool staticBody = false;
     
@@ -55,7 +55,7 @@ public class Attractor : MonoBehaviour
             }
     }
   }
-    /*
+
   public static void SimulateStellarSystem(string scene, Attractor obj){
       if(Attractors != null){
         foreach(Attractor attractor in Attractors){
@@ -79,6 +79,6 @@ public class Attractor : MonoBehaviour
         Vector3 forceDirection = distanceDirection.normalized * forceMag;
 
         rigidBodyToAttract.AddForce(forceDirection);
-  }*/
+  }
 
 }

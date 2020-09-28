@@ -27,7 +27,7 @@ MonoBehaviour:
   - enabled: 1
     useFirstLayerAsMask: 1
     noiseSettings:
-      numLayers: 4
+      numLayers: 8
       fallof: 0.3
       freqPower: 8.86
       freq: 5.75
@@ -37,7 +37,7 @@ MonoBehaviour:
   - enabled: 1
     useFirstLayerAsMask: 0
     noiseSettings:
-      numLayers: 4
+      numLayers: 8
       fallof: 0.3
       freqPower: 4.52
       freq: 1.52
