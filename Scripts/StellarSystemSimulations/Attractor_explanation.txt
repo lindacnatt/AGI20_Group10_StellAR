@@ -1,5 +1,0 @@
-Importera C# filen Attractors till dina assets. Följ sedan anvisningarna för att koppla ihop scriptet med en asset i följande video:
-
-https://www.youtube.com/watch?v=Ouu3D_VHx9o&list=WL&index=13&t=0s 
-
-Koden är skriven utefter videon ovan.
