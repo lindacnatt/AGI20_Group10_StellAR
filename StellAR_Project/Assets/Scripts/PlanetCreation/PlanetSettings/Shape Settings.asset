@@ -16,16 +16,18 @@ MonoBehaviour:
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
+    useMouseAsMask: 0
     noiseSettings:
       numLayers: 4
       fallof: 0.61
       freqPower: 2.07
       freq: 0.32
-      minValue: 0.25
-      amplitude: 0.21
-      noiseCenter: {x: 1.09, y: 2.17, z: 2.64}
+      minValue: 0.27
+      amplitude: 0.2
+      noiseCenter: {x: 4.4, y: 5.54, z: 2.64}
   - enabled: 1
     useFirstLayerAsMask: 1
+    useMouseAsMask: 0
     noiseSettings:
       numLayers: 8
       fallof: 0.3
@@ -36,6 +38,7 @@ MonoBehaviour:
       noiseCenter: {x: 0.58, y: 0, z: 0}
   - enabled: 1
     useFirstLayerAsMask: 0
+    useMouseAsMask: 0
     noiseSettings:
       numLayers: 8
       fallof: 0.3

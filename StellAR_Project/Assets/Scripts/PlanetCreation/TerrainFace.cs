@@ -6,10 +6,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerrainFace{
-    Mesh mesh;
+public class TerrainFace {
+    public Mesh mesh;
     int resolution;
-    Vector3 localUp;
+    public Vector3 localUp;
     Vector3 axisA;
     Vector3 axisB;
     ShapeGenerator shapeGenerator;
@@ -52,6 +52,7 @@ public class TerrainFace{
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        //mesh.normals = vertices;
         mesh.RecalculateNormals(); 
     }
 }
