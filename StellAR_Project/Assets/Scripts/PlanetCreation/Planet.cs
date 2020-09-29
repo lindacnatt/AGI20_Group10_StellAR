@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour{
     //public NoiseSettings noiseSettings;
 
     // create mouseInteractions
-    MouseInteraction mouseInteraction;
+    MouseInteraction interaction;
     
     ShapeGenerator shapeGenerator;
     
@@ -27,7 +27,8 @@ public class Planet : MonoBehaviour{
     public bool colorSettingsFoldout;
   
     void Initialize(){
-        shapeGenerator = new ShapeGenerator(shapeSettings);
+        interaction = GameObject.FindObjectOfType<MouseInteraction>(); 
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
 
         if(meshFilters == null || meshFilters.Length == 0){
             meshFilters = new MeshFilter[6];

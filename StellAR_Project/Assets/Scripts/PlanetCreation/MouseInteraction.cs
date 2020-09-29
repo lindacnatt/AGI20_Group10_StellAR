@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseInteraction : MonoBehaviour{
-    
     Ray ray;
     RaycastHit hit;
     Transform selection;
@@ -22,12 +21,11 @@ public class MouseInteraction : MonoBehaviour{
             
             if(selectionRenderer != null){
                 if(Input.GetMouseButtonDown(0)){
-                    hitCoords.Add(transform.InverseTransformPoint(hit.point)); 
+                    hitCoords.Add(selection.InverseTransformPoint(hit.point)); 
                     terrainFaceMesh = getCurrentFace(ray.direction, selection);
                     vertices = terrainFaceMesh.vertices;
                 } 
             }
-
         }
     }
 
@@ -43,7 +41,7 @@ public class MouseInteraction : MonoBehaviour{
         }
         return null;
     }
-    List<Vector3> GetPaintedVertices(){
+    public List<Vector3> GetPaintedVertices(){
         return hitCoords;
     }
     
