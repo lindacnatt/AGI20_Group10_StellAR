@@ -2,7 +2,7 @@ HUR MAN ANVÄNDER GRAVITATION OCH TRAJECTORY
 
 1. Lägg på scripten CelestialObject på varje objekt som ska påverkas av gravitation. Om objektet bara ska attrahera men inte påverkas av de andra finns alternativet "static body" att klicka i. Lägg sedan in objektets rigid body i CelestialObjects rigidbody.
 
-2. Skapa ett nytt tomt GameObject. Lägg på scripten NBodyPhysics, SimulatePauseControl och TrajectorySimulation. Lägg till ett mainObjekt till TrajecotrySimulation, här kan du även lägga till en hastighet som ska läggas på när trajectoryn räknas ut.  Kom ihåg att även lägga till en line renderer om du inte använder den färdiga scenen som tillhör scriptan.
+2. Skapa ett nytt tomt GameObject. Lägg på scripten NBodyPhysics, SimulationPauseControl och TrajectorySimulation. Lägg till ett mainObjekt till TrajecotrySimulation, här kan du även lägga till en hastighet som ska läggas på när trajectoryn räknas ut.  Kom ihåg att även lägga till en line renderer om du inte använder den färdiga scenen som tillhör scriptan.
 
 3. Lägg på scriptet InitialVelocity om du vill ge andra objekt än mainObjektet en start hastighet i systemet.
 

@@ -5,7 +5,9 @@ using UnityEngine;
 public class NBodyPhysics : MonoBehaviour
 {
 
-    public const float gravityConstant = 667.408f;
+    public const float gravityConstant = 0.667408f; /*tinier planets needs a bigger gravity constant, for planets in the scale of around 1 m and 10-20 kg
+                                                     they need a 10^10 times bigger gravity constant than the real one.
+                                                     We should ajdust this later so that 1 unit of mass in unity = one earth-mass*/
 
     // Start is called before the first frame update
    void FixedUpdate(){
@@ -65,7 +67,7 @@ public class NBodyPhysics : MonoBehaviour
             Vector3 new_pos= current.rigidBody.position+current.rigidBody.velocity*timeStep+current.acceleration*Mathf.Pow(timeStep,2)/2.0f;  
             return new_pos;
         }*/
-    
+
     Vector3 UpdatePosition (float timeStep, ref CelestialObject current) {
             Vector3 new_pos= current.rigidBody.position+current.rigidBody.velocity*timeStep;  
             return new_pos;

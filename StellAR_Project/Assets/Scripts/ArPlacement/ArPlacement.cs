@@ -8,6 +8,7 @@ using UnityEngine.XR.ARSubsystems;
 public class ArPlacement : MonoBehaviour
 {
     public GameObject gameObjectToInstantiate; //this is a reference to the prefab we are placing
+    public GameObject simulationRunner;
     public Camera ARCamera; //the camera
     public float distanceFromCamera; //as of now a set distance
     private GameObject objectToPlace;//this is the object that is placed
@@ -31,8 +32,10 @@ public class ArPlacement : MonoBehaviour
         if (Input.touchCount > 0)
         {
             placed = true; //this places the object and it is locked to the latest position it had. Physics should take it from here.
-            objectToPlace.GetComponent<Attractor>().enabled = true;
-            objectToPlace.GetComponent<Rigidbody>().AddRelativeForce(Mathf.Pow(objectToPlace.GetComponent<Rigidbody>().mass, 3) * Vector3.forward); //we need to dial this in
+            objectToPlace.GetComponent<CelestialObject>().enabled = true;
+            simulationRunner.GetComponent<TrajectorySimulation>().initialVelocity = 1.5f * ARCamera.transform.forward;
+            simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;
+            //objectToPlace.GetComponent<Rigidbody>().AddRelativeForce(Mathf.Pow(objectToPlace.GetComponent<Rigidbody>().mass, 3) * Vector3.forward); //we need to dial this in
             Destroy(this);
         }
     }

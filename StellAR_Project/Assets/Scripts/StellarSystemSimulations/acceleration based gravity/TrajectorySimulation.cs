@@ -29,6 +29,8 @@ public class TrajectorySimulation : MonoBehaviour
 
     private float timer;
 
+    public static bool isDone = false;
+
     Vector3[] prel_acc;
 
     private bool startSimulation;
@@ -42,7 +44,7 @@ public class TrajectorySimulation : MonoBehaviour
   void Start()
     {
         traj = GetComponent<LineRenderer>();
-        traj.positionCount = lineVertices;
+        
     }
 
     void CopyObjects(){
@@ -153,16 +155,29 @@ public class TrajectorySimulation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SimulationPauseControl.gameIsPaused){
-            if (Input.GetKeyDown(KeyCode.T)){ 
+        if (mainObject != null) //wont run if there is nothing to place, i.e. nothing to show trajectory of.
+        {
+            if (SimulationPauseControl.gameIsPaused)
+            {
+                // if (Input.GetKeyDown(KeyCode.T) ){ 
+                gameObject.GetComponent<LineRenderer>().enabled = true;
                 CalcTrajectory(Time.fixedDeltaTime);
-                
 
+
+                //}
+                //if(Input.GetKeyDown(KeyCode.Return)){ 
+
+                //    SimulationPauseControl.gameIsPaused = false;
+
+                //}
             }
-            if(Input.GetKeyDown(KeyCode.Return)){ 
-                SetInitialVel();
-                SimulationPauseControl.gameIsPaused = false;
-                
+            if (isDone) //when the trajectory is mapped out and beautiful...
+            {
+                SetInitialVel(); //...the object being placed gets its initial velocity (right now the amount of velocity is set in ArPlacement) and...
+                isDone = !isDone;
+                mainObject = null; /*...we placed it so now we are ready to do something other than placing, 
+                                   also makes sure that user does not add additional velocities when pausing the game after placing planet*/
+
             }
         }
     }
@@ -171,6 +186,7 @@ public class TrajectorySimulation : MonoBehaviour
     void CalcTrajectory(float time){
         CopyObjects();
         CalcVeloStart();
+        traj.positionCount = lineVertices;
         int count=0;
         for(int j=0; j<traj.positionCount; j++){
             prel_acc = new Vector3[length];
@@ -208,7 +224,8 @@ public class TrajectorySimulation : MonoBehaviour
     }
 
     void SetInitialVel(){
-         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
-         a.pausedVelocity += initialVelocity;
+        //CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
+        //a.pausedVelocity += initialVelocity;
+        mainObject.GetComponent<Rigidbody>().velocity += initialVelocity; //the above previous code did not work for some reason, changed it to this simpler thing not sure if good tho
     }
     }

@@ -55,11 +55,11 @@ public class CelestialObject : MonoBehaviour
         Objects.Remove(this);
     }
 
-     void OnCollisionEnter(){
+    /* void OnCollisionEnter(){
         if(!staticBody)
             Destroy(this.gameObject);
 
-    }
+    }*/
 
 
 }
