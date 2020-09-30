@@ -27,7 +27,7 @@ public class Planet : MonoBehaviour{
   
     void Initialize(){
         if(interaction == null){
-            interaction = GameObject.FindObjectOfType<MouseInteraction>();
+            MouseInteraction interaction = GameObject.GetComponent<MouseInteraction>();
         }
        
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);

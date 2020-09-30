@@ -14,10 +14,11 @@ public class ShapeGenerator {
         this.settings = settings;
         noiseFilters = new NoiseFilter[settings.noiseLayers.Length];
         this.interaction = interaction;
-        touchedPoints = interaction.GetPaintedVertices();
+        /* touchedPoints = interaction.GetPaintedVertices();
         foreach (Vector3 point in touchedPoints){
             Debug.Log(point);
         }
+        */
         for (int i = 0; i < noiseFilters.Length; i++){
             noiseFilters[i] = new NoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
@@ -32,10 +33,10 @@ public class ShapeGenerator {
         }
         for(int i = 1; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
-                if(checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize)){
+                //if(checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize)){
                     mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1;
                     elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;    
-                }
+                //}
             }  
         }
         return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
