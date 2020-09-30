@@ -42,6 +42,9 @@ public class MouseInteraction : MonoBehaviour{
         return null;
     }
     public List<Vector3> GetPaintedVertices(){
+        foreach (Vector3 point in hitCoords){
+            Debug.Log(point);
+        }
         return hitCoords;
     }
     
