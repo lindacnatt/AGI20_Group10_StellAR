@@ -14,33 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1
   noiseLayers:
-  - enabled: 1
+  - enabled: 0
     useFirstLayerAsMask: 0
+    useMouseAsMask: 0
     noiseSettings:
       numLayers: 4
-      fallof: 0.61
-      freqPower: 2.07
-      freq: 0.32
-      minValue: 0.25
-      amplitude: 0.21
-      noiseCenter: {x: 1.09, y: 2.17, z: 2.64}
-  - enabled: 1
-    useFirstLayerAsMask: 1
-    noiseSettings:
-      numLayers: 8
-      fallof: 0.3
-      freqPower: 8.86
-      freq: 5.75
-      minValue: 0.51
-      amplitude: 4.55
-      noiseCenter: {x: 0.58, y: 0, z: 0}
+      fallof: 0.72
+      freqPower: 1.97
+      freq: 2.6
+      minValue: 0
+      amplitude: 0.01
+      noiseCenter: {x: 0, y: 0, z: 0}
   - enabled: 1
     useFirstLayerAsMask: 0
+    useMouseAsMask: 0
     noiseSettings:
-      numLayers: 8
-      fallof: 0.3
-      freqPower: 4.52
-      freq: 1.52
-      minValue: -0.11
-      amplitude: 0.03
-      noiseCenter: {x: 0.58, y: 0, z: 0}
+      numLayers: 4
+      fallof: 0.72
+      freqPower: 1.97
+      freq: 2.6
+      minValue: 0
+      amplitude: 0.29
+      noiseCenter: {x: 0, y: 0, z: 0}
