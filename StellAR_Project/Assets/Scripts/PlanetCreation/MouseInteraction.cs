@@ -20,6 +20,7 @@ public class MouseInteraction : MonoBehaviour{
             selectionRenderer = selection.GetComponent<Renderer>();
             
             if(selectionRenderer != null){
+                Debug.Log("not null");
                 if(Input.GetMouseButtonDown(0)){
                     hitCoords.Add(selection.InverseTransformPoint(hit.point)); 
                     terrainFaceMesh = getCurrentFace(ray.direction, selection);
@@ -42,6 +43,9 @@ public class MouseInteraction : MonoBehaviour{
         return null;
     }
     public List<Vector3> GetPaintedVertices(){
+        foreach (Vector3 point in hitCoords){
+            Debug.Log(point);
+        }
         return hitCoords;
     }
     
