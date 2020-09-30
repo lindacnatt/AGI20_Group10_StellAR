@@ -20,6 +20,7 @@ public class MouseInteraction : MonoBehaviour{
             selectionRenderer = selection.GetComponent<Renderer>();
             
             if(selectionRenderer != null){
+                Debug.Log("not null");
                 if(Input.GetMouseButtonDown(0)){
                     hitCoords.Add(selection.InverseTransformPoint(hit.point)); 
                     terrainFaceMesh = getCurrentFace(ray.direction, selection);
