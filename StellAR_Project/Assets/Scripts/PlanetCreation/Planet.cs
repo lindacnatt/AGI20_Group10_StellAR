@@ -10,8 +10,10 @@ public class Planet : MonoBehaviour{
     public bool autoUpdate = false;
 
     public ColorSettings colorSettings;
-    public ShapeSettings shapeSettings;
     public Slider cSlider;
+    
+    public ShapeSettings shapeSettings;
+    
 
     // create mouseInteractions
     public MouseInteraction interaction;
@@ -75,9 +77,10 @@ public class Planet : MonoBehaviour{
 
     void GenerateColors(){ // update color for every mesh given from the colorsettings
         foreach(MeshFilter m in meshFilters){
-            Color _pColor = colorSettings.planetColor;
-            _pColor = Color.HSVToRGB(cSlider.value, 1, 1);
-            m.GetComponent<MeshRenderer>().sharedMaterial.color = _pColor;
+            Color newPlanetColor = colorSettings.planetColor;
+            //covert the colors to HSV and only change the hue
+            newPlanetColor = Color.HSVToRGB(cSlider.value, 1, 1);
+            m.GetComponent<MeshRenderer>().sharedMaterial.color = newPlanetColor;
         }
     }
 
