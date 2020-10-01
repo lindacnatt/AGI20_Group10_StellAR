@@ -76,7 +76,7 @@ public class Planet : MonoBehaviour{
     void GenerateColors(){ // update color for every mesh given from the colorsettings
         foreach(MeshFilter m in meshFilters){
             Color _pColor = colorSettings.planetColor;
-            _pColor.r = cSlider.value;
+            _pColor = Color.HSVToRGB(cSlider.value, 1, 1);
             m.GetComponent<MeshRenderer>().sharedMaterial.color = _pColor;
         }
     }
