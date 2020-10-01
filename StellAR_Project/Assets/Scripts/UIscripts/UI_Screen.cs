@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace Stellar.UI
 {
     [RequireComponent(typeof(Animator))]
-[   RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(CanvasGroup))]
+
     public class UI_Screen : MonoBehaviour
     {
 
         #region Variables
         [Header("Main Properties")]
-        public Selectaböen m_StartSelectable;
+        public Selectable m_StartSelectable;
 
         [Header("Screen Events")]
         public UnityEvent onScreenStart = new UnityEvent();
@@ -52,7 +56,7 @@ namespace Stellar.UI
            
         }
 
-        public HandleAnimator(string aTrigger)
+        void HandleAnimator(string aTrigger)
         {
              if(animator){
                 animator.SetTrigger(aTrigger);
