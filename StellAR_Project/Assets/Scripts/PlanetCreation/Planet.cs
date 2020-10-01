@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Planet : MonoBehaviour{   
-
     [Range(2, 256)]
     public int resolution = 10;
     public bool autoUpdate = false;
@@ -24,16 +23,11 @@ public class Planet : MonoBehaviour{
     public bool shapeSettingsFoldout;
     [HideInInspector]
     public bool colorSettingsFoldout;
-  
+    
     void Initialize(){
-        if(interaction == null){
-            //MouseInteraction interaction = GameObject.GetComponent<MouseInteraction>();
-        }
-       
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
 
         if(meshFilters == null || meshFilters.Length == 0){
-            Debug.Log("meshFilters null");
             meshFilters = new MeshFilter[6];
         }    
 
@@ -41,7 +35,7 @@ public class Planet : MonoBehaviour{
         Vector3[] directions = {Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back};
         
         for(int i = 0; i < 6; i++){
-            if(meshFilters[i] == null){
+            if(meshFilters[i] == null || meshFilters[i].sharedMesh == null){
                 GameObject meshObj = new GameObject("mesh");
                 meshObj.transform.parent = transform;
                 meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
