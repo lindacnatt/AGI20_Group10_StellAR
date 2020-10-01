@@ -11,7 +11,7 @@ public class Planet : MonoBehaviour{
 
     public ColorSettings colorSettings;
     public Slider cSlider;
-    
+
     public ShapeSettings shapeSettings;
     
 
