@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Planet : MonoBehaviour{   
 
@@ -10,6 +11,7 @@ public class Planet : MonoBehaviour{
 
     public ColorSettings colorSettings;
     public ShapeSettings shapeSettings;
+    public Slider cSlider;
 
     // create mouseInteractions
     public MouseInteraction interaction;
@@ -73,7 +75,9 @@ public class Planet : MonoBehaviour{
 
     void GenerateColors(){ // update color for every mesh given from the colorsettings
         foreach(MeshFilter m in meshFilters){
-            m.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColor;
+            Color _pColor = colorSettings.planetColor;
+            _pColor.r = cSlider.value;
+            m.GetComponent<MeshRenderer>().sharedMaterial.color = _pColor;
         }
     }
 
