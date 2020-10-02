@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Planet : MonoBehaviour{   
-    [Range(2, 256)]
+    
+    [Range(2, 100)]
+    // Resolution of every terrainFace
     public int resolution = 10;
-    public bool autoUpdate = false;
 
-    public ColorSettings colorSettings;
+    // update on buttonpress or on change
+    public bool autoUpdate = false; 
+
+    // data on the planet
+    public ColorSettings colorSettings; 
     public ShapeSettings shapeSettings;
 
     // create mouseInteractions
     public MouseInteraction interaction;
-    
     ShapeGenerator shapeGenerator;
     
     [SerializeField, HideInInspector]
@@ -25,6 +29,11 @@ public class Planet : MonoBehaviour{
     public bool colorSettingsFoldout;
     
     void Initialize(){
+        if(shapeSettings == null || colorSettings == null){
+            shapeSettings = SettingSpawner.loadDefaultShape();
+            colorSettings = SettingSpawner.loadDefaultColor();
+        }
+
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
 
         if(meshFilters == null || meshFilters.Length == 0){
@@ -35,7 +44,7 @@ public class Planet : MonoBehaviour{
         Vector3[] directions = {Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back};
         
         for(int i = 0; i < 6; i++){
-            if(meshFilters[i] == null || meshFilters[i].sharedMesh == null){
+            if(meshFilters[i] == null){
                 GameObject meshObj = new GameObject("mesh");
                 meshObj.transform.parent = transform;
                 meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
@@ -46,6 +55,14 @@ public class Planet : MonoBehaviour{
         } 
     }
 
+    void Awake(){
+        if(shapeSettings == null){
+            shapeSettings = SettingSpawner.loadDefaultShape();
+        }
+        if(colorSettings == null){
+            colorSettings = SettingSpawner.loadDefaultColor();
+        }
+    }
     public void GeneratePlanet(){
         Initialize();
         GenerateMesh();
