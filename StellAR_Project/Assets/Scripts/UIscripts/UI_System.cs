@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +10,8 @@ namespace Stellar.UI
     {
 
         #region Variables
+        [Header("Main Properties")]
+        public UI_Screen _mStartScreen;
         [Header("system Events")]
         public UnityEvent onSwitchedScreen = new UnityEvent();
 
@@ -29,6 +31,10 @@ namespace Stellar.UI
         void Start()
         {
             screens = GetComponentsInChildren<UI_Screen>(true);
+
+            if(_mStartScreen){
+                SwitchScreens(_mStartScreen);
+            }
         }
         #endregion
 
@@ -39,13 +45,14 @@ namespace Stellar.UI
             {
                 if(currentScreen)
                 {
-                    //currentScreen.Close();
+                    currentScreen.CloseScreen();
                     previousScreen = currentScreen;
                 }
 
                 currentScreen = aScreen;
                 currentScreen.gameObject.SetActive(true);
-                //currentSreen.StartScreen();
+                currentScreen.StartScreen();
+
                 if(onSwitchedScreen !=null) {
                     onSwitchedScreen.Invoke();
                 }
