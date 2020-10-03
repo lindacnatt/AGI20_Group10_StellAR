@@ -16,7 +16,6 @@ public class TrajectoryLineAnimation : MonoBehaviour
     void Start()
     {
         traj = GetComponent<LineRenderer>();
-        rb = (Rigidbody) main.GetComponent(typeof(Rigidbody));
         length=TrajectorySimulation.linePositions.Length;
         
     }
@@ -37,37 +36,51 @@ public class TrajectoryLineAnimation : MonoBehaviour
     }
 
     void Update(){
-        if(TrajectorySimulation.drawLine){
-            DrawLine();
+        if(main != null)
+        {
+            rb = (Rigidbody)main.GetComponent(typeof(Rigidbody)); //if it is in start and is assigned to a gameobject it will throw an error as it should not get a planet until it is placed.
+            if (TrajectorySimulation.drawLine)
+            {
+                DrawLine();
+            }
         }
+        
     }
 
     void FixedUpdate()
-    { 
-        if(!SimulationPauseControl.gameIsPaused){
-            if(TrajectorySimulation.destroyLine){
-                
-                Vector3 linePos =TrajectorySimulation.linePositions[length-1-count];
-                float distance = (rb.position-linePos).magnitude;
-            
-                if(count < length ){
-                    if(distance <= 1.0f){
-                            traj.positionCount -=1;
+    {
+        if (main != null)
+        {
+            if (!SimulationPauseControl.gameIsPaused)
+            {
+                if (TrajectorySimulation.destroyLine)
+                {
+
+                    Vector3 linePos = TrajectorySimulation.linePositions[length - 1 - count];
+                    float distance = (rb.position - linePos).magnitude;
+
+                    if (count < length)
+                    {
+                        if (distance <= 1.0f)
+                        {
+                            traj.positionCount -= 1;
                             count++;
                         }
-                }
-                else
+                    }
+                    else
                     {
                         TrajectorySimulation.destroyLine = false;
                         //traj.positionCount=0;
                         count = 0;
                     }
 
+                }
+                else
+                {
+                    traj.positionCount = 0;
+                }
+
             }
-            else{
-                traj.positionCount=0;
-            }
-            
         }
 
     }

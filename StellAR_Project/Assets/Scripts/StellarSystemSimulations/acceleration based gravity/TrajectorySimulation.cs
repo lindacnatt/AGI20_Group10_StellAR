@@ -179,20 +179,28 @@ public class TrajectorySimulation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SimulationPauseControl.gameIsPaused){
-            if (Input.GetKeyDown(KeyCode.T)){ 
-                CalcTrajectory(Time.fixedDeltaTime);
-                Array.Reverse(linePositions);
-                drawLine=true;
-                
+        if (mainObject != null)
+        {
+            if (SimulationPauseControl.gameIsPaused)
+            {
+                if (Input.GetKeyDown(KeyCode.T) || Input.touchCount > 0)
+                {
+                    CalcTrajectory(Time.fixedDeltaTime);
+                    Array.Reverse(linePositions);
+                    drawLine = true;
 
-            }
-            if(Input.GetKeyDown(KeyCode.Return)){ 
-                SetInitialVel();
-                destroyLine=true;
-                SimulationPauseControl.gameIsPaused = false;
 
-                
+                }
+                //As of now the below code is counting on the user being sure that when they press they place, no backsies. C
+                if (Input.GetKeyDown(KeyCode.Return) || ((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Ended))
+                {
+                    SetInitialVel();
+                    destroyLine = true;
+                    SimulationPauseControl.gameIsPaused = false;
+                    //mainObject = null;
+                    //this.GetComponent<TrajectoryLineAnimation>().main = null;
+
+                }
             }
         }
     }
@@ -243,8 +251,8 @@ public class TrajectorySimulation : MonoBehaviour
     }
 
     void SetInitialVel(){
-         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
-         a.velocity +=initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
-         //a.pausedVelocity += initialVelocity;
+        CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
+         a.velocity += initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
+        //a.pausedVelocity += initialVelocity;*/
     }
     }
