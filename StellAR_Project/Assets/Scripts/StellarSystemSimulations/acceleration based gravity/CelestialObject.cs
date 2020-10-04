@@ -65,7 +65,7 @@ public class CelestialObject : MonoBehaviour
     }
 
      void OnCollisionEnter(){
-        if (!staticBody)
+        if (!staticBody && this.enabled)
         {
             GameObject.Find("Simulation").GetComponent<LineRenderer>().enabled = false; //Nasty solution to the fact that when planets destroy on impact the linerenderer continued to exist
             

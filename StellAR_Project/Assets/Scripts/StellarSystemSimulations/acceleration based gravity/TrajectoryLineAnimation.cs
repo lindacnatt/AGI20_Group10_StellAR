@@ -57,8 +57,7 @@ public class TrajectoryLineAnimation : MonoBehaviour
             {
                 if (TrajectorySimulation.destroyLine)
                 {
-                    Debug.Log("count " + count);
-                    Debug.Log("length " + length);
+              
                     Vector3 linePos = TrajectorySimulation.linePositions[length - 1 - count];
                     float distance = (rb.position - linePos).magnitude;
             
