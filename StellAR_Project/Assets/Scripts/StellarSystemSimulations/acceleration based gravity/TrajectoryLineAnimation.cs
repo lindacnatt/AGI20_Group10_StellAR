@@ -23,7 +23,8 @@ public class TrajectoryLineAnimation : MonoBehaviour
     // Update is called once per frame
 
     public void DrawLine(){
-        count=0;
+        this.GetComponent<LineRenderer>().enabled = true;
+        count =0;
         traj.positionCount = length;
         int index=0;
         foreach(Vector3 pos in TrajectorySimulation.linePositions){
@@ -49,27 +50,34 @@ public class TrajectoryLineAnimation : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         if (main != null)
         {
             if (!SimulationPauseControl.gameIsPaused)
             {
                 if (TrajectorySimulation.destroyLine)
                 {
-
+                    Debug.Log("count " + count);
+                    Debug.Log("length " + length);
                     Vector3 linePos = TrajectorySimulation.linePositions[length - 1 - count];
                     float distance = (rb.position - linePos).magnitude;
-
-                    if (count < length)
+            
+                    if (count < length-1) //otherwise the linepos array thingy above got out of range as it became 2000 - 2001
                     {
+                        
                         if (distance <= 1.0f)
                         {
+                           
                             traj.positionCount -= 1;
                             count++;
                         }
                     }
+
                     else
                     {
+                  
                         TrajectorySimulation.destroyLine = false;
+                        
                         //traj.positionCount=0;
                         count = 0;
                     }

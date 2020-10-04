@@ -33,7 +33,7 @@ public class ArPlacement : MonoBehaviour
         {
             placed = true; //this places the object and it is locked to the latest position it had. Physics should take it from here.
             objectToPlace.GetComponent<CelestialObject>().enabled = true;
-            simulationRunner.GetComponent<TrajectorySimulation>().initialVelocity = 1.5f * ARCamera.transform.forward;
+            simulationRunner.GetComponent<TrajectorySimulation>().initialVelocity = 3f * ARCamera.transform.forward;
             simulationRunner.GetComponent<TrajectoryLineAnimation>().main = objectToPlace;
             simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;
             //objectToPlace.GetComponent<Rigidbody>().AddRelativeForce(Mathf.Pow(objectToPlace.GetComponent<Rigidbody>().mass, 3) * Vector3.forward); //we need to dial this in

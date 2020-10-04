@@ -6,7 +6,7 @@ public class NBodyPhysics : MonoBehaviour
 {
 
     //public const float gravityConstant = 667.408f; //StellarSystemSim scene
-    public const float gravityConstant = 0.667408f; //ARScene
+    public const float gravityConstant = 0.6667408f; //ARScene
 
     // Start is called before the first frame update
     void FixedUpdate(){

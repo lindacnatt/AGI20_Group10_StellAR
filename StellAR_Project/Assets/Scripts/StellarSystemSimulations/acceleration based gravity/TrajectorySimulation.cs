@@ -197,10 +197,17 @@ public class TrajectorySimulation : MonoBehaviour
                     SetInitialVel();
                     destroyLine = true;
                     SimulationPauseControl.gameIsPaused = false;
-                    //mainObject = null;
+                    mainObject = null;
                     //this.GetComponent<TrajectoryLineAnimation>().main = null;
 
                 }
+            }
+        } 
+        else
+        {
+            if (SimulationPauseControl.gameIsPaused && Input.touchCount < 1)
+            {
+                SimulationPauseControl.gameIsPaused = false;
             }
         }
     }
@@ -253,6 +260,7 @@ public class TrajectorySimulation : MonoBehaviour
     void SetInitialVel(){
         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
          a.velocity += initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
+        //https://physics.stackexchange.com/questions/29190/how-exactly-does-mass-affect-speed
         //a.pausedVelocity += initialVelocity;*/
     }
-    }
+}
