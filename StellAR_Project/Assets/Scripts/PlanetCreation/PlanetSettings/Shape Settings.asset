@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
   m_Name: Shape Settings
   m_EditorClassIdentifier: 
-  radius: 7
+  radius: 1
   noiseLayers:
-  - enabled: 0
+  - enabled: 1
     useFirstLayerAsMask: 0
     useMouseAsMask: 0
     noiseSettings:
@@ -25,7 +25,7 @@ MonoBehaviour:
       minValue: 0
       amplitude: 0.01
       noiseCenter: {x: 0, y: 0, z: 0}
-  - enabled: 1
+  - enabled: 0
     useFirstLayerAsMask: 0
     useMouseAsMask: 0
     noiseSettings:
