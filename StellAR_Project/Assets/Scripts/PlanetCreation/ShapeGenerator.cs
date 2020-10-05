@@ -13,7 +13,7 @@ public class ShapeGenerator {
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction){
         this.settings = settings;
         noiseFilters = new NoiseFilter[settings.noiseLayers.Length];
-        this.interaction = interaction;
+        //this.interaction = interaction;
         /* touchedPoints = interaction.GetPaintedVertices();
         foreach (Vector3 point in touchedPoints){
             Debug.Log(point);

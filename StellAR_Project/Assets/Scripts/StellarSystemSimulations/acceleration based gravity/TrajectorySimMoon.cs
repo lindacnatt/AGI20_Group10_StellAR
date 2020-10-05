@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class TrajectorySimulation : MonoBehaviour
+public class TrajectorySimMoon : MonoBehaviour
 {
     
     public GameObject mainObject;
@@ -35,6 +35,11 @@ public class TrajectorySimulation : MonoBehaviour
 
     private bool startSimulation;
 
+    float timeDelta;
+
+    private bool isMoon;
+
+    private int parentIndx = 0;
 
   void Awake(){
       Time.fixedDeltaTime = 0.01f;
@@ -43,9 +48,18 @@ public class TrajectorySimulation : MonoBehaviour
 
 
     void CopyObjects(){
-       
+        Moon m = mainObject.GetComponent<Moon>();
+        if (!m) {
+             m=null;
+        }
+        else{
+            isMoon=true;
+        }
+
         length=CelestialObject.Objects.Count;
-       
+        if(isMoon)
+            length +=1;
+
         velosities=new Vector3[length];
         positions=new Vector3[length];
         massess=new float[length];
@@ -60,22 +74,29 @@ public class TrajectorySimulation : MonoBehaviour
         //velosities[0] = rb.velocity;
         radius[0] = T.localScale.x;
 
-    
-        CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
-        if(a.staticBody)
-        {
-            isStatic[0]=true;
-            }
+        
+        if(isMoon){
+            velosities[0] = m.velocity;
+        }
         else{
+            CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
+            if(a.staticBody)
+                isStatic[0]=true;
+            else{
             velosities[0] = a.velocity;
-        //velosities[0] = a.pausedVelocity;
+            //velosities[0] = a.pausedVelocity;
+                }
             }
-            
         
 
         int count = 1;
-        for(int i=0; i<length; i++){
+        for(int i=0; i<length-1; i++){
             GameObject go = CelestialObject.Objects[i].gameObject;
+            if(isMoon){
+                if(m.parent==go){
+                    parentIndx = count;
+                }
+            }
             if(go == mainObject){
                 continue; }
             else {
@@ -110,15 +131,45 @@ public class TrajectorySimulation : MonoBehaviour
 
     Vector3 CalcAccNBody(int index){
         
+
         Vector3 dirResultant = new Vector3(0f,0f,0f);
-        
-        for (int i=0; i<length; i++){
+        int k = 0;
+        if(isMoon){
+            k=1;
+            if(index==0){
+                return dirResultant;
+            }
+        } 
+    
+        for (int i=k; i<length; i++){
             if(i!=index && !dead[i]){
                 float distance = (positions[i]-positions[index]).magnitude;
-                
                 if(distance == double.PositiveInfinity)
+                    //print(positions[i]);
+                    //print(positions[index]);
                     return new Vector3(0f,0f,0f);
+                Vector3 direction = (positions[i]-positions[index]).normalized;
+                dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
+            }    
+        }
+        //print(dirResultant);
+        return dirResultant;
+    }
 
+      Vector3 CalcAccSource(int index){
+        
+        Vector3 dirResultant = new Vector3(0f,0f,0f);
+        int k = 0;
+        if(isMoon){
+            k=1;
+            if(index==0){
+                return dirResultant;
+            }
+        }    
+        
+        for (int i=k; i<length; i++){
+            if(i!=index && !dead[i] && isStatic[i]){
+                float distance = (positions[i]-positions[index]).magnitude;
                 Vector3 direction = (positions[i]-positions[index]).normalized;
                 dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
             }    
@@ -126,20 +177,26 @@ public class TrajectorySimulation : MonoBehaviour
         return dirResultant;
     }
 
-      Vector3 CalcAccSource(int index){
+    Vector3 CalcAccMoon(int index, int parent){
+        
+
         Vector3 dirResultant = new Vector3(0f,0f,0f);
-    
-        for (int i=0; i<length; i++){
-            if(i!=index && !dead[i] && isStatic[i]){
-                float distance = (positions[i]-positions[index]).magnitude;
+        
+        if(!dead[parent]){
+            float distance = (positions[parent]-positions[index]).magnitude;
+            Vector3 direction = (positions[parent]-positions[index]).normalized;
+            dirResultant += NBodyPhysics.gravityConstant*direction*massess[parent]/Mathf.Pow(distance,2.0f);
+        } 
+        else{
+            for (int i=1; i<length; i++){
+                if(isStatic[i]){
+                    float distance = (positions[i]-positions[index]).magnitude;
+                    Vector3 direction = (positions[i]-positions[index]).normalized;
+                    dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
+                }    
+             }
 
-                if(distance == double.PositiveInfinity)
-                    return new Vector3(0f,0f,0f);
-
-                Vector3 direction = (positions[i]-positions[index]).normalized;
-                dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
-            }    
-        }
+        }   
         return dirResultant;
     }
 
@@ -219,6 +276,9 @@ public class TrajectorySimulation : MonoBehaviour
                 
                 }
             }
+            if(isMoon){
+                            prel_acc[0]=CalcAccMoon(0,parentIndx);
+                        }
              for(int i=0; i<length; i++){ 
                 if((!isStatic[i]) && (!dead[i])){
                     
@@ -248,3 +308,4 @@ public class TrajectorySimulation : MonoBehaviour
          //a.pausedVelocity += initialVelocity;
     }
     }
+

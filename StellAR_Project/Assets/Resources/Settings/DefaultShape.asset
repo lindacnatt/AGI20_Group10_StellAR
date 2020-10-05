@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
-  m_Name: Shape Settings
+  m_Name: DefaultShape
   m_EditorClassIdentifier: 
   radius: 1
   noiseLayers:
@@ -18,21 +18,10 @@ MonoBehaviour:
     useFirstLayerAsMask: 0
     useMouseAsMask: 0
     noiseSettings:
-      numLayers: 4
-      fallof: 0.72
-      freqPower: 1.97
-      freq: 2.6
+      numLayers: 0
+      fallof: 0
+      freqPower: 0
+      freq: 0
       minValue: 0
-      amplitude: 0.01
-      noiseCenter: {x: 0, y: 0, z: 0}
-  - enabled: 0
-    useFirstLayerAsMask: 0
-    useMouseAsMask: 0
-    noiseSettings:
-      numLayers: 4
-      fallof: 0.72
-      freqPower: 1.97
-      freq: 2.6
-      minValue: 0
-      amplitude: 0.29
+      amplitude: 0
       noiseCenter: {x: 0, y: 0, z: 0}

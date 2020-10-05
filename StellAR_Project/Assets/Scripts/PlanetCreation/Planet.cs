@@ -4,20 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Planet : MonoBehaviour{   
-
-    [Range(2, 256)]
+    
+    [Range(2, 100)]
+    // Resolution of every terrainFace
     public int resolution = 10;
-    public bool autoUpdate = false;
 
-    public ColorSettings colorSettings;
     public Slider cSlider;
 
+    // update on buttonpress or on change
+    public bool autoUpdate = false; 
+
+    // data on the planet
+    public ColorSettings colorSettings; 
     public ShapeSettings shapeSettings;
     
 
     // create mouseInteractions
     public MouseInteraction interaction;
-    
     ShapeGenerator shapeGenerator;
     
     [SerializeField, HideInInspector]
@@ -28,16 +31,16 @@ public class Planet : MonoBehaviour{
     public bool shapeSettingsFoldout;
     [HideInInspector]
     public bool colorSettingsFoldout;
-  
+    
     void Initialize(){
-        if(interaction == null){
-            //MouseInteraction interaction = GameObject.GetComponent<MouseInteraction>();
+        if(shapeSettings == null || colorSettings == null){
+            shapeSettings = SettingSpawner.loadDefaultShape();
+            colorSettings = SettingSpawner.loadDefaultColor();
         }
-       
+
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
 
         if(meshFilters == null || meshFilters.Length == 0){
-            Debug.Log("meshFilters null");
             meshFilters = new MeshFilter[6];
         }    
 
@@ -56,6 +59,14 @@ public class Planet : MonoBehaviour{
         } 
     }
 
+    void Awake(){
+        if(shapeSettings == null){
+            shapeSettings = SettingSpawner.loadDefaultShape();
+        }
+        if(colorSettings == null){
+            colorSettings = SettingSpawner.loadDefaultColor();
+        }
+    }
     public void GeneratePlanet(){
         Initialize();
         GenerateMesh();
