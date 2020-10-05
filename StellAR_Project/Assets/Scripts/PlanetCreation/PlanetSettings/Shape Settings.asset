@@ -12,35 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
   m_Name: Shape Settings
   m_EditorClassIdentifier: 
-  radius: 1
+  radius: 21
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
     noiseSettings:
-      numLayers: 4
-      fallof: 0.61
-      freqPower: 2.07
-      freq: 0.32
-      minValue: 0.25
-      amplitude: 0.21
+      numLayers: 3
+      fallof: 1.51
+      freqPower: 0.52
+      freq: 0.04
+      minValue: 1.24
+      amplitude: 0.54
       noiseCenter: {x: 1.09, y: 2.17, z: 2.64}
   - enabled: 1
-    useFirstLayerAsMask: 1
+    useFirstLayerAsMask: 0
     noiseSettings:
-      numLayers: 8
-      fallof: 0.3
-      freqPower: 8.86
-      freq: 5.75
-      minValue: 0.51
-      amplitude: 4.55
+      numLayers: 3
+      fallof: 0.32
+      freqPower: 0.48
+      freq: 2.77
+      minValue: 1.1
+      amplitude: 1.62
       noiseCenter: {x: 0.58, y: 0, z: 0}
   - enabled: 1
     useFirstLayerAsMask: 0
     noiseSettings:
-      numLayers: 8
+      numLayers: 4
       fallof: 0.3
       freqPower: 4.52
       freq: 1.52
-      minValue: -0.11
+      minValue: 0.7
       amplitude: 0.03
       noiseCenter: {x: 0.58, y: 0, z: 0}

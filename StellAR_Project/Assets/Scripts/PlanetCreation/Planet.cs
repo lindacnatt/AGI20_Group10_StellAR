@@ -10,6 +10,7 @@ public class Planet : MonoBehaviour{
 
     public ColorSettings colorSettings;
     public ShapeSettings shapeSettings;
+    public CraterSettings craterSettings;
     //public NoiseSettings noiseSettings;
 
     // create mouseInteractions
@@ -25,7 +26,9 @@ public class Planet : MonoBehaviour{
     public bool shapeSettingsFoldout;
     [HideInInspector]
     public bool colorSettingsFoldout;
-  
+    [HideInInspector]
+    public bool craterSettingsFoldout;
+
     void Initialize(){
         shapeGenerator = new ShapeGenerator(shapeSettings);
 

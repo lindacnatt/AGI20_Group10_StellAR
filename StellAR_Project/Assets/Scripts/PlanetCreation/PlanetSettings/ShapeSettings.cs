@@ -7,10 +7,14 @@ public class ShapeSettings : ScriptableObject{
     public float radius;
     public NoiseLayer[] noiseLayers;
 
+
     [System.Serializable]
     public class NoiseLayer{
         public bool enabled = true;
         public bool useFirstLayerAsMask = false;
         public NoiseSettings  noiseSettings;
     }
+
+    public TestSettings testSettings;
+
 }
