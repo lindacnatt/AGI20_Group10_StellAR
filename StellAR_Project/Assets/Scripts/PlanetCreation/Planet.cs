@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Planet : MonoBehaviour{   
     
@@ -8,12 +9,15 @@ public class Planet : MonoBehaviour{
     // Resolution of every terrainFace
     public int resolution = 10;
 
+    public Slider cSlider;
+
     // update on buttonpress or on change
     public bool autoUpdate = false; 
 
     // data on the planet
     public ColorSettings colorSettings; 
     public ShapeSettings shapeSettings;
+    
 
     // create mouseInteractions
     public MouseInteraction interaction;
@@ -84,7 +88,10 @@ public class Planet : MonoBehaviour{
 
     void GenerateColors(){ // update color for every mesh given from the colorsettings
         foreach(MeshFilter m in meshFilters){
-            m.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColor;
+            Color newPlanetColor = colorSettings.planetColor;
+            //covert the colors to HSV and only change the hue
+            newPlanetColor = Color.HSVToRGB(cSlider.value, 1, 1);
+            m.GetComponent<MeshRenderer>().sharedMaterial.color = newPlanetColor;
         }
     }
 
