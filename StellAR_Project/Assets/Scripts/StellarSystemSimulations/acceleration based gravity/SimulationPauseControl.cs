@@ -10,7 +10,7 @@ public class SimulationPauseControl : MonoBehaviour
     void Update()
     {
       
-        if (Input.GetKeyDown(KeyCode.P) || ((gameIsPaused == false) && ((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Began)))
+        if (Input.GetKeyDown(KeyCode.P) || ((gameIsPaused == false) && (Input.touchCount == 1))) //((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Began))
         {
             gameIsPaused = !gameIsPaused;
         }

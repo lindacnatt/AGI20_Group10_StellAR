@@ -10,6 +10,7 @@ public class TrajectorySimulation : MonoBehaviour
     //private Vector3 mainPos;
     //private float mainMass;
 
+    //[HideInInspector]
     public Vector3 initialVelocity;
 
     public static Vector3[] linePositions;
@@ -183,7 +184,7 @@ public class TrajectorySimulation : MonoBehaviour
         {
             if (SimulationPauseControl.gameIsPaused)
             {
-                if (Input.GetKeyDown(KeyCode.T) || Input.touchCount > 0)
+                if (Input.GetKeyDown(KeyCode.T) || Input.touchCount == 2) //Input.touchCount > 0
                 {
                     CalcTrajectory(Time.fixedDeltaTime);
                     Array.Reverse(linePositions);
@@ -192,7 +193,7 @@ public class TrajectorySimulation : MonoBehaviour
 
                 }
                 //As of now the below code is counting on the user being sure that when they press they place, no backsies. C
-                if (Input.GetKeyDown(KeyCode.Return) || ((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Ended))
+                if (Input.GetKeyDown(KeyCode.Return) || (Input.touchCount == 3)) //((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
                     SetInitialVel();
                     destroyLine = true;
