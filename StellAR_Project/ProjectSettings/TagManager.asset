@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planet
   - Sun
+  - Simulation
   layers:
   - Default
   - TransparentFX
