@@ -35,18 +35,22 @@ public class TrajectoryVelocity : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(((SimulationPauseControl.gameIsPaused) && (!TrajectorySimulation.drawLine))){
-            viewDir.enabled = true;
-            viewDir.positionCount = vertices;
-            direction = Camera.main.transform.forward;
-            DrawDirection();
-            ts.initialVelocity = direction*magnitude;
-            print(!TrajectorySimulation.drawLine);
+    {   
+        if(mainObject != null){
+            if(((SimulationPauseControl.gameIsPaused) && (!TrajectorySimulation.drawLine))){
+                viewDir.enabled = true;
+                viewDir.positionCount = vertices;
+                direction = Camera.main.transform.forward;
+                DrawDirection();
+                direction = direction*magnitude;
+            }
+            else{
+                viewDir.positionCount = 0;
+                viewDir.enabled = false;
+            }
         }
-        else{
-            viewDir.positionCount = 0;
-            viewDir.enabled = false;
+        if(TrajectorySimulation.destroyLine){
+            mainObject = null;
         }
         
     }

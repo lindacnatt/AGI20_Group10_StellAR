@@ -7,12 +7,16 @@ using UnityEngine.SceneManagement;
 public class SimulationPauseControl : MonoBehaviour
 {
     public static bool gameIsPaused = false;
-    void Update()
+    /*void Update()
     {
       
         if (Input.GetKeyDown(KeyCode.P) || ((gameIsPaused == false) && (Input.touchCount == 1))) //((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Began))
         {
             gameIsPaused = !gameIsPaused;
         }
+    }*/
+
+    public void Toggle(){
+        gameIsPaused = !gameIsPaused;
     }
 }

@@ -36,6 +36,9 @@ public class TrajectorySimulation : MonoBehaviour
 
     private bool startSimulation;
 
+    private bool shoot;
+    private bool showTrajectory;
+
 
   void Awake(){
       Time.fixedDeltaTime = 0.01f;
@@ -106,6 +109,7 @@ public class TrajectorySimulation : MonoBehaviour
     }
 
      void CalcVeloStart(){
+        initialVelocity = TrajectoryVelocity.direction;
         velosities[0] = velosities[0] + initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
     }
 
@@ -184,33 +188,35 @@ public class TrajectorySimulation : MonoBehaviour
         {
             if (SimulationPauseControl.gameIsPaused)
             {
-                if (Input.GetKeyDown(KeyCode.T) || Input.touchCount == 2) //Input.touchCount > 0
+                if (showTrajectory) //(Input.GetKeyDown(KeyCode.T) || Input.touchCount == 1) //Input.touchCount > 0
                 {
                     CalcTrajectory(Time.fixedDeltaTime);
                     Array.Reverse(linePositions);
                     drawLine = true;
+                    showTrajectory = !showTrajectory;
 
 
                 }
                 //As of now the below code is counting on the user being sure that when they press they place, no backsies. C
-                if (Input.GetKeyDown(KeyCode.Return) || (Input.touchCount == 3)) //((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Ended)
+                if (shoot)//(Input.GetKeyDown(KeyCode.Return) || (Input.touchCount == 2)) //((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
                     SetInitialVel();
                     destroyLine = true;
                     SimulationPauseControl.gameIsPaused = false;
                     mainObject = null;
+                    shoot = !shoot;
                     //this.GetComponent<TrajectoryLineAnimation>().main = null;
 
                 }
             }
         } 
-        else
+        /*else
         {
             if (SimulationPauseControl.gameIsPaused && Input.touchCount < 1)
             {
                 SimulationPauseControl.gameIsPaused = false;
             }
-        }
+        }*/
     }
 
 
@@ -263,5 +269,14 @@ public class TrajectorySimulation : MonoBehaviour
          a.velocity += initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
         //https://physics.stackexchange.com/questions/29190/how-exactly-does-mass-affect-speed
         //a.pausedVelocity += initialVelocity;*/
+    }
+
+    public void ToggleShoot(){
+        shoot = !shoot;
+    }
+
+    public void ToggleTrajectory(){
+        showTrajectory = !showTrajectory;
+
     }
 }

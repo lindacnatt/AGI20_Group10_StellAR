@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrajectoryLineAnimation : MonoBehaviour
 {
-    public LineRenderer traj;
+    public static LineRenderer traj;
     private Rigidbody rb;
     private int count = 0;
     public GameObject main;
