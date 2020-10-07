@@ -19,4 +19,8 @@ public class SimulationPauseControl : MonoBehaviour
     public void Toggle(){
         gameIsPaused = !gameIsPaused;
     }
+
+    public void RestartGame(){
+         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
