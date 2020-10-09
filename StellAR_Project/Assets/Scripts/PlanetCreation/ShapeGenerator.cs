@@ -4,51 +4,57 @@ using UnityEngine;
 
 public class ShapeGenerator {
     ShapeSettings settings;
-    NoiseFilter[] noiseFilters;
-
+    NoiseInterface[] noiseFilters;
     MouseInteraction interaction;
     List<Vector3> touchedPoints;
 
-
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction){
         this.settings = settings;
-        noiseFilters = new NoiseFilter[settings.noiseLayers.Length];
-        //this.interaction = interaction;
-        /* touchedPoints = interaction.GetPaintedVertices();
-        foreach (Vector3 point in touchedPoints){
-            Debug.Log(point);
-        }
-        */
+        noiseFilters = new NoiseInterface[settings.noiseLayers.Length];
+        this.interaction = interaction;
+        touchedPoints = interaction.GetPaintedVertices();
         for (int i = 0; i < noiseFilters.Length; i++){
-            noiseFilters[i] = new NoiseFilter(settings.noiseLayers[i].noiseSettings);
+            noiseFilters[i] = NoiseFactory.createNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere){
         float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
-        float mask;
         float elevation = 0;
-        if(settings.noiseLayers[0].enabled){
+        float mask = 1.0f; //should be changed depending on maskType
+        float dist;
+
+        if(settings.noiseLayers[0].enabled){ //TODO: fix for mouse interaction s
             elevation += firstLayerValue;
         }
         for(int i = 1; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
-                //if(checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize)){
-                    mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1;
-                    elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;    
-                //}
+                if(settings.noiseLayers[i].useMouseAsMask){
+                    dist = checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize);  
+                    if(dist < interaction.brushSize){
+                        //mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1;
+                        mask = (interaction.brushSize-dist)/interaction.brushSize; 
+                    }
+                    else{
+                        mask = .0f;
+                    }
+                }
+                elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }  
         }
         return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
     }
 
-    private bool checkIfmarked(List<Vector3> touchedPoints, Vector3 pointOnSphere, float radius){
+    private float checkIfmarked(List<Vector3> touchedPoints, Vector3 pointOnSphere, float radius){
+        float minDist = radius;
+        float tempDist;
         foreach (Vector3 point in touchedPoints){
-            if((point-pointOnSphere).magnitude < radius){
-                return true;
+            tempDist = (point-pointOnSphere).magnitude;
+            if(tempDist < minDist){ // if point is within a certain area 
+                minDist = tempDist; 
             }
         }
-        return false;
+        return minDist;
     }
 
 
