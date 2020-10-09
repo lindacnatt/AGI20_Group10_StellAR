@@ -38,6 +38,7 @@ public class TrajectorySimulation : MonoBehaviour
 
     private bool shoot;
     private bool showTrajectory;
+    private Vector3 startPos;
 
 
   void Awake(){
@@ -59,6 +60,7 @@ public class TrajectorySimulation : MonoBehaviour
 
         Transform T = (Transform) mainObject.GetComponent(typeof(Transform));
         Rigidbody rb = (Rigidbody) mainObject.GetComponent(typeof(Rigidbody));
+        startPos = rb.position;
         positions[0] = rb.position;
         massess[0] = rb.mass;
         //velosities[0] = rb.velocity;
@@ -266,6 +268,7 @@ public class TrajectorySimulation : MonoBehaviour
 
     void SetInitialVel(){
         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
+        a.rigidBody.position = startPos;
          a.velocity += initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
         //https://physics.stackexchange.com/questions/29190/how-exactly-does-mass-affect-speed
         //a.pausedVelocity += initialVelocity;*/
@@ -273,6 +276,7 @@ public class TrajectorySimulation : MonoBehaviour
 
     public void ToggleShoot(){
         shoot = !shoot;
+
     }
 
     public void ToggleTrajectory(){

@@ -24,6 +24,7 @@ public class RotateCam : MonoBehaviour
         transform.SetParent(camContainer.transform);
 
         gyroEnabled = EnableGyro();
+        this.enabled = false;
     }
 
     private bool EnableGyro(){
@@ -41,11 +42,14 @@ public class RotateCam : MonoBehaviour
     
  
     void Update () {
-        if(gyroEnabled){
+        if(gyroEnabled && (target !=null)){
             //transform.localRotation = gyro.attitude*rotation;
             camContainer.transform.rotation = gyro.attitude*rotation;
             transform.LookAt(target);
             //ChangePosition();
+        }
+        else{
+            this.enabled = false;
         }
     }
 

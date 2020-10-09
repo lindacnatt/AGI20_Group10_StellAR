@@ -9,7 +9,7 @@ public class TrajectoryVelocity : MonoBehaviour
     [HideInInspector]
     public static Vector3 direction = new Vector3(0f,0f,0f);
     [HideInInspector]
-    public static float magnitude = 5f;
+    public static float magnitude = 2.5f;
 
     public LineRenderer viewDir;
     
@@ -17,10 +17,20 @@ public class TrajectoryVelocity : MonoBehaviour
     public GameObject simulation;
 
     [HideInInspector]
-    public TrajectorySimulation ts;
+    public int vertices;
 
     [HideInInspector]
-    public int vertices;
+    public Vector3 start = new Vector3(0f,0f,0f);
+
+    [HideInInspector]
+    public Vector3 end = new Vector3(0f,0f,0f);
+
+
+    [HideInInspector]
+    public GameObject cam;
+    private float offset;
+
+    private bool startSlingshot;
 
 
     // Start is called before the first frame update
@@ -28,7 +38,7 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         vertices = 20;
         this.GetComponent<LineRenderer>().enabled = false;
-        ts=(TrajectorySimulation) simulation.GetComponent<TrajectorySimulation>();
+
 
         
     }
@@ -38,29 +48,76 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         if(mainObject != null){
             if(((SimulationPauseControl.gameIsPaused) && (!TrajectorySimulation.drawLine))){
-                viewDir.enabled = true;
-                viewDir.positionCount = vertices;
-                direction = Camera.main.transform.forward;
-                DrawDirection();
-                direction = direction*magnitude;
+                //ViewDirection();
+                
+                if (start.magnitude <= 0.01f){
+                    start = mainObject.transform.position;
+                }
+                if(startSlingshot){
+                    SlingShot();
+                    mainObject.transform.position = end;
+                }
+                else{
+                    mainObject.transform.position = start;
+                }
+                
             }
             else{
                 viewDir.positionCount = 0;
                 viewDir.enabled = false;
+                start = new Vector3(0f,0f,0f);
+                startSlingshot = false;
+
             }
         }
+        else{
+            viewDir.positionCount = 0;
+            viewDir.enabled = false;
+            start = new Vector3(0f,0f,0f);
+        }
+        
         if(TrajectorySimulation.destroyLine){
             mainObject = null;
         }
         
     }
 
-    void DrawDirection(){
-        Vector3 start=mainObject.transform.position;
+    void DrawDirection(float scaling, Vector3 start){
         float s = scaling / (float) viewDir.positionCount;
         for (int i=0; i<viewDir.positionCount; i++){
             viewDir.SetPosition(i,start+direction*s*i);
         }
+    }
+
+    void DrawDirection(Vector3 end){
+        float s = direction.magnitude / (float) viewDir.positionCount;
+        for (int i=0; i<viewDir.positionCount; i++){
+            viewDir.SetPosition(i,end+direction*s*i);
+        }
+    }
+
+    void ViewDirection(){
+        viewDir.enabled = true;
+        viewDir.positionCount = vertices;
+        direction = Camera.main.transform.forward;
+        DrawDirection(scaling, mainObject.transform.position);
+        direction = direction*magnitude;
+    }
+
+    void SlingShot(){
+            //Touch touch = Input.GetTouch(0);
+            //Vector3 end = touch.position;
+            //Vector3 start = mainObject.transform.position;
+            viewDir.enabled = true;
+            viewDir.positionCount = vertices;
+            end = Camera.main.transform.position + 2.0f*Camera.main.transform.forward;//cam.transform.position+2.0f*cam.transform.forward;
+            direction = (start-end);
+            DrawDirection(end);
+            direction *= magnitude;
+    }
+
+    public void ToggleSlingShot(){
+        startSlingshot = !startSlingshot;
     }
 
 }
