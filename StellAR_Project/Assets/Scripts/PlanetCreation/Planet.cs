@@ -12,7 +12,7 @@ public class Planet : MonoBehaviour{
     public Slider cSlider;
 
     // update on buttonpress or on change
-    public bool autoUpdate = false; 
+    public bool autoUpdate = true; 
 
     // data on the planet
     public ColorSettings colorSettings; 
@@ -38,6 +38,10 @@ public class Planet : MonoBehaviour{
             colorSettings = SettingSpawner.loadDefaultColor();
         }
 
+        if(interaction == null){
+            interaction = this.GetComponent<MouseInteraction>();
+        }
+
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
 
         if(meshFilters == null || meshFilters.Length == 0){
@@ -60,11 +64,12 @@ public class Planet : MonoBehaviour{
     }
 
     void Awake(){
-        if(shapeSettings == null){
+         if(shapeSettings == null || colorSettings == null){
             shapeSettings = SettingSpawner.loadDefaultShape();
-        }
-        if(colorSettings == null){
             colorSettings = SettingSpawner.loadDefaultColor();
+        }
+        if(interaction == null){
+            interaction = this.GetComponent<MouseInteraction>();
         }
     }
     public void GeneratePlanet(){
@@ -72,7 +77,6 @@ public class Planet : MonoBehaviour{
         GenerateMesh();
         GenerateColors();
     }
-
     void GenerateMesh(){
         foreach(TerrainFace face in terrainFaces){
             face.ConstructMesh();
