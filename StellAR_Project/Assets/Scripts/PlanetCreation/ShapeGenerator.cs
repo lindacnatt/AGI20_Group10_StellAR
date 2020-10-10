@@ -43,8 +43,12 @@ public class ShapeGenerator {
                 elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
         }
-
-        elevation += craterHeight;
+        if (craterHeight < 0)
+        {
+            //Remove any mountain and add the height of the crater at this position
+            elevation += craterHeight * (1 + elevation * Math.Abs(1 / craterHeight));
+        }
+        //elevation += craterHeight;
         return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
     }
 

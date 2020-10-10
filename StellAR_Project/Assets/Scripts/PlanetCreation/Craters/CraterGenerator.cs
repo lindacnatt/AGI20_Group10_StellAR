@@ -22,14 +22,15 @@ public class CraterGenerator
         public float radius;
         public float floor;
         public float smoothness;
-        public Crater(Vector3 center, float radius, float floor, float smoothness)
+        public float impact;
+        public Crater(Vector3 center, float radius, float floor, float smoothness, float impact)
         {
             this.center = center;
             this.radius = radius;
             this.floor = floor;
             this.smoothness = smoothness;
-
-        }
+            this.impact = impact;
+    }
     };
 
     public float CalculateCraterDepth(Vector3 vertexPos)
@@ -64,7 +65,7 @@ public class CraterGenerator
             {
                 craterList.Add(new Crater(new Vector3(1, 0, 0),
                     craterSettings.radius, craterSettings.floorHeight,
-                    craterSettings.smoothness));
+                    craterSettings.smoothness, craterSettings.impact));
             }
             else
             {
