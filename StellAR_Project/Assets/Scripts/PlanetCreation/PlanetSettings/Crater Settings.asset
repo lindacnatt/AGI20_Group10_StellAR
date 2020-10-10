@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2d4aba463a444bb8309499b3d00f1c, type: 3}
   m_Name: Crater Settings
   m_EditorClassIdentifier: 
-  radius: 0.36
+  radius: 0.3
   numCraters: 1
-  rimSteepness: 0.56
-  rimWidth: 0.96
-  smoothness: 0.22
-  floorHeight: -0.76
-  impact: 1.49
+  rimSteepness: 0.5
+  rimWidth: 0.54
+  smoothness: 0.23
+  floorHeight: -0.52
+  impact: 0.86
