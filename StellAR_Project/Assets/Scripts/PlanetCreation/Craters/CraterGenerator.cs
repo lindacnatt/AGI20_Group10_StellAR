@@ -18,13 +18,13 @@ public class CraterGenerator
 
     public class Crater
     {
-        public Vector3 centre;
+        public Vector3 center;
         public float radius;
         public float floor;
         public float smoothness;
-        public Crater(Vector3 centre, float radius, float floor, float smoothness)
+        public Crater(Vector3 center, float radius, float floor, float smoothness)
         {
-            this.centre = centre;
+            this.center = center;
             this.radius = radius;
             this.floor = floor;
             this.smoothness = smoothness;
@@ -34,13 +34,13 @@ public class CraterGenerator
 
     public float CalculateCraterDepth(Vector3 vertexPos)
     {
-        float craterDepth = 0;
+        float craterHeight = 0;
         //List<Crater> craters = createCraters(settings.craterSettings.numCraters);
         for (int i = 0; i < craterSettings.numCraters; i++)
         {
-            Vector3 diff = vertexPos - craterList[i].centre;
+            Vector3 diff = vertexPos - craterList[i].center;
             float distFromCentre = diff.magnitude;
-            if (distFromCentre <= craterList[0].radius + craterSettings.rimWidth)
+            if (distFromCentre <= craterList[i].radius + craterSettings.rimWidth)
             {
                 float x = diff.magnitude / Mathf.Max(craterList[i].radius, 0.0001f);
                 float cavity = x * x - 1;
@@ -49,11 +49,11 @@ public class CraterGenerator
 
                 float craterShape = smoothMax(cavity, craterList[i].floor, craterList[i].smoothness);
                 craterShape = smoothMin(craterShape, rim, craterList[i].smoothness);
-                craterDepth += craterShape * craterList[i].radius * craterSettings.impact;
+                craterHeight += craterShape * craterList[i].radius * craterSettings.impact;
                 //Debug.Log(craterHeight);
             }
         }
-        return craterDepth;
+        return craterHeight;
     }
 
     public void CreateCraters(int numCraters)
