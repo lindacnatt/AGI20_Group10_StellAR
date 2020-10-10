@@ -23,7 +23,7 @@ public class PlanetEditor : Editor{
         }
         DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref shapeEditor);
         DrawSettingsEditor(planet.colorSettings, planet.OnColorSettingsUpdated, ref planet.colorSettingsFoldout, ref colorEditor);
-        DrawSettingsEditor(planet.craterSettings, planet.OnColorSettingsUpdated, ref planet.craterSettingsFoldout, ref craterEditor);
+        DrawSettingsEditor(planet.craterSettings, planet.OnCraterSettingsUpdated, ref planet.craterSettingsFoldout, ref craterEditor);
         //DrawSettingsEditor(planet.noiseSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref noiseEditor);
     }
     void DrawSettingsEditor(Object settings, System.Action onSettingsUpdated, ref bool foldout, ref Editor editor){

@@ -15,6 +15,4 @@ public class ShapeSettings : ScriptableObject{
         public NoiseSettings  noiseSettings;
     }
 
-    public TestSettings testSettings;
-
 }
