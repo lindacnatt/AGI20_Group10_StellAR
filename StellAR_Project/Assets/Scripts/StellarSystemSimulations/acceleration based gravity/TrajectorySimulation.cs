@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class TrajectorySimulation : MonoBehaviour
 {
@@ -11,9 +12,10 @@ public class TrajectorySimulation : MonoBehaviour
 
     public Vector3 initialVelocity;
 
+    public static Vector3[] linePositions;
+    public static bool destroyLine;
+    public static bool drawLine;
     public int lineVertices;
-
-    public LineRenderer traj;
 
     private Vector3[] velosities;
     private Vector3[] positions;
@@ -33,20 +35,17 @@ public class TrajectorySimulation : MonoBehaviour
 
     private bool startSimulation;
 
-    float timeDelta;
 
   void Awake(){
       Time.fixedDeltaTime = 0.01f;
+      linePositions = new Vector3[lineVertices];
   } 
 
-  void Start()
-    {
-        traj = GetComponent<LineRenderer>();
-        traj.positionCount = lineVertices;
-    }
 
     void CopyObjects(){
+       
         length=CelestialObject.Objects.Count;
+       
         velosities=new Vector3[length];
         positions=new Vector3[length];
         massess=new float[length];
@@ -61,12 +60,18 @@ public class TrajectorySimulation : MonoBehaviour
         //velosities[0] = rb.velocity;
         radius[0] = T.localScale.x;
 
+    
         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
         if(a.staticBody)
+        {
             isStatic[0]=true;
+            }
         else{
-            velosities[0] = a.pausedVelocity;
-        }
+            velosities[0] = a.velocity;
+        //velosities[0] = a.pausedVelocity;
+            }
+            
+        
 
         int count = 1;
         for(int i=0; i<length; i++){
@@ -84,7 +89,8 @@ public class TrajectorySimulation : MonoBehaviour
             if(ai.staticBody)
                 isStatic[count]=true;
             else
-                velosities[count] = ai.pausedVelocity;
+                velosities[count] = ai.velocity;
+                //velosities[count] = ai.pausedVelocity;
             count++;
             }
         }
@@ -95,21 +101,41 @@ public class TrajectorySimulation : MonoBehaviour
     }
 
     void CalcNextVeloWithAcc(int index, Vector3 acc, float timeStep){
-        velosities[index]+=acc*timeStep;
+        velosities[index]+=(acc*timeStep)*Mathf.Sqrt(2.0f/massess[index]);
     }
 
      void CalcVeloStart(){
-        velosities[0] = velosities[0] + initialVelocity;
+        velosities[0] = velosities[0] + initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
     }
 
-    Vector3 CalcAcc(int index){
+    Vector3 CalcAccNBody(int index){
         
-
         Vector3 dirResultant = new Vector3(0f,0f,0f);
         
         for (int i=0; i<length; i++){
             if(i!=index && !dead[i]){
                 float distance = (positions[i]-positions[index]).magnitude;
+                
+                if(distance == double.PositiveInfinity)
+                    return new Vector3(0f,0f,0f);
+
+                Vector3 direction = (positions[i]-positions[index]).normalized;
+                dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
+            }    
+        }
+        return dirResultant;
+    }
+
+      Vector3 CalcAccSource(int index){
+        Vector3 dirResultant = new Vector3(0f,0f,0f);
+    
+        for (int i=0; i<length; i++){
+            if(i!=index && !dead[i] && isStatic[i]){
+                float distance = (positions[i]-positions[index]).magnitude;
+
+                if(distance == double.PositiveInfinity)
+                    return new Vector3(0f,0f,0f);
+
                 Vector3 direction = (positions[i]-positions[index]).normalized;
                 dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
             }    
@@ -156,12 +182,16 @@ public class TrajectorySimulation : MonoBehaviour
         if(SimulationPauseControl.gameIsPaused){
             if (Input.GetKeyDown(KeyCode.T)){ 
                 CalcTrajectory(Time.fixedDeltaTime);
+                Array.Reverse(linePositions);
+                drawLine=true;
                 
 
             }
             if(Input.GetKeyDown(KeyCode.Return)){ 
                 SetInitialVel();
+                destroyLine=true;
                 SimulationPauseControl.gameIsPaused = false;
+
                 
             }
         }
@@ -172,28 +202,33 @@ public class TrajectorySimulation : MonoBehaviour
         CopyObjects();
         CalcVeloStart();
         int count=0;
-        for(int j=0; j<traj.positionCount; j++){
+        for(int j=0; j<lineVertices; j++){
             prel_acc = new Vector3[length];
             
-            traj.SetPosition(count, positions[0]);
+            linePositions[count]=positions[0];
             count++;
                 
             for(int i=0; i<length; i++){
                 if((!isStatic[i]) && (!dead[i])){
-                        prel_acc[i]=CalcAcc(i);
+                        if(ToggleGravityMode.nBodyGravity){
+                            prel_acc[i]=CalcAccNBody(i);
+                        }
+                        else{
+                            prel_acc[i]=CalcAccSource(i);
+                        }
                 
                 }
             }
              for(int i=0; i<length; i++){ 
                 if((!isStatic[i]) && (!dead[i])){
                     
+                    CalcNextVeloWithAcc(i,prel_acc[i],time);
+                    Vector3 new_pos = CalcPos(i,time);
                     
-                    //Vector3 new_pos = CalcPos(i,time);
-                    //CalcNextVeloWithAcc(i,prel_acc[i],time);
                     
 
-                    Vector3 new_pos = CalcPos(i,time,prel_acc[i]); 
-                    CalcNextVelo(i,new_pos,time);
+                    //Vector3 new_pos = CalcPos(i,time,prel_acc[i]); 
+                    //CalcNextVelo(i,new_pos,time);
                     
                     positions[i] = new_pos;
                 }
@@ -209,6 +244,7 @@ public class TrajectorySimulation : MonoBehaviour
 
     void SetInitialVel(){
          CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
-         a.pausedVelocity += initialVelocity;
+         a.velocity +=initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
+         //a.pausedVelocity += initialVelocity;
     }
     }

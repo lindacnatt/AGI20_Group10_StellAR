@@ -9,9 +9,20 @@ public class InitialVelocity : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         rb=this.GetComponent<Rigidbody>();
-        rb.velocity += initialvelocity;
+        Moon m = this.GetComponent<Moon>();
+        if (m) {
+        //Component is valid AND stored for later use, preventing any further GetComponent calls
+            m.velocity = initialvelocity*Mathf.Sqrt(2.0f/rb.mass);;
+        }
+        else{
+            CelestialObject ob = (CelestialObject) gameObject.GetComponent<CelestialObject>();
+            ob.velocity+=initialvelocity*Mathf.Sqrt(2.0f/rb.mass);
+        }
+        
+        //rb.velocity += initialvelocity;
+        
         
     }
 }

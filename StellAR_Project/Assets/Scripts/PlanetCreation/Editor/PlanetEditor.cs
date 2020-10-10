@@ -17,7 +17,6 @@ public class PlanetEditor : Editor{
                 planet.GeneratePlanet();
             }
         }
-
         if(GUILayout.Button("Generate Planet")){
             planet.GeneratePlanet();
         }
@@ -33,17 +32,17 @@ public class PlanetEditor : Editor{
                 if(foldout){
                     CreateCachedEditor(settings, null, ref editor);
                     editor.OnInspectorGUI();
-                
+
                     if(check.changed ){
                         if(onSettingsUpdated != null){
                             onSettingsUpdated();
                         }
                     }
-                } 
+                }
             }
         }
-        
-    }  
+
+    }
     private void OnEnable(){
         planet = (Planet)target;
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoiseFilter {
+public class NoiseFilter : NoiseInterface{
     SimplexNoise noise = new SimplexNoise();
     public NoiseSettings settings;
     

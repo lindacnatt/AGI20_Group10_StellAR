@@ -9,11 +9,19 @@ public class CelestialObject : MonoBehaviour
     
     [HideInInspector]
     public Vector3 acceleration = new Vector3(0f,0f,0f);
+    [HideInInspector]
+    public Vector3 nextAcceleration = new Vector3(0f,0f,0f);
+
+    [HideInInspector]
+    public Vector3 velocity = new Vector3(0f,0f,0f);
+
     public bool staticBody;
 
     [HideInInspector]
     public Vector3 pausedVelocity;
     private bool hasBeenPaused;
+
+    
     
 
      public static List<CelestialObject> Objects;
@@ -60,6 +68,5 @@ public class CelestialObject : MonoBehaviour
             Destroy(this.gameObject);
 
     }
-
 
 }

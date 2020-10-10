@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
+  m_Name: DefaultShape
+  m_EditorClassIdentifier: 
+  radius: 1
+  noiseLayers:
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    useMouseAsMask: 1
+    noiseSettings:
+      filterType: 1
+      numLayers: 4
+      fallof: 0.53
+      freqPower: 2.04
+      freq: 0.46
+      minValue: 1.66
+      amplitude: 1.08
+      noiseCenter: {x: 3.31, y: 0, z: 0}
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    useMouseAsMask: 0
+    noiseSettings:
+      filterType: 2
+      numLayers: 5
+      fallof: 0.75
+      freqPower: 4.19
+      freq: 2.65
+      minValue: 0.26
+      amplitude: 0.15
+      noiseCenter: {x: 1.15, y: 0, z: 0}
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    useMouseAsMask: 1
+    noiseSettings:
+      filterType: 3
+      numLayers: 5
+      fallof: 0.75
+      freqPower: 4.19
+      freq: 0.55
+      minValue: 0.54
+      amplitude: 0.23
+      noiseCenter: {x: 1.15, y: 0, z: 0}
