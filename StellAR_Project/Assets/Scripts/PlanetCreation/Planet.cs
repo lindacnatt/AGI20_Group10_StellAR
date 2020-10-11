@@ -22,6 +22,8 @@ public class Planet : MonoBehaviour{
     // create mouseInteractions
     public MouseInteraction interaction;
     ShapeGenerator shapeGenerator;
+    ColorGenerator colorGenerator = new ColorGenerator();
+
     
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
@@ -43,6 +45,7 @@ public class Planet : MonoBehaviour{
         }
 
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
+        colorGenerator.UpdateSettings(colorSettings);
 
         if(meshFilters == null || meshFilters.Length == 0){
             meshFilters = new MeshFilter[6];
@@ -55,10 +58,11 @@ public class Planet : MonoBehaviour{
             if(meshFilters[i] == null){
                 GameObject meshObj = new GameObject("mesh");
                 meshObj.transform.parent = transform;
-                meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
+                meshObj.AddComponent<MeshRenderer>(); //.sharedMaterial = new Material(Shader.Find("Standard"));
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
-            }    
+            }
+            meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
             terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]); 
         } 
     }
@@ -81,6 +85,7 @@ public class Planet : MonoBehaviour{
         foreach(TerrainFace face in terrainFaces){
             face.ConstructMesh();
         }
+        colorGenerator.UpdateElevation(shapeGenerator.elevationMinMax);
     }
  
     public void OnShapeSettingsUpdated(){
@@ -91,12 +96,14 @@ public class Planet : MonoBehaviour{
     }
 
     void GenerateColors(){ // update color for every mesh given from the colorsettings
-        foreach(MeshFilter m in meshFilters){
+
+        colorGenerator.UpdateColors();
+       /*  foreach(MeshFilter m in meshFilters){
             Color newPlanetColor = colorSettings.planetColor;
             //covert the colors to HSV and only change the hue
             newPlanetColor = Color.HSVToRGB(cSlider.value, 1, 1);
             m.GetComponent<MeshRenderer>().sharedMaterial.color = newPlanetColor;
-        }
+        } */
     }
 
     public void OnColorSettingsUpdated(){ //Rebuild planet when color is updated
