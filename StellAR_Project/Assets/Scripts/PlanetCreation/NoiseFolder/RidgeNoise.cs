@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoiseFilter : NoiseInterface{
+public class RidgeNoise: NoiseInterface{
     SimplexNoise noise = new SimplexNoise();
     public NoiseSettings settings;
     
-    public NoiseFilter(NoiseSettings settings){
+    public RidgeNoise(NoiseSettings settings){
         this.settings = settings;
     }
     public float Evaluate(Vector3 point){
@@ -15,7 +15,8 @@ public class NoiseFilter : NoiseInterface{
         float noiseValue = 0;
 
         for(int i = 0; i < settings.numLayers; i++){ // add noise of increasing frequencies 
-            float v = (noise.Evaluate((point+this.settings.noiseCenter)*freq)+1)*0.5f;
+            float v = 1 - Mathf.Abs(noise.Evaluate((point+this.settings.noiseCenter)*freq));
+            //v *= v;
             noiseValue += v*amplitude;
             
             freq *= settings.freqPower;
