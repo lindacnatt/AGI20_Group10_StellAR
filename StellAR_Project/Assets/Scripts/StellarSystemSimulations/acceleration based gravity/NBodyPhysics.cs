@@ -86,6 +86,7 @@ public class NBodyPhysics : MonoBehaviour
             if((otherObject != current)){
                 
                 float distance = (otherObject.rigidBody.position-current.rigidBody.position).magnitude;
+                
                 Vector3 direction = (otherObject.rigidBody.position-current.rigidBody.position).normalized;
                 current.acceleration += direction * gravityConstant *otherObject.rigidBody.mass / Mathf.Pow(distance,2);
             }

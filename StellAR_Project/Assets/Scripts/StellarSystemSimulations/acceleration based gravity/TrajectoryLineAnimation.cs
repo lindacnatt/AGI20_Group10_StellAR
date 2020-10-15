@@ -82,12 +82,12 @@ public class TrajectoryLineAnimation : MonoBehaviour
                     }
 
                 }
-                else
-                {
-                    traj.positionCount = 0;
-                }
 
             }
+        }
+        else{
+            traj.positionCount = 0;
+            this.GetComponent<LineRenderer>().enabled = false;
         }
 
     }

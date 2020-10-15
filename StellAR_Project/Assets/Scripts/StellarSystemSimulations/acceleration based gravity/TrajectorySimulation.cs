@@ -36,9 +36,10 @@ public class TrajectorySimulation : MonoBehaviour
 
     private bool startSimulation;
 
-    private bool shoot;
+    public static bool shoot;
     private bool showTrajectory;
     private Vector3 startPos;
+    public static bool freeze;
 
 
   void Awake(){
@@ -123,8 +124,8 @@ public class TrajectorySimulation : MonoBehaviour
             if(i!=index && !dead[i]){
                 float distance = (positions[i]-positions[index]).magnitude;
                 
-                if(distance == double.PositiveInfinity)
-                    return new Vector3(0f,0f,0f);
+                //if(distance == double.PositiveInfinity)
+                //    return new Vector3(0f,0f,0f);
 
                 Vector3 direction = (positions[i]-positions[index]).normalized;
                 dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
@@ -190,7 +191,7 @@ public class TrajectorySimulation : MonoBehaviour
         {
             if (SimulationPauseControl.gameIsPaused)
             {
-                if (TrajectoryVelocity.startSlingshot) //(Input.GetKeyDown(KeyCode.T) || Input.touchCount == 1) //Input.touchCount > 0
+                if (TrajectoryVelocity.startSlingshot && !freeze) //(Input.GetKeyDown(KeyCode.T) || Input.touchCount == 1) //Input.touchCount > 0
                 {
                     CalcTrajectory(Time.fixedDeltaTime);
                     Array.Reverse(linePositions);
@@ -283,5 +284,9 @@ public class TrajectorySimulation : MonoBehaviour
     public void ToggleTrajectory(){
         showTrajectory = !showTrajectory;
 
+    }
+
+    public void ToggleFreeze(){
+        freeze = !freeze;
     }
 }

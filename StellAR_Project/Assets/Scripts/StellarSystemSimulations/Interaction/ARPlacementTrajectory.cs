@@ -20,6 +20,19 @@ public class ARPlacementTrajectory : MonoBehaviour
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
     }
 
+    void Update(){
+        if (Input.touchCount > 0 && (placed != true))
+        {
+            placed = true; //this places the object and it is locked to the latest position it had. Physics should take it from here.
+            objectToPlace.GetComponent<CelestialObject>().enabled = true;
+            simulationRunner.GetComponent<TrajectoryLineAnimation>().main = objectToPlace;
+            simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;
+            simulationRunner.transform.GetChild(0).gameObject.GetComponent<TrajectoryVelocity>().mainObject = objectToPlace;
+            SimulationPauseControl.gameIsPaused = true;
+            TrajectoryVelocity.startSlingshot = true;
+            Destroy(this);
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -29,17 +42,10 @@ public class ARPlacementTrajectory : MonoBehaviour
             objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera;
             objectToPlace.transform.rotation = new Quaternion(0.0f, ARCamera.transform.rotation.y, 0.0f, ARCamera.transform.rotation.w);
         }
-        if (Input.touchCount > 0 && (placed != true))
-        {
-            placed = true; //this places the object and it is locked to the latest position it had. Physics should take it from here.
-            objectToPlace.GetComponent<CelestialObject>().enabled = true;
-            simulationRunner.GetComponent<TrajectoryLineAnimation>().main = objectToPlace;
-            simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;
-            simulationRunner.transform.GetChild(0).gameObject.GetComponent<TrajectoryVelocity>().mainObject = objectToPlace;
-            SimulationPauseControl.gameIsPaused = true;
-            //ARCamera.GetComponent<RotateCam>().enabled=true;
-            //ARCamera.GetComponent<RotateCam>().target=objectToPlace.transform;
-            Destroy(this);
-        }
+    }
+
+    public void PlaceNextObject(){
+        objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
+        placed = false;
     }
 }
