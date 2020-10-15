@@ -1478,6 +1478,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleTrajectory
       objectReference: {fileID: 0}
+    - target: {fileID: 4151942393400817466, guid: 10831885e93884349a4226fc6fde88c0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4151942393495466496, guid: 10831885e93884349a4226fc6fde88c0,
         type: 3}
       propertyPath: m_Name

@@ -190,12 +190,12 @@ public class TrajectorySimulation : MonoBehaviour
         {
             if (SimulationPauseControl.gameIsPaused)
             {
-                if (showTrajectory) //(Input.GetKeyDown(KeyCode.T) || Input.touchCount == 1) //Input.touchCount > 0
+                if (TrajectoryVelocity.startSlingshot) //(Input.GetKeyDown(KeyCode.T) || Input.touchCount == 1) //Input.touchCount > 0
                 {
                     CalcTrajectory(Time.fixedDeltaTime);
                     Array.Reverse(linePositions);
                     drawLine = true;
-                    showTrajectory = !showTrajectory;
+                    //showTrajectory = !showTrajectory;
 
 
                 }
@@ -207,6 +207,7 @@ public class TrajectorySimulation : MonoBehaviour
                     SimulationPauseControl.gameIsPaused = false;
                     mainObject = null;
                     shoot = !shoot;
+                    TrajectoryVelocity.startSlingshot = false;
                     //this.GetComponent<TrajectoryLineAnimation>().main = null;
 
                 }

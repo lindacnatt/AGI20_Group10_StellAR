@@ -9,7 +9,7 @@ public class TrajectoryVelocity : MonoBehaviour
     [HideInInspector]
     public static Vector3 direction = new Vector3(0f,0f,0f);
     [HideInInspector]
-    public static float magnitude = 2.5f;
+    public static float magnitude = 4f;
 
     public LineRenderer viewDir;
     
@@ -30,7 +30,7 @@ public class TrajectoryVelocity : MonoBehaviour
     public GameObject cam;
     private float offset;
 
-    private bool startSlingshot;
+    public static bool startSlingshot;
 
 
     // Start is called before the first frame update
