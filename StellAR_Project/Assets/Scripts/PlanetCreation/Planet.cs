@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 public class Planet : MonoBehaviour{   
     
-    [Range(2, 2)]
+    [Range(2, 100)]
     // Resolution of every terrainFace
     public int resolution = 10;
 
-    [Range(0, 3)]
-    public int isoDetail = 1;
+    [Range(0, 5)]
+    public int icoDetail = 1;
+    public bool isIcoSphere = true;
 
     public Slider cSlider;
 
@@ -28,7 +29,7 @@ public class Planet : MonoBehaviour{
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
-    IsoSphere isoSphere;
+    IcoSphere icoSphere;
     MeshFilter meshFilter;
 
 
@@ -68,7 +69,7 @@ public class Planet : MonoBehaviour{
         } 
     }
 
-    void InitializeIsoSphere(){        
+    void InitializeIcoSphere(){        
         if(shapeSettings == null || colorSettings == null){
             shapeSettings = SettingSpawner.loadDefaultShape();
             colorSettings = SettingSpawner.loadDefaultColor();
@@ -79,22 +80,22 @@ public class Planet : MonoBehaviour{
         }
 
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
-
+        
+        if(this.transform.Find("mesh") != null){
+            meshFilter = this.transform.Find("mesh").GetComponent<MeshFilter>();
+        }
         if(meshFilter == null){
             GameObject meshObj = new GameObject("mesh");
             meshObj.transform.parent = transform;
-            meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Standard"));
+            meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
             meshFilter = meshObj.AddComponent<MeshFilter>();
-            meshFilter.sharedMesh = new Mesh();
+            meshFilter.sharedMesh = new Mesh();     
         }
-        
-        
-        isoSphere = new IsoSphere(shapeGenerator, shapeSettings.radius, isoDetail, meshFilter.sharedMesh);
-        
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh);     
     }
 
     void Awake(){
-         if(shapeSettings == null || colorSettings == null){
+        if(shapeSettings == null || colorSettings == null){
             shapeSettings = SettingSpawner.loadDefaultShape();
             colorSettings = SettingSpawner.loadDefaultColor();
         }
@@ -103,11 +104,15 @@ public class Planet : MonoBehaviour{
         }
     }
     public void GeneratePlanet(){
-        //Initialize();
-        InitializeIsoSphere();
-        //GenerateMesh();
-        GenerateMeshIso();
-        //GenerateColors();
+        if(isIcoSphere){
+            InitializeIcoSphere();
+            GenerateMeshIco();
+        }
+        else{
+            Initialize();
+            GenerateMesh();
+            GenerateColors();
+        }
     }
     void GenerateMesh(){
         foreach(TerrainFace face in terrainFaces){
@@ -115,16 +120,20 @@ public class Planet : MonoBehaviour{
         }
     }
 
-    void GenerateMeshIso(){
-        isoSphere.ConstructMesh();
+    void GenerateMeshIco(){
+        icoSphere.ConstructMesh();
     }
  
     public void OnShapeSettingsUpdated(){
         if(autoUpdate){
-            //Initialize();
-            //GenerateMesh();
-            InitializeIsoSphere();
-            GenerateMeshIso();
+            if(isIcoSphere){
+                InitializeIcoSphere();
+                GenerateMeshIco();
+            }
+            else{
+                Initialize();
+                GenerateMesh();    
+            }
         }    
     }
 
@@ -142,9 +151,5 @@ public class Planet : MonoBehaviour{
             Initialize();
             GenerateColors();
         }
-    }
-
-    void GenerateMeshIcosphere(){
-
     }
 }

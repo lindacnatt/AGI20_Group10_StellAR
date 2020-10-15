@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IsoSphere {
+public class IcoSphere {
     Mesh mesh;
     int detail;
     ShapeGenerator shapeGenerator;
@@ -12,7 +12,7 @@ public class IsoSphere {
     List<Vector3> vertices;
     float theta;
 
-    public IsoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh){
+    public IcoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh){
         this.shapeGenerator = shapeGenerator;
         this.detail = detail;
         this.mesh = mesh;
@@ -20,22 +20,41 @@ public class IsoSphere {
 
         this.triangleTable = new Hashtable();
         this.vertices = new List<Vector3>();
-        this.theta = (1 + Mathf.Sqrt(5))*0.5f; //golden 
+        this.theta = (1 + Mathf.Sqrt(5))*0.5f; //golden ratio
         this.midPointCach = new Dictionary<string, Vector3>();
     }
 
     public void ConstructMesh(){
         List<Vector3Int> triangles = new List<Vector3Int>();
         List<int> triangleIndices = new List<int>();
-        Vector2 sideLen  = new Vector2(radius, theta*radius);
+        /* Vector2 sideLen  = new Vector2(radius, theta*radius);
         sideLen /= sideLen.magnitude;
         sideLen *= radius;
+        */
 
-        // scale so that every vertice is r lenght
+        // scale so that every vertice is r length
+        /*
         float r = sideLen[0];
         theta = sideLen[1];
-
+        */
+        float r = 1.0f;
         // construct basic vertices
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(-r, theta, 0).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(r, theta, 0).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(-r, -theta, 0).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(r, -theta, 0).normalized));
+
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(0, -r, theta).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(0, r, theta).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(0, -r, -theta).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(0, r, -theta).normalized));
+
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3( theta,0, -r).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3( theta, 0, r).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(-theta, 0, -r).normalized));
+        vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(-theta, 0, r).normalized));
+        
+        /*
         vertices.Add(new Vector3(-r, theta, 0));
         vertices.Add(new Vector3(r, theta, 0));
         vertices.Add(new Vector3(-r, -theta, 0));
@@ -50,6 +69,7 @@ public class IsoSphere {
         vertices.Add(new Vector3( theta, 0, r));
         vertices.Add(new Vector3(-theta, 0, -r));
         vertices.Add(new Vector3(-theta, 0, r));
+        */
 
         // construct triangles
         triangles.Add(new Vector3Int(0, 11, 5));
@@ -75,8 +95,7 @@ public class IsoSphere {
         triangles.Add(new Vector3Int(6, 2, 10));
         triangles.Add(new Vector3Int(8, 6, 7));
         triangles.Add(new Vector3Int(9, 8, 1));
-
-        //Debug.Log(vertices[0].ToString());
+        
         for(int i = 0; i < detail; i++){
             Vector3 a, b, c;
             List<Vector3Int> tempList = new List<Vector3Int>();
@@ -87,10 +106,15 @@ public class IsoSphere {
                 c = GetMidPoint(vertices[triangle.z], vertices[triangle.x]);
                 
                 // add new vertices to list
+                
+                AddVertex(shapeGenerator.CalculatePointOnPlanet(a));
+                AddVertex(shapeGenerator.CalculatePointOnPlanet(b));
+                AddVertex(shapeGenerator.CalculatePointOnPlanet(c));
+                /*
                 AddVertex(a);
                 AddVertex(b);
                 AddVertex(c);
-                
+                */
                 len = vertices.Count;
                 tempList.Add(new Vector3Int(len-3, len-2, len-1)); //add a b c triangle
                 tempList.Add(new Vector3Int(triangle.x, len-3, len-1));
@@ -120,13 +144,12 @@ public class IsoSphere {
         else{
             Vector3 temp = b - a;
             temp = a + temp*0.5f;
-            temp = temp.normalized * radius;
+            temp = temp.normalized; // * radius;
             midPointCach.Add(key, temp);
             return temp;
         }
     }
     private void AddVertex(Vector3 point){
-        
         this.vertices.Add(point);
     }
 }
