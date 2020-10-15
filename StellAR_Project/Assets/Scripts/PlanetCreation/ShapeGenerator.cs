@@ -22,11 +22,12 @@ public class ShapeGenerator {
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere, float craterHeight){
         float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
         float elevation = 0;
+        float noiseelevation = 0;
         float mask = 1.0f; //should be changed depending on maskType
         float dist;
 
         if(settings.noiseLayers[0].enabled){ //TODO: fix for mouse interaction s
-            elevation += firstLayerValue;
+            noiseelevation += firstLayerValue;
         }
         for(int i = 1; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
@@ -40,15 +41,20 @@ public class ShapeGenerator {
                         mask = .0f;
                     }
                 }
-                elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
+                noiseelevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
         }
-        if (craterHeight < 0)
+        elevation += noiseelevation;
+        if (craterHeight <= 0)
         {
             //Remove any mountain and add the height of the crater at this position
-            elevation += craterHeight * (1 + elevation * Math.Abs(1 / craterHeight));
+            elevation += craterHeight - noiseelevation;
         }
-        //elevation += craterHeight;
+        else if (craterHeight > 0)
+        {
+            //Make rims of craters look better with noise
+            elevation += (craterHeight + noiseelevation/2)/2;
+        }
         return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
     }
 

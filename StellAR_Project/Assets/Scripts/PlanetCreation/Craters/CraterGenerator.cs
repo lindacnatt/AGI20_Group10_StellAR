@@ -7,13 +7,18 @@ public class CraterGenerator
 {
     //ShapeSettings setings;
     CraterSettings craterSettings;
-    List<Crater> craterList;
 
     public CraterGenerator(CraterSettings craterSettings)
     {
-        this.craterSettings = craterSettings;
+        if (craterSettings != null)
+        {
+            this.craterSettings = craterSettings;
+        }
+        else
+        {
+            //this.craterSettings = SettingSpawner.loadDefaultCraters();
+        }
         //this.setings = setings;
-        craterList = new List<Crater>();
     }
 
     public class Crater
@@ -36,8 +41,9 @@ public class CraterGenerator
     public float CalculateCraterDepth(Vector3 vertexPos)
     {
         float craterHeight = 0;
-        //List<Crater> craters = createCraters(settings.craterSettings.numCraters);
-        for (int i = 0; i < craterSettings.numCraters; i++)
+        //Will need some adjustments for more than one craters
+        List<Crater> craterList = craterSettings.craterList;
+        for (int i = 0; i < craterList.Count; i++)
         {
             Vector3 diff = vertexPos - craterList[i].center;
             float distFromCentre = diff.magnitude;
@@ -51,26 +57,52 @@ public class CraterGenerator
                 float craterShape = smoothMax(cavity, craterList[i].floor, craterList[i].smoothness);
                 craterShape = smoothMin(craterShape, rim, craterList[i].smoothness);
                 craterHeight += craterShape * craterList[i].radius * craterSettings.impact;
-                //Debug.Log(craterHeight);
             }
+            /*
+            if (craterHeight >= -0.2 && craterHeight < 0.2)
+            {
+                craterHeight = 0;
+            }
+            if (craterHeight >= 0.2 && craterHeight < 0.4)
+            {
+                craterHeight = 0.2f;
+            }
+            if (craterHeight >= 0.4 && craterHeight < 0.6)
+            {
+                craterHeight = 0.4f;
+            }
+            if (craterHeight >= 0.6)
+            {
+                craterHeight = 0.6f;
+            }
+            if (craterHeight <= -0.2 && craterHeight > -0.4)
+            {
+                craterHeight = -0.2f;
+            }
+            if (craterHeight <= -0.4 && craterHeight > -0.6)
+            {
+                craterHeight = -0.4f;
+            }
+            if (craterHeight <= -0.6)
+            {
+                craterHeight = -0.6f;
+            }
+            */
         }
         return craterHeight;
     }
 
-    public void CreateCraters(int numCraters)
+    public void CreateCrater(Vector3 pos)
     {
-        for (int i = 0; i < numCraters; i++)
+        if (craterSettings.craterList != null)
         {
-            if (craterList != null)
-            {
-                craterList.Add(new Crater(new Vector3(1, 0, 0),
-                    craterSettings.radius, craterSettings.floorHeight,
-                    craterSettings.smoothness, craterSettings.impact));
-            }
-            else
-            {
-                Debug.Log("craterlist null");
-            }
+            craterSettings.craterList.Add(new Crater(pos,
+                craterSettings.radius, craterSettings.floorHeight,
+                craterSettings.smoothness, craterSettings.impact));
+        }
+        else
+        {
+            Debug.Log("craterlist null");
         }
     }
 
@@ -86,4 +118,5 @@ public class CraterGenerator
         float h = Mathf.Clamp01((b - a + k) / (2 * k));
         return a * h + b * (1 - h) - k * h * (1 - h);
     }
+
 }

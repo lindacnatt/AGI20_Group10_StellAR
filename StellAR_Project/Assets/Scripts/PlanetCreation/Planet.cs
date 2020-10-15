@@ -10,6 +10,7 @@ public class Planet : MonoBehaviour{
     public int resolution = 10;
 
     public Slider cSlider;
+    Vector3 craterCenter = new Vector3(0, 0, 0);
 
     // update on buttonpress or on change
     public bool autoUpdate = true;
@@ -18,15 +19,15 @@ public class Planet : MonoBehaviour{
     public ColorSettings colorSettings;
     public ShapeSettings shapeSettings;
     public CraterSettings craterSettings;
+    public Explosion explosion;
     //public NoiseSettings noiseSettings;
-
-    //public Crater craterStruct;
-    //public static List<Crater> cratersList;
+    SphereCollider planetCollider;
 
     // create mouseInteractions
     public MouseInteraction interaction;
     ShapeGenerator shapeGenerator;
     CraterGenerator craterGenerator;
+
 
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
@@ -44,6 +45,10 @@ public class Planet : MonoBehaviour{
             shapeSettings = SettingSpawner.loadDefaultShape();
             colorSettings = SettingSpawner.loadDefaultColor();
         }
+        if(craterSettings == null)
+        {
+            craterSettings = SettingSpawner.loadDefaultCraters();
+        }
 
         if(interaction == null){
             interaction = this.GetComponent<MouseInteraction>();
@@ -51,7 +56,9 @@ public class Planet : MonoBehaviour{
 
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
         craterGenerator = new CraterGenerator(craterSettings);
-        craterGenerator.CreateCraters(1);
+
+        planetCollider = GetComponent<SphereCollider>();
+        craterGenerator.CreateCrater(craterCenter);
 
         if (meshFilters == null || meshFilters.Length == 0){
             meshFilters = new MeshFilter[6];
@@ -102,8 +109,8 @@ public class Planet : MonoBehaviour{
         foreach(MeshFilter m in meshFilters){
             Color newPlanetColor = colorSettings.planetColor;
             //covert the colors to HSV and only change the hue
-            newPlanetColor = Color.HSVToRGB(cSlider.value, 1, 1);
-            m.GetComponent<MeshRenderer>().sharedMaterial.color = newPlanetColor;
+            //newPlanetColor = Color.HSVToRGB(cSlider.value, 1, 1);
+            //m.GetComponent<MeshRenderer>().sharedMaterial.color = newPlanetColor;
         }
     }
 
@@ -121,5 +128,32 @@ public class Planet : MonoBehaviour{
             Initialize();
             GenerateMesh();
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        ContactPoint contact = collision.contacts[0];
+        Vector3 position = contact.point.normalized;
+        Vector3 planetRotEuler  = gameObject.transform.localRotation.eulerAngles;
+        Quaternion rotation = Quaternion.AngleAxis(-planetRotEuler[2], Vector3.forward)
+            * Quaternion.AngleAxis(-planetRotEuler[0], Vector3.right)
+            * Quaternion.AngleAxis(-planetRotEuler[1], Vector3.up);
+        position = rotation * position;
+        craterCenter = position;
+        float velocity = collision.relativeVelocity.magnitude;
+        craterSettings.impact = 0.2f + velocity/2;
+        Debug.Log("impact: " + craterSettings.impact);
+        craterSettings.floorHeight = -2f/velocity;
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+        if (asteroids.Length > 0)
+        {
+            GameObject asteroid = asteroids[0];
+            SphereCollider asteroidCollider = asteroid.GetComponent<SphereCollider>();
+            float radius = asteroid.transform.localScale.x * asteroidCollider.radius;
+            craterSettings.radius = radius;
+
+        }
+        Initialize();
+        GenerateMesh();
     }
 }

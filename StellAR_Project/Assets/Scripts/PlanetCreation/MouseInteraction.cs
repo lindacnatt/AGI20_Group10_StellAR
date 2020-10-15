@@ -19,7 +19,8 @@ public class MouseInteraction : MonoBehaviour{
             selection = hit.transform;
             //selectionRenderer = selection.GetComponent<Renderer>();
             if(Input.GetMouseButtonDown(0)){
-                hitCoords.Add(selection.InverseTransformPoint(hit.point)); 
+                hitCoords.Add(selection.InverseTransformPoint(hit.point));
+                Debug.Log(selection.InverseTransformPoint(hit.point));
             }
         }
     }
