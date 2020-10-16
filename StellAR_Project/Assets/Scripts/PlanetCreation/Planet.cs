@@ -104,6 +104,7 @@ public class Planet : MonoBehaviour{
         }
     }
     public void GeneratePlanet(){
+        UpdateCollider();
         if(isIcoSphere){
             InitializeIcoSphere();
             GenerateMeshIco();
@@ -126,6 +127,7 @@ public class Planet : MonoBehaviour{
  
     public void OnShapeSettingsUpdated(){
         if(autoUpdate){
+            UpdateCollider();
             if(isIcoSphere){
                 InitializeIcoSphere();
                 GenerateMeshIco();
@@ -151,5 +153,10 @@ public class Planet : MonoBehaviour{
             Initialize();
             GenerateColors();
         }
+    }
+
+    private void UpdateCollider(){
+        SphereCollider collider = this.GetComponent<SphereCollider>();
+        collider.radius = shapeSettings.radius;
     }
 }

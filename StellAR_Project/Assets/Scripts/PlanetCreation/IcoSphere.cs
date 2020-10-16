@@ -7,7 +7,6 @@ public class IcoSphere {
     int detail;
     ShapeGenerator shapeGenerator;
     float radius;
-    Hashtable triangleTable;
     Dictionary<string, Vector3> midPointCach;
     List<Vector3> vertices;
     float theta;
@@ -18,7 +17,6 @@ public class IcoSphere {
         this.mesh = mesh;
         this.radius = radius;
 
-        this.triangleTable = new Hashtable();
         this.vertices = new List<Vector3>();
         this.theta = (1 + Mathf.Sqrt(5))*0.5f; //golden ratio
         this.midPointCach = new Dictionary<string, Vector3>();
@@ -37,6 +35,7 @@ public class IcoSphere {
         float r = sideLen[0];
         theta = sideLen[1];
         */
+        
         float r = 1.0f;
         // construct basic vertices
         vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(-r, theta, 0).normalized));
@@ -106,15 +105,16 @@ public class IcoSphere {
                 c = GetMidPoint(vertices[triangle.z], vertices[triangle.x]);
                 
                 // add new vertices to list
-                
                 AddVertex(shapeGenerator.CalculatePointOnPlanet(a));
                 AddVertex(shapeGenerator.CalculatePointOnPlanet(b));
                 AddVertex(shapeGenerator.CalculatePointOnPlanet(c));
+                
                 /*
                 AddVertex(a);
                 AddVertex(b);
                 AddVertex(c);
                 */
+                
                 len = vertices.Count;
                 tempList.Add(new Vector3Int(len-3, len-2, len-1)); //add a b c triangle
                 tempList.Add(new Vector3Int(triangle.x, len-3, len-1));

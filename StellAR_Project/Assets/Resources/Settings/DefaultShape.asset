@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   noiseLayers:
-  - enabled: 0
+  - enabled: 1
     useFirstLayerAsMask: 0
     useMouseAsMask: 0
     noiseSettings:
@@ -22,9 +22,10 @@ MonoBehaviour:
       numLayers: 4
       fallof: 1.02
       freqPower: 2.04
-      freq: 0.24
-      minValue: 1.33
-      amplitude: 0.46
+      freq: 0.1
+      minValue: 1.39
+      clampSteps: 2
+      amplitude: 0.48
       noiseCenter: {x: 6.7, y: 4.88, z: -0.08}
   - enabled: 0
     useFirstLayerAsMask: 0
@@ -36,5 +37,6 @@ MonoBehaviour:
       freqPower: 2.68
       freq: 1.19
       minValue: 1.11
+      clampSteps: 1
       amplitude: 0.55
       noiseCenter: {x: 6.7, y: 4.88, z: -0.08}
