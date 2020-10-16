@@ -94,6 +94,10 @@ public class TrajectoryVelocity : MonoBehaviour
         for (int i=0; i<viewDir.positionCount; i++){
             viewDir.SetPosition(i,end+direction*s*i);
         }
+       
+
+
+
     }
 
     void ViewDirection(){

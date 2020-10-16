@@ -30,7 +30,7 @@ public class ARPlacementTrajectory : MonoBehaviour
             simulationRunner.transform.GetChild(0).gameObject.GetComponent<TrajectoryVelocity>().mainObject = objectToPlace;
             SimulationPauseControl.gameIsPaused = true;
             TrajectoryVelocity.startSlingshot = true;
-            Destroy(this);
+            //objectToPlace = null;
         }
     }
 
