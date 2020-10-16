@@ -19,15 +19,19 @@ public class ShapeGenerator {
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere){
-        float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
-        float elevation = 0;
+        //float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
+        float elevation = 0.0f;
         float mask = 1.0f; //should be changed depending on maskType
         float dist;
+        float noiseValue;
 
+        /*
         if(settings.noiseLayers[0].enabled){ //TODO: fix for mouse interaction s
             elevation += firstLayerValue;
         }
-        for(int i = 1; i < noiseFilters.Length; i++){
+        */
+
+        for(int i = 0; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
                 if(settings.noiseLayers[i].useMouseAsMask){
                     dist = checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize);  
@@ -39,7 +43,9 @@ public class ShapeGenerator {
                         mask = .0f;
                     }
                 }
-                elevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
+                noiseValue =  noiseFilters[i].Evaluate(pointOnUnitSphere);
+                //noiseValue = StepFunction(settings.noiseLayers[i].noiseSettings.clampSteps, noiseValue);
+                elevation += noiseValue * mask;
             }  
         }
         return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
@@ -57,5 +63,10 @@ public class ShapeGenerator {
         return minDist;
     }
 
+    private float StepFunction(int numSteps, float value){ // clamps the value, assumes value [0, 1]
+        value = Mathf.Round(value*numSteps);
+        value /= numSteps;
+        return value;
+    }
 
 }
