@@ -11,8 +11,8 @@ public class ShapeGenerator {
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction){
         this.settings = settings;
         noiseFilters = new NoiseInterface[settings.noiseLayers.Length];
-        this.interaction = interaction;
-        touchedPoints = interaction.GetPaintedVertices();
+        //this.interaction = interaction;
+        //touchedPoints = interaction.GetPaintedVertices();
         for (int i = 0; i < noiseFilters.Length; i++){
             noiseFilters[i] = NoiseFactory.createNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
@@ -34,6 +34,7 @@ public class ShapeGenerator {
         for(int i = 0; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
                 if(settings.noiseLayers[i].useMouseAsMask){
+                    /*
                     dist = checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize);  
                     if(dist < interaction.brushSize){
                         //mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1;
@@ -42,6 +43,7 @@ public class ShapeGenerator {
                     else{
                         mask = .0f;
                     }
+                    */
                 }
                 noiseValue =  noiseFilters[i].Evaluate(pointOnUnitSphere);
                 //noiseValue = StepFunction(settings.noiseLayers[i].noiseSettings.clampSteps, noiseValue);

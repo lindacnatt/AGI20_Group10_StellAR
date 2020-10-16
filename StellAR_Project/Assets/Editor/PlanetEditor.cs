@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Planet))]
+[CustomEditor(typeof(MotherPlanet), true)]
 public class PlanetEditor : Editor{
-    Planet planet;
+    MotherPlanet planet;
     Editor shapeEditor;
     Editor colorEditor;
     public override void OnInspectorGUI(){
@@ -16,8 +16,9 @@ public class PlanetEditor : Editor{
             }
         }
         if(GUILayout.Button("Generate Planet")){
-            planet.GeneratePlanet();
+            planet.GeneratePlanet();    
         }
+      
         DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldout, ref shapeEditor);
         DrawSettingsEditor(planet.colorSettings, planet.OnColorSettingsUpdated, ref planet.colorSettingsFoldout, ref colorEditor);
     }
@@ -40,6 +41,6 @@ public class PlanetEditor : Editor{
         
     }  
     private void OnEnable(){
-        planet = (Planet)target;
+        planet = (MotherPlanet)target;
     }
 }

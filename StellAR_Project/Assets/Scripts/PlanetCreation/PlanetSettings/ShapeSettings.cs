@@ -4,6 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class ShapeSettings : ScriptableObject{
+    [Range(0, 10)]
     public float radius;
     public NoiseLayer[] noiseLayers;
 
