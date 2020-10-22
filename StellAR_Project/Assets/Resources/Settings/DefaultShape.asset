@@ -31,12 +31,12 @@ MonoBehaviour:
     useMouseAsMask: 0
     noiseSettings:
       filterType: 3
-      numLayers: 3
+      numLayers: 1
       fallof: 0.75
       freqPower: 4.19
       freq: 2.65
       minValue: 0.26
-      amplitude: 0.04
+      amplitude: 0.08
       noiseCenter: {x: 1.15, y: 0, z: 0}
   - enabled: 1
     useFirstLayerAsMask: 0

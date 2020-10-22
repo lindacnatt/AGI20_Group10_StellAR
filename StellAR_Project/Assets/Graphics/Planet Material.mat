@@ -61,6 +61,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _normalMap:
+        m_Texture: {fileID: 2800000, guid: 7e67c1b53bae94c269c2d1d67c3b3603, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -92,4 +96,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _elevationMinMax: {r: 0.92555404, g: 1.3248726, b: 0, a: 0}
+    - _elevationMinMax: {r: 0.923796, g: 1.3425121, b: 0, a: 0}
