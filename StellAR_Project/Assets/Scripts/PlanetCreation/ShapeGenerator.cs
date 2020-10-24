@@ -8,6 +8,7 @@ public class ShapeGenerator {
     NoiseInterface[] noiseFilters;
     MouseInteraction interaction;
     List<Vector3> touchedPoints;
+    public MinMax elevationMinMax;
 
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction){
         this.settings = settings;
@@ -17,6 +18,7 @@ public class ShapeGenerator {
         for (int i = 0; i < noiseFilters.Length; i++){
             noiseFilters[i] = NoiseFactory.createNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
+        elevationMinMax = new MinMax();
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere, float craterHeight){
@@ -25,11 +27,15 @@ public class ShapeGenerator {
         float noiseelevation = 0;
         float mask = 1.0f; //should be changed depending on maskType
         float dist;
+        float noiseValue;
 
+        /*
         if(settings.noiseLayers[0].enabled){ //TODO: fix for mouse interaction s
             noiseelevation += firstLayerValue;
         }
-        for(int i = 1; i < noiseFilters.Length; i++){
+        */
+
+        for(int i = 0; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
                 if(settings.noiseLayers[i].useMouseAsMask){
                     dist = checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize);
@@ -59,7 +65,9 @@ public class ShapeGenerator {
         {
             elevation = -1.2f;
         }
-        return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
+        elevation = settings.radius * (1 + elevation);
+        elevationMinMax.AddValue(elevation);
+        return pointOnUnitSphere *  elevation;
     }
 
     private float checkIfmarked(List<Vector3> touchedPoints, Vector3 pointOnSphere, float radius){
@@ -74,5 +82,10 @@ public class ShapeGenerator {
         return minDist;
     }
 
+    private float StepFunction(int numSteps, float value){ // clamps the value, assumes value [0, 1]
+        value = Mathf.Round(value*numSteps);
+        value /= numSteps;
+        return value;
+    }
 
 }
