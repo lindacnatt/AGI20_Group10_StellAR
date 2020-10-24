@@ -9,6 +9,10 @@ public class Planet : MonoBehaviour{
     // Resolution of every terrainFace
     public int resolution = 10;
 
+    [Range(0, 5)]
+    public int icoDetail = 1;
+    public bool isIcoSphere = true;
+
     public Slider cSlider;
 
     // update on buttonpress or on change
@@ -18,7 +22,6 @@ public class Planet : MonoBehaviour{
     public ColorSettings colorSettings; 
     public ShapeSettings shapeSettings;
     
-
     // create mouseInteractions
     public MouseInteraction interaction;
     ShapeGenerator shapeGenerator;
@@ -28,12 +31,15 @@ public class Planet : MonoBehaviour{
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
+    IcoSphere icoSphere;
+    MeshFilter meshFilter;
+
 
     [HideInInspector]
     public bool shapeSettingsFoldout;
     [HideInInspector]
     public bool colorSettingsFoldout;
-    
+
     void Initialize(){
         if(shapeSettings == null || colorSettings == null){
             shapeSettings = SettingSpawner.loadDefaultShape();
@@ -49,9 +55,9 @@ public class Planet : MonoBehaviour{
 
         if(meshFilters == null || meshFilters.Length == 0){
             meshFilters = new MeshFilter[6];
-        }    
+        }      
 
-        terrainFaces = new TerrainFace[6];
+        terrainFaces = new TerrainFace[6]; 
         Vector3[] directions = {Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back};
         
         for(int i = 0; i < 6; i++){
@@ -67,8 +73,33 @@ public class Planet : MonoBehaviour{
         } 
     }
 
+    void InitializeIcoSphere(){        
+        if(shapeSettings == null || colorSettings == null){
+            shapeSettings = SettingSpawner.loadDefaultShape();
+            colorSettings = SettingSpawner.loadDefaultColor();
+        }
+
+        if(interaction == null){
+            interaction = this.GetComponent<MouseInteraction>();
+        }
+
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
+        
+        if(this.transform.Find("mesh") != null){
+            meshFilter = this.transform.Find("mesh").GetComponent<MeshFilter>();
+        }
+        if(meshFilter == null){
+            GameObject meshObj = new GameObject("mesh");
+            meshObj.transform.parent = transform;
+            meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
+            meshFilter = meshObj.AddComponent<MeshFilter>();
+            meshFilter.sharedMesh = new Mesh();     
+        }
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh);     
+    }
+
     void Awake(){
-         if(shapeSettings == null || colorSettings == null){
+        if(shapeSettings == null || colorSettings == null){
             shapeSettings = SettingSpawner.loadDefaultShape();
             colorSettings = SettingSpawner.loadDefaultColor();
         }
@@ -77,9 +108,16 @@ public class Planet : MonoBehaviour{
         }
     }
     public void GeneratePlanet(){
-        Initialize();
-        GenerateMesh();
-        GenerateColors();
+        UpdateCollider();
+        if(isIcoSphere){
+            InitializeIcoSphere();
+            GenerateMeshIco();
+        }
+        else{
+            Initialize();
+            GenerateMesh();
+            GenerateColors();
+        }
     }
     void GenerateMesh(){
         /* for (int i = 0; i < 6; i++)
@@ -93,11 +131,22 @@ public class Planet : MonoBehaviour{
         }
         colorGenerator.UpdateElevation(shapeGenerator.elevationMinMax);
     }
+
+    void GenerateMeshIco(){
+        icoSphere.ConstructMesh();
+    }
  
     public void OnShapeSettingsUpdated(){
         if(autoUpdate){
-            Initialize();
-            GenerateMesh();
+            UpdateCollider();
+            if(isIcoSphere){
+                InitializeIcoSphere();
+                GenerateMeshIco();
+            }
+            else{
+                Initialize();
+                GenerateMesh();    
+            }
         }    
     }
 
@@ -118,5 +167,10 @@ public class Planet : MonoBehaviour{
             Initialize();
             GenerateColors();
         }
-      }
+    }
+
+    private void UpdateCollider(){
+        SphereCollider collider = this.GetComponent<SphereCollider>();
+        collider.radius = shapeSettings.radius;
+    }
 }
