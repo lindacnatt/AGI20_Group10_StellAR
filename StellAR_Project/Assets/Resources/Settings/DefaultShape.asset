@@ -19,24 +19,34 @@ MonoBehaviour:
     useMouseAsMask: 0
     noiseSettings:
       filterType: 1
-      numLayers: 4
-      fallof: 1.02
-      freqPower: 2.04
-      freq: 0.1
-      minValue: 1.39
-      clampSteps: 2
-      amplitude: 0.48
-      noiseCenter: {x: 6.7, y: 4.88, z: -0.08}
-  - enabled: 0
+      numLayers: 5
+      fallof: 0.53
+      freqPower: 2.6
+      freq: 0.46
+      minValue: 1.66
+      amplitude: 1.041
+      noiseCenter: {x: 3.31, y: 0, z: 0}
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    useMouseAsMask: 0
+    noiseSettings:
+      filterType: 3
+      numLayers: 2
+      fallof: 0.75
+      freqPower: 4.19
+      freq: 2.65
+      minValue: 0.26
+      amplitude: 0.061
+      noiseCenter: {x: 1.15, y: 0, z: 0}
+  - enabled: 1
     useFirstLayerAsMask: 0
     useMouseAsMask: 0
     noiseSettings:
       filterType: 2
-      numLayers: 4
-      fallof: 1.02
-      freqPower: 2.68
-      freq: 1.19
-      minValue: 1.11
-      clampSteps: 1
-      amplitude: 0.55
-      noiseCenter: {x: 6.7, y: 4.88, z: -0.08}
+      numLayers: 2
+      fallof: 0.75
+      freqPower: 4.19
+      freq: 0.55
+      minValue: 0.54
+      amplitude: 0.488
+      noiseCenter: {x: 1.15, y: 0, z: 0}

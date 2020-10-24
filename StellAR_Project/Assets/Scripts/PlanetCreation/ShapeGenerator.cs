@@ -7,6 +7,7 @@ public class ShapeGenerator {
     NoiseInterface[] noiseFilters;
     MouseInteraction interaction;
     List<Vector3> touchedPoints;
+    public MinMax elevationMinMax;
 
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction){
         this.settings = settings;
@@ -16,6 +17,7 @@ public class ShapeGenerator {
         for (int i = 0; i < noiseFilters.Length; i++){
             noiseFilters[i] = NoiseFactory.createNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
+        elevationMinMax = new MinMax();
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere){
@@ -48,7 +50,9 @@ public class ShapeGenerator {
                 elevation += noiseValue * mask;
             }  
         }
-        return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
+        elevation = settings.radius * (1 + elevation);
+        elevationMinMax.AddValue(elevation);
+        return pointOnUnitSphere *  elevation;
     }
 
     private float checkIfmarked(List<Vector3> touchedPoints, Vector3 pointOnSphere, float radius){
