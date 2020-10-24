@@ -12,6 +12,5 @@ public class CraterSettings : ScriptableObject
 	public float smoothness = 0.0f;
 	public float floorHeight = -1.0f;
 	public float impact = 1.5f;
-	[HideInInspector]
 	public List<CraterGenerator.Crater> craterList = new List<CraterGenerator.Crater>();
 }

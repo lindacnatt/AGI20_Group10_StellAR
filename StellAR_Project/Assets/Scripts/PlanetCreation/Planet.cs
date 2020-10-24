@@ -14,6 +14,7 @@ public class Planet : MonoBehaviour{
 
     // update on buttonpress or on change
     public bool autoUpdate = true;
+    public bool clearCraters = true;
 
     // data on the planet
     public ColorSettings colorSettings;
@@ -49,8 +50,12 @@ public class Planet : MonoBehaviour{
         {
             craterSettings = SettingSpawner.loadDefaultCraters();
         }
+        if (clearCraters)
+        {
+            craterSettings.craterList = new List<CraterGenerator.Crater>();
+        }
 
-        if(interaction == null){
+        if (interaction == null){
             interaction = this.GetComponent<MouseInteraction>();
         }
 
@@ -88,6 +93,7 @@ public class Planet : MonoBehaviour{
         }
     }
     public void GeneratePlanet(){
+        clearCraters = true;
         Initialize();
         GenerateMesh();
         GenerateColors();
@@ -100,6 +106,7 @@ public class Planet : MonoBehaviour{
 
     public void OnShapeSettingsUpdated(){
         if(autoUpdate){
+            clearCraters = true;
             Initialize();
             GenerateMesh();
         }
@@ -116,6 +123,7 @@ public class Planet : MonoBehaviour{
 
     public void OnColorSettingsUpdated(){ //Rebuild planet when color is updated
         if(autoUpdate){
+            clearCraters = true;
             Initialize();
             GenerateColors();
         }
@@ -125,6 +133,7 @@ public class Planet : MonoBehaviour{
     { //Rebuild planet when color is updated
         if (autoUpdate)
         {
+            clearCraters = false;
             Initialize();
             GenerateMesh();
         }
@@ -132,6 +141,7 @@ public class Planet : MonoBehaviour{
 
     void OnCollisionEnter(Collision collision)
     {
+        clearCraters = false;
         ContactPoint contact = collision.contacts[0];
         Vector3 position = contact.point.normalized;
         Vector3 planetRotEuler  = gameObject.transform.localRotation.eulerAngles;
@@ -142,7 +152,7 @@ public class Planet : MonoBehaviour{
         craterCenter = position;
         float velocity = collision.relativeVelocity.magnitude;
         craterSettings.impact = 0.2f + velocity/2;
-        Debug.Log("impact: " + craterSettings.impact);
+        //Debug.Log("impact: " + craterSettings.impact);
         craterSettings.floorHeight = -2f/velocity;
         GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
         if (asteroids.Length > 0)
@@ -153,6 +163,14 @@ public class Planet : MonoBehaviour{
             craterSettings.radius = radius;
 
         }
+        Initialize();
+        GenerateMesh();
+    }
+
+    void PlaceCrater(Vector3 position)
+    {
+        clearCraters = false;
+        craterCenter = position;
         Initialize();
         GenerateMesh();
     }

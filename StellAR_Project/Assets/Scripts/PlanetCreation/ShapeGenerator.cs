@@ -45,15 +45,19 @@ public class ShapeGenerator {
             }
         }
         elevation += noiseelevation;
-        if (craterHeight <= 0)
+        if (craterHeight < 0)
         {
             //Remove any mountain and add the height of the crater at this position
             elevation += craterHeight - noiseelevation;
         }
-        else if (craterHeight > 0)
+        if (craterHeight > 0)
         {
             //Make rims of craters look better with noise
             elevation += (craterHeight + noiseelevation/2)/2;
+        }
+        if (elevation < -1.2f)
+        {
+            elevation = -1.2f;
         }
         return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);
     }

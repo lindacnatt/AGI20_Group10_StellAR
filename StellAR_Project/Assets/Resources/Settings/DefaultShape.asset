@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
   m_Name: DefaultShape
   m_EditorClassIdentifier: 
-  radius: 1.83
+  radius: 1.68
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
     useMouseAsMask: 1
     noiseSettings:
       filterType: 1
-      numLayers: 2
+      numLayers: 4
       fallof: -0.2
       freqPower: 0.97
       freq: 0.66
