@@ -82,6 +82,12 @@ public class Planet : MonoBehaviour{
         GenerateColors();
     }
     void GenerateMesh(){
+        /* for (int i = 0; i < 6; i++)
+        {
+            if (meshFilters[i].gameObject.activeSelf) {
+                terrainFaces[i].ConstructMesh();
+            }
+        } */
         foreach(TerrainFace face in terrainFaces){
             face.ConstructMesh();
         }
@@ -98,12 +104,13 @@ public class Planet : MonoBehaviour{
     void GenerateColors(){ // update color for every mesh given from the colorsettings
 
         colorGenerator.UpdateColors();
-       /*  foreach(MeshFilter m in meshFilters){
-            Color newPlanetColor = colorSettings.planetColor;
-            //covert the colors to HSV and only change the hue
-            newPlanetColor = Color.HSVToRGB(cSlider.value, 1, 1);
-            m.GetComponent<MeshRenderer>().sharedMaterial.color = newPlanetColor;
-        } */
+        for (int i = 0; i < 6; i++)
+        {
+            if (meshFilters[i].gameObject.activeSelf) {
+                terrainFaces[i].UpdateUVs(colorGenerator);
+            }
+        }
+     
     }
 
     public void OnColorSettingsUpdated(){ //Rebuild planet when color is updated
