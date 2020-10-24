@@ -27,7 +27,7 @@ public class TerrainFace {
         Vector3[] vertices = new Vector3[resolution *resolution];
         int[] triangles = new int[((resolution-1)*(resolution-1)*6)]; //Create all vertices for mesh 
         int triangleIndex = 0;
-        Vector2[] uv = mesh.uv;
+        Vector2[] uv = (mesh.uv.Length == vertices.Length)?mesh.uv:new Vector2[vertices.Length];
 
         for(int y = 0; y < resolution; y++){ 
             for(int x = 0; x < resolution; x++){
