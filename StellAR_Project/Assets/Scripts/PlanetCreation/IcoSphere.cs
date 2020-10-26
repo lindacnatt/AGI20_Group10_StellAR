@@ -52,23 +52,6 @@ public class IcoSphere {
         vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3( theta, 0, r).normalized));
         vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(-theta, 0, -r).normalized));
         vertices.Add(shapeGenerator.CalculatePointOnPlanet(new Vector3(-theta, 0, r).normalized));
-        
-        /*
-        vertices.Add(new Vector3(-r, theta, 0));
-        vertices.Add(new Vector3(r, theta, 0));
-        vertices.Add(new Vector3(-r, -theta, 0));
-        vertices.Add(new Vector3(r, -theta, 0));
-
-        vertices.Add(new Vector3(0, -r, theta));
-        vertices.Add(new Vector3(0, r, theta));
-        vertices.Add(new Vector3(0, -r, -theta));
-        vertices.Add(new Vector3(0, r, -theta));
-
-        vertices.Add(new Vector3( theta,0, -r));
-        vertices.Add(new Vector3( theta, 0, r));
-        vertices.Add(new Vector3(-theta, 0, -r));
-        vertices.Add(new Vector3(-theta, 0, r));
-        */
 
         // construct triangles
         triangles.Add(new Vector3Int(0, 11, 5));
@@ -109,12 +92,6 @@ public class IcoSphere {
                 AddVertex(shapeGenerator.CalculatePointOnPlanet(b));
                 AddVertex(shapeGenerator.CalculatePointOnPlanet(c));
                 
-                /*
-                AddVertex(a);
-                AddVertex(b);
-                AddVertex(c);
-                */
-                
                 len = vertices.Count;
                 tempList.Add(new Vector3Int(len-3, len-2, len-1)); //add a b c triangle
                 tempList.Add(new Vector3Int(triangle.x, len-3, len-1));
@@ -144,7 +121,7 @@ public class IcoSphere {
         else{
             Vector3 temp = b - a;
             temp = a + temp*0.5f;
-            temp = temp.normalized; // * radius;
+            temp = temp.normalized;
             midPointCach.Add(key, temp);
             return temp;
         }

@@ -31,7 +31,6 @@ public abstract class MotherPlanet: MonoBehaviour {
 
     public void OnShapeSettingsUpdated(){
         if(autoUpdate){
-            Initialize();
             GenerateMesh();  
             UpdateCollider();
         }    

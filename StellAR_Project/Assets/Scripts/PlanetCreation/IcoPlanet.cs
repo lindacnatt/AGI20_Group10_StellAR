@@ -24,22 +24,25 @@ public class IcoPlanet : MotherPlanet{
             interaction = GetComponent<MouseInteraction>();
         }
 
-        if(this.transform.Find("mesh").gameObject == null){ // no meshObj initialized yet
+        if(this.GetComponent<SphereCollider>() == null){
+            this.gameObject.AddComponent<SphereCollider>();
+        }
+
+        if(this.transform.Find("mesh") == null){ // no meshObj initialized yet
             GameObject meshObj = new GameObject("mesh");
             meshObj.transform.parent = transform;
             meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
             meshFilter = meshObj.AddComponent<MeshFilter>();
             meshFilter.sharedMesh = new Mesh();     
         }
-
-        else if(meshFilter == null){
+        else{
             GameObject meshObj = this.transform.Find("mesh").gameObject;
             meshFilter = meshObj.GetComponent<MeshFilter>();
+            meshObj.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
             meshFilter.sharedMesh = new Mesh();
         }
 
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
-        
         icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, LOD, meshFilter.sharedMesh);     
     }
 
@@ -47,8 +50,7 @@ public class IcoPlanet : MotherPlanet{
         icoSphere.ConstructMesh();
     }
 
-    public override void GenerateColors(){
-        
+    public override void GenerateColors(){   
     }
 
 }
