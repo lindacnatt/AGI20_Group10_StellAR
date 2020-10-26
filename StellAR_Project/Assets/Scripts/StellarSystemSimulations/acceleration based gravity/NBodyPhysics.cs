@@ -12,11 +12,9 @@ public class NBodyPhysics : MonoBehaviour
     void FixedUpdate(){
         if(!SimulationPauseControl.gameIsPaused){
             
-       
                 SimulateAcceleration();
                 SetPositions();
         
-           
         }
        
     }

@@ -39,7 +39,6 @@ public class TrajectoryLineAnimation : MonoBehaviour
     void Update(){
         if(main != null)
         {
-            rb = (Rigidbody)main.GetComponent(typeof(Rigidbody)); //if it is in start and is assigned to a gameobject it will throw an error as it should not get a planet until it is placed.
             if (TrajectorySimulation.drawLine)
             {
                 DrawLine();
@@ -57,7 +56,7 @@ public class TrajectoryLineAnimation : MonoBehaviour
             {
                 if (TrajectorySimulation.destroyLine)
                 {
-              
+                    rb = (Rigidbody)main.GetComponent(typeof(Rigidbody));
                     Vector3 linePos = TrajectorySimulation.linePositions[length - 1 - count];
                     float distance = (rb.position - linePos).magnitude;
             
@@ -76,9 +75,8 @@ public class TrajectoryLineAnimation : MonoBehaviour
                     {
                   
                         TrajectorySimulation.destroyLine = false;
-                        
-                        //traj.positionCount=0;
                         count = 0;
+                        this.GetComponent<LineRenderer>().enabled = false;
                     }
 
                 }

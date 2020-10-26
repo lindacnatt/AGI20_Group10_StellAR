@@ -7,10 +7,8 @@ public class TrajectorySimulation : MonoBehaviour
 {
     
     public GameObject mainObject;
-    //private Vector3 mainPos;
-    //private float mainMass;
 
-    //[HideInInspector]
+    [HideInInspector]
     public Vector3 initialVelocity;
 
     public static Vector3[] linePositions;
@@ -43,7 +41,7 @@ public class TrajectorySimulation : MonoBehaviour
 
 
   void Awake(){
-      Time.fixedDeltaTime = 0.01f;
+      Time.fixedDeltaTime = 0.02f;
       linePositions = new Vector3[lineVertices];
   } 
 
@@ -191,7 +189,7 @@ public class TrajectorySimulation : MonoBehaviour
         {
             if (SimulationPauseControl.gameIsPaused)
             {
-                if (TrajectoryVelocity.startSlingshot && !freeze) //(Input.GetKeyDown(KeyCode.T) || Input.touchCount == 1) //Input.touchCount > 0
+                if (TrajectoryVelocity.startSlingshot && !freeze) 
                 {
                     CalcTrajectory(Time.fixedDeltaTime);
                     Array.Reverse(linePositions);
@@ -200,8 +198,8 @@ public class TrajectorySimulation : MonoBehaviour
 
 
                 }
-                //As of now the below code is counting on the user being sure that when they press they place, no backsies. C
-                if (shoot)//(Input.GetKeyDown(KeyCode.Return) || (Input.touchCount == 2)) //((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Ended)
+    
+                if (shoot)
                 {
                     SetInitialVel();
                     destroyLine = true;
@@ -214,13 +212,6 @@ public class TrajectorySimulation : MonoBehaviour
                 }
             }
         } 
-        /*else
-        {
-            if (SimulationPauseControl.gameIsPaused && Input.touchCount < 1)
-            {
-                SimulationPauseControl.gameIsPaused = false;
-            }
-        }*/
     }
 
 

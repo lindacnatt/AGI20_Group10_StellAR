@@ -12,12 +12,4 @@ public class ToggleGravityMode : MonoBehaviour
    public void Toggle(){
        nBodyGravity = !nBodyGravity;
    }
-
-    /*// Update is called once per frame
-    void Update()
-    {   
-        if (Input.GetKeyDown(KeyCode.G)){
-            nBodyGravity = !nBodyGravity;
-        }
-    }*/
 }

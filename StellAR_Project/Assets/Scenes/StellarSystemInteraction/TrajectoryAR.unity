@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainObject: {fileID: 0}
   initialVelocity: {x: 0, y: 0, z: 0}
-  lineVertices: 2000
+  lineVertices: 1000
 --- !u!114 &315051719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,10 +1327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 1468576916}
   acceleration: {x: 0, y: 0, z: 0}
-  nextAcceleration: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   staticBody: 1
-  pausedVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &1468576916
 Rigidbody:
   m_ObjectHideFlags: 0
