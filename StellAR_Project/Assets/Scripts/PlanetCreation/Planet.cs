@@ -63,15 +63,15 @@ public class Planet : MonoBehaviour{
             craterSettings.craterList = new List<CraterGenerator.Crater>();
         }
 
-        if (interaction == null){
-            interaction = this.GetComponent<MouseInteraction>();
-        }
+        interaction = gameObject.GetComponent<MouseInteraction>();
+        
 
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
         craterGenerator = new CraterGenerator(craterSettings);
 
         planetCollider = GetComponent<SphereCollider>();
         craterGenerator.CreateCrater(craterCenter);
+
         colorGenerator.UpdateSettings(colorSettings);
 
         if (meshFilters == null || meshFilters.Length == 0){
@@ -98,14 +98,30 @@ public class Planet : MonoBehaviour{
             shapeSettings = SettingSpawner.loadDefaultShape();
             colorSettings = SettingSpawner.loadDefaultColor();
         }
+        if (craterSettings == null)
+        {
+            craterSettings = SettingSpawner.loadDefaultCraters();
+        }
+        if (clearCraters)
+        {
+            craterSettings.craterList = new List<CraterGenerator.Crater>();
+        }
 
-        if(interaction == null){
+        if (interaction == null){
             interaction = this.GetComponent<MouseInteraction>();
         }
 
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
+        craterGenerator = new CraterGenerator(craterSettings);
 
-        if(this.transform.Find("mesh") != null){
+        planetCollider = GetComponent<SphereCollider>();
+        if (craterCenter != Vector3.zero)
+        {
+            craterGenerator.CreateCrater(craterCenter);
+        }
+        colorGenerator.UpdateSettings(colorSettings);
+
+        if (this.transform.Find("mesh") != null){
             meshFilter = this.transform.Find("mesh").GetComponent<MeshFilter>();
         }
         if(meshFilter == null){
@@ -115,7 +131,7 @@ public class Planet : MonoBehaviour{
             meshFilter = meshObj.AddComponent<MeshFilter>();
             meshFilter.sharedMesh = new Mesh();
         }
-        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh);
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh, craterGenerator);
     }
 
     void Awake(){
@@ -226,7 +242,7 @@ public class Planet : MonoBehaviour{
             craterSettings.radius = radius;
 
         }
-        if(isIcoSphere){
+        if (isIcoSphere){
             InitializeIcoSphere();
             GenerateMeshIco();
         }
@@ -236,11 +252,11 @@ public class Planet : MonoBehaviour{
         }
     }
 
-    void PlaceCrater(Vector3 position)
+    public void PlaceCrater(Vector3 position)
     {
         clearCraters = false;
         craterCenter = position;
-        if(isIcoSphere){
+        if (isIcoSphere){
             InitializeIcoSphere();
             GenerateMeshIco();
         }

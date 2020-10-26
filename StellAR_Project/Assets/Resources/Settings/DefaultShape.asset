@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
   m_Name: DefaultShape
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   radius: 2
   noiseLayers:
   - enabled: 1
@@ -19,34 +19,37 @@ MonoBehaviour:
     useMouseAsMask: 0
     noiseSettings:
       filterType: 1
-      numLayers: 5
-      fallof: 0.53
-      freqPower: 2.6
-      freq: 0.46
-      minValue: 1.66
-      amplitude: 1.041
+      numLayers: 1
+      fallof: 0.5
+      freqPower: 0.66
+      freq: 0.99
+      minValue: 1.43
+      clampSteps: 19
+      amplitude: 0.82
       noiseCenter: {x: 3.31, y: 0, z: 0}
   - enabled: 1
     useFirstLayerAsMask: 0
     useMouseAsMask: 0
     noiseSettings:
       filterType: 3
-      numLayers: 2
-      fallof: 0.75
-      freqPower: 4.19
-      freq: 2.65
+      numLayers: 1
+      fallof: 0.94
+      freqPower: 0.71
+      freq: 1.03
       minValue: 0.26
-      amplitude: 0.061
+      clampSteps: 3
+      amplitude: 0.12
       noiseCenter: {x: 1.15, y: 0, z: 0}
   - enabled: 1
     useFirstLayerAsMask: 0
     useMouseAsMask: 0
     noiseSettings:
       filterType: 2
-      numLayers: 2
-      fallof: 0.75
-      freqPower: 4.19
-      freq: 0.55
-      minValue: 0.54
-      amplitude: 0.488
+      numLayers: 1
+      fallof: 0.52
+      freqPower: 2.67
+      freq: 1.73
+      minValue: 0.73
+      clampSteps: 5
+      amplitude: 1.06
       noiseCenter: {x: 1.15, y: 0, z: 0}
