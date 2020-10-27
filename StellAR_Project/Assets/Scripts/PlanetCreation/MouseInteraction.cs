@@ -8,34 +8,30 @@ public class MouseInteraction : MonoBehaviour{
     Transform selection;
     Renderer selectionRenderer;
     Mesh terrainFaceMesh;
+    [HideInInspector]
     public List<Vector3> hitCoords;
     Vector3[] vertices;
 
     [SerializeField]
-    public float brushSize = 0.1f;
+    public float brushSize = 0.2f;
+    float time;
+    void Start(){
+        time = Time.fixedTime + 0.05f;
+    }
     void Update(){
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit)){
-            selection = hit.transform;
-            //selectionRenderer = selection.GetComponent<Renderer>();
-            if(Input.GetMouseButtonDown(0)){
-                hitCoords.Add(selection.InverseTransformPoint(hit.point)); 
+        if(Time.fixedTime >= time){
+            time += 0.05f; // how often should we add a point
+            if(Physics.Raycast(ray, out hit)){
+                selection = hit.transform;
+                //selectionRenderer = selection.GetComponent<Renderer>();
+                if(Input.GetMouseButton(0)){
+                    hitCoords.Add(selection.InverseTransformPoint(hit.point)); 
+                }
             }
-        }
+        }   
     }
-
-    Mesh getCurrentFace(Vector3 rayDirection, Transform planet){
-        float angle;
-        Vector3 faceForward;
-        for(int i = 0; i < 6; i++){
-            faceForward = planet.GetChild(i).forward;
-            angle = Vector3.Angle(rayDirection, faceForward);
-            if(angle < 45){
-                return planet.GetChild(i).GetComponent<MeshFilter>().mesh;
-            }
-        }
-        return null;
-    }
+    
     public List<Vector3> GetPaintedVertices(){
         foreach (Vector3 point in hitCoords){
             Debug.Log(point);

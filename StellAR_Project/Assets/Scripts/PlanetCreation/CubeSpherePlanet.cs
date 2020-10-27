@@ -71,6 +71,10 @@ public class CubeSpherePlanet : MotherPlanet{
         }
     }
 
+    public override void UpdateMesh(){
+        
+    }
+
     public override void GenerateColors(){ // update color for every mesh given from the colorsettings
         foreach(MeshFilter m in meshFilters){
             //Color newPlanetColor = colorSettings.planetColor;

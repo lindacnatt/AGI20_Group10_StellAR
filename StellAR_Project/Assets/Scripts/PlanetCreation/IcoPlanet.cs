@@ -31,23 +31,35 @@ public class IcoPlanet : MotherPlanet{
         if(this.transform.Find("mesh") == null){ // no meshObj initialized yet
             GameObject meshObj = new GameObject("mesh");
             meshObj.transform.parent = transform;
-            meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
+            meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Standard"));
             meshFilter = meshObj.AddComponent<MeshFilter>();
             meshFilter.sharedMesh = new Mesh();     
         }
         else{
             GameObject meshObj = this.transform.Find("mesh").gameObject;
             meshFilter = meshObj.GetComponent<MeshFilter>();
-            meshObj.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
+            meshObj.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Standard"));
             meshFilter.sharedMesh = new Mesh();
         }
 
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
-        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, LOD, meshFilter.sharedMesh);     
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, LOD, meshFilter.sharedMesh);    
+        //icoSphere.UpdateUVs(); // create the UV-mapping for texture  
     }
 
     public override void GenerateMesh(){
         icoSphere.ConstructMesh();
+        icoSphere.UpdateMesh();
+    }
+
+    public override void UpdateMesh(){
+        if(icoSphere == null){
+            Initialize();
+            icoSphere.ConstructMesh();
+        }
+        else{
+            icoSphere.UpdateMesh();
+        }            
     }
 
     public override void GenerateColors(){   
