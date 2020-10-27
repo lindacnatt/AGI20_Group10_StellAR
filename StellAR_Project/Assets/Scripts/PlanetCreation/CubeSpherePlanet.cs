@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeSpherePlanet : MotherPlanet{
-    [Range(2, 100)]
+    
     // Resolution of every terrainFace
+    [Range(2, 100)]
     public int resolution = 10;
 
     //public Slider cSlider;
     
     // create mouseInteractions
-    public MouseInteraction interaction;
+    MouseInteraction interaction;
     ShapeGenerator shapeGenerator;
     
     [SerializeField, HideInInspector]
@@ -24,7 +25,7 @@ public class CubeSpherePlanet : MotherPlanet{
         }
 
         if(interaction == null){
-            interaction = this.GetComponent<MouseInteraction>();
+            interaction = GetComponent<MouseInteraction>();
         }
 
         if(this.GetComponent<SphereCollider>() == null){
@@ -45,7 +46,7 @@ public class CubeSpherePlanet : MotherPlanet{
                 if(meshFilters[i] == null){
                     GameObject meshObj = new GameObject("mesh");
                     meshObj.transform.parent = transform;
-                    meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Unlit/Color"));
+                    meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
                     meshFilters[i] = meshObj.AddComponent<MeshFilter>();
                     meshFilters[i].sharedMesh = new Mesh();
                 }    
@@ -57,7 +58,7 @@ public class CubeSpherePlanet : MotherPlanet{
                 if(meshFilters[i] == null){
                     GameObject meshObj = this.transform.Find("mesh").gameObject;
                     meshObj.transform.parent = transform;
-                    meshObj.GetComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Unlit/Color"));
+                    meshObj.GetComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
                     meshFilters[i] = meshObj.GetComponent<MeshFilter>();
                     meshFilters[i].sharedMesh = new Mesh();
                 }    
@@ -69,10 +70,18 @@ public class CubeSpherePlanet : MotherPlanet{
         foreach(TerrainFace face in terrainFaces){
             face.ConstructMesh();
         }
+        foreach(TerrainFace face in terrainFaces){
+            face.UpdateMesh();
+        }
     }
 
     public override void UpdateMesh(){
-        
+        if(terrainFaces == null){
+            this.Initialize();
+        }
+        foreach(TerrainFace face in terrainFaces){
+            face.UpdateMesh();
+        }
     }
 
     public override void GenerateColors(){ // update color for every mesh given from the colorsettings

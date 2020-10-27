@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 582703426434235820}
   - component: {fileID: 2291044155116161494}
   - component: {fileID: 8369662442284230654}
+  - component: {fileID: 8923358774929065148}
   m_Layer: 0
-  m_Name: CubeSphere
+  m_Name: CubeSpherePlanet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,5 +64,18 @@ MonoBehaviour:
   shapeSettingsFoldout: 0
   colorSettingsFoldout: 0
   resolution: 10
-  interaction: {fileID: 0}
   meshFilters: []
+--- !u!114 &8923358774929065148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274824980126629115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89b0e7c82d397d41b22f02be0abc60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitCoords: []
+  brushSize: 0.2
