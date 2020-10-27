@@ -16,9 +16,10 @@ public abstract class MotherPlanet: MonoBehaviour {
     public abstract void Initialize();  
     public abstract void GenerateMesh();
     public abstract void GenerateColors();
+
+    public abstract void UpdateMesh();
     
     // these can be used directly in subClass 
-
     void Awake(){
         GeneratePlanet();
     }
@@ -31,7 +32,9 @@ public abstract class MotherPlanet: MonoBehaviour {
 
     public void OnShapeSettingsUpdated(){
         if(autoUpdate){
-            GenerateMesh();  
+            UpdateMesh();
+            //Initialize();
+            //GenerateMesh();
             UpdateCollider();
         }    
     }
