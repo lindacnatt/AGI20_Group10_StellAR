@@ -23,7 +23,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     void Update(){
         if (Input.touchCount > 0 && (placed != true))
         {
-            placed = true; //this places the object and it is locked to the latest position it had. Physics should take it from here.
+            placed = true; 
             objectToPlace.GetComponent<CelestialObject>().enabled = true;
             simulationRunner.GetComponent<TrajectoryLineAnimation>().main = objectToPlace;
             simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;

@@ -21,6 +21,6 @@ public class SimulationPauseControl : MonoBehaviour
     }
 
     public void RestartGame(){
-         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }

@@ -14,7 +14,6 @@ public class TrajectoryVelocity : MonoBehaviour
     public LineRenderer viewDir;
     
     public float scaling;
-    public GameObject simulation;
 
     [HideInInspector]
     public int vertices;
@@ -50,7 +49,7 @@ public class TrajectoryVelocity : MonoBehaviour
             if(((SimulationPauseControl.gameIsPaused) && (!TrajectorySimulation.drawLine))){
                 //ViewDirection();
                 
-                if (start.magnitude <= 0.01f){
+                if (start.magnitude <= 0.001f){
                     start = mainObject.transform.position;
                 }
                 if(startSlingshot){
@@ -96,8 +95,6 @@ public class TrajectoryVelocity : MonoBehaviour
         }
        
 
-
-
     }
 
     void ViewDirection(){
@@ -109,9 +106,6 @@ public class TrajectoryVelocity : MonoBehaviour
     }
 
     void SlingShot(){
-            //Touch touch = Input.GetTouch(0);
-            //Vector3 end = touch.position;
-            //Vector3 start = mainObject.transform.position;
             viewDir.enabled = true;
             viewDir.positionCount = vertices;
             end = Camera.main.transform.position + 2.0f*Camera.main.transform.forward;//cam.transform.position+2.0f*cam.transform.forward;
