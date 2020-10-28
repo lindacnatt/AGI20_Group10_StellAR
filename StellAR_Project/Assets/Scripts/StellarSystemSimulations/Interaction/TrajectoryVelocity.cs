@@ -19,7 +19,7 @@ public class TrajectoryVelocity : MonoBehaviour
     public int vertices;
 
     [HideInInspector]
-    public Vector3 start = new Vector3(0f,0f,0f);
+    public static Vector3 start = new Vector3(0f,0f,0f);
 
     [HideInInspector]
     public Vector3 end = new Vector3(0f,0f,0f);
@@ -69,14 +69,12 @@ public class TrajectoryVelocity : MonoBehaviour
 
             }
         }
-        else{
-            viewDir.positionCount = 0;
-            viewDir.enabled = false;
-            start = new Vector3(0f,0f,0f);
-        }
         
         if(TrajectorySimulation.destroyLine){
             mainObject = null;
+            viewDir.positionCount = 0;
+            viewDir.enabled = false;
+            start = new Vector3(0f,0f,0f);
         }
         
     }

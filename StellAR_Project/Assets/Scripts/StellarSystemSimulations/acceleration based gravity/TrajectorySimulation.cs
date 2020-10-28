@@ -202,11 +202,13 @@ public class TrajectorySimulation : MonoBehaviour
                 if (shoot)
                 {
                     SetInitialVel();
+                    mainObject.GetComponent<SphereCollider>().enabled = true;
                     destroyLine = true;
                     SimulationPauseControl.gameIsPaused = false;
                     mainObject = null;
                     shoot = !shoot;
                     TrajectoryVelocity.startSlingshot = false;
+                    freeze = false;
                     //this.GetComponent<TrajectoryLineAnimation>().main = null;
 
                 }

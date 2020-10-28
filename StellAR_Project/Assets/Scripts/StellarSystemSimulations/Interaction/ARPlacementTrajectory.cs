@@ -21,7 +21,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     }
 
     void Update(){
-        if (Input.touchCount > 0 && (placed != true))
+        if (Input.touchCount == 2 && (placed != true))
         {
             placed = true; 
             objectToPlace.GetComponent<CelestialObject>().enabled = true;
@@ -30,6 +30,9 @@ public class ARPlacementTrajectory : MonoBehaviour
             simulationRunner.transform.GetChild(0).gameObject.GetComponent<TrajectoryVelocity>().mainObject = objectToPlace;
             SimulationPauseControl.gameIsPaused = true;
             TrajectoryVelocity.startSlingshot = true;
+            TrajectoryVelocity.start = new Vector3(0f,0f,0f);
+            TrajectorySimulation.destroyLine = false;
+            objectToPlace.GetComponent<SphereCollider>().enabled = false;
             //objectToPlace = null;
         }
     }

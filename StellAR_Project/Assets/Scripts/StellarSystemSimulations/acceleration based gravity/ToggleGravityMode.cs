@@ -11,5 +11,9 @@ public class ToggleGravityMode : MonoBehaviour
   }
    public void Toggle(){
        nBodyGravity = !nBodyGravity;
+       TrajectoryLineAnimation.traj.enabled=false;
+       TrajectoryLineAnimation.traj.positionCount=0;
+       TrajectorySimulation.destroyLine=false;
+       
    }
 }

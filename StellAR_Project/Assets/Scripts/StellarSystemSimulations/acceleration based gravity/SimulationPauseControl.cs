@@ -21,6 +21,15 @@ public class SimulationPauseControl : MonoBehaviour
     }
 
     public void RestartGame(){
-         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        TrajectoryVelocity.startSlingshot = false;
+        TrajectoryVelocity.start = new Vector3(0f,0f,0f);
+        gameIsPaused = false;
+        TrajectorySimulation.drawLine = false;
+        TrajectorySimulation.destroyLine = false;
+        TrajectorySimulation.freeze = false;
+        TrajectorySimulation.shoot = false;
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        ToggleGravityMode.nBodyGravity=true;
+
     }
 }

@@ -86,6 +86,7 @@ public class TrajectoryLineAnimation : MonoBehaviour
         else{
             traj.positionCount = 0;
             this.GetComponent<LineRenderer>().enabled = false;
+            TrajectorySimulation.destroyLine = false;
         }
 
     }
