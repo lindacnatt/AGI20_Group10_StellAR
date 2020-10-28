@@ -362,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054004082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 1.99, y: 0, z: 3}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -398,6 +398,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 1054004088}
   acceleration: {x: 0, y: 0, z: 0}
+  nextAcceleration: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
   staticBody: 1
   pausedVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1229450013
@@ -627,13 +629,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1533429860}
-  - component: {fileID: 1533429859}
+  - component: {fileID: 1533429861}
   - component: {fileID: 1533429858}
   - component: {fileID: 1533429857}
-  - component: {fileID: 1533429861}
+  - component: {fileID: 1533429862}
+  - component: {fileID: 1533429859}
+  - component: {fileID: 1533429863}
   m_Layer: 0
   m_Name: Simulation
-  m_TagString: Untagged
+  m_TagString: Simulation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -647,13 +651,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1533429856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 170e70f22a7c749dfb00bdcaa46bc7fc, type: 3}
+  m_Script: {fileID: 11500000, guid: d9ded6aa03a5440b98991d43bbcf41eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainObject: {fileID: 0}
-  initialVelocity: {x: 0, y: 0, z: 0}
-  lineVertices: 1000
-  traj: {fileID: 0}
 --- !u!114 &1533429858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1533429856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4d861c4e235048df978fda0ed18802b, type: 3}
+  m_Script: {fileID: 11500000, guid: c13c43dc5576747ae878b58452edcd34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1533429859
@@ -675,9 +675,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1533429856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb2747b2c93784a5ba12b4fb447d28db, type: 3}
+  m_Script: {fileID: 11500000, guid: d27251ac7c4484a20825519cd28540c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainObject: {fileID: 0}
+  initialVelocity: {x: 0, y: 0, z: 0}
+  lineVertices: 2000
 --- !u!4 &1533429860
 Transform:
   m_ObjectHideFlags: 0
@@ -789,3 +792,103 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1533429862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533429856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af25a7a10edf448c0986895d93072838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traj: {fileID: 1533429861}
+  main: {fileID: 0}
+--- !u!114 &1533429863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533429856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e799072e9064d9588d903fa51f1599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &4832371588505585468
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870172, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870240, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_Name
+      value: Another Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744246818739550032, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_Mass
+      value: 15
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a4a0e715951b3048aa1bb4176e152af, type: 3}

@@ -7,9 +7,8 @@ public class TrajectorySimulation : MonoBehaviour
 {
     
     public GameObject mainObject;
-    //private Vector3 mainPos;
-    //private float mainMass;
 
+    [HideInInspector]
     public Vector3 initialVelocity;
 
     public static Vector3[] linePositions;
@@ -35,9 +34,14 @@ public class TrajectorySimulation : MonoBehaviour
 
     private bool startSimulation;
 
+    public static bool shoot;
+    private bool showTrajectory;
+    private Vector3 startPos;
+    public static bool freeze;
+
 
   void Awake(){
-      Time.fixedDeltaTime = 0.01f;
+      Time.fixedDeltaTime = 0.02f;
       linePositions = new Vector3[lineVertices];
   } 
 
@@ -55,6 +59,7 @@ public class TrajectorySimulation : MonoBehaviour
 
         Transform T = (Transform) mainObject.GetComponent(typeof(Transform));
         Rigidbody rb = (Rigidbody) mainObject.GetComponent(typeof(Rigidbody));
+        startPos = rb.position;
         positions[0] = rb.position;
         massess[0] = rb.mass;
         //velosities[0] = rb.velocity;
@@ -105,6 +110,7 @@ public class TrajectorySimulation : MonoBehaviour
     }
 
      void CalcVeloStart(){
+        initialVelocity = TrajectoryVelocity.direction;
         velosities[0] = velosities[0] + initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
     }
 
@@ -116,8 +122,8 @@ public class TrajectorySimulation : MonoBehaviour
             if(i!=index && !dead[i]){
                 float distance = (positions[i]-positions[index]).magnitude;
                 
-                if(distance == double.PositiveInfinity)
-                    return new Vector3(0f,0f,0f);
+                //if(distance == double.PositiveInfinity)
+                //    return new Vector3(0f,0f,0f);
 
                 Vector3 direction = (positions[i]-positions[index]).normalized;
                 dirResultant += NBodyPhysics.gravityConstant*direction*massess[i]/Mathf.Pow(distance,2.0f);
@@ -179,22 +185,35 @@ public class TrajectorySimulation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SimulationPauseControl.gameIsPaused){
-            if (Input.GetKeyDown(KeyCode.T)){ 
-                CalcTrajectory(Time.fixedDeltaTime);
-                Array.Reverse(linePositions);
-                drawLine=true;
-                
+        if (mainObject != null)
+        {
+            if (SimulationPauseControl.gameIsPaused)
+            {
+                if (TrajectoryVelocity.startSlingshot && !freeze) 
+                {
+                    CalcTrajectory(Time.fixedDeltaTime);
+                    Array.Reverse(linePositions);
+                    drawLine = true;
+                    //showTrajectory = !showTrajectory;
 
-            }
-            if(Input.GetKeyDown(KeyCode.Return)){ 
-                SetInitialVel();
-                destroyLine=true;
-                SimulationPauseControl.gameIsPaused = false;
 
-                
+                }
+    
+                if (shoot)
+                {
+                    SetInitialVel();
+                    mainObject.GetComponent<SphereCollider>().enabled = true;
+                    destroyLine = true;
+                    SimulationPauseControl.gameIsPaused = false;
+                    mainObject = null;
+                    shoot = !shoot;
+                    TrajectoryVelocity.startSlingshot = false;
+                    freeze = false;
+                    //this.GetComponent<TrajectoryLineAnimation>().main = null;
+
+                }
             }
-        }
+        } 
     }
 
 
@@ -243,8 +262,24 @@ public class TrajectorySimulation : MonoBehaviour
     }
 
     void SetInitialVel(){
-         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
-         a.velocity +=initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
-         //a.pausedVelocity += initialVelocity;
+        CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
+        a.rigidBody.position = startPos;
+         a.velocity += initialVelocity*Mathf.Sqrt(2.0f/massess[0]);
+        //https://physics.stackexchange.com/questions/29190/how-exactly-does-mass-affect-speed
+        //a.pausedVelocity += initialVelocity;*/
     }
+
+    public void ToggleShoot(){
+        shoot = !shoot;
+
     }
+
+    public void ToggleTrajectory(){
+        showTrajectory = !showTrajectory;
+
+    }
+
+    public void ToggleFreeze(){
+        freeze = !freeze;
+    }
+}
