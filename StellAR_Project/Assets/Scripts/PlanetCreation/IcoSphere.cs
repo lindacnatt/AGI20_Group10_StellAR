@@ -29,7 +29,8 @@ public class IcoSphere {
   
         float r = 1.0f/Mathf.Sqrt((1 + theta*theta));
         theta = theta/Mathf.Sqrt((1 + theta*theta));
-        // construct basic vertices
+        
+        // construct base vertices
         vertices.Add((new Vector3(-r, theta, 0)));
         vertices.Add((new Vector3(r, theta, 0)));
         vertices.Add((new Vector3(-r, -theta, 0)));
@@ -166,6 +167,7 @@ public class IcoSphere {
         for(int i = 0; i < mesh.vertices.Length; i++){
             vertice = mesh.vertices[i];
             vertice = vertice.normalized;
+            
             // stolen from: https://www.alexisgiard.com/icosahedron-sphere/
             u = 0.5f + (Mathf.Atan2(vertice.z, vertice.x) / (2f * Mathf.PI));
             v = 0.5f - (Mathf.Asin(vertice.y) / Mathf.PI);

@@ -5,15 +5,13 @@ using UnityEngine;
 public class IcoPlanet : MotherPlanet{
     [Range(0, 5)]
     public int LOD;
-    
-    ShapeGenerator shapeGenerator;
-    
+
     // for planetGeneration
     IcoSphere icoSphere;
     [SerializeField, HideInInspector]
     MeshFilter meshFilter;
     MouseInteraction interaction;
-    
+
     public override void Initialize(){
         if(shapeSettings == null || colorSettings == null){
         shapeSettings = SettingSpawner.loadDefaultShape();
@@ -49,13 +47,13 @@ public class IcoPlanet : MotherPlanet{
 
     public override void GenerateMesh(){
         icoSphere.ConstructMesh();
-        icoSphere.UpdateMesh();
     }
 
     public override void UpdateMesh(){
         if(icoSphere == null){
             Initialize();
             icoSphere.ConstructMesh();
+            icoSphere.UpdateMesh();
         }
         else{
             icoSphere.UpdateMesh();
@@ -63,6 +61,8 @@ public class IcoPlanet : MotherPlanet{
     }
 
     public override void GenerateColors(){   
+        Color newPlanetColor = colorSettings.planetColor;
+        meshFilter.GetComponent<MeshRenderer>().sharedMaterial.color = newPlanetColor;
     }
 
 }

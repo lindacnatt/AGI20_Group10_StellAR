@@ -22,23 +22,22 @@ public class ShapeGenerator {
         float elevation = 0.0f;
         float mask = 1.0f; //should be changed depending on maskType
         float dist;
-        float noiseValue;
+        float noiseValue = 0f;
+        float brushRadius = interaction.brushSize * this.settings.radius;
 
         for(int i = 0; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
                 if(settings.noiseLayers[i].useMouseAsMask){
-                    dist = checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize);  
-                    if(dist < interaction.brushSize){
-                        //mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1;
-                        mask = (interaction.brushSize-dist)/interaction.brushSize; 
+                    dist = checkIfmarked(touchedPoints, pointOnUnitSphere, brushRadius);  
+                    if(dist < brushRadius){
+                        mask = (brushRadius-dist)/brushRadius; 
                     }
                     else{
                         mask = .0f;
                     }        
                 }
-                noiseValue =  noiseFilters[i].Evaluate(pointOnUnitSphere);
-                //noiseValue = StepFunction(settings.noiseLayers[i].noiseSettings.clampSteps, noiseValue, settings.noiseLayers[i].noiseSettings.amplitude);
-                elevation += noiseValue * mask;
+                noiseValue =  noiseFilters[i].Evaluate(pointOnUnitSphere) * mask; // mask the value
+                elevation += noiseValue;
             }  
         }
         return pointOnUnitSphere * settings.radius  +  (pointOnUnitSphere * elevation);

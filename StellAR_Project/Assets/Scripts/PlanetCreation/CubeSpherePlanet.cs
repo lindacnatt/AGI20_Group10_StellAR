@@ -12,7 +12,6 @@ public class CubeSpherePlanet : MotherPlanet{
     
     // create mouseInteractions
     MouseInteraction interaction;
-    ShapeGenerator shapeGenerator;
     
     [SerializeField, HideInInspector]
     public MeshFilter[] meshFilters;

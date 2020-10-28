@@ -11,7 +11,7 @@ public class ShapeSettings : ScriptableObject{
     [System.Serializable]
     public class NoiseLayer{
         public bool enabled = true;
-        public bool useFirstLayerAsMask = false;
+        public bool usePrevLayerAsMask = false;
         public bool useMouseAsMask = false;
         public NoiseSettings  noiseSettings;
     }

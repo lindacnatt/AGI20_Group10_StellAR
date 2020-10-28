@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class MotherPlanet: MonoBehaviour {
     public ShapeSettings shapeSettings;
     public ColorSettings colorSettings;
+    public ShapeGenerator shapeGenerator;
     public bool autoUpdate = true;
 
     [HideInInspector]
@@ -16,7 +17,6 @@ public abstract class MotherPlanet: MonoBehaviour {
     public abstract void Initialize();  
     public abstract void GenerateMesh();
     public abstract void GenerateColors();
-
     public abstract void UpdateMesh();
     
     // these can be used directly in subClass 
@@ -26,6 +26,7 @@ public abstract class MotherPlanet: MonoBehaviour {
     public void GeneratePlanet(){
         Initialize();
         GenerateMesh();
+        UpdateMesh();
         GenerateColors();
         UpdateCollider(); 
     }
@@ -40,7 +41,7 @@ public abstract class MotherPlanet: MonoBehaviour {
     }
      public void OnColorSettingsUpdated(){ //Rebuild planet when color is updated
         if(autoUpdate){
-            Initialize();
+            //Initialize();
             GenerateColors();
         }
     }

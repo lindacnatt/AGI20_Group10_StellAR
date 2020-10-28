@@ -12,31 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
   m_Name: DefaultShape
   m_EditorClassIdentifier: 
-  radius: 1.28
+  radius: 1
   noiseLayers:
   - enabled: 0
-    useFirstLayerAsMask: 0
-    useMouseAsMask: 1
+    usePrevLayerAsMask: 0
+    useMouseAsMask: 0
     noiseSettings:
       filterType: 1
       numLayers: 4
       fallof: 1.02
-      freqPower: 1.88
-      freq: 0.24
-      minValue: 0.63
+      freqPower: 2.33
+      freq: 0.09
+      minValue: 1.59
       clampSteps: 2
-      amplitude: 0.24
-      noiseCenter: {x: 6.7, y: 4.88, z: -0.08}
-  - enabled: 0
-    useFirstLayerAsMask: 0
-    useMouseAsMask: 0
+      amplitude: 0.59
+      noiseCenter: {x: 7.22, y: 4.88, z: -0.08}
+  - enabled: 1
+    usePrevLayerAsMask: 0
+    useMouseAsMask: 1
     noiseSettings:
       filterType: 2
       numLayers: 4
       fallof: 1.02
       freqPower: 2.68
-      freq: 1.19
+      freq: 0.58
       minValue: 1.11
       clampSteps: 1
-      amplitude: 0.55
+      amplitude: 0.13
       noiseCenter: {x: 6.7, y: 4.88, z: -0.08}
