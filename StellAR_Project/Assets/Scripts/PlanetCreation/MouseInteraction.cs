@@ -16,9 +16,12 @@ public class MouseInteraction : MonoBehaviour{
     public float brushSize = 0.2f;
     float time;
     [Range(0, 2)]
+
+    // for being able to use different noise types
     public int type = 0;
     public List<Vector3>[] hitCoordsArr = new List<Vector3>[2]; 
     MotherPlanet planet;
+    
     void Start(){
         planet = GetComponent<MotherPlanet>();
         time = Time.fixedTime + 0.1f; 
