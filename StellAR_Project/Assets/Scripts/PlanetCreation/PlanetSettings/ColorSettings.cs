@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [CreateAssetMenu()]
 public class ColorSettings : ScriptableObject{
         public Material planetMaterial;
         public BiomeColorSettings biomeColorSettings;
-
+        
         [System.Serializable]
         public class BiomeColorSettings{
                 public Biome[] biomes;

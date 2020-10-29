@@ -13,6 +13,7 @@ public class TerrainFace {
     Vector3 axisA;
     Vector3 axisB;
     ShapeGenerator shapeGenerator;
+    
     public TerrainFace(ShapeGenerator shapeGenerator, Mesh mesh, int resolution, Vector3 localUp){
         this.shapeGenerator = shapeGenerator;
         this.mesh = mesh;
@@ -25,7 +26,7 @@ public class TerrainFace {
 
     public void ConstructMesh(){
         Vector3[] vertices = new Vector3[resolution *resolution];
-        int[] triangles = new int[((resolution-1)*(resolution-1)*6)]; //Create all vertices for mesh 
+        int[] triangles = new int[(resolution-1)*(resolution-1)*6]; //Create all vertices for mesh 
         int triangleIndex = 0;
         Vector2[] uv = (mesh.uv.Length == vertices.Length)?mesh.uv:new Vector2[vertices.Length];
 
@@ -58,7 +59,7 @@ public class TerrainFace {
         mesh.uv = uv;
     }
     public void UpdateUVs(ColorGenerator colorGenerator){
-        Vector2[] uv = new Vector2[resolution * resolution];
+        Vector2[] uv = mesh.uv;
         for (int y =0; y < resolution; y++){
             for (int x = 0; x < resolution; x++){
  
