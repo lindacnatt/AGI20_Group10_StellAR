@@ -16,7 +16,6 @@ public class TerrainFace {
     ShapeGenerator shapeGenerator;
     //ShapeSettings settings;
     CraterGenerator craterGenerator;
-    //CraterSettings craterSettings;
 
     public TerrainFace(ShapeGenerator shapeGenerator, Mesh mesh, int resolution
         , Vector3 localUp, CraterGenerator craterGenerator) {
@@ -28,7 +27,6 @@ public class TerrainFace {
 
         axisA = new Vector3(localUp.y, localUp.z, localUp.x);
         axisB = Vector3.Cross(localUp, axisA);
-        //Debug.Log(craterList);
     }
 
     public void ConstructMesh(){

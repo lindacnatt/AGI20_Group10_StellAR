@@ -21,10 +21,13 @@ public class CelestialObject : MonoBehaviour
     public Vector3 pausedVelocity;
     private bool hasBeenPaused;
 
-    
-    
+    public GameObject explosionEffect;
+    bool hasExploded = false;
 
-     public static List<CelestialObject> Objects;
+
+
+
+    public static List<CelestialObject> Objects;
 
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
@@ -63,10 +66,52 @@ public class CelestialObject : MonoBehaviour
         Objects.Remove(this);
     }
 
-     void OnCollisionEnter(){
-        if(!staticBody)
-            Destroy(this.gameObject);
+    void OnCollisionEnter(Collision collision)
+    {
+        float otherRadius = collision.gameObject.GetComponent<SphereCollider>().radius;
+        float thisRadius = this.GetComponent<SphereCollider>().radius;
+        if (otherRadius <= thisRadius / 2)
+        {
+            if (this.gameObject.tag != "gasgiant")
+            {
+                Planet planet = this.GetComponent<Planet>();
+                planet.MakeCrater(collision, otherRadius);
+            }
+        }
+        else
+        {
+            if (!hasExploded)
+            {
+                if (this.transform.localScale.x >= 1)
+                {
+                    explosionEffect = Resources.Load<GameObject>("Explosions/BigExplosionEffect");
+                    ExplodeBig();
+                }
+                else
+                {
+                    explosionEffect = Resources.Load<GameObject>("Explosions/SmallExplosionEffect");
+                    ExplodeSmall();
+                }
+                hasExploded = true;
+            }
+        }
 
     }
+
+    void ExplodeBig()
+    {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
+
+        Destroy(gameObject);
+    }
+
+    void ExplodeSmall()
+    {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
+
+        Destroy(gameObject);
+    }
+
+
 
 }

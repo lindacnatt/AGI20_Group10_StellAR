@@ -7,8 +7,9 @@ public class CraterGenerator
 {
     //ShapeSettings setings;
     CraterSettings craterSettings;
+    List<Crater> craterList;
 
-    public CraterGenerator(CraterSettings craterSettings)
+    public CraterGenerator(CraterSettings craterSettings, List<Crater> craterList)
     {
         if (craterSettings != null)
         {
@@ -16,9 +17,9 @@ public class CraterGenerator
         }
         else
         {
-            //this.craterSettings = SettingSpawner.loadDefaultCraters();
+            this.craterSettings = SettingSpawner.loadDefaultCraters();
         }
-        //this.setings = setings;
+        this.craterList = craterList;
     }
 
     public class Crater
@@ -42,7 +43,7 @@ public class CraterGenerator
     {
         float craterHeight = 0;
         //Will need some adjustments for more than one craters
-        List<Crater> craterList = craterSettings.craterList;
+        //List<Crater> craterList = craterSettings.craterList;
         for (int i = 0; i < craterList.Count; i++)
         {
             Vector3 diff = vertexPos - craterList[i].center;
@@ -58,52 +59,8 @@ public class CraterGenerator
                 craterShape = smoothMin(craterShape, rim, craterList[i].smoothness);
                 craterHeight += craterShape * craterList[i].radius * craterSettings.impact;
             }
-            /*
-            if (craterHeight >= -0.2 && craterHeight < 0.2)
-            {
-                craterHeight = 0;
-            }
-            if (craterHeight >= 0.2 && craterHeight < 0.4)
-            {
-                craterHeight = 0.2f;
-            }
-            if (craterHeight >= 0.4 && craterHeight < 0.6)
-            {
-                craterHeight = 0.4f;
-            }
-            if (craterHeight >= 0.6)
-            {
-                craterHeight = 0.6f;
-            }
-            if (craterHeight <= -0.2 && craterHeight > -0.4)
-            {
-                craterHeight = -0.2f;
-            }
-            if (craterHeight <= -0.4 && craterHeight > -0.6)
-            {
-                craterHeight = -0.4f;
-            }
-            if (craterHeight <= -0.6)
-            {
-                craterHeight = -0.6f;
-            }
-            */
         }
         return craterHeight;
-    }
-
-    public void CreateCrater(Vector3 pos)
-    {
-        if (craterSettings.craterList != null)
-        {
-            craterSettings.craterList.Add(new Crater(pos,
-                craterSettings.radius, craterSettings.floorHeight,
-                craterSettings.smoothness, craterSettings.impact));
-        }
-        else
-        {
-            Debug.Log("craterlist null");
-        }
     }
 
     float smoothMin(float a, float b, float k)

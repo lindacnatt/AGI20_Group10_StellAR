@@ -10,7 +10,6 @@ public class Explosion : MonoBehaviour
     bool hasExploded = false;
     bool bigExplopsion = false;
     Vector3 startpos;
-    float colliderRadius;
     // Start is called before the first frame update
     private void Start()
     {
@@ -33,13 +32,8 @@ public class Explosion : MonoBehaviour
     {
         if (!hasExploded)
         {
-            ContactPoint contact = collision.contacts[0];
-            //Quaternion rotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
-            //Vector3 position = contact.point;
-            SphereCollider mycollider = this.GetComponent<SphereCollider>();
-            colliderRadius = mycollider.radius;
             if (bigExplopsion) {
-                Explode();
+                ExplodeBig();
             }
             else
             {
@@ -49,7 +43,7 @@ public class Explosion : MonoBehaviour
         }
     }
 
-    void Explode()
+    void ExplodeBig()
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
