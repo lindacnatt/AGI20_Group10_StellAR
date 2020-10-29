@@ -8,8 +8,10 @@ public class TrajectoryVelocity : MonoBehaviour
     public GameObject mainObject;
     [HideInInspector]
     public static Vector3 direction = new Vector3(0f,0f,0f);
+    public SpriteRenderer arrow;
     [HideInInspector]
     public static float magnitude = 4f;
+
 
     public LineRenderer viewDir;
     
@@ -37,6 +39,8 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         vertices = 20;
         this.GetComponent<LineRenderer>().enabled = false;
+        arrow=this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        arrow.enabled=false;
 
 
         
@@ -66,6 +70,8 @@ public class TrajectoryVelocity : MonoBehaviour
                 viewDir.enabled = false;
                 start = new Vector3(0f,0f,0f);
                 startSlingshot = false;
+                arrow.enabled=false;
+                arrow.size=new Vector2(0f,0f);
 
             }
         }
@@ -75,6 +81,8 @@ public class TrajectoryVelocity : MonoBehaviour
             viewDir.positionCount = 0;
             viewDir.enabled = false;
             start = new Vector3(0f,0f,0f);
+            arrow.enabled=false;
+            arrow.size=new Vector2(0f,0f);
         }
         
     }
@@ -91,7 +99,12 @@ public class TrajectoryVelocity : MonoBehaviour
         for (int i=0; i<viewDir.positionCount; i++){
             viewDir.SetPosition(i,end+direction*s*i);
         }
-       
+
+    }
+
+    void DrawDirectionSprite(){
+        float s = direction.magnitude*magnitude;
+        arrow.size = new Vector2(s, 0f);
 
     }
 
@@ -104,11 +117,13 @@ public class TrajectoryVelocity : MonoBehaviour
     }
 
     void SlingShot(){
-            viewDir.enabled = true;
-            viewDir.positionCount = vertices;
+            //viewDir.enabled = true;
+            arrow.enabled = true;
+            //viewDir.positionCount = vertices;
             end = Camera.main.transform.position + 2.0f*Camera.main.transform.forward;//cam.transform.position+2.0f*cam.transform.forward;
             direction = (start-end);
-            DrawDirection(end);
+            //DrawDirection(end);
+            DrawDirectionSprite();
             direction *= magnitude;
     }
 
