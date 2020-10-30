@@ -9,8 +9,9 @@ public class ShapeGenerator {
     MouseInteraction interaction;
     List<Vector3> touchedPoints;
     public MinMax elevationMinMax;
+    CraterGenerator craterGenerator;
 
-    public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction){
+    public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction, CraterGenerator craterGenerator){
         this.settings = settings;
         noiseFilters = new NoiseInterface[settings.noiseLayers.Length];
         this.interaction = interaction;
@@ -19,9 +20,12 @@ public class ShapeGenerator {
             noiseFilters[i] = NoiseFactory.createNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
         elevationMinMax = new MinMax();
+        this.craterGenerator = craterGenerator;
     }
 
-    public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere, float craterHeight){
+    public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere){
+        float craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
+        //Debug.Log(craterHeight);
         float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
         float elevation = 0;
         float noiseelevation = 0;

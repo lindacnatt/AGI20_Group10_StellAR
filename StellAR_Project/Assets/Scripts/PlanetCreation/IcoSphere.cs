@@ -40,6 +40,7 @@ public class IcoSphere {
         
         float r = 1.0f;
         // construct basic vertices
+        /*
         Vector3 pointOnUnitSphere = new Vector3(-r, theta, 0).normalized;
         float craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
         vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
@@ -78,8 +79,8 @@ public class IcoSphere {
         pointOnUnitSphere = new Vector3(-theta, 0, r).normalized;
         craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
         vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
+        */
         
-        /*
         vertices.Add(new Vector3(-r, theta, 0));
         vertices.Add(new Vector3(r, theta, 0));
         vertices.Add(new Vector3(-r, -theta, 0));
@@ -94,7 +95,6 @@ public class IcoSphere {
         vertices.Add(new Vector3( theta, 0, r));
         vertices.Add(new Vector3(-theta, 0, -r));
         vertices.Add(new Vector3(-theta, 0, r));
-        */
 
         // construct triangles
         triangles.Add(new Vector3Int(0, 11, 5));
@@ -134,9 +134,9 @@ public class IcoSphere {
                 float craterHeightA = craterGenerator.CalculateCraterDepth(a);
                 float craterHeightB = craterGenerator.CalculateCraterDepth(a);
                 float craterHeightC = craterGenerator.CalculateCraterDepth(a);
-                AddVertex(shapeGenerator.CalculatePointOnPlanet(a, craterHeightA));
-                AddVertex(shapeGenerator.CalculatePointOnPlanet(b, craterHeightB));
-                AddVertex(shapeGenerator.CalculatePointOnPlanet(c, craterHeightC));
+                AddVertex(shapeGenerator.CalculatePointOnPlanet(a));
+                AddVertex(shapeGenerator.CalculatePointOnPlanet(b));
+                AddVertex(shapeGenerator.CalculatePointOnPlanet(c));
                 
                 /*
                 AddVertex(a);

@@ -14,7 +14,6 @@ public class Planet : CelestialObject{
     public bool isIcoSphere = true;
 
     public Slider cSlider;
-    Vector3 craterCenter = new Vector3(0, 0, 0);
 
     // update on buttonpress or on change
     public bool autoUpdate = true;
@@ -61,8 +60,8 @@ public class Planet : CelestialObject{
 
         interaction = gameObject.GetComponent<MouseInteraction>();
 
-        shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
         craterGenerator = new CraterGenerator(craterSettings, craterList);
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
 
         colorGenerator.UpdateSettings(colorSettings);
 
@@ -101,8 +100,8 @@ public class Planet : CelestialObject{
             interaction = this.GetComponent<MouseInteraction>();
         }
 
-        shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
         craterGenerator = new CraterGenerator(craterSettings, craterList);
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
 
         colorGenerator.UpdateSettings(colorSettings);
 
@@ -121,9 +120,13 @@ public class Planet : CelestialObject{
 
     void UpdateIcoSphere()
     {
-        shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
+        if (craterSettings == null)
+        {
+            craterSettings = SettingSpawner.loadDefaultCraters();
+        }
+
         craterGenerator = new CraterGenerator(craterSettings, craterList);
-        Debug.Log(craterList[0].center);
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
 
         colorGenerator.UpdateSettings(colorSettings);
 
@@ -218,7 +221,7 @@ public class Planet : CelestialObject{
         if (autoUpdate)
         {
             InitializeIcoSphere();
-            CreateCrater(new Vector3(0,0,-1));
+            CreateCrater(new Vector3(0,0,-1), 1);
             GenerateMeshIco();
         }
     }
@@ -232,7 +235,6 @@ public class Planet : CelestialObject{
             * Quaternion.AngleAxis(-planetRotEuler[0], Vector3.right)
             * Quaternion.AngleAxis(-planetRotEuler[1], Vector3.up);
         position = rotation * position;
-        craterCenter = position;
         float velocity = collision.relativeVelocity.magnitude;
         craterSettings.impact = 0.2f + velocity / 2;
         craterSettings.floorHeight = -2f / velocity;
@@ -240,13 +242,13 @@ public class Planet : CelestialObject{
 
         if (isIcoSphere)
         {
-            CreateCrater(position);
+            CreateCrater(position, 1);
             UpdateIcoSphere();
             GenerateMeshIco();
         }
         else
         {
-            CreateCrater(position);
+            CreateCrater(position, 1);
             Initialize();
             GenerateMesh();
         }
@@ -255,25 +257,24 @@ public class Planet : CelestialObject{
 
     public void PlaceCrater(Vector3 position)
     {
-        craterCenter = position;
-        Debug.Log("Tjena");
         if (isIcoSphere){
-            CreateCrater(position);
+            CreateCrater(position.normalized, 0.001f);
             UpdateIcoSphere();
             GenerateMeshIco();
         }
         else{
-            CreateCrater(position);
+            CreateCrater(position.normalized, 0.001f);
             Initialize();
             GenerateMesh();
         }
     }
 
-    public void CreateCrater(Vector3 pos)
+    public void CreateCrater(Vector3 pos, float multilplier)
     {
         craterList.Add(new CraterGenerator.Crater(pos,
             craterSettings.radius, craterSettings.floorHeight,
-            craterSettings.smoothness, craterSettings.impact));
+            craterSettings.smoothness, craterSettings.impact * multilplier,
+            craterSettings.rimSteepness * multilplier, craterSettings.rimWidth * multilplier));
     }
 
     private void UpdateCollider(){
