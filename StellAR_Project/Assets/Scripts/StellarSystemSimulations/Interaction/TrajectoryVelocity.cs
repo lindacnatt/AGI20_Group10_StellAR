@@ -8,6 +8,7 @@ public class TrajectoryVelocity : MonoBehaviour
     public GameObject mainObject;
     [HideInInspector]
     public static Vector3 direction = new Vector3(0f,0f,0f);
+    private Vector3 oldDirection = new Vector3(1f,1f,1f);
     public SpriteRenderer arrow;
     [HideInInspector]
     public static float magnitude = 4f;
@@ -32,6 +33,10 @@ public class TrajectoryVelocity : MonoBehaviour
     private float offset;
 
     public static bool startSlingshot;
+
+    //private int ellapsedCalls = 0;
+    //private int maxCalls = 50;
+    //private float interpolationStep = 0.0f;
 
 
     // Start is called before the first frame update
@@ -103,9 +108,16 @@ public class TrajectoryVelocity : MonoBehaviour
     }
 
     void DrawDirectionSprite(){
-        float s = direction.magnitude*magnitude;
-        arrow.size = new Vector2(s, 0f);
-
+        float scaling = direction.magnitude-0.26f;
+        scaling = scaling < 0.0f ? 0.0f : scaling;
+        arrow.size = new Vector2(0.26f+scaling, 0.13f);
+        //Quaternion rotation = Quaternion.LookRotation(direction,Vector3.up);
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //Quaternion rotation = Quaternion.AngleAxis(angle, transform.forward);
+        arrow.gameObject.transform.rotation = rotation;
+        //arrow.gameObject.transform.LookAt(start, new Vector3(0, 0, -1));
     }
 
     void ViewDirection(){
@@ -117,18 +129,36 @@ public class TrajectoryVelocity : MonoBehaviour
     }
 
     void SlingShot(){
-            //viewDir.enabled = true;
-            arrow.enabled = true;
-            //viewDir.positionCount = vertices;
+            viewDir.enabled = true;
+            viewDir.positionCount = vertices;
             end = Camera.main.transform.position + 2.0f*Camera.main.transform.forward;//cam.transform.position+2.0f*cam.transform.forward;
             direction = (start-end);
-            //DrawDirection(end);
+            
+            //interpolationStep = ellapsedCalls > maxCalls ? 0.0f : interpolationStep + 0.01f;
+            //float interpolationRatio = 0.9f + interpolationStep;
+            //Vector3 newDirection = (start-end);
+            //direction = Vector3.Lerp(direction, newDirection, interpolationRatio);
+            arrow.transform.position=end;
+            arrow.enabled = true;
+            
+            //CheckDirectionChange();
+            DrawDirection(end);
             DrawDirectionSprite();
             direction *= magnitude;
     }
 
     public void ToggleSlingShot(){
         startSlingshot = !startSlingshot;
+    }
+
+    public void CheckDirectionChange(){
+        float change = (direction - oldDirection).magnitude;
+        if(change > 0.05){  
+            oldDirection = direction;
+        }
+        else{
+            direction = oldDirection;
+        }
     }
 
 }
