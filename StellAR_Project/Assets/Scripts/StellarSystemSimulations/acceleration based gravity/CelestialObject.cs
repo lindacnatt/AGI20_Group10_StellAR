@@ -5,12 +5,11 @@ using UnityEngine;
 public class CelestialObject : MonoBehaviour
 {
 
+    [HideInInspector]
     public Rigidbody rigidBody;
-    
+
     [HideInInspector]
     public Vector3 acceleration = new Vector3(0f,0f,0f);
-    [HideInInspector]
-    public Vector3 nextAcceleration = new Vector3(0f,0f,0f);
 
     [HideInInspector]
     public Vector3 velocity = new Vector3(0f,0f,0f);
@@ -31,30 +30,14 @@ public class CelestialObject : MonoBehaviour
 
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
+        rigidBody = GetComponent<Rigidbody>();
         if (staticBody)
             rigidBody.isKinematic = true;
 
     }
 
-    void FixedUpdate(){
-        if(!SimulationPauseControl.gameIsPaused){
-            
-            if(hasBeenPaused){
-                rigidBody.velocity=pausedVelocity;
-                hasBeenPaused=false;
-            }
-        }
-        else{
-            if(!hasBeenPaused)
-                pausedVelocity = rigidBody.velocity;
-            
-            rigidBody.velocity=new Vector3(0f,0f,0f);
-            hasBeenPaused = true;
-        }
-    }
-
     // For adding attractors to the attractors list
-    void OnEnable(){  
+    void OnEnable(){
         if(Objects == null){
             Objects = new List<CelestialObject>();
         }

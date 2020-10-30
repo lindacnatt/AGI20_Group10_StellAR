@@ -11,13 +11,9 @@ public class ToggleGravityMode : MonoBehaviour
   }
    public void Toggle(){
        nBodyGravity = !nBodyGravity;
+       TrajectoryLineAnimation.traj.enabled=false;
+       TrajectoryLineAnimation.traj.positionCount=0;
+       TrajectorySimulation.destroyLine=false;
+       
    }
-
-    /*// Update is called once per frame
-    void Update()
-    {   
-        if (Input.GetKeyDown(KeyCode.G)){
-            nBodyGravity = !nBodyGravity;
-        }
-    }*/
 }
