@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Planet : MonoBehaviour{
+public class Planet : CelestialObject{
 
     [Range(2, 100)]
     // Resolution of every terrainFace
@@ -23,7 +23,6 @@ public class Planet : MonoBehaviour{
     public ColorSettings colorSettings;
     public ShapeSettings shapeSettings;
     public CraterSettings craterSettings;
-    public Explosion explosion;
     //public NoiseSettings noiseSettings;
 
     // create mouseInteractions
@@ -124,6 +123,7 @@ public class Planet : MonoBehaviour{
     {
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
         craterGenerator = new CraterGenerator(craterSettings, craterList);
+        Debug.Log(craterList[0].center);
 
         colorGenerator.UpdateSettings(colorSettings);
 
@@ -256,6 +256,7 @@ public class Planet : MonoBehaviour{
     public void PlaceCrater(Vector3 position)
     {
         craterCenter = position;
+        Debug.Log("Tjena");
         if (isIcoSphere){
             CreateCrater(position);
             UpdateIcoSphere();
