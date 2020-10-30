@@ -63,7 +63,7 @@ public class CraterGenerator
 
                 float craterShape = smoothMax(cavity, craterList[i].floor, craterList[i].smoothness);
                 craterShape = smoothMin(craterShape, rim, craterList[i].smoothness);
-                craterHeight += craterShape * craterList[i].radius * craterSettings.impact;
+                craterHeight += craterShape * craterList[i].radius * craterList[i].impact;
             }
         }
         return craterHeight;

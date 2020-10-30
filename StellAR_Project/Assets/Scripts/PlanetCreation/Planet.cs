@@ -120,11 +120,6 @@ public class Planet : CelestialObject{
 
     void UpdateIcoSphere()
     {
-        if (craterSettings == null)
-        {
-            craterSettings = SettingSpawner.loadDefaultCraters();
-        }
-
         craterGenerator = new CraterGenerator(craterSettings, craterList);
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
 
@@ -258,7 +253,25 @@ public class Planet : CelestialObject{
     public void PlaceCrater(Vector3 position)
     {
         if (isIcoSphere){
-            CreateCrater(position.normalized, 0.001f);
+            Vector3 pos = position.normalized;
+            bool sameCrater = false;
+            int index = 0;
+            for (int i = 0; i < craterList.Count; i++)
+            {
+                if (craterList[i].center == pos)
+                {
+                    sameCrater = true;
+                    index = i;
+                }
+            }
+            if (sameCrater)
+            {
+                craterList[index].impact += 0.1f;
+            }
+            else
+            {
+                CreateCrater(position.normalized, 0.001f);
+            }
             UpdateIcoSphere();
             GenerateMeshIco();
         }

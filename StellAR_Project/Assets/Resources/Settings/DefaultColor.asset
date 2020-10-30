@@ -118,6 +118,7 @@ MonoBehaviour:
       freqPower: -0.15
       freq: 2.19
       minValue: 0.5
+      clampSteps: 3
       amplitude: 1.009
       noiseCenter: {x: 0, y: 0, z: 0}
     noiseOffset: 0.58
