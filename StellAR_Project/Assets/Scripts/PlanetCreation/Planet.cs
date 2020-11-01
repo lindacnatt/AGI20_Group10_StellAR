@@ -13,7 +13,6 @@ public class Planet : CelestialObject{
     public int icoDetail = 1;
     public bool isIcoSphere = true;
 
-    public Slider cSlider;
 
     // update on buttonpress or on change
     public bool autoUpdate = true;
