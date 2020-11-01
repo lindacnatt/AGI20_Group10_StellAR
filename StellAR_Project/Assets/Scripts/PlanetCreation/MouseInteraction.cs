@@ -10,16 +10,39 @@ public class MouseInteraction : MonoBehaviour{
     Mesh terrainFaceMesh;
     public List<Vector3> hitCoords;
     Vector3[] vertices;
+    Planet planet;
+    bool craterPlacement = false;
+    bool placingCrater = false;
 
-    [SerializeField]
+        [SerializeField]
     public float brushSize = 0.1f;
     void Update(){
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit)){
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.C))
+        {
+            craterPlacement ^= true;
+        }
+        if (placingCrater)
+        {
+            planet = gameObject.GetComponent<Planet>();
+            planet.PlaceCrater(selection.InverseTransformPoint(hit.point));
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            placingCrater = false;
+        }
+            if (Physics.Raycast(ray, out hit)){
             selection = hit.transform;
             //selectionRenderer = selection.GetComponent<Renderer>();
             if(Input.GetMouseButtonDown(0)){
-                hitCoords.Add(selection.InverseTransformPoint(hit.point)); 
+                if (craterPlacement)
+                {
+                    placingCrater = true;
+                }
+                else
+                {
+                    hitCoords.Add(selection.InverseTransformPoint(hit.point));
+                }
             }
         }
     }
@@ -38,7 +61,7 @@ public class MouseInteraction : MonoBehaviour{
     }
     public List<Vector3> GetPaintedVertices(){
         foreach (Vector3 point in hitCoords){
-            Debug.Log(point);
+            //Debug.Log(point);
         }
         return hitCoords;
     }

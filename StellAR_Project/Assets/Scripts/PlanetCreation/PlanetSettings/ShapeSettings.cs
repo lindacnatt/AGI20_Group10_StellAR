@@ -7,6 +7,7 @@ public class ShapeSettings : ScriptableObject{
     public float radius;
     public NoiseLayer[] noiseLayers;
 
+
     [System.Serializable]
     public class NoiseLayer{
         public bool enabled = true;
@@ -14,4 +15,5 @@ public class ShapeSettings : ScriptableObject{
         public bool useMouseAsMask = false;
         public NoiseSettings  noiseSettings;
     }
+
 }

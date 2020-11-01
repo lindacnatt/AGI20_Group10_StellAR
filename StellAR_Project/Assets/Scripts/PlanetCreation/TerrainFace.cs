@@ -4,6 +4,7 @@ Heavy inspiration taken from Sebastian Lague's Video; Procederul Planets (E01 th
 */
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TerrainFace {
@@ -13,9 +14,13 @@ public class TerrainFace {
     Vector3 axisA;
     Vector3 axisB;
     ShapeGenerator shapeGenerator;
-    
-    public TerrainFace(ShapeGenerator shapeGenerator, Mesh mesh, int resolution, Vector3 localUp){
+    //ShapeSettings settings;
+    CraterGenerator craterGenerator;
+
+    public TerrainFace(ShapeGenerator shapeGenerator, Mesh mesh, int resolution
+        , Vector3 localUp, CraterGenerator craterGenerator) {
         this.shapeGenerator = shapeGenerator;
+        this.craterGenerator = craterGenerator;
         this.mesh = mesh;
         this.resolution = resolution;
         this.localUp = localUp;
@@ -26,17 +31,17 @@ public class TerrainFace {
 
     public void ConstructMesh(){
         Vector3[] vertices = new Vector3[resolution *resolution];
-        int[] triangles = new int[(resolution-1)*(resolution-1)*6]; //Create all vertices for mesh 
+        int[] triangles = new int[((resolution-1)*(resolution-1)*6)]; //Create all vertices for mesh
         int triangleIndex = 0;
         Vector2[] uv = (mesh.uv.Length == vertices.Length)?mesh.uv:new Vector2[vertices.Length];
 
-        for(int y = 0; y < resolution; y++){ 
+        for(int y = 0; y < resolution; y++){
             for(int x = 0; x < resolution; x++){
-                
                 int i = x + y *resolution;
                 Vector2 percent = new Vector2(x, y)/(resolution-1);
-                Vector3 pointOnUnitCube = localUp + (percent.x - 0.5f) * 2 * axisA + (percent.y - 0.5f) * 2 * axisB; 
+                Vector3 pointOnUnitCube = localUp + (percent.x - 0.5f) * 2 * axisA + (percent.y - 0.5f) * 2 * axisB;
                 Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
+                float craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
                 vertices[i] = shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere);
 
                 if(x != resolution -1 && y != resolution -1){ //don't create traingeles along the edges of the cube face
@@ -62,10 +67,10 @@ public class TerrainFace {
         Vector2[] uv = mesh.uv;
         for (int y =0; y < resolution; y++){
             for (int x = 0; x < resolution; x++){
- 
+
                 int i = x+y * resolution;
                 Vector2 percent = new Vector2(x, y)/(resolution-1);
-                Vector3 pointOnUnitCube = localUp + (percent.x - 0.5f) * 2 * axisA + (percent.y - 0.5f) * 2 * axisB; 
+                Vector3 pointOnUnitCube = localUp + (percent.x - 0.5f) * 2 * axisA + (percent.y - 0.5f) * 2 * axisB;
                 Vector3 pointOnUnitSphere = pointOnUnitCube.normalized;
 
                 uv[i] = new Vector2(colorGenerator.BiomePercentFromPoint(pointOnUnitSphere), 0);

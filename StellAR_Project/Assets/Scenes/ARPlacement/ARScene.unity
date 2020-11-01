@@ -605,7 +605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054004082}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 1.99, y: 0, z: 3}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1002,13 +1002,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1533429860}
-  - component: {fileID: 1533429859}
+  - component: {fileID: 1533429861}
   - component: {fileID: 1533429858}
   - component: {fileID: 1533429857}
-  - component: {fileID: 1533429861}
+  - component: {fileID: 1533429862}
+  - component: {fileID: 1533429859}
+  - component: {fileID: 1533429863}
   m_Layer: 0
   m_Name: Simulation
-  m_TagString: Untagged
+  m_TagString: Simulation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1022,13 +1024,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1533429856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 170e70f22a7c749dfb00bdcaa46bc7fc, type: 3}
+  m_Script: {fileID: 11500000, guid: d9ded6aa03a5440b98991d43bbcf41eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainObject: {fileID: 0}
-  initialVelocity: {x: 0, y: 0, z: 0}
-  lineVertices: 1000
-  traj: {fileID: 0}
 --- !u!114 &1533429858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,7 +1036,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1533429856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4d861c4e235048df978fda0ed18802b, type: 3}
+  m_Script: {fileID: 11500000, guid: c13c43dc5576747ae878b58452edcd34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1533429859
@@ -1050,9 +1048,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1533429856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb2747b2c93784a5ba12b4fb447d28db, type: 3}
+  m_Script: {fileID: 11500000, guid: d27251ac7c4484a20825519cd28540c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainObject: {fileID: 0}
+  initialVelocity: {x: 0, y: 0, z: 0}
+  lineVertices: 2000
 --- !u!4 &1533429860
 Transform:
   m_ObjectHideFlags: 0

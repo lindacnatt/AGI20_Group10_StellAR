@@ -7,12 +7,29 @@ using UnityEngine.SceneManagement;
 public class SimulationPauseControl : MonoBehaviour
 {
     public static bool gameIsPaused = false;
-
-    void Update()
+    /*void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+      
+        if (Input.GetKeyDown(KeyCode.P) || ((gameIsPaused == false) && (Input.touchCount == 1))) //((Input.touchCount > 0) && Input.GetTouch(0).phase == TouchPhase.Began))
         {
             gameIsPaused = !gameIsPaused;
         }
+    }*/
+
+    public void Toggle(){
+        gameIsPaused = !gameIsPaused;
+    }
+
+    public void RestartGame(){
+        TrajectoryVelocity.startSlingshot = false;
+        TrajectoryVelocity.start = new Vector3(0f,0f,0f);
+        gameIsPaused = false;
+        TrajectorySimulation.drawLine = false;
+        TrajectorySimulation.destroyLine = false;
+        TrajectorySimulation.freeze = false;
+        TrajectorySimulation.shoot = false;
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        ToggleGravityMode.nBodyGravity=true;
+
     }
 }

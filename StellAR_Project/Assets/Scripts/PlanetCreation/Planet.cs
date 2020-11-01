@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Planet : MonoBehaviour{   
-    
+public class Planet : CelestialObject{
+
     [Range(2, 100)]
     // Resolution of every terrainFace
     public int resolution = 10;
@@ -15,18 +15,21 @@ public class Planet : MonoBehaviour{
 
 
     // update on buttonpress or on change
-    public bool autoUpdate = true; 
+    public bool autoUpdate = true;
 
     // data on the planet
-    public ColorSettings colorSettings; 
+    public ColorSettings colorSettings;
     public ShapeSettings shapeSettings;
-    
+    public CraterSettings craterSettings;
+    //public NoiseSettings noiseSettings;
+
     // create mouseInteractions
     public MouseInteraction interaction;
     ShapeGenerator shapeGenerator;
+    CraterGenerator craterGenerator;
     ColorGenerator colorGenerator = new ColorGenerator();
 
-    
+
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
@@ -38,28 +41,36 @@ public class Planet : MonoBehaviour{
     public bool shapeSettingsFoldout;
     [HideInInspector]
     public bool colorSettingsFoldout;
+    [HideInInspector]
+    public bool craterSettingsFoldout;
+
+    public List<CraterGenerator.Crater> craterList = new List<CraterGenerator.Crater>();
 
     void Initialize(){
         if(shapeSettings == null || colorSettings == null){
             shapeSettings = SettingSpawner.loadDefaultShape();
             colorSettings = SettingSpawner.loadDefaultColor();
         }
-
-        if(interaction == null){
-            interaction = this.GetComponent<MouseInteraction>();
+        if(craterSettings == null)
+        {
+            craterSettings = SettingSpawner.loadDefaultCraters();
         }
+        craterList = new List<CraterGenerator.Crater>();
 
-        shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
+        interaction = gameObject.GetComponent<MouseInteraction>();
+
+        craterGenerator = new CraterGenerator(craterSettings, craterList);
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
+
         colorGenerator.UpdateSettings(colorSettings);
 
-        if(meshFilters == null || meshFilters.Length == 0){
+        if (meshFilters == null || meshFilters.Length == 0){
             meshFilters = new MeshFilter[6];
-        }      
+        }
 
-        terrainFaces = new TerrainFace[6]; 
+        terrainFaces = new TerrainFace[6];
         Vector3[] directions = {Vector3.up, Vector3.down, Vector3.left, Vector3.right, Vector3.forward, Vector3.back};
-        
-        for(int i = 0; i < 6; i++){
+        for (int i = 0; i < 6; i++){
             if(meshFilters[i] == null){
                 GameObject meshObj = new GameObject("mesh");
                 meshObj.transform.parent = transform;
@@ -68,23 +79,32 @@ public class Planet : MonoBehaviour{
                 meshFilters[i].sharedMesh = new Mesh();
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
-            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]); 
-        } 
+            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i], craterGenerator);
+        }
     }
 
-    void InitializeIcoSphere(){        
+    void InitializeIcoSphere(){
         if(shapeSettings == null || colorSettings == null){
             shapeSettings = SettingSpawner.loadDefaultShape();
             colorSettings = SettingSpawner.loadDefaultColor();
         }
+        if (craterSettings == null)
+        {
+            craterSettings = SettingSpawner.loadDefaultCraters();
+        }
 
-        if(interaction == null){
+        craterList = new List<CraterGenerator.Crater>();
+
+        if (interaction == null){
             interaction = this.GetComponent<MouseInteraction>();
         }
 
-        shapeGenerator = new ShapeGenerator(shapeSettings, interaction);
-        
-        if(this.transform.Find("mesh") != null){
+        craterGenerator = new CraterGenerator(craterSettings, craterList);
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
+
+        colorGenerator.UpdateSettings(colorSettings);
+
+        if (this.transform.Find("mesh") != null){
             meshFilter = this.transform.Find("mesh").GetComponent<MeshFilter>();
         }
         if(meshFilter == null){
@@ -92,9 +112,31 @@ public class Planet : MonoBehaviour{
             meshObj.transform.parent = transform;
             meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
             meshFilter = meshObj.AddComponent<MeshFilter>();
-            meshFilter.sharedMesh = new Mesh();     
+            meshFilter.sharedMesh = new Mesh();
         }
-        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh);     
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh, craterGenerator);
+    }
+
+    void UpdateIcoSphere()
+    {
+        craterGenerator = new CraterGenerator(craterSettings, craterList);
+        shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
+
+        colorGenerator.UpdateSettings(colorSettings);
+
+        if (this.transform.Find("mesh") != null)
+        {
+            meshFilter = this.transform.Find("mesh").GetComponent<MeshFilter>();
+        }
+        if (meshFilter == null)
+        {
+            GameObject meshObj = new GameObject("mesh");
+            meshObj.transform.parent = transform;
+            meshObj.AddComponent<MeshRenderer>().material = new Material(Shader.Find("Unlit/Color"));
+            meshFilter = meshObj.AddComponent<MeshFilter>();
+            meshFilter.sharedMesh = new Mesh();
+        }
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh, craterGenerator);
     }
 
     void Awake(){
@@ -134,7 +176,7 @@ public class Planet : MonoBehaviour{
     void GenerateMeshIco(){
         icoSphere.ConstructMesh();
     }
- 
+
     public void OnShapeSettingsUpdated(){
         if(autoUpdate){
             UpdateCollider();
@@ -144,9 +186,9 @@ public class Planet : MonoBehaviour{
             }
             else{
                 Initialize();
-                GenerateMesh();    
+                GenerateMesh();
             }
-        }    
+        }
     }
 
     void GenerateColors(){ // update color for every mesh given from the colorsettings
@@ -158,7 +200,7 @@ public class Planet : MonoBehaviour{
                 terrainFaces[i].UpdateUVs(colorGenerator);
             }
         }
-     
+
     }
 
     public void OnColorSettingsUpdated(){ //Rebuild planet when color is updated
@@ -166,6 +208,85 @@ public class Planet : MonoBehaviour{
             Initialize();
             GenerateColors();
         }
+      }
+
+    public void OnCraterSettingsUpdated()
+    { //Rebuild planet when color is updated
+        if (autoUpdate)
+        {
+            InitializeIcoSphere();
+            CreateCrater(new Vector3(0,0,-1), 1);
+            GenerateMeshIco();
+        }
+    }
+
+    public void MakeCrater(Collision collision, float otherRadius)
+    {
+        ContactPoint contact = collision.contacts[0];
+        Vector3 position = contact.point.normalized;
+        Vector3 planetRotEuler = gameObject.transform.localRotation.eulerAngles;
+        Quaternion rotation = Quaternion.AngleAxis(-planetRotEuler[2], Vector3.forward)
+            * Quaternion.AngleAxis(-planetRotEuler[0], Vector3.right)
+            * Quaternion.AngleAxis(-planetRotEuler[1], Vector3.up);
+        position = rotation * position;
+        float velocity = collision.relativeVelocity.magnitude;
+        craterSettings.impact = 0.2f + velocity / 2;
+        craterSettings.floorHeight = -2f / velocity;
+        craterSettings.radius = otherRadius*0.75f;
+
+        if (isIcoSphere)
+        {
+            CreateCrater(position, 1);
+            UpdateIcoSphere();
+            GenerateMeshIco();
+        }
+        else
+        {
+            CreateCrater(position, 1);
+            Initialize();
+            GenerateMesh();
+        }
+    }
+
+
+    public void PlaceCrater(Vector3 position)
+    {
+        if (isIcoSphere){
+            Vector3 pos = position.normalized;
+            bool sameCrater = false;
+            int index = 0;
+            for (int i = 0; i < craterList.Count; i++)
+            {
+                if (craterList[i].center == pos)
+                {
+                    sameCrater = true;
+                    index = i;
+                }
+            }
+            if (sameCrater)
+            {
+                craterList[index].impact += 0.1f;
+            }
+            else
+            {
+                CreateCrater(position.normalized, 0.001f);
+            }
+            UpdateIcoSphere();
+            GenerateMeshIco();
+        }
+        else{
+            CreateCrater(position.normalized, 0.001f);
+            Initialize();
+            GenerateMesh();
+        }
+    }
+
+    public void CreateCrater(Vector3 pos, float multilplier)
+    {
+        craterList.Add(new CraterGenerator.Crater(pos,
+            craterSettings.radius, craterSettings.floorHeight,
+            craterSettings.smoothness, craterSettings.impact * multilplier,
+            craterSettings.rimSteepness * multilplier, craterSettings.rimWidth * multilplier));
     }
 
     private void UpdateCollider(){
