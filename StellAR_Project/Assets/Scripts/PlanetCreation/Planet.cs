@@ -233,7 +233,7 @@ public class Planet : CelestialObject{
         float velocity = collision.relativeVelocity.magnitude;
         craterSettings.impact = 0.2f + velocity / 2;
         craterSettings.floorHeight = -2f / velocity;
-        craterSettings.radius = otherRadius;
+        craterSettings.radius = otherRadius*0.75f;
 
         if (isIcoSphere)
         {

@@ -52,13 +52,14 @@ public class CelestialObject : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         float otherRadius = collision.gameObject.GetComponent<SphereCollider>().radius;
+        float otherX = collision.gameObject.transform.localScale.x;
         float thisRadius = this.GetComponent<SphereCollider>().radius;
         if (otherRadius <= thisRadius / 2)
         {
             if (this.gameObject.tag != "gasgiant")
             {
                 Planet planet = this.GetComponent<Planet>();
-                planet.MakeCrater(collision, otherRadius);
+                planet.MakeCrater(collision, otherRadius* otherX);
             }
         }
         else
