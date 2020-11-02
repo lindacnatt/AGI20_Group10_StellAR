@@ -138,12 +138,12 @@ public class TrajectoryVelocity : MonoBehaviour
             //float interpolationRatio = 0.9f + interpolationStep;
             //Vector3 newDirection = (start-end);
             //direction = Vector3.Lerp(direction, newDirection, interpolationRatio);
-            arrow.transform.position=end;
-            arrow.enabled = true;
+            //arrow.transform.position=end;
+            //arrow.enabled = true;
             
             //CheckDirectionChange();
             DrawDirection(end);
-            DrawDirectionSprite();
+            //DrawDirectionSprite();
             direction *= magnitude;
     }
 
