@@ -64,7 +64,7 @@ public class TerrainFace {
         mesh.uv = uv;
     }
     public void UpdateUVs(ColorGenerator colorGenerator){
-        Vector2[] uv = new Vector2[resolution * resolution];
+        Vector2[] uv = mesh.uv;
         for (int y =0; y < resolution; y++){
             for (int x = 0; x < resolution; x++){
 
