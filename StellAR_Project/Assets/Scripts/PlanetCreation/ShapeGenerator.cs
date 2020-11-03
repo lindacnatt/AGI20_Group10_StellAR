@@ -31,7 +31,6 @@ public class ShapeGenerator {
         float noiseelevation = 0;
         float mask = 1.0f; //should be changed depending on maskType
         float dist;
-        float noiseValue;
 
         /*
         if(settings.noiseLayers[0].enabled){ //TODO: fix for mouse interaction s

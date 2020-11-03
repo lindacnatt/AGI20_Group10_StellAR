@@ -127,7 +127,10 @@ public class Planet : CelestialObject{
 
         craterGenerator = new CraterGenerator(craterSettings, craterList);
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
-
+        Debug.Log(craterList[0].radius);
+        Debug.Log(craterList[0].impact);
+        Debug.Log(craterList[0].center);
+        Debug.Log(craterList[0].smoothness);
         colorGenerator.UpdateSettings(colorSettings);
 
         if (this.transform.Find("mesh") != null)
