@@ -13,6 +13,9 @@ public class Triangle : MonoBehaviour
     RaycastHit2D hit;
     Transform selection;
     Renderer selectionRenderer;
+    BaryCentric bary;
+    GameObject handle;
+    
 
     public Material material;
 
@@ -30,7 +33,7 @@ public class Triangle : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
-        vertices = new[] {
+        vertices = new Vector3[] {
             new Vector3(0,0,0),
             new Vector3(0.5f,0.866025404f,0)*size,
             new Vector3(1,0,0)*size
@@ -41,18 +44,22 @@ public class Triangle : MonoBehaviour
 
         mesh.triangles = triangles;
 
+        Debug.Log(BaryCentric.getWeights(new Vector3(0.1f,0.1f,0.1f) , vertices));
         
+        handle = this.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update(){
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics2D.Raycast(ray.origin, ray.direction)){
-            Debug.Log("Hej");
+        hit = Physics2D.Raycast(ray.origin, ray.direction);
+        if(hit){
             selection = hit.transform;
-            //selectionRenderer = selection.GetComponent<Renderer>();
-            if(Input.GetMouseButtonDown(0)){
-                //Debug.Log(BaryCentric.getWeights(selection.InverseTransformPoint(hit.point), vertices));
+            selectionRenderer = selection.GetComponent<Renderer>();
+
+            if(Input.GetMouseButtonDown(0) && selectionRenderer != null){
+                handle.transform.position = hit.point;
+                Debug.Log(BaryCentric.getWeights(selection.InverseTransformPoint(hit.point), vertices));
             }
         }
     }

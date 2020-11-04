@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class BaryCentric {
+public class BaryCentric {
     public static Vector3 getWeights(Vector3 pos, Vector3[] triangle){ //calculate barycentric weights from pos
         float A =  HeronsArea(triangle[0], triangle[1], triangle[2]);
         float w1, w2, w3;
