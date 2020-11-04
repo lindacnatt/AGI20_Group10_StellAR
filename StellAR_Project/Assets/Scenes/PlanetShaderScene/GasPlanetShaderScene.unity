@@ -227,8 +227,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64082dc636a5d3f439b2756b06e37350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  BandColorStorm: {r: 0, g: 0, b: 0, a: 0}
   StormSize: 0
+  StormSpeed: 0
+  StormStrength: {x: 0, y: 0}
+  StormPlacement: {x: 0, y: 0}
+  SpiralDefinition: {x: 0, y: 0}
+  BandScale1: 0
+  BandXSeed1: 0
+  BandYSeed1: 0
+  BandColor1: {r: 0, g: 0, b: 0, a: 0}
+  BandScale2: 0
+  BandXSeed2: 0
+  BandYSeed2: 0
+  BandColor2: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &836184050
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,13 +410,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752128786}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: -0.42}
+  m_LocalRotation: {x: 0, y: -0.13139133, z: 0, w: 0.9913306}
+  m_LocalPosition: {x: 0.61, y: 0.1, z: -0.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -15.1, z: 0}
 --- !u!114 &1752128790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,5 +554,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64082dc636a5d3f439b2756b06e37350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaterialColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0}
-  StormSize: 5
+  BandColorStorm: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 0}
+  StormSize: 3.94
+  StormSpeed: 1
+  StormStrength: {x: 2.06, y: 2.59}
+  StormPlacement: {x: 0.19, y: 1.89}
+  SpiralDefinition: {x: 1.05, y: 1.32}
+  BandScale1: 1
+  BandXSeed1: 2
+  BandYSeed1: 1
+  BandColor1: {r: 1, g: 1, b: 1, a: 0}
+  BandScale2: 2
+  BandXSeed2: 1.4
+  BandYSeed2: 1
+  BandColor2: {r: 0, g: 0, b: 0, a: 0}
