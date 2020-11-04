@@ -22,6 +22,7 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         //set the color property
         propertyBlock.SetColor("BandColorStorm", MaterialColor);
         propertyBlock.SetFloat("_StormSize", StormSize);
+        propertyBlock.SetVector();
         //apply propertyBlock to renderer
         renderer.SetPropertyBlock(propertyBlock);
     }

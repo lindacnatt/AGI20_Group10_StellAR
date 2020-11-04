@@ -543,4 +543,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaterialColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0}
-  StormSize: 5.09
+  StormSize: 5
