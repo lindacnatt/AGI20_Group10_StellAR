@@ -25,11 +25,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - BandScale1: 3
-    - BandScale2: 0.56
-    - BandXSeed1: 1.38
+    - BandScale1: 8.23
+    - BandScale2: 0.95
+    - BandXSeed1: 1.26
     - BandXSeed2: 0
-    - BandYSeed1: 0.18
+    - BandYSeed1: -1.5
     - BandYSeed2: 0
     - StormSize: 5
     - StormSpeed: 8
@@ -41,15 +41,16 @@ Material:
     - Vector1_8CE20CE8: 1.1
     - Vector1_8D3B6B8D: 5
     - Vector1_D56E1125: 3.6
+    - _StormSize: 9.04
     m_Colors:
-    - BandColor1: {r: 1.262745, g: 0.7764706, b: 0.345098, a: 0}
-    - BandColor2: {r: 0.7735849, g: 0.4484763, b: 0, a: 0}
+    - BandColor1: {r: 0.35039517, g: 1.1754774, b: 1.2627451, a: 0}
+    - BandColor2: {r: 0, g: 0.6263051, b: 0.77254903, a: 0}
     - BandColorStorm: {r: 1, g: 1, b: 1, a: 0}
     - Color_31473F7B: {r: 1.262745, g: 0.7764706, b: 0.345098, a: 0}
     - Color_3AC4195C: {r: 0.7735849, g: 0.4484763, b: 0, a: 0}
     - Color_B7D4F64D: {r: 1, g: 1, b: 1, a: 0}
     - SpiralDefinition: {r: 1, g: 1, b: 0, a: 0}
-    - StormPlacement: {r: 0.97, g: 1, b: 0, a: 0}
+    - StormPlacement: {r: 1, g: 1, b: 0, a: 0}
     - StormStrength: {r: 2, g: 3, b: 0, a: 0}
     - Vector2_7C89100A: {r: 2, g: 3, b: 0, a: 0}
     - Vector2_C2166337: {r: 0.97, g: 1, b: 0, a: 0}

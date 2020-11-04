@@ -227,7 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64082dc636a5d3f439b2756b06e37350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyColor: {r: 0, g: 0, b: 0, a: 0}
+  MaterialColor: {r: 0, g: 0, b: 0, a: 0}
+  StormSize: 0
 --- !u!1 &836184050
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,4 +542,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64082dc636a5d3f439b2756b06e37350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyColor: {r: 0, g: 0.6509434, b: 0.021128364, a: 0}
+  MaterialColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 0}
+  StormSize: 5.09
