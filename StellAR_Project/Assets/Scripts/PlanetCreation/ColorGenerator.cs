@@ -40,6 +40,7 @@ public class ColorGenerator
     }
 
     public void UpdateColors(){
+        //Debug.Log("Update Colors");
         Color[] colors = new Color[texture.width * texture.height];
         int colorIndex = 0;
         foreach (var biome in settings.biomeColorSettings.biomes)

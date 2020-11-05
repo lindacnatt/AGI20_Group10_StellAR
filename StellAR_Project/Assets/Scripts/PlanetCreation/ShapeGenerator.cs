@@ -9,7 +9,7 @@ public class ShapeGenerator {
     MouseInteraction interaction;
     List<Vector3> touchedPoints;
     public MinMax elevationMinMax;
-    CraterGenerator craterGenerator;
+    public CraterGenerator craterGenerator;
 
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction, CraterGenerator craterGenerator){
         this.settings = settings;
@@ -32,18 +32,11 @@ public class ShapeGenerator {
         float mask = 1.0f; //should be changed depending on maskType
         float dist;
 
-        /*
-        if(settings.noiseLayers[0].enabled){ //TODO: fix for mouse interaction s
-            noiseelevation += firstLayerValue;
-        }
-        */
-
         for(int i = 0; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
                 if(settings.noiseLayers[i].useMouseAsMask){
-                    dist = checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize);
+                    dist = checkIfmarked(touchedPoints, pointOnUnitSphere*settings.radius, interaction.brushSize*settings.radius);
                     if(dist < interaction.brushSize){
-                        //mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1;
                         mask = (interaction.brushSize-dist)/interaction.brushSize;
                     }
                     else{

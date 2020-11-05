@@ -8,62 +8,54 @@ public class MouseInteraction : MonoBehaviour{
     Transform selection;
     Renderer selectionRenderer;
     Mesh terrainFaceMesh;
+    [HideInInspector]
     public List<Vector3> hitCoords;
     Vector3[] vertices;
-    Planet planet;
+    MotherPlanet planet;
     bool craterPlacement = false;
-    bool placingCrater = false;
+    //bool placingCrater = false;
 
-        [SerializeField]
-    public float brushSize = 0.1f;
+    [SerializeField]
+    public float brushSize = 0.2f;
+
+    void Start(){
+        planet = gameObject.GetComponent<MotherPlanet>();
+    }
+
     void Update(){
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.C))
         {
+            Debug.Log("toggle craterCreator");
             craterPlacement ^= true;
         }
+        /*
         if (placingCrater)
         {
-            planet = gameObject.GetComponent<Planet>();
-            planet.PlaceCrater(selection.InverseTransformPoint(hit.point));
+            //planet.PlaceCrater(selection.InverseTransformPoint(hit.point));
+            planet.shapeGenerator.craterGenerator.CreateCrater(hit.point);
         }
         if (Input.GetMouseButtonUp(0))
         {
             placingCrater = false;
         }
-            if (Physics.Raycast(ray, out hit)){
+        */
+        if (Physics.Raycast(ray, out hit)){
             selection = hit.transform;
-            //selectionRenderer = selection.GetComponent<Renderer>();
-            if(Input.GetMouseButtonDown(0)){
-                if (craterPlacement)
-                {
-                    placingCrater = true;
+            if(craterPlacement){
+                if(Input.GetMouseButtonDown(0)){
+                    planet.shapeGenerator.craterGenerator.CreateCrater(hit.point);
                 }
-                else
-                {
+            }
+            else{
+                if(Input.GetMouseButton(0)){
                     hitCoords.Add(selection.InverseTransformPoint(hit.point));
                 }
             }
+           planet.UpdateMesh();
         }
-    }
-
-    Mesh getCurrentFace(Vector3 rayDirection, Transform planet){
-        float angle;
-        Vector3 faceForward;
-        for(int i = 0; i < 6; i++){
-            faceForward = planet.GetChild(i).forward;
-            angle = Vector3.Angle(rayDirection, faceForward);
-            if(angle < 45){
-                return planet.GetChild(i).GetComponent<MeshFilter>().mesh;
-            }
-        }
-        return null;
     }
     public List<Vector3> GetPaintedVertices(){
-        foreach (Vector3 point in hitCoords){
-            //Debug.Log(point);
-        }
         return hitCoords;
-    }
-    
+    } 
 }

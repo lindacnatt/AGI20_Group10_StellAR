@@ -29,13 +29,11 @@ public class Planet : CelestialObject{
     CraterGenerator craterGenerator;
     ColorGenerator colorGenerator = new ColorGenerator();
 
-
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
     IcoSphere icoSphere;
     MeshFilter meshFilter;
-
 
     [HideInInspector]
     public bool shapeSettingsFoldout;
@@ -44,7 +42,7 @@ public class Planet : CelestialObject{
     [HideInInspector]
     public bool craterSettingsFoldout;
 
-    public List<CraterGenerator.Crater> craterList = new List<CraterGenerator.Crater>();
+    //public List<CraterGenerator.Crater> craterList = new List<CraterGenerator.Crater>();
 
     void Initialize(){
         if(shapeSettings == null || colorSettings == null){
@@ -55,11 +53,11 @@ public class Planet : CelestialObject{
         {
             craterSettings = SettingSpawner.loadDefaultCraters();
         }
-        craterList = new List<CraterGenerator.Crater>();
+        //craterList = new List<CraterGenerator.Crater>();
 
         interaction = gameObject.GetComponent<MouseInteraction>();
 
-        craterGenerator = new CraterGenerator(craterSettings, craterList);
+        craterGenerator = new CraterGenerator(craterSettings);
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
 
         colorGenerator.UpdateSettings(colorSettings);
@@ -79,7 +77,7 @@ public class Planet : CelestialObject{
                 meshFilters[i].sharedMesh = new Mesh();
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
-            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i], craterGenerator);
+            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
         }
     }
 
@@ -93,13 +91,13 @@ public class Planet : CelestialObject{
             craterSettings = SettingSpawner.loadDefaultCraters();
         }
 
-        craterList = new List<CraterGenerator.Crater>();
+        //craterList = new List<CraterGenerator.Crater>();
 
         if (interaction == null){
             interaction = this.GetComponent<MouseInteraction>();
         }
 
-        craterGenerator = new CraterGenerator(craterSettings, craterList);
+        craterGenerator = new CraterGenerator(craterSettings);
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
 
         colorGenerator.UpdateSettings(colorSettings);
@@ -114,17 +112,19 @@ public class Planet : CelestialObject{
             meshFilter = meshObj.AddComponent<MeshFilter>();
             meshFilter.sharedMesh = new Mesh();
         }
-        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh, craterGenerator);
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh);
     }
 
     void UpdateIcoSphere()
     {
-        craterGenerator = new CraterGenerator(craterSettings, craterList);
+        craterGenerator = new CraterGenerator(craterSettings);
         shapeGenerator = new ShapeGenerator(shapeSettings, interaction, craterGenerator);
+        /*
         Debug.Log(craterList[0].radius);
         Debug.Log(craterList[0].impact);
         Debug.Log(craterList[0].center);
         Debug.Log(craterList[0].smoothness);
+        */
         colorGenerator.UpdateSettings(colorSettings);
 
         if (this.transform.Find("mesh") != null)
@@ -139,7 +139,7 @@ public class Planet : CelestialObject{
             meshFilter = meshObj.AddComponent<MeshFilter>();
             meshFilter.sharedMesh = new Mesh();
         }
-        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh, craterGenerator);
+        icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, icoDetail, meshFilter.sharedMesh);
     }
 
     void Awake(){
@@ -218,7 +218,7 @@ public class Planet : CelestialObject{
         if (autoUpdate)
         {
             InitializeIcoSphere();
-            CreateCrater(new Vector3(0,0,-1), 1);
+            //CreateCrater(new Vector3(0,0,-1), 1);
             GenerateMeshIco();
         }
     }
@@ -239,13 +239,13 @@ public class Planet : CelestialObject{
 
         if (isIcoSphere)
         {
-            CreateCrater(position, 1);
+            //CreateCrater(position, 1);
             UpdateIcoSphere();
             GenerateMeshIco();
         }
         else
         {
-            CreateCrater(position, 1);
+            //CreateCrater(position, 1);
             Initialize();
             GenerateMesh();
         }
@@ -257,33 +257,38 @@ public class Planet : CelestialObject{
         if (isIcoSphere){
             Vector3 pos = position.normalized;
             bool sameCrater = false;
-            int index = 0;
+            //int index = 0;
+            /*
             for (int i = 0; i < craterList.Count; i++)
-            {
+            {   
+                
                 if (craterList[i].center == pos)
                 {
                     sameCrater = true;
                     index = i;
                 }
+                
             }
+            */
             if (sameCrater)
             {
-                craterList[index].impact += 0.1f;
+                //craterList[index].impact += 0.1f;
             }
             else
             {
-                CreateCrater(position.normalized, 0.001f);
+                //CreateCrater(position.normalized, 0.001f);
             }
             UpdateIcoSphere();
             GenerateMeshIco();
         }
         else{
-            CreateCrater(position.normalized, 0.001f);
+            //CreateCrater(position.normalized, 0.001f);
             Initialize();
             GenerateMesh();
         }
     }
 
+    /*
     public void CreateCrater(Vector3 pos, float multilplier)
     {
         craterList.Add(new CraterGenerator.Crater(pos,
@@ -291,6 +296,7 @@ public class Planet : CelestialObject{
             craterSettings.smoothness, craterSettings.impact * multilplier,
             craterSettings.rimSteepness * multilplier, craterSettings.rimWidth * multilplier));
     }
+    */
 
     private void UpdateCollider(){
         SphereCollider collider = this.GetComponent<SphereCollider>();
