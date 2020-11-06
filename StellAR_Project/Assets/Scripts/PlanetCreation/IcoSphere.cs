@@ -11,10 +11,8 @@ public class IcoSphere {
     List<Vector3> vertices;
     List<Vector2> uvCoords;
     float theta;
-    CraterGenerator craterGenerator;
 
-    public IcoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh)
-    {
+    public IcoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh){
         this.shapeGenerator = shapeGenerator;
         this.detail = detail;
         this.mesh = mesh;
@@ -32,20 +30,20 @@ public class IcoSphere {
         theta = theta/Mathf.Sqrt((1 + theta*theta));
         
         // construct base vertices
-        vertices.Add((new Vector3(-r, theta, 0)));
-        vertices.Add((new Vector3(r, theta, 0)));
-        vertices.Add((new Vector3(-r, -theta, 0)));
-        vertices.Add((new Vector3(r, -theta, 0)));
+        AddVertex((new Vector3(-r, theta, 0)));
+        AddVertex((new Vector3(r, theta, 0)));
+        AddVertex((new Vector3(-r, -theta, 0)));
+        AddVertex((new Vector3(r, -theta, 0)));
 
-        vertices.Add((new Vector3(0, -r, theta)));
-        vertices.Add((new Vector3(0, r, theta)));
-        vertices.Add((new Vector3(0, -r, -theta)));
-        vertices.Add((new Vector3(0, r, -theta)));
+        AddVertex((new Vector3(0, -r, theta)));
+        AddVertex((new Vector3(0, r, theta)));
+        AddVertex((new Vector3(0, -r, -theta)));
+        AddVertex((new Vector3(0, r, -theta)));
 
-        vertices.Add((new Vector3( theta,0, -r)));
-        vertices.Add((new Vector3( theta, 0, r)));
-        vertices.Add((new Vector3(-theta, 0, -r)));
-        vertices.Add((new Vector3(-theta, 0, r)));
+        AddVertex((new Vector3( theta,0, -r)));
+        AddVertex((new Vector3( theta, 0, r)));
+        AddVertex((new Vector3(-theta, 0, -r)));
+        AddVertex((new Vector3(-theta, 0, r)));
 
         // construct triangles
         triangles.Add(new Vector3Int(0, 11, 5));
