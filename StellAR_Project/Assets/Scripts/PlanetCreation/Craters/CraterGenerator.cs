@@ -6,10 +6,10 @@ using UnityEngine;
 public class CraterGenerator 
 {
     //ShapeSettings setings;
-    CraterSettings craterSettings;
+    public CraterSettings craterSettings;
     List<Crater> craterList;
 
-    public CraterGenerator(CraterSettings craterSettings, List<Crater> craterList)
+    public CraterGenerator(CraterSettings craterSettings)
     {
         if (craterSettings != null)
         {
@@ -19,7 +19,7 @@ public class CraterGenerator
         {
             this.craterSettings = SettingSpawner.loadDefaultCraters();
         }
-        this.craterList = craterList;
+        this.craterList = new List<Crater>();
     }
 
     public class Crater
@@ -67,6 +67,15 @@ public class CraterGenerator
             }
         }
         return craterHeight;
+    }
+
+    public void CreateCrater(Vector3 pos){   
+        //Debug.Log("crater created at pos: " + pos);
+        craterList.Add(new Crater(pos, craterSettings.radius, 
+            craterSettings.floorHeight, craterSettings.smoothness, 
+            craterSettings.impact, craterSettings.rimSteepness,
+            craterSettings.rimWidth));
+      
     }
 
     float smoothMin(float a, float b, float k)

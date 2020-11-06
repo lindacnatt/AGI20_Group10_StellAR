@@ -9,18 +9,23 @@ public class ShapeGenerator {
     MouseInteraction interaction;
     List<Vector3> touchedPoints;
     public MinMax elevationMinMax;
-    CraterGenerator craterGenerator;
+    public CraterGenerator craterGenerator;
+    Dictionary<String, float> masks;
 
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction, CraterGenerator craterGenerator){
+        Debug.Log("new shape");
         this.settings = settings;
         noiseFilters = new NoiseInterface[settings.noiseLayers.Length];
+        
         this.interaction = interaction;
-        touchedPoints = interaction.GetPaintedVertices();
+        this.masks = new Dictionary<string, float>();
+        //touchedPoints = interaction.GetPaintedVertices();
+        
         for (int i = 0; i < noiseFilters.Length; i++){
             noiseFilters[i] = NoiseFactory.createNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
         elevationMinMax = new MinMax();
-        this.craterGenerator = craterGenerator;
+        this.craterGenerator = craterGenerator; 
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere){
@@ -31,23 +36,28 @@ public class ShapeGenerator {
         float noiseelevation = 0;
         float mask = 1.0f; //should be changed depending on maskType
         float dist;
-
-        /*
-        if(settings.noiseLayers[0].enabled){ //TODO: fix for mouse interaction s
-            noiseelevation += firstLayerValue;
-        }
-        */
+        String pointStr = pointOnUnitSphere.ToString();
 
         for(int i = 0; i < noiseFilters.Length; i++){
             if(settings.noiseLayers[i].enabled){
                 if(settings.noiseLayers[i].useMouseAsMask){
-                    dist = checkIfmarked(touchedPoints, pointOnUnitSphere, interaction.brushSize);
+                    // check if the point is in radius of the painted vertices 
+                    //dist = checkIfmarked(touchedPoints, pointOnUnitSphere*settings.radius, interaction.brushSize*settings.radius);
+                    dist = (pointOnUnitSphere*settings.radius - interaction.interactionPoint).magnitude;
                     if(dist < interaction.brushSize){
-                        //mask = settings.noiseLayers[i].useFirstLayerAsMask ? firstLayerValue : 1;
                         mask = (interaction.brushSize-dist)/interaction.brushSize;
+                        if(masks.ContainsKey(pointStr)){
+                            //Debug.Log("Point Updated");
+                            masks[pointStr] = Sigmoid(masks[pointStr] + mask);    
+                        }
+                        else{
+                            //Debug.Log("point Added");
+                            masks.Add(pointStr, mask);
+                        }
                     }
                     else{
-                        mask = .0f;
+                        // if dictionary contains value set to value otherwise 0
+                        mask = (masks.ContainsKey(pointStr) ? masks[pointStr]: 0f);
                     }
                 }
                 noiseelevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
@@ -91,4 +101,7 @@ public class ShapeGenerator {
         return value;
     }
 
+    private float Sigmoid(float value){
+        return 1.0f / (1.0f + (float) Math.Exp(-value));
+    }      
 }
