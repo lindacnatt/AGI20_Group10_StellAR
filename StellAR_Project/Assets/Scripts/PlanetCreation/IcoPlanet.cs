@@ -63,7 +63,6 @@ public class IcoPlanet : MotherPlanet{
 
     public override void UpdateMesh(){
         if(icoSphere == null){
-            Debug.Log("initialized");
             Initialize();
             icoSphere.ConstructMesh();
             icoSphere.UpdateMesh();

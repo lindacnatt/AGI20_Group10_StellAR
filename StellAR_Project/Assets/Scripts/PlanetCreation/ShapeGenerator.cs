@@ -48,7 +48,8 @@ public class ShapeGenerator {
                         mask = (interaction.brushSize-dist)/interaction.brushSize;
                         if(masks.ContainsKey(pointStr)){
                             //Debug.Log("Point Updated");
-                            masks[pointStr] = Sigmoid(masks[pointStr] + mask);    
+                            masks[pointStr] = Sigmoid(masks[pointStr] + mask);  
+                            //masks[pointStr] += mask;  
                         }
                         else{
                             //Debug.Log("point Added");
