@@ -10,7 +10,7 @@ public class ShapeGenerator {
     List<Vector3> touchedPoints;
     public MinMax elevationMinMax;
     public CraterGenerator craterGenerator;
-    Dictionary<String, float> masks;
+    List<Dictionary<String, float>> masks;
 
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction, CraterGenerator craterGenerator){
         Debug.Log("new shape");
@@ -18,12 +18,13 @@ public class ShapeGenerator {
         noiseFilters = new NoiseInterface[settings.noiseLayers.Length];
         
         this.interaction = interaction;
-        this.masks = new Dictionary<string, float>();
-        //touchedPoints = interaction.GetPaintedVertices();
-        
+        this.masks = new List<Dictionary<string, float>>();
+
         for (int i = 0; i < noiseFilters.Length; i++){
+            masks.Add(new Dictionary<string, float>());
             noiseFilters[i] = NoiseFactory.createNoiseFilter(settings.noiseLayers[i].noiseSettings);
         }
+
         elevationMinMax = new MinMax();
         this.craterGenerator = craterGenerator; 
     }
@@ -31,35 +32,44 @@ public class ShapeGenerator {
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere){
         float craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
         //Debug.Log(craterHeight);
-        float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
+        //float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
         float elevation = 0;
         float noiseelevation = 0;
-        float mask = 1.0f; //should be changed depending on maskType
+        float mask;//should be changed depending on maskType
         float dist;
         String pointStr = pointOnUnitSphere.ToString();
 
         for(int i = 0; i < noiseFilters.Length; i++){
+            mask = 1.0f;
             if(settings.noiseLayers[i].enabled){
                 if(settings.noiseLayers[i].useMouseAsMask){
-                    // check if the point is in radius of the painted vertices 
-                    //dist = checkIfmarked(touchedPoints, pointOnUnitSphere*settings.radius, interaction.brushSize*settings.radius);
-                    dist = (pointOnUnitSphere*settings.radius - interaction.interactionPoint).magnitude;
-                    if(dist < interaction.brushSize){
-                        mask = (interaction.brushSize-dist)/interaction.brushSize;
-                        if(masks.ContainsKey(pointStr)){
-                            //Debug.Log("Point Updated");
-                            masks[pointStr] = Sigmoid(masks[pointStr] + mask);  
-                            //masks[pointStr] += mask;  
+                    if(interaction.noiseType == i){
+                        // check if the point is in radius of the painted vertices 
+                        dist = (pointOnUnitSphere*settings.radius - interaction.interactionPoint).magnitude;
+                        if(dist < interaction.brushSize){
+                            // the mask is the distance from point to brush
+                            mask = (interaction.brushSize-dist)/interaction.brushSize;
+                            mask *= 0.2f;
+                            if(masks[i].ContainsKey(pointStr)){
+                                if(masks[i][pointStr] >= 1f){
+                                    masks[i][pointStr] = 1f;
+                                }  
+                                else{
+                                    masks[i][pointStr] += mask;
+                                }
+                            }
+                            else{
+                                masks[i].Add(pointStr, mask);
+                            }
                         }
                         else{
-                            //Debug.Log("point Added");
-                            masks.Add(pointStr, mask);
-                        }
-                    }
-                    else{
                         // if dictionary contains value set to value otherwise 0
-                        mask = (masks.ContainsKey(pointStr) ? masks[pointStr]: 0f);
-                    }
+                        mask = (masks[i].ContainsKey(pointStr) ? masks[i][pointStr]: 0f);
+                        }
+                    } 
+                    else{
+                        mask = (masks[i].ContainsKey(pointStr) ? masks[i][pointStr]: 0f);
+                    }                 
                 }
                 noiseelevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
