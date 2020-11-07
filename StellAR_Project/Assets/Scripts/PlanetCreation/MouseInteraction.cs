@@ -19,6 +19,8 @@ public class MouseInteraction : MonoBehaviour{
     public float brushSize = 0.2f;
     public Vector3 interactionPoint;
     float timeToGo;
+    [Range(0, 3)]
+    public int noiseType = 0;
     
     void Start(){
         planet = gameObject.GetComponent<MotherPlanet>();
@@ -39,32 +41,17 @@ public class MouseInteraction : MonoBehaviour{
                 if(craterPlacement){
                     if(Input.GetMouseButtonDown(0)){
                         planet.shapeGenerator.craterGenerator.CreateCrater(hit.point);
+                        planet.UpdateMesh();
                     }
                 }
                 else{
                     if(Input.GetMouseButton(0)){
                         interactionPoint = selection.InverseTransformPoint(hit.point); 
+                        planet.UpdateMesh();
                         //hitCoords.Add(selection.InverseTransformPoint(hit.point));
                     }
                 }
-                planet.UpdateMesh();
             }   
-        }
-       
-        /*
-        if (placingCrater)
-        {
-            //planet.PlaceCrater(selection.InverseTransformPoint(hit.point));
-            planet.shapeGenerator.craterGenerator.CreateCrater(hit.point);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            placingCrater = false;
-        }
-        */
-       
+        }    
     }
-    public List<Vector3> GetPaintedVertices(){
-        return hitCoords;
-    } 
 }
