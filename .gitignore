@@ -1,2 +1,3 @@
 #In the Apple macOS operating system, .DS_Store is a file that stores custom attributes of its containing folder.
 *.DS_Store
+iOSbuild/
