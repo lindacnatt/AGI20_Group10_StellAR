@@ -69,11 +69,38 @@ public class CraterGenerator
         return craterHeight;
     }
 
-    public void CreateCrater(Vector3 pos){   
+    public void PlaceCrater(Vector3 position)
+    {
+        Vector3 pos = position.normalized;
+        bool sameCrater = false;
+        int index = 0;
+        for (int i = 0; i < craterList.Count; i++)
+        {   
+                
+            if (craterList[i].center == pos)
+            {
+                sameCrater = true;
+                index = i;
+            }
+                
+        }
+        if (sameCrater)
+        {
+            craterList[index].impact += 0.1f;
+        }
+        else
+        {
+            CreateCrater(pos, 0.001f);
+        }
+        CreateCrater(position, 1f);
+
+    }
+
+    public void CreateCrater(Vector3 pos, float multiplier){   
         //Debug.Log("crater created at pos: " + pos);
         craterList.Add(new Crater(pos, craterSettings.radius, 
             craterSettings.floorHeight, craterSettings.smoothness, 
-            craterSettings.impact, craterSettings.rimSteepness,
+            craterSettings.impact * multiplier, craterSettings.rimSteepness,
             craterSettings.rimWidth));
       
     }

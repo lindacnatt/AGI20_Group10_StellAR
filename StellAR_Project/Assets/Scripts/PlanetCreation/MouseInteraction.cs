@@ -25,31 +25,29 @@ public class MouseInteraction : MonoBehaviour{
     void Start(){
         planet = gameObject.GetComponent<MotherPlanet>();
         timeToGo = Time.fixedTime + 0.1f;
+        Debug.Log("timeToGo: " + timeToGo);
     }
 
     void Update(){
-        if(Time.fixedTime >=timeToGo){
-            timeToGo += 0.1f;
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.C))
-            {
-                Debug.Log("toggle craterCreator");
-                craterPlacement ^= true;
-            }
-            if (Physics.Raycast(ray, out hit)){
-                selection = hit.transform;
-                if(craterPlacement){
-                    if(Input.GetMouseButtonDown(0)){
-                        planet.shapeGenerator.craterGenerator.CreateCrater(hit.point);
-                        planet.UpdateMesh();
-                    }
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.C))
+        {
+            craterPlacement ^= true;
+        }
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit)){
+            selection = hit.transform;
+            if(craterPlacement){
+                if(Input.GetMouseButton(0)){
+                    Debug.Log("Hej");
+                    planet.shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
+                    planet.UpdateMesh();
                 }
-                else{
-                    if(Input.GetMouseButton(0)){
-                        interactionPoint = selection.InverseTransformPoint(hit.point); 
-                        planet.UpdateMesh();
-                        //hitCoords.Add(selection.InverseTransformPoint(hit.point));
-                    }
+            }
+            else{
+                if(Input.GetMouseButton(0)){
+                    interactionPoint = selection.InverseTransformPoint(hit.point); 
+                    planet.UpdateMesh();
+                    //hitCoords.Add(selection.InverseTransformPoint(hit.point));
                 }
             }   
         }    

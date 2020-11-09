@@ -112,7 +112,7 @@ public class IcoPlanet : MotherPlanet{
             float radius = asteroid.transform.localScale.x * asteroidCollider.radius;
             craterSettings.radius = radius;
         }
-        shapeGenerator.craterGenerator.CreateCrater(position);
+        shapeGenerator.craterGenerator.CreateCrater(position, 1f);
         UpdateMesh();  
     }
 }
