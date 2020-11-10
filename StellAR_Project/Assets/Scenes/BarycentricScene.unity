@@ -377,6 +377,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+
 --- !u!1 &2087089946
 GameObject:
   m_ObjectHideFlags: 0

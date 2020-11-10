@@ -14,7 +14,7 @@ public class AnimatedBackground : MonoBehaviour
         Vector2 offset = mat.GetTextureOffset("_MainTex");
 
         offset.x += Time.deltaTime / 80f;
-        offset.y += Time.deltaTime / 75f;
+        offset.y += Time.deltaTime / 110f;
 
 
         mat.SetTextureOffset("_MainTex", offset);

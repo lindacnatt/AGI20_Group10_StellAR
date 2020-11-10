@@ -13,4 +13,10 @@ public class SettingSpawner {
         var colorSettings = Resources.Load<ColorSettings>("Settings/DefaultColor");
         return colorSettings;
     }
+
+    public static CraterSettings loadDefaultCraters()
+    {
+        var craterSettings = Resources.Load<CraterSettings>("Settings/DefaultCraters");
+        return craterSettings;
+    }
 }
