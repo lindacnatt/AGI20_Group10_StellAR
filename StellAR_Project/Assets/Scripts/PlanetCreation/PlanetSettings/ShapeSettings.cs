@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class ShapeSettings : ScriptableObject{
     public float radius;
+    public bool zeroLvlIsOcean;
     public NoiseLayer[] noiseLayers;
 
 

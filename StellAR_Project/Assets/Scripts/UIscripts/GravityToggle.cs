@@ -5,27 +5,34 @@ using UnityEngine.UI;
 
 public class GravityToggle : MonoBehaviour
 {
-   private Toggle toggle;
+   private Button button;
+   private string  nbody = "Change to Nbody";
+   private string source = "Change to Source";
+   private Text txt;
+   private int count = 0;
  
      private void Start()
      {
-         toggle = GetComponent<Toggle>();
-         toggle.onValueChanged.AddListener(OnToggleValueChanged);
+         button = GetComponent<Button>();
+         txt = gameObject.GetComponentInChildren(typeof(Text)) as Text;
+         txt.text = source;
      }
  
-     private void OnToggleValueChanged(bool isOn)
-     {
-         ColorBlock cb = toggle.colors;
-         if (isOn)
-         {
-             cb.normalColor = Color.green;
-             cb.highlightedColor = Color.green;
+     public void ToggleGravity(){
+
+         if(txt.text == source){
+             txt.text = nbody;
+             ToggleGravityMode.nBodyGravity = false;
+             print("source");
          }
-         else
-         {
-             cb.normalColor = Color.blue;
-             cb.highlightedColor = Color.blue;
+         else{
+             txt.text = source;
+             ToggleGravityMode.nBodyGravity = true;
+             print("nbdoy");
          }
-         toggle.colors = cb;
+         TrajectoryLineAnimation.traj.enabled=false;
+         TrajectoryLineAnimation.traj.positionCount=0;
+         TrajectorySimulation.destroyLine=false;
+        
      }
 }

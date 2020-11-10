@@ -9,16 +9,14 @@ public class IcoSphere {
     float radius;
     Dictionary<string, Vector3> midPointCach;
     List<Vector3> vertices;
+    List<Vector2> uvCoords;
     float theta;
-    CraterGenerator craterGenerator;
 
-    public IcoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh, CraterGenerator craterGenerator)
-    {
+    public IcoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh){
         this.shapeGenerator = shapeGenerator;
         this.detail = detail;
         this.mesh = mesh;
         this.radius = radius;
-        this.craterGenerator = craterGenerator;
         this.vertices = new List<Vector3>();
         this.theta = (1 + Mathf.Sqrt(5))*0.5f; //golden ratio
         this.midPointCach = new Dictionary<string, Vector3>();
@@ -27,74 +25,25 @@ public class IcoSphere {
     public void ConstructMesh(){
         List<Vector3Int> triangles = new List<Vector3Int>();
         List<int> triangleIndices = new List<int>();
-        /* Vector2 sideLen  = new Vector2(radius, theta*radius);
-        sideLen /= sideLen.magnitude;
-        sideLen *= radius;
-        */
-
-        // scale so that every vertice is r length
-        /*
-        float r = sideLen[0];
-        theta = sideLen[1];
-        */
+  
+        float r = 1.0f/Mathf.Sqrt((1 + theta*theta));
+        theta = theta/Mathf.Sqrt((1 + theta*theta));
         
-        float r = 1.0f;
-        // construct basic vertices
-        /*
-        Vector3 pointOnUnitSphere = new Vector3(-r, theta, 0).normalized;
-        float craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(r, theta, 0).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(-r, -theta, 0).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(r, -theta, 0).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
+        // construct base vertices
+        AddVertex((new Vector3(-r, theta, 0)));
+        AddVertex((new Vector3(r, theta, 0)));
+        AddVertex((new Vector3(-r, -theta, 0)));
+        AddVertex((new Vector3(r, -theta, 0)));
 
-        pointOnUnitSphere = new Vector3(0, -r, theta).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(0, r, theta).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(0, -r, -theta).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(0, r, -theta).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
+        AddVertex((new Vector3(0, -r, theta)));
+        AddVertex((new Vector3(0, r, theta)));
+        AddVertex((new Vector3(0, -r, -theta)));
+        AddVertex((new Vector3(0, r, -theta)));
 
-        pointOnUnitSphere = new Vector3(theta, 0, -r).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(theta, 0, r).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(-theta, 0, -r).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        pointOnUnitSphere = new Vector3(-theta, 0, r).normalized;
-        craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        vertices.Add(shapeGenerator.CalculatePointOnPlanet(pointOnUnitSphere, craterHeight));
-        */
-        
-        vertices.Add(new Vector3(-r, theta, 0));
-        vertices.Add(new Vector3(r, theta, 0));
-        vertices.Add(new Vector3(-r, -theta, 0));
-        vertices.Add(new Vector3(r, -theta, 0));
-
-        vertices.Add(new Vector3(0, -r, theta));
-        vertices.Add(new Vector3(0, r, theta));
-        vertices.Add(new Vector3(0, -r, -theta));
-        vertices.Add(new Vector3(0, r, -theta));
-
-        vertices.Add(new Vector3( theta,0, -r));
-        vertices.Add(new Vector3( theta, 0, r));
-        vertices.Add(new Vector3(-theta, 0, -r));
-        vertices.Add(new Vector3(-theta, 0, r));
+        AddVertex((new Vector3( theta,0, -r)));
+        AddVertex((new Vector3( theta, 0, r)));
+        AddVertex((new Vector3(-theta, 0, -r)));
+        AddVertex((new Vector3(-theta, 0, r)));
 
         // construct triangles
         triangles.Add(new Vector3Int(0, 11, 5));
@@ -129,21 +78,11 @@ public class IcoSphere {
                 a = GetMidPoint(vertices[triangle.x], vertices[triangle.y]);
                 b = GetMidPoint(vertices[triangle.y], vertices[triangle.z]);
                 c = GetMidPoint(vertices[triangle.z], vertices[triangle.x]);
-
-                // add new vertices to list
-                float craterHeightA = craterGenerator.CalculateCraterDepth(a);
-                float craterHeightB = craterGenerator.CalculateCraterDepth(a);
-                float craterHeightC = craterGenerator.CalculateCraterDepth(a);
-                AddVertex(shapeGenerator.CalculatePointOnPlanet(a));
-                AddVertex(shapeGenerator.CalculatePointOnPlanet(b));
-                AddVertex(shapeGenerator.CalculatePointOnPlanet(c));
-                
-                /*
+                                
                 AddVertex(a);
                 AddVertex(b);
                 AddVertex(c);
-                */
-                
+
                 len = vertices.Count;
                 tempList.Add(new Vector3Int(len-3, len-2, len-1)); //add a b c triangle
                 tempList.Add(new Vector3Int(triangle.x, len-3, len-1));
@@ -162,6 +101,7 @@ public class IcoSphere {
         mesh.Clear();
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangleIndices.ToArray();
+        UpdateUVs();
         mesh.RecalculateNormals(); 
     }
 
@@ -173,7 +113,7 @@ public class IcoSphere {
         else{
             Vector3 temp = b - a;
             temp = a + temp*0.5f;
-            temp = temp.normalized; // * radius;
+            temp = temp.normalized;
             midPointCach.Add(key, temp);
             return temp;
         }
@@ -181,4 +121,34 @@ public class IcoSphere {
     private void AddVertex(Vector3 point){
         this.vertices.Add(point);
     }
+
+    public void UpdateMesh(){
+        Vector3[] updatedVertices = new Vector3[this.vertices.Count];
+        int[] tempTriangles = mesh.triangles;
+
+        for(int i = 0; i < this.vertices.Count; i++){
+            updatedVertices[i] = shapeGenerator.CalculatePointOnPlanet(this.vertices[i]);
+        }
+        mesh.Clear();
+        mesh.vertices = updatedVertices;
+        mesh.triangles = tempTriangles;
+        mesh.RecalculateNormals();
+    }
+
+    public void UpdateUVs(){
+        Vector2[] uvs = new Vector2[mesh.vertices.Length];
+        float u;
+        float v;
+        Vector3 vertice;
+        for(int i = 0; i < mesh.vertices.Length; i++){
+            vertice = mesh.vertices[i];
+            
+            // stolen from: https://www.alexisgiard.com/icosahedron-sphere/
+            u = 0.5f + (Mathf.Atan2(vertice.z, vertice.x) / (2f * Mathf.PI));
+            v = 0.5f - (Mathf.Asin(vertice.y) / Mathf.PI);
+            uvs[i] = new Vector2(u, v);
+        }
+        mesh.uv = uvs;
+    }
+
 }

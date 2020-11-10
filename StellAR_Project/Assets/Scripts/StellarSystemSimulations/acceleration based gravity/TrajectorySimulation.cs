@@ -59,11 +59,14 @@ public class TrajectorySimulation : MonoBehaviour
 
         Transform T = (Transform) mainObject.GetComponent(typeof(Transform));
         Rigidbody rb = (Rigidbody) mainObject.GetComponent(typeof(Rigidbody));
+        SphereCollider sc = (SphereCollider) mainObject.GetComponent(typeof(SphereCollider));
+
         startPos = rb.position;
         positions[0] = rb.position;
         massess[0] = rb.mass;
         //velosities[0] = rb.velocity;
-        radius[0] = T.localScale.x;
+        //radius[0] = T.localScale.x;
+        radius[0] = sc.radius*T.localScale.x;
 
     
         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
@@ -89,7 +92,10 @@ public class TrajectorySimulation : MonoBehaviour
             positions[count] = rbi.position;
             massess[count] = rbi.mass;
             //velosities[count] = rbi.velocity;
-            radius[count] = Ti.localScale.x;
+            SphereCollider sci = (SphereCollider) mainObject.GetComponent(typeof(SphereCollider));
+            //radius[count] = Ti.localScale.x;
+            radius[count] = sci.radius*Ti.localScale.x;
+
             CelestialObject ai = (CelestialObject) go.GetComponent(typeof(CelestialObject));
             if(ai.staticBody)
                 isStatic[count]=true;
@@ -167,7 +173,7 @@ public class TrajectorySimulation : MonoBehaviour
                 float distance = (secondPos-firstPos).magnitude;
                 float radiusDistance= radius[index]+radius[i];
                 
-                if(distance <= radiusDistance*0.5f){ 
+                if(distance <= radiusDistance){  //radiusDistance*0.5f
                     if(!isStatic[i]){
                         dead[i] = true;
                         firstDead = true;}
