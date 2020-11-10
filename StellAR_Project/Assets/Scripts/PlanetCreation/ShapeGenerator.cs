@@ -78,7 +78,7 @@ public class ShapeGenerator {
         elevation += craterHeight;
         if (craterHeight < 0)
         {
-            elevation += -elevation / 2;
+            elevation += -noiseelevation*0.8f;
         }
         elevation = settings.radius * (1 + elevation);
         if (elevation < settings.radius && settings.zeroLvlIsOcean)
@@ -91,7 +91,7 @@ public class ShapeGenerator {
         }
         else
         {
-            elevationMinMax.AddValue(elevation);
+            elevationMinMax.AddValue(Mathf.Max(elevation, settings.radius -1.5f));
         }
         return pointOnUnitSphere *  elevation;
     }

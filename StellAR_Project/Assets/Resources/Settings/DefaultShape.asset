@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DefaultShape
   m_EditorClassIdentifier: 
   radius: 4.12
+  zeroLvlIsOcean: 0
   noiseLayers:
   - enabled: 1
     useFirstLayerAsMask: 0
