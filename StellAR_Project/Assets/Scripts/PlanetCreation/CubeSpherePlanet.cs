@@ -90,9 +90,6 @@ public class CubeSpherePlanet : MotherPlanet{
             //face.UpdateUVs();
         }
     }
-    public override void OnCollisionEnter(Collision collision){
-
-    }
 
     public override void GenerateColors(){ // update color for every mesh given from the colorsettings
         foreach(MeshFilter m in meshFilters){

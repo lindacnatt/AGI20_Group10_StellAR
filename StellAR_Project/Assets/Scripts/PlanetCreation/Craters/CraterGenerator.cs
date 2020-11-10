@@ -20,7 +20,7 @@ public class CraterGenerator
             this.craterSettings = SettingSpawner.loadDefaultCraters();
         }
         this.craterList = new List<Crater>();
-    }
+}
 
     public class Crater
     {
@@ -86,13 +86,15 @@ public class CraterGenerator
         }
         if (sameCrater)
         {
-            craterList[index].impact += 0.1f;
+            if (craterList[index].impact < 1.5f)
+            {
+                craterList[index].impact += 0.03f;
+            }
         }
         else
         {
-            CreateCrater(pos, 0.001f);
+            CreateCrater(pos, 0.01f);
         }
-        CreateCrater(position, 1f);
 
     }
 
@@ -102,7 +104,7 @@ public class CraterGenerator
             craterSettings.floorHeight, craterSettings.smoothness, 
             craterSettings.impact * multiplier, craterSettings.rimSteepness,
             craterSettings.rimWidth));
-      
+
     }
 
     float smoothMin(float a, float b, float k)

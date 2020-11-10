@@ -25,7 +25,6 @@ public class MouseInteraction : MonoBehaviour{
     void Start(){
         planet = gameObject.GetComponent<MotherPlanet>();
         timeToGo = Time.fixedTime + 0.1f;
-        Debug.Log("timeToGo: " + timeToGo);
     }
 
     void Update(){
@@ -38,7 +37,6 @@ public class MouseInteraction : MonoBehaviour{
             selection = hit.transform;
             if(craterPlacement){
                 if(Input.GetMouseButton(0)){
-                    Debug.Log("Hej");
                     planet.shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
                     planet.UpdateMesh();
                 }
