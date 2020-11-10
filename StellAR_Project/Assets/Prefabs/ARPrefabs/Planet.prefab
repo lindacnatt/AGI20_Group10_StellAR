@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6550158357655270181}
   - component: {fileID: 6550158357655270180}
   - component: {fileID: 8171175754884860779}
-  - component: {fileID: 3738904025032273820}
   - component: {fileID: 7074397186039641720}
   m_Layer: 0
   m_Name: Planet
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0530f499e52e99e49b96f9de8a40936e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,20 +111,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3738904025032273820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6550158357655270235}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a3cb4557c62547668b5e3b253a34202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody: {fileID: 8171175754884860779}
-  staticBody: 0
 --- !u!114 &7074397186039641720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,5 +125,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 8171175754884860779}
   acceleration: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
   staticBody: 0
-  pausedVelocity: {x: 0, y: 0, z: 0}

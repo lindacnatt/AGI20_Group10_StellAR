@@ -1,6 +1,7 @@
 ﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
 namespace Stellar.UI
@@ -22,6 +23,7 @@ namespace Stellar.UI
 
         private UI_Screen currentScreen;
         public UI_Screen CurrentScreen{get{return currentScreen;}}
+        public float transitionTime;
         
         #endregion
         
@@ -71,7 +73,12 @@ namespace Stellar.UI
         }
 
         IEnumerator WaitToLoadScene(int sceneIndex){
-            yield return null;
+            
+            //Add animation
+            //Wait
+            yield return new WaitForSeconds(transitionTime);
+            //Load scene
+            SceneManager.LoadScene(sceneIndex);
         }
         #endregion
     }

@@ -5,17 +5,16 @@ using UnityEngine;
 public class NBodyPhysics : MonoBehaviour
 {
 
-    public const float gravityConstant = 667.408f;
+    //public const float gravityConstant = 667.408f; //StellarSystemSim scene
+    public const float gravityConstant = 0.6667408f; //ARScene
 
     // Start is called before the first frame update
-   void FixedUpdate(){
+    void FixedUpdate(){
         if(!SimulationPauseControl.gameIsPaused){
             
-       
                 SimulateAcceleration();
                 SetPositions();
         
-           
         }
        
     }
@@ -85,6 +84,7 @@ public class NBodyPhysics : MonoBehaviour
             if((otherObject != current)){
                 
                 float distance = (otherObject.rigidBody.position-current.rigidBody.position).magnitude;
+                
                 Vector3 direction = (otherObject.rigidBody.position-current.rigidBody.position).normalized;
                 current.acceleration += direction * gravityConstant *otherObject.rigidBody.mass / Mathf.Pow(distance,2);
             }
