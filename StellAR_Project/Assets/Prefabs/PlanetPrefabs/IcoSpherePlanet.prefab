@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3057556004749462259}
   - component: {fileID: 3057556004749462258}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: IcoSpherePlanet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,6 +70,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitCoords: []
   brushSize: 0.2
+  interactionPoint: {x: 0, y: 0, z: 0}
+  noiseType: 0
 --- !u!135 &3057556004749462258
 SphereCollider:
   m_ObjectHideFlags: 0
