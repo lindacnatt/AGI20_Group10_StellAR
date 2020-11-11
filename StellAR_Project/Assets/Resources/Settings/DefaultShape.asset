@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DefaultShape
   m_EditorClassIdentifier: 
   radius: 1
-  zeroLvlIsOcean: 0
+  zeroLvlIsOcean: 1
   noiseLayers: []
