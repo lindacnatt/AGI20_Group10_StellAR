@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class TextFromSliderValue : MonoBehaviour
 {
-    Text valueText;
-    // Start is called before the first frame update
+    public Text valueText;
+    // Start is called before the first f rame update
     void Start()
     {
         valueText = GetComponent<Text>(); //Gets the text part of the textobject this script is applied to
@@ -19,6 +19,6 @@ public class TextFromSliderValue : MonoBehaviour
     }
     public void UpdateText (float value) //Called from the eventhandler of the slider-object
     {
-        valueText.text = (Mathf.Round(value * 100) / 100).ToString("f2");
+        valueText.text = value.ToString();
     }
 }

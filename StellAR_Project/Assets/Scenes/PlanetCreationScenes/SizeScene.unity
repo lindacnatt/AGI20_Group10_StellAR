@@ -559,7 +559,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 992979951}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 4
+  m_MaxValue: 14
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -2148,7 +2148,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '0,00
+  m_Text: '1,00
 
 '
 --- !u!222 &768128088
@@ -2171,6 +2171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb259ea0c0fce01478e1b41c6e07ce24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  valueText: {fileID: 0}
 --- !u!1 &827889691
 GameObject:
   m_ObjectHideFlags: 0
@@ -4281,6 +4282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Planet: {fileID: 0}
+  SizeSlider: {fileID: 221089832}
 --- !u!1 &1688786478
 GameObject:
   m_ObjectHideFlags: 0
