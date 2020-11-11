@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GasPlanetPBR Material
+  m_Shader: {fileID: -6465566751694194690, guid: e673afc734ec6764793d9fd60e073d78,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _SampleTexture2D_3A240379_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 7f01d816ccc10bd48bcd6da7f9bb9d55, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - BandScale1: 8.23
+    - BandScale2: 0.95
+    - BandXSeed1: 1.26
+    - BandXSeed2: 0
+    - BandYSeed1: -1.5
+    - BandYSeed2: 0
+    - StormSize: 5
+    - StormSpeed: 8
+    - Vector1_18A6AAF: -1.91
+    - Vector1_32C3B0E8: 0
+    - Vector1_6C410140: 0
+    - Vector1_6DFCD766: 8
+    - Vector1_88DA8C1F: 0.78
+    - Vector1_8CE20CE8: 1.1
+    - Vector1_8D3B6B8D: 5
+    - Vector1_D56E1125: 3.6
+    - _StormSize: 9.04
+    m_Colors:
+    - BandColor1: {r: 0.35039517, g: 1.1754774, b: 1.2627451, a: 0}
+    - BandColor2: {r: 0, g: 0.6263051, b: 0.77254903, a: 0}
+    - BandColorStorm: {r: 1, g: 1, b: 1, a: 0}
+    - Color_31473F7B: {r: 1.262745, g: 0.7764706, b: 0.345098, a: 0}
+    - Color_3AC4195C: {r: 0.7735849, g: 0.4484763, b: 0, a: 0}
+    - Color_B7D4F64D: {r: 1, g: 1, b: 1, a: 0}
+    - SpiralDefinition: {r: 1, g: 1, b: 0, a: 0}
+    - StormPlacement: {r: 1, g: 1, b: 0, a: 0}
+    - StormStrength: {r: 2, g: 3, b: 0, a: 0}
+    - Vector2_7C89100A: {r: 2, g: 3, b: 0, a: 0}
+    - Vector2_C2166337: {r: 0.97, g: 1, b: 0, a: 0}
+    - Vector2_F8D19515: {r: 1, g: 1, b: 0, a: 0}

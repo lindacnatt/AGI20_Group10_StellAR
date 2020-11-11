@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MotherPlanet: MonoBehaviour {
+public abstract class MotherPlanet: CelestialObject {
     public ShapeSettings shapeSettings;
     public ColorSettings colorSettings;
     public CraterSettings craterSettings;
@@ -27,7 +27,7 @@ public abstract class MotherPlanet: MonoBehaviour {
     public abstract void GenerateColors();
     public abstract void UpdateMesh();
     public abstract void OnCraterSettingsUpdated();
-    public abstract void OnCollisionEnter(Collision collision);
+    //public abstract void OnCollisionEnter(Collision collision);
     
     // these can be used directly in subClass 
     void Awake(){

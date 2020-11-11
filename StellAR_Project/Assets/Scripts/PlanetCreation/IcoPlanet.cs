@@ -90,29 +90,22 @@ public class IcoPlanet : MotherPlanet{
             GenerateMesh();
         }
     }
-    
-    public override void OnCollisionEnter(Collision collision){
-        clearCraters = false;
+
+
+    public void MakeCrater(Collision collision, float otherRadius)
+    {
         ContactPoint contact = collision.contacts[0];
-        Vector3 position = contact.point.normalized;
-        Vector3 planetRotEuler  = gameObject.transform.localRotation.eulerAngles;
+        Vector3 position = contact.point - this.transform.localPosition;
+        Vector3 planetRotEuler = gameObject.transform.localRotation.eulerAngles;
         Quaternion rotation = Quaternion.AngleAxis(-planetRotEuler[2], Vector3.forward)
             * Quaternion.AngleAxis(-planetRotEuler[0], Vector3.right)
             * Quaternion.AngleAxis(-planetRotEuler[1], Vector3.up);
-        
         position = rotation * position;
+
         float velocity = collision.relativeVelocity.magnitude;
-        craterSettings.impact = 0.2f + velocity/2;
-        craterSettings.floorHeight = -2f/velocity;
-        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-        
-        if (asteroids.Length > 0){
-            GameObject asteroid = asteroids[0];
-            SphereCollider asteroidCollider = asteroid.GetComponent<SphereCollider>();
-            float radius = asteroid.transform.localScale.x * asteroidCollider.radius;
-            craterSettings.radius = radius;
-        }
-        shapeGenerator.craterGenerator.CreateCrater(position, 1f);
-        UpdateMesh();  
+        craterSettings.impact = Mathf.Min(0.1f + velocity / 3, 1.6f);
+        craterSettings.radius = otherRadius * 0.6f;
+        shapeGenerator.craterGenerator.CreateCrater(position.normalized, 1f);
+        UpdateMesh();
     }
 }
