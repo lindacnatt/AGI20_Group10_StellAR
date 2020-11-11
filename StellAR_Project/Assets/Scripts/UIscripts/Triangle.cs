@@ -16,6 +16,7 @@ public class Triangle : MonoBehaviour{
     PolygonCollider2D col;
     Vector2[] colPoints;
     Vector2 worldPos;
+    MotherPlanet planet;
     
 
     public Material material;
@@ -37,6 +38,7 @@ public class Triangle : MonoBehaviour{
             meshRenderer = gameObject.GetComponent<MeshRenderer>();
             col = gameObject.GetComponent<PolygonCollider2D>();
         }
+        planet = GetComponent<MotherPlanet>();
         
         meshRenderer.material = material;
         mesh = new Mesh();
@@ -68,8 +70,10 @@ public class Triangle : MonoBehaviour{
   
     void Update(){
         if(Input.GetMouseButton(0)){
-            worldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z)) * -1f;
-            hit = Physics2D.Raycast(worldPos, Vector2.zero);
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //worldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane)) * -1f;
+            hit = Physics2D.GetRayIntersection(ray);
+            //Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 5f);
             if(hit){
                 selection = hit.transform;
                 //selectionRenderer = selection.GetComponent<Renderer>();
@@ -82,6 +86,11 @@ public class Triangle : MonoBehaviour{
     void UpdateColor(Vector3 weights){
         Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
         //Debug.Log(meshRenderer);
-        meshRenderer.material.SetColor("_Color", newColor);
+        //meshRenderer.material.SetColor("_Color", newColor);
+    }
+
+    void UpdatePlanetColor(Vector3 weights){
+        Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
+        planet.GenerateColors();
     }
 }
