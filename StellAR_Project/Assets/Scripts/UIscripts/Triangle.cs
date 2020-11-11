@@ -79,18 +79,18 @@ public class Triangle : MonoBehaviour{
                 //selectionRenderer = selection.GetComponent<Renderer>();
                 handle.transform.position = hit.point;
                 //Debug.Log(BaryCentric.getWeights(handle.transform.position, vertices));
-                UpdateColor(BaryCentric.getWeights(handle.transform.position, vertices));
+                //UpdateColor(BaryCentric.getWeights(handle.transform.position, vertices));
             }
         }  
     }
     void UpdateColor(Vector3 weights){
-        Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
+        float mult = 1f;
+        Color newColor = new Color(weights.x*mult, weights.y*mult, weights.z*mult, 1f*mult);
         //Debug.Log(meshRenderer);
-        //meshRenderer.material.SetColor("_Color", newColor);
+        meshRenderer.material.color = newColor;
     }
 
     void UpdatePlanetColor(Vector3 weights){
         Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
-        planet.GenerateColors();
     }
 }
