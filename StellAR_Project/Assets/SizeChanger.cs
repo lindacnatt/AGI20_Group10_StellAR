@@ -37,16 +37,17 @@ public class SizeChanger : MonoBehaviour
     {
         
     }
-    public void SizeUpdate(float value) { 
+    public void SizeUpdate(float value) {
+        value = Mathf.Log(value*100)/5;
         if (Planet.GetComponent<IsTypeOfPlanet>().IsGassy == true)
         {
-            Planet.transform.localScale = new Vector3(value/2, value/2, value/2); //localscale adjusts diameter, to keep consistency with rocky icospheres we halve it to get a radius
+            Planet.transform.localScale = new Vector3(value * 2, value * 2, value * 2); //localscale adjusts diameter, to keep consistency with rocky icospheres we halve it to get a radius
+
         }
         if (Planet.GetComponent<IsTypeOfPlanet>().IsRocky == true)
         {
             Planet.GetComponent<IcoPlanet>().shapeSettings.radius = value;
             Planet.GetComponent<IcoPlanet>().UpdateMesh();
-
             Debug.Log(Planet.GetComponent<IcoPlanet>().shapeSettings.radius);
 
             

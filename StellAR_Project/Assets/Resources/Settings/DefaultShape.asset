@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
   m_Name: DefaultShape
   m_EditorClassIdentifier: 
-  radius: 1
+  radius: 2.5
   zeroLvlIsOcean: 1
   noiseLayers: []
