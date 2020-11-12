@@ -10,7 +10,7 @@ Material:
   m_Name: defaultMat
   m_Shader: {fileID: -6465566751694194690, guid: a8d3b1970792d4ec5a839f60beed2f93,
     type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -79,7 +79,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _elevationMinMax: {r: 1.8360859, g: 1.8776772, b: 0, a: 0}
+    - _elevationMinMax: {r: 0.6802395, g: 1.1042922, b: 0, a: 0}
 --- !u!114 &3094181170076204967
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -90,6 +90,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   version: 1
