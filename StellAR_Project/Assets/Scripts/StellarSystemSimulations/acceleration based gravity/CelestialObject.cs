@@ -22,6 +22,7 @@ public class CelestialObject : MonoBehaviour
 
     public GameObject explosionEffect;
     bool hasExploded = false;
+    public float weightMultiplier = 2;
 
 
 
@@ -30,9 +31,22 @@ public class CelestialObject : MonoBehaviour
 
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
-        rigidBody = GetComponent<Rigidbody>();
+        if (rigidBody == null)
+        {
+            rigidBody = this.gameObject.AddComponent<Rigidbody>();
+        }
+        else
+        {
+            rigidBody = GetComponent<Rigidbody>();
+        }
+        //rigidBody.mass = this.gameObject.transform.localScale.x *
+        //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
+        rigidBody.useGravity = false;
         if (staticBody)
+        {
             rigidBody.isKinematic = true;
+        }
+
 
     }
 
@@ -53,9 +67,10 @@ public class CelestialObject : MonoBehaviour
     {
         float otherRadius = collision.gameObject.GetComponent<SphereCollider>().radius;
         float otherX = collision.gameObject.transform.localScale.x;
+        float thisX = this.gameObject.transform.localScale.x;
         float thisRadius = this.GetComponent<SphereCollider>().radius;
-    
-        if (otherRadius <= thisRadius / 2)
+
+        if (otherRadius * otherX <= thisRadius * thisX / 2)
         {
             Vector3 testvar = collision.contacts[0].point - this.transform.localPosition;
             if (this.gameObject.tag != "gasgiant")
@@ -66,19 +81,22 @@ public class CelestialObject : MonoBehaviour
         }
         else
         {
-            if (!hasExploded)
+            if (!staticBody)
             {
-                if (this.transform.localScale.x >= 1)
+                if (!hasExploded)
                 {
-                    explosionEffect = Resources.Load<GameObject>("Explosions/BigExplosionEffect");
-                    ExplodeBig();
+                    if (this.transform.localScale.x >= 1)
+                    {
+                        explosionEffect = Resources.Load<GameObject>("Explosions/BigExplosionEffect");
+                        ExplodeBig();
+                    }
+                    else
+                    {
+                        explosionEffect = Resources.Load<GameObject>("Explosions/SmallExplosionEffect");
+                        ExplodeSmall();
+                    }
+                    hasExploded = true;
                 }
-                else
-                {
-                    explosionEffect = Resources.Load<GameObject>("Explosions/SmallExplosionEffect");
-                    ExplodeSmall();
-                }
-                hasExploded = true;
             }
         }
 
@@ -97,7 +115,5 @@ public class CelestialObject : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-
 
 }

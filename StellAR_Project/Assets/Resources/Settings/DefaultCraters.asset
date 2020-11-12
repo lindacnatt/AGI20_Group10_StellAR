@@ -17,5 +17,5 @@ MonoBehaviour:
   rimSteepness: 0.75
   rimWidth: 0.6
   smoothness: 0.3
-  floorHeight: -0.9
-  impact: 2.0419636
+  floorHeight: -0.6
+  impact: 0.1926313
