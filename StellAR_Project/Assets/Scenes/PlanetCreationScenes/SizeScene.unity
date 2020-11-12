@@ -1411,12 +1411,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 931780110}
-        m_MethodName: SwitchScreens
-        m_Mode: 2
+        m_MethodName: LoadScene
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 2021850989}
-          m_ObjectArgumentAssemblyTypeName: Stellar.UI.UI_Screen, Assembly-CSharp
-          m_IntArgument: 0
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2054,7 +2054,7 @@ PrefabInstance:
     - target: {fileID: 3057556004749462258, guid: 2bc1c7983ffeb7747897587faca93e61,
         type: 3}
       propertyPath: m_Radius
-      value: 1.3908645
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3057556004749462269, guid: 2bc1c7983ffeb7747897587faca93e61,
         type: 3}
@@ -2865,7 +2865,7 @@ PrefabInstance:
     - target: {fileID: 4099893984842514919, guid: e1136afbe978eea479ff200c6989c096,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1136afbe978eea479ff200c6989c096, type: 3}

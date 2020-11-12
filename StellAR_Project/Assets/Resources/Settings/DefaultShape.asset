@@ -12,33 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad72c7ddf4a82634cb90a1f722284225, type: 3}
   m_Name: DefaultShape
   m_EditorClassIdentifier: 
-  radius: 3.15
-  zeroLvlIsOcean: 1
+  radius: 1.0687994
+  zeroLvlIsOcean: 0
   noiseLayers:
   - enabled: 0
     useFirstLayerAsMask: 0
     useMouseAsMask: 1
     noiseSettings:
       filterType: 1
-
-      numLayers: 3
-      fallof: 0.2
-      freqPower: 1.56
-      freq: 2
-      minValue: 0
-      clampSteps: 0
-      amplitude: 0.06
-      noiseCenter: {x: 0, y: 0, z: 0}
-  - enabled: 1
-    useFirstLayerAsMask: 0
-    useMouseAsMask: 1
-    noiseSettings:
-      filterType: 2
-      numLayers: 4
-      fallof: 0.18
-      freqPower: 0.12
-      freq: 0.43
-      minValue: 0.12
-      clampSteps: 0
-      amplitude: 0.32
+      numLayers: 0
+      fallof: 0.5
+      freqPower: 0
+      freq: 0
+      minValue: 0.5
+      clampSteps: 3
+      amplitude: 1
       noiseCenter: {x: 0, y: 0, z: 0}
