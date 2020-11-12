@@ -15,8 +15,8 @@ public class MouseInteraction : MonoBehaviour{
     bool craterPlacement = false;
     //bool placingCrater = false;
 
-    [SerializeField]
     public float brushSize = 0.2f;
+    [HideInInspector]
     public Vector3 interactionPoint;
     float timeToGo;
     [Range(0, 3)]
