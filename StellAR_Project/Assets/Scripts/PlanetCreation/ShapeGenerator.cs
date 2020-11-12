@@ -11,7 +11,6 @@ public class ShapeGenerator {
     public MinMax elevationMinMax;
     public CraterGenerator craterGenerator;
     List<Dictionary<String, float>> masks;
-    public bool zerolvlIsOcean = true;
 
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction, CraterGenerator craterGenerator){
         this.settings = settings;
@@ -116,5 +115,5 @@ public class ShapeGenerator {
 
     private float Sigmoid(float value){
         return 1.0f / (1.0f + (float) Math.Exp(-value));
-    }      
+    }
 }

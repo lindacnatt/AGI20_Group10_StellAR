@@ -57,4 +57,12 @@ public abstract class MotherPlanet: CelestialObject {
         SphereCollider collider = this.GetComponent<SphereCollider>();
         collider.radius = this.shapeSettings.radius;
     }
+
+    public void toggleOcean()
+    {
+        shapeSettings.zeroLvlIsOcean ^= true;
+        UpdateMesh();
+        GenerateColors();
+    }
+
 }

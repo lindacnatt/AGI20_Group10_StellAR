@@ -125,7 +125,6 @@ public class IcoSphere {
     public void UpdateMesh(){
         Vector3[] updatedVertices = new Vector3[this.vertices.Count];
         int[] tempTriangles = mesh.triangles;
-
         for(int i = 0; i < this.vertices.Count; i++){
             updatedVertices[i] = shapeGenerator.CalculatePointOnPlanet(this.vertices[i]);
         }

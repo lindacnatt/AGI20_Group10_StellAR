@@ -108,4 +108,5 @@ public class IcoPlanet : MotherPlanet{
         shapeGenerator.craterGenerator.CreateCrater(position.normalized, 1f);
         UpdateMesh();
     }
+
 }
