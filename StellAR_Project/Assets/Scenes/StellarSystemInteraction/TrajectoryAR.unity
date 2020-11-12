@@ -1010,6 +1010,7 @@ MonoBehaviour:
   staticBody: 1
   pausedVelocity: {x: 0, y: 0, z: 0}
   explosionEffect: {fileID: 0}
+  weightMultiplier: 2
 --- !u!54 &1468576916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1754,6 +1755,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6779542141411190307, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 479.74713
+      objectReference: {fileID: 0}
+    - target: {fileID: 6779542141411190307, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -959.50574
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1386f97e98c2d410c9ab00718c253a22, type: 3}
