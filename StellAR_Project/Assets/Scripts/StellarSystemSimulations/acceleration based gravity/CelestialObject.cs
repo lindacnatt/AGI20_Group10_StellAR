@@ -47,6 +47,7 @@ public class CelestialObject : MonoBehaviour
             rigidBody.isKinematic = true;
         }
 
+
     }
 
     // For adding attractors to the attractors list
@@ -68,7 +69,7 @@ public class CelestialObject : MonoBehaviour
         float otherX = collision.gameObject.transform.localScale.x;
         float thisX = this.gameObject.transform.localScale.x;
         float thisRadius = this.GetComponent<SphereCollider>().radius;
-    
+
         if (otherRadius * otherX <= thisRadius * thisX / 2)
         {
             Vector3 testvar = collision.contacts[0].point - this.transform.localPosition;
@@ -80,19 +81,22 @@ public class CelestialObject : MonoBehaviour
         }
         else
         {
-            if (!hasExploded)
+            if (!staticBody)
             {
-                if (this.transform.localScale.x >= 1)
+                if (!hasExploded)
                 {
-                    explosionEffect = Resources.Load<GameObject>("Explosions/BigExplosionEffect");
-                    ExplodeBig();
+                    if (this.transform.localScale.x >= 1)
+                    {
+                        explosionEffect = Resources.Load<GameObject>("Explosions/BigExplosionEffect");
+                        ExplodeBig();
+                    }
+                    else
+                    {
+                        explosionEffect = Resources.Load<GameObject>("Explosions/SmallExplosionEffect");
+                        ExplodeSmall();
+                    }
+                    hasExploded = true;
                 }
-                else
-                {
-                    explosionEffect = Resources.Load<GameObject>("Explosions/SmallExplosionEffect");
-                    ExplodeSmall();
-                }
-                hasExploded = true;
             }
         }
 
