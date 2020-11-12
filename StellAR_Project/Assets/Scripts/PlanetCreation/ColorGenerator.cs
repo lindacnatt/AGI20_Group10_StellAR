@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ColorGenerator
 {
-    ColorSettings settings;
+    public ColorSettings settings;
     Texture2D texture;
     const int textureResolution = 50;
     NoiseInterface biomeNoiseFilter;
+    Color newTint;
+    public Slider slider;
+
 
     public void UpdateSettings(ColorSettings settings){
         
@@ -40,7 +44,6 @@ public class ColorGenerator
     }
 
     public void UpdateColors(){
-        //Debug.Log("Update Colors");
         Color[] colors = new Color[texture.width * texture.height];
         int colorIndex = 0;
         foreach (var biome in settings.biomeColorSettings.biomes)
@@ -57,4 +60,5 @@ public class ColorGenerator
         settings.planetMaterial.SetTexture("_texture", texture);
 
     }
+ 
 }
