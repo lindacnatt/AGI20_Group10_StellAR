@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1010,6 +1010,7 @@ MonoBehaviour:
   staticBody: 1
   pausedVelocity: {x: 0, y: 0, z: 0}
   explosionEffect: {fileID: 0}
+  weightMultiplier: 2
 --- !u!54 &1468576916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1447,7 +1448,7 @@ PrefabInstance:
     - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}

@@ -12,7 +12,7 @@ public class MouseInteraction : MonoBehaviour{
     public List<Vector3> hitCoords;
     Vector3[] vertices;
     MotherPlanet planet;
-    bool craterPlacement = false;
+    public bool craterPlacement = false;
     //bool placingCrater = false;
 
     public float brushSize = 0.2f;
@@ -49,5 +49,10 @@ public class MouseInteraction : MonoBehaviour{
                 }
             }   
         }    
+    }
+
+    public void craterMode()
+    {
+        craterPlacement ^= true;
     }
 }
