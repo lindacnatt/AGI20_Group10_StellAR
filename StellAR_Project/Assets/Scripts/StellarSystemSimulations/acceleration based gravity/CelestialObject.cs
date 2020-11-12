@@ -22,6 +22,7 @@ public class CelestialObject : MonoBehaviour
 
     public GameObject explosionEffect;
     bool hasExploded = false;
+    public float weightMultiplier = 2;
 
 
 
@@ -30,9 +31,21 @@ public class CelestialObject : MonoBehaviour
 
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
-        rigidBody = GetComponent<Rigidbody>();
+        if (rigidBody == null)
+        {
+            rigidBody = this.gameObject.AddComponent<Rigidbody>();
+        }
+        else
+        {
+            rigidBody = GetComponent<Rigidbody>();
+        }
+        rigidBody.mass = this.gameObject.transform.localScale.x *
+            this.GetComponent<SphereCollider>().radius * weightMultiplier;
+        rigidBody.useGravity = false;
         if (staticBody)
+        {
             rigidBody.isKinematic = true;
+        }
 
     }
 
@@ -98,7 +111,5 @@ public class CelestialObject : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-
 
 }
