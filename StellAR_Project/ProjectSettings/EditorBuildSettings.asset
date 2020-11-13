@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlanetCreationScenes/SizeScene.unity
     guid: ab73f713ec9e37944a4a90781c85af1f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/StellarSystemInteraction/TrajectoryInteraction.unity
     guid: a3daa77c940af42bbab276b9c5bf2002
   - enabled: 0
