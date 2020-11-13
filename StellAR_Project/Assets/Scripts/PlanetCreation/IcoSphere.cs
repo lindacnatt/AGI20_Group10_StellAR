@@ -11,6 +11,7 @@ public class IcoSphere {
     List<Vector3> vertices;
     List<Vector2> uvCoords;
     float theta;
+    Vector2[] uv;
 
     public IcoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh){
         this.shapeGenerator = shapeGenerator;
@@ -28,7 +29,8 @@ public class IcoSphere {
   
         float r = 1.0f/Mathf.Sqrt((1 + theta*theta));
         theta = theta/Mathf.Sqrt((1 + theta*theta));
-        
+        uv = mesh.uv;
+
         // construct base vertices
         AddVertex((new Vector3(-r, theta, 0)));
         AddVertex((new Vector3(r, theta, 0)));
@@ -101,7 +103,7 @@ public class IcoSphere {
         mesh.Clear();
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangleIndices.ToArray();
-        UpdateUVs();
+        mesh.uv = uv;
         mesh.RecalculateNormals(); 
     }
 
@@ -149,6 +151,15 @@ public class IcoSphere {
             uvs[i] = new Vector2(u, v);
         }
         mesh.uv = uvs;
+    }
+
+    public void UpdateBiomeUVs(ColorGenerator colorgenerator){
+        Vector2[] uv = new Vector2[vertices.Count];
+        for(int i = 0; i < vertices.Count; i++){
+            Vector3 point = vertices[i];
+            uv[i] = new Vector2(colorgenerator.BiomePercentFromPoint(point), 0);
+        }
+        mesh.uv = uv;
     }
 
 }
