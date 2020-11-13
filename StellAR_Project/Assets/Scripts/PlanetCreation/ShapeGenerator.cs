@@ -26,6 +26,7 @@ public class ShapeGenerator {
 
         elevationMinMax = new MinMax();
         this.craterGenerator = craterGenerator;
+        settings.zeroLvlIsOcean = false;
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere) {
@@ -90,7 +91,7 @@ public class ShapeGenerator {
         }
         else
         {
-            elevationMinMax.AddValue(Mathf.Max(elevation, settings.radius -1.5f));
+            elevationMinMax.AddValue(Mathf.Max(elevation, settings.radius -1f));
         }
         return pointOnUnitSphere *  elevation;
     }

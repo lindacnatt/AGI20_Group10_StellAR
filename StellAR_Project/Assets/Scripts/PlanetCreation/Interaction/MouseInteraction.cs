@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseInteraction : MonoBehaviour{
     Ray ray;
@@ -12,7 +13,9 @@ public class MouseInteraction : MonoBehaviour{
     public List<Vector3> hitCoords;
     Vector3[] vertices;
     MotherPlanet planet;
-    public bool craterPlacement = false;
+    public bool craterPlacement;
+    Button craterBtn;
+    Text craterBtnTxt;
     //bool placingCrater = false;
 
     public float brushSize = 0.2f;
@@ -21,11 +24,16 @@ public class MouseInteraction : MonoBehaviour{
     float timeToGo;
     [Range(0, 3)]
     public int noiseType = 0;
-    
+    Color toggledTxtColor = new Color(1.0f, 1.0f, 1.0f);
+    Color untoggledTxtColor = new Color(0.5f, 0.5f, 0.5f);
+    Color toggledColor = new Color(0.1f, 0.0f, 0.7f);
+    Color untoggledColor = new Color(0.2f, 0.2f, 0.5f);
+
     void Start(){
         planet = gameObject.GetComponent<MotherPlanet>();
         timeToGo = Time.fixedTime + 0.1f;
-    }
+        craterPlacement = false;
+}
 
     void Update(){
         if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.C))
@@ -53,6 +61,19 @@ public class MouseInteraction : MonoBehaviour{
 
     public void craterMode()
     {
+        craterBtn = GameObject.Find("ToggleCraterMode").GetComponent<Button>();
+        craterBtnTxt = craterBtn.GetComponentInChildren<Text>();
         craterPlacement ^= true;
+        if (craterPlacement)
+        {
+            craterBtn.GetComponent<Image>().color = toggledColor;
+            craterBtnTxt.color = toggledTxtColor;
+        }
+        else
+        {
+            craterBtn.GetComponent<Image>().color = untoggledColor;
+            craterBtnTxt.color = untoggledTxtColor;
+        }
+
     }
 }
