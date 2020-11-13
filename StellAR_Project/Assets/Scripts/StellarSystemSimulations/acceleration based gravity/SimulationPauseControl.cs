@@ -16,7 +16,7 @@ public class SimulationPauseControl : MonoBehaviour
         }
     }*/
 
-    public void Toggle(){
+    public void PauseToggle(){
         gameIsPaused = !gameIsPaused;
     }
 
