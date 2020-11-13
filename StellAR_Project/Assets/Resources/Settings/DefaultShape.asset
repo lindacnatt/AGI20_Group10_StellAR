@@ -20,12 +20,13 @@ MonoBehaviour:
     useMouseAsMask: 0
     noiseSettings:
       filterType: 1
-      numLayers: 4
-      fallof: 0.18
-      freqPower: 0.12
-      freq: 1.23
-      minValue: 0.12
-      amplitude: 0.29
+      numLayers: 3
+      fallof: 0.2
+      freqPower: 1.56
+      freq: 2
+      minValue: 0
+      clampSteps: 0
+      amplitude: 0.06
       noiseCenter: {x: 0, y: 0, z: 0}
   - enabled: 1
     useFirstLayerAsMask: 0
