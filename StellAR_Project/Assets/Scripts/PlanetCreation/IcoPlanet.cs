@@ -54,7 +54,7 @@ public class IcoPlanet : MotherPlanet{
         colorGenerator.UpdateSettings(colorSettings);
 
         icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, LOD, meshFilter.sharedMesh); 
-        icoSphere.UpdateUVs();   
+        icoSphere.UpdateBiomeUVs(colorGenerator);   
     }
 
     public override void GenerateMesh(){
@@ -74,12 +74,11 @@ public class IcoPlanet : MotherPlanet{
     }
 
     public override void GenerateColors(){   
-        //Debug.Log(colorGenerator);
-        //icoSphere.UpdateUVs();
-        colorGenerator.UpdateColors();
-        if(meshFilter.gameObject.activeSelf){
-            //icoSphere.UpdateUVs();
+        if(colorGenerator == null){
+            Initialize();
         }
+        colorGenerator.UpdateColors();
+        icoSphere.UpdateBiomeUVs(colorGenerator);
     }
     
     public override void OnCraterSettingsUpdated(){ //Rebuild planet when color is updated
