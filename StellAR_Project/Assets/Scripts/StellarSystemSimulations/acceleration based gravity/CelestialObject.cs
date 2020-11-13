@@ -16,13 +16,11 @@ public class CelestialObject : MonoBehaviour
 
     public bool staticBody;
 
-    [HideInInspector]
-    public Vector3 pausedVelocity;
-    private bool hasBeenPaused;
-
     public GameObject explosionEffect;
     bool hasExploded = false;
     public float weightMultiplier = 2;
+    
+
 
 
 
@@ -114,6 +112,16 @@ public class CelestialObject : MonoBehaviour
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
         Destroy(gameObject);
+    }
+
+    public void SetState(){
+        if (staticBody)
+        {
+            rigidBody.isKinematic = true;
+        }
+        else{
+            rigidBody.isKinematic = false;
+        }
     }
 
 }
