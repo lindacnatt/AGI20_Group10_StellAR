@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public static class SaveLoadStarSystem 
+public static class SaveLoadStarSystem
 {
     public static void SaveStarSystem(){
         SystemSimulationData simData = new SystemSimulationData(CelestialObject.Objects.Count);

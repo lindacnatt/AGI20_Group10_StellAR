@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SystemSimulationData : MonoBehaviour
+public class SystemSimulationData: MonoBehaviour
 {
     public bool[] staticBodies;
     public SerializeVector3[][] physicsData;

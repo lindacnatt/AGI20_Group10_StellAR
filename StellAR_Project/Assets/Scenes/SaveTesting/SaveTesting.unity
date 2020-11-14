@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1048,6 +1048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057789185}
   - component: {fileID: 1057789184}
+  - component: {fileID: 1057789186}
   m_Layer: 0
   m_Name: SaveLoad
   m_TagString: Untagged
@@ -1086,6 +1087,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057789186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057789183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fded4267b3dfa44fb82a4c4c0590070c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticBodies: 
+  planetCount: 0
 --- !u!1 &1115016358
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,12 +2450,17 @@ PrefabInstance:
     - target: {fileID: 6779542141411190307, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 479.74713
+      value: 479.74707
       objectReference: {fileID: 0}
     - target: {fileID: 6779542141411190307, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: -959.50574
+      objectReference: {fileID: 0}
+    - target: {fileID: 6779542141411190307, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.1098633
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1386f97e98c2d410c9ab00718c253a22, type: 3}
