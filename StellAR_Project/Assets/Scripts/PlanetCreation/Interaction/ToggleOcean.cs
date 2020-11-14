@@ -40,6 +40,8 @@ public class ToggleOcean : MonoBehaviour
             oceanBtnTxt.color = untoggledTxtColor;
         }
         planet.shapeGenerator.elevationMinMax = new MinMax();
+        Debug.Log("Min: " + planet.shapeGenerator.elevationMinMax.Min);
+        Debug.Log("Max: " + planet.shapeGenerator.elevationMinMax.Max);
         planet.UpdateMesh();
         planet.GenerateColors();
     }

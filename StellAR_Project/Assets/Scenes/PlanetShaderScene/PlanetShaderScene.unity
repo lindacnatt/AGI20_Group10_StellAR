@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1245,9 +1245,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1120766315}
+      - m_Target: {fileID: 1120766317}
         m_MethodName: toggleOcean
         m_Mode: 1
         m_Arguments:
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11064083, g: 0, b: 0.5471698, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2315,18 +2315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89b0e7c82d397d41b22f02be0abc60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1120766315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3057556004749462256, guid: 2bc1c7983ffeb7747897587faca93e61,
-    type: 3}
-  m_PrefabInstance: {fileID: 1120766309}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1120766310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 203dbfc5856ae21419c4e2ad6ce75aeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1120766317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2336,10 +2324,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1120766310}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c69e3e1509be4448ab632cc1a16d2495, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d22e3b62e8514730bcbe1fc59242b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planet: {fileID: 0}
 --- !u!1 &1140103288
 GameObject:
   m_ObjectHideFlags: 0
@@ -2759,9 +2746,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2804,7 +2791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11064083, g: 0, b: 0.5471698, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3108,7 +3095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
