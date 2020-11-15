@@ -18,7 +18,9 @@ public class CelestialObject : MonoBehaviour
 
     public GameObject explosionEffect;
     bool hasExploded = false;
-    public float weightMultiplier = 2;
+    //public float weightMultiplier = 2;
+    [HideInInspector]
+    public float mass;
     
 
 
@@ -40,6 +42,7 @@ public class CelestialObject : MonoBehaviour
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
+        mass = rigidBody.mass;
         if (staticBody)
         {
             rigidBody.isKinematic = true;
@@ -114,7 +117,13 @@ public class CelestialObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetState(){
+    public void SetState(_celestialObject data){
+        staticBody = data.staticBody;
+        velocity = data.velocity;
+        rigidBody.position = data.position;
+        mass = data.mass; 
+        rigidBody.mass=mass;
+
         if (staticBody)
         {
             rigidBody.isKinematic = true;
@@ -122,6 +131,19 @@ public class CelestialObject : MonoBehaviour
         else{
             rigidBody.isKinematic = false;
         }
+    }
+
+    public Vector3 GetPosition(){
+        return rigidBody.position;
+    }
+
+    public static void DestroyAll(){
+        
+        foreach(CelestialObject co in Objects){
+            Destroy(co);
+        }
+        Objects.Clear(); //clearing the old planets
+        Objects.TrimExcess();
     }
 
 }

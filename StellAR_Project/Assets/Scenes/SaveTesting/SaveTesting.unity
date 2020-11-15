@@ -1048,7 +1048,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1057789185}
   - component: {fileID: 1057789184}
-  - component: {fileID: 1057789186}
   m_Layer: 0
   m_Name: SaveLoad
   m_TagString: Untagged
@@ -1087,20 +1086,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1057789186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057789183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fded4267b3dfa44fb82a4c4c0590070c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staticBodies: 
-  planetCount: 0
 --- !u!1 &1115016358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,7 +1395,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   staticBody: 1
   explosionEffect: {fileID: 0}
-  weightMultiplier: 2
+  mass: 0
 --- !u!54 &1468576916
 Rigidbody:
   m_ObjectHideFlags: 0
