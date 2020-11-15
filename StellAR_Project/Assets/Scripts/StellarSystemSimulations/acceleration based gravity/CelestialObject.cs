@@ -140,7 +140,7 @@ public class CelestialObject : MonoBehaviour
     public static void DestroyAll(){
         
         foreach(CelestialObject co in Objects){
-            Destroy(co);
+            Destroy(co.gameObject);
         }
         Objects.Clear(); //clearing the old planets
         Objects.TrimExcess();
