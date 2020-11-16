@@ -8,8 +8,8 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
     public Color BandColorStorm; 
     public float StormSize;
     public float StormSpeed;
-    public Vector2 StormStrength;
-    public Vector2 StormPlacement;
+    public float StormStrength;
+    public float StormPlacement;
     public Vector2 SpiralDefinition;
 
     public float BandScale1;
@@ -28,6 +28,11 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
     private MaterialPropertyBlock propertyBlock;
 
     // OnValidate is called in the editor after the component is edited
+    public void ChangeFloatProperty(float value)
+    {
+
+    }
+
     void OnValidate()
     {
         //create propertyblock only if none exists
@@ -39,9 +44,9 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         
         propertyBlock.SetColor("_BandColorStorm", BandColorStorm);
         propertyBlock.SetFloat("_StormSize", StormSize);
-        propertyBlock.SetVector("_StormStrength", StormStrength);
+        propertyBlock.SetFloat("_StormStrength", StormStrength);
         propertyBlock.SetFloat("_StormSpeed", StormSpeed);
-        propertyBlock.SetVector("_StormPlacement", StormPlacement);
+        propertyBlock.SetFloat("_StormPlacement", StormPlacement);
         propertyBlock.SetVector("_SpiralDefinition", SpiralDefinition);
 
         propertyBlock.SetFloat("_BandScale1", BandScale1);
