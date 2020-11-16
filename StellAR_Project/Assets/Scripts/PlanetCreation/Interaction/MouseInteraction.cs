@@ -51,7 +51,8 @@ public class MouseInteraction : MonoBehaviour{
             }
             else{
                 if(Input.GetMouseButton(0)){
-                    interactionPoint = selection.InverseTransformPoint(hit.point); 
+                    interactionPoint = selection.InverseTransformPoint(hit.point);
+                    hitCoords.Add(interactionPoint);
                     planet.UpdateMesh();
                     //hitCoords.Add(selection.InverseTransformPoint(hit.point));
                 }
