@@ -5,11 +5,11 @@ using UnityEngine;
 public class SaveLoadScenes : MonoBehaviour
 {
    
-public int sceneIndex = 0;
-public bool save = false;
-public bool load = false;
-public bool delete = false;
-public GameObject prefab;
+    public int sceneIndex = 0;
+    public bool save = false;
+    public bool load = false;
+    public bool delete = false;
+    public GameObject prefab;
 
 
     void Update()
@@ -22,30 +22,26 @@ public GameObject prefab;
         }
         if(load){
             if(sceneIndex == 0){
-                SystemSimulationData systemData = SaveLoadStarSystem.LoadStarSystem();
-                if(systemData == null){
-                    return;
-                }
-                
-                CelestialObject.Objects.Clear(); //clearing the old planets
-                CelestialObject.Objects.TrimExcess();
+                SystemSimulationData data = SaveLoadStarSystem.LoadStarSystem();
+                if( data != null){
 
-                TrajectoryVelocity.startSlingshot = false;
-                TrajectoryVelocity.start = new Vector3(0f,0f,0f);
-                SimulationPauseControl.gameIsPaused = false;
-                TrajectorySimulation.drawLine = false;
-                TrajectorySimulation.destroyLine = false;
-                TrajectorySimulation.freeze = false;
-                TrajectorySimulation.shoot = false;
-
-                for(int i=0; i<systemData.planetCount; i++){
-                    GameObject obj = Instantiate(prefab);
-                    obj.GetComponent<CelestialObject>().enabled = true;
-                }
-
-                systemData.DeployData();
-                load=false;
+                    CelestialObject.DestroyAll();
+                    
+                    for(int i=0; i<data.planetCount; i++){
+                        GameObject obj = Instantiate(prefab);
+                        obj.GetComponent<CelestialObject>().enabled = true;
+                        CelestialObject co = obj.GetComponent<CelestialObject>();
+                        co.SetState(data.physicsData[i]);
+                    }
+                    load=false;
+                }   
             }
+            else{
+                load=false;
+                Debug.Log("failed to load");
+            }
+                
+        }
         if(delete){
             if(sceneIndex == 0){
                 SaveLoadStarSystem.DeleteStarSystem();
@@ -53,7 +49,6 @@ public GameObject prefab;
             }
         }
 
-        }
         
     }
 
