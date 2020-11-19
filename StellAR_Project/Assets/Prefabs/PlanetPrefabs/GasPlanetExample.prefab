@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 4099893984842514918}
   - component: {fileID: 4099893984842514906}
   - component: {fileID: -5098111291175729366}
+  - component: {fileID: 1732931101}
   m_Layer: 0
   m_Name: GasPlanetExample
-  m_TagString: Untagged
+  m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,20 +108,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64082dc636a5d3f439b2756b06e37350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BandColorStorm: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 0}
-  StormSize: 7.65
-  StormSpeed: 1.06
-  StormStrength: {x: 5.14, y: 2}
-  StormPlacement: {x: -0.8, y: 1.89}
-  SpiralDefinition: {x: 1, y: 1}
-  BandScale1: 13.24
-  BandXSeed1: 2.7
-  BandYSeed1: 2.08
+  BandColorStorm: {r: 0.8773585, g: 0.29966652, b: 0.19450872, a: 0}
+  StormSize: 5
+  StormSpeed: 2
+  StormStrength: 3
+  StormPlacement: 0
+  BandScale1: 1
+  BandXSeed1: 3.01
+  BandYSeed1: -3.39
   BandColor1: {r: 1, g: 0.4824681, b: 0.4764151, a: 0}
-  BandScale2: 1.15
-  BandXSeed2: 1.75
-  BandYSeed2: 1.32
+  BandScale2: 4
+  BandXSeed2: 1.15
+  BandYSeed2: 0.43
   BandColor2: {r: 1, g: 0.94389194, b: 0.4669811, a: 0}
+  BandColor3: {r: 0.9245283, g: 0, b: 0, a: 0}
+  CurrentlyCustomizing: 
 --- !u!82 &-5098111291175729366
 AudioSource:
   m_ObjectHideFlags: 0
@@ -226,3 +228,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1732931101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4099893984842514919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96bc3af8cf89604293aa98a2d1a4d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsGassy: 1
+  IsRocky: 0
