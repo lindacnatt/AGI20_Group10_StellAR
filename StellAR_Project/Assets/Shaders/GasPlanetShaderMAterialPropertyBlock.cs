@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
 
@@ -10,7 +10,6 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
     public float StormSpeed;
     public float StormStrength;
     public float StormPlacement;
-    public Vector2 SpiralDefinition;
 
     public float BandScale1;
     public float BandXSeed1;
@@ -22,24 +21,76 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
     public float BandYSeed2;
     public Color BandColor2;
 
+    public Color BandColor3;
+
+    public string CurrentlyCustomizing;
+
+    private Renderer TheRenderer;
+
+    private bool SeedToggle;
+
 
     
     //The material property block we pass to the GPU
     private MaterialPropertyBlock propertyBlock;
 
     // OnValidate is called in the editor after the component is edited
-    public void ChangeFloatProperty(float value)
+    public void ChangeStormSize(float value)
     {
+        StormSize = value;
+      
+    }
+    public void ChangeStormSpeed(float value)
+    {
+        StormSpeed = value;
+
+    }
+    public void ChangeStormStrength(float value)
+    {
+
+        StormStrength = value;
+    }
+    public void ChangeStormPlacement(float value)
+    {
+
+        StormPlacement = value;
+    }
+    public void ChangeBandScale1(float value)
+    {
+        BandScale1 = value;
+
+    }
+    public void ChangeBandScale2(float value)
+    {
+        BandScale2 = value;
+
+    }
+    public void ReSeed(bool value)
+    {
+        if (value != SeedToggle)
+        {
+            BandXSeed1 = UnityEngine.Random.Range(0, 10);
+            BandXSeed2 = UnityEngine.Random.Range(0, 10);
+            BandYSeed1 = UnityEngine.Random.Range(0, 10);
+            BandYSeed2 = UnityEngine.Random.Range(0, 10);
+
+
+
+        }
 
     }
 
-    void OnValidate()
+    private void Awake()
     {
         //create propertyblock only if none exists
         if (propertyBlock == null)
             propertyBlock = new MaterialPropertyBlock();
         //Get a renderer component either of the own gameobject or of a child
-        Renderer renderer = GetComponentInChildren<Renderer>();
+        TheRenderer = GetComponentInChildren<Renderer>();
+    }
+    void Update()
+    {
+       
         //set the color property
         
         propertyBlock.SetColor("_BandColorStorm", BandColorStorm);
@@ -47,7 +98,6 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         propertyBlock.SetFloat("_StormStrength", StormStrength);
         propertyBlock.SetFloat("_StormSpeed", StormSpeed);
         propertyBlock.SetFloat("_StormPlacement", StormPlacement);
-        propertyBlock.SetVector("_SpiralDefinition", SpiralDefinition);
 
         propertyBlock.SetFloat("_BandScale1", BandScale1);
         propertyBlock.SetFloat("_BandXSeed1", BandXSeed1);
@@ -59,8 +109,10 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         propertyBlock.SetFloat("_BandYSeed2", BandYSeed2);
         propertyBlock.SetColor("_BandColor2", BandColor2);
 
+        propertyBlock.SetColor("_BandColor3", BandColor3);
+
 
         //apply propertyBlock to renderer
-        renderer.SetPropertyBlock(propertyBlock);
+        TheRenderer.SetPropertyBlock(propertyBlock);
     }
 } 
