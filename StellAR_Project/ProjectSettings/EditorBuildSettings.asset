@@ -5,19 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlanetCreationUI/UI.unity
     guid: 66e8f209e1cd249c098c9e384fc728d1
   - enabled: 1
     path: Assets/Scenes/StellarSystemInteraction/TrajectoryAR.unity
     guid: f97921465e5664ae4a6d04a87ea40ee4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlanetShaderScene/PlanetShaderScene.unity
     guid: 40022427e005545db8931bcc8d8e87cd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlanetCreationScenes/SizeScene.unity
     guid: ab73f713ec9e37944a4a90781c85af1f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StellarSystemInteraction/TrajectoryInteraction.unity
     guid: a3daa77c940af42bbab276b9c5bf2002
   - enabled: 0
