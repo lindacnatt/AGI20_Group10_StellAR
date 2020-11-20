@@ -29,11 +29,13 @@ public class AnchorPlacement : MonoBehaviour
     {
         if (!alreadyPlaced)
         {
-            if (Input.touchCount > 0 || Input.GetMouseButtonDown(1) == true)
+            if (Input.touchCount == 1|| Input.GetMouseButtonDown(1) == true)
             {
                 /*Disable the following two lines to debug on a computer*/
                 var anchor = arAnchorManager.AddAnchor(new Pose(spawnedAnchor.transform.position, spawnedAnchor.transform.rotation));
                 spawnedAnchor.transform.SetParent(anchor.transform);
+                
+                GetComponent<ARPlacementTrajectory>().enabled = true;
                 
                 toEnable1.SetActive(true);
                 
@@ -43,7 +45,7 @@ public class AnchorPlacement : MonoBehaviour
 
                 toDisable.SetActive(false);
 
-                GetComponent<ARPlacementTrajectory>().enabled = true;
+                
                 alreadyPlaced = true;
                 Destroy(this);
                 return;
