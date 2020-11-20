@@ -15,7 +15,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     private bool placed = false;//of the object is placed or not
 
     // Start is called before the first frame update
-    void Awake()
+    void Start() // messes with initial sun placement if awake
     {
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
     }
