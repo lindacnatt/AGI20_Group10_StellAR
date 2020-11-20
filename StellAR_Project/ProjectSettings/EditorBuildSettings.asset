@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PlanetCreationUI/UI.unity
     guid: 66e8f209e1cd249c098c9e384fc728d1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StellarSystemInteraction/TrajectoryAR.unity
     guid: f97921465e5664ae4a6d04a87ea40ee4
   - enabled: 0
@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ARPlacement/ARScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SaveTesting/SaveTesting.unity
     guid: 752c5cbdff45c48439787e460f534fb9
   m_configObjects:
