@@ -34,6 +34,7 @@ public class CelestialObject : MonoBehaviour
     void Start(){
         
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
+        /*
         if (rigidBody == null)
         {
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
@@ -128,6 +129,8 @@ public class CelestialObject : MonoBehaviour
         if (staticBody)
         {
             rigidBody.isKinematic = true;
+            this.gameObject.transform.position = data.position;
+            
         }
         else{
             rigidBody.isKinematic = false;

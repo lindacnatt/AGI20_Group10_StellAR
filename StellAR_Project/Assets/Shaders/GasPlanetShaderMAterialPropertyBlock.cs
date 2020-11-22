@@ -79,6 +79,19 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         }
 
     }
+    public void ChangeBandColor1(float value)
+    {
+        BandColor1.r = value;
+    }
+    public void ChangeBandColor2(float value)
+    {
+        BandColor2.r = value;
+    }
+    public void ChangeBandColor3(float value)
+    {
+        BandColor3.r = value;
+    }
+
 
     private void Awake()
     {
