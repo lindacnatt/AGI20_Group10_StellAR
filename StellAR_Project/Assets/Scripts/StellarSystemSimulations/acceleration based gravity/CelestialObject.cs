@@ -34,7 +34,6 @@ public class CelestialObject : MonoBehaviour
     void Start(){
         
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
-        /*
         if (rigidBody == null)
         {
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
