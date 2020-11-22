@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 public class ShapeGenerator {
-    ShapeSettings settings;
+    public ShapeSettings settings;
     NoiseInterface[] noiseFilters;
     MouseInteraction interaction;
     List<Vector3> touchedPoints;

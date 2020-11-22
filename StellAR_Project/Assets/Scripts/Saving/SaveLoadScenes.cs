@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveLoadScenes : MonoBehaviour
 {
-   
-    public int sceneIndex = 0;
+
+    public int sceneIndex;
     public bool save = false;
     public bool load = false;
     public bool delete = false;
     public GameObject prefab;
 
+    private void Start()
+    {
+        sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex == 6)
+        {
+            load = true;
+        }
+    }
 
     void Update()
     {
@@ -18,6 +27,16 @@ public class SaveLoadScenes : MonoBehaviour
             if(sceneIndex == 0){
                 SaveLoadStarSystem.SaveStarSystem();
                 save=false;
+            }
+            if (sceneIndex == 5)
+            {
+                GameObject[] planets = GameObject.FindGameObjectsWithTag("Planet");
+                foreach (GameObject planet in planets)
+                {
+                    MotherPlanet mp = planet.GetComponent<MotherPlanet>();
+                    SaveLoadStarSystem.SavePlanet(mp);
+                }
+                save = false;
             }
         }
         if(load){
@@ -35,6 +54,20 @@ public class SaveLoadScenes : MonoBehaviour
                     }
                     load=false;
                 }   
+            }
+            else if (sceneIndex == 6){
+                PlanetData data = SaveLoadStarSystem.LoadPlanets();
+                if (data != null)
+                {
+                    CelestialObject.DestroyAll();
+                    GameObject obj = Instantiate(prefab);
+                    obj.GetComponent<MotherPlanet>().enabled = true;
+                    MotherPlanet mo = obj.GetComponent<MotherPlanet>();
+                    mo.GeneratePlanet();
+                    mo.SetShape(data);
+                    mo.UpdateMesh();
+                    load = false;
+                }
             }
             else{
                 load=false;

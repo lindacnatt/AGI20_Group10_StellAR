@@ -32,7 +32,6 @@ public class CelestialObject : MonoBehaviour
 
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
-        /*
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
         if (rigidBody == null)
         {
@@ -41,7 +40,6 @@ public class CelestialObject : MonoBehaviour
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
-        */
         mass = rigidBody.mass;
         if (staticBody)
         {

@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/StellarSystemSimulations/Trajectory test.unity
     guid: 85b9412293cc3466ea358f7c5ce2c6c1
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/PlanetCreationScenes/PlanetCreationScene.unity
     guid: ff60770743c7a8d42bfb7cafae356371
   - enabled: 0
@@ -32,6 +32,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SaveTesting/SaveTesting.unity
     guid: 752c5cbdff45c48439787e460f534fb9
+  - enabled: 1
+    path: Assets/Scenes/PlanetCreationScenes/TestScene.unity
+    guid: 1ef09711289fa48bf8b7299928adf5ba
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 2008e36f073572d4b9faf9a30e8df97d,
       type: 2}
