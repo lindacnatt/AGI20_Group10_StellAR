@@ -39,10 +39,11 @@ public class CelestialObject : MonoBehaviour
         {
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
         }
+     
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
-        */
+       
         mass = rigidBody.mass;
         if (staticBody)
         {
