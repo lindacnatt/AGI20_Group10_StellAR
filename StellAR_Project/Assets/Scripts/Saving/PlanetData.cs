@@ -10,7 +10,7 @@ public class PlanetData
 
     public PlanetData(MotherPlanet planet)
     {
+
         planetData = new _planet(planet);
-        //Debug.Log(craterList);
     }
 }

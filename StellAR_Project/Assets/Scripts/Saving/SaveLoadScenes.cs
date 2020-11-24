@@ -11,6 +11,7 @@ public class SaveLoadScenes : MonoBehaviour
     public bool load = false;
     public bool delete = false;
     public GameObject prefab;
+    public GameObject prefab2;
 
     private void Start()
     {
@@ -24,38 +25,44 @@ public class SaveLoadScenes : MonoBehaviour
     void Update()
     {
         if(save){
-            if(sceneIndex == 0){
+            if(sceneIndex == 5){
                 SaveLoadStarSystem.SaveStarSystem();
                 save=false;
             }
-            if (sceneIndex == 5)
+            else if (sceneIndex == 5)
+                //Maybe use for going from planet creation to solar system when there's just one planet in the scene.
             {
                 GameObject[] planets = GameObject.FindGameObjectsWithTag("Planet");
-                foreach (GameObject planet in planets)
+                if (planets.Length > 0)
                 {
-                    MotherPlanet mp = planet.GetComponent<MotherPlanet>();
+                    MotherPlanet mp = planets[0].GetComponent<MotherPlanet>();
                     SaveLoadStarSystem.SavePlanet(mp);
                 }
                 save = false;
             }
         }
         if(load){
-            if(sceneIndex == 0){
+            if(sceneIndex == 6){
                 SystemSimulationData data = SaveLoadStarSystem.LoadStarSystem();
                 if( data != null){
 
                     CelestialObject.DestroyAll();
-                    
                     for(int i=0; i<data.planetCount; i++){
                         GameObject obj = Instantiate(prefab);
                         obj.GetComponent<CelestialObject>().enabled = true;
                         CelestialObject co = obj.GetComponent<CelestialObject>();
                         co.SetState(data.physicsData[i]);
+
+                        MotherPlanet mo = obj.GetComponentInChildren<MotherPlanet>();
+                        mo.GeneratePlanet();
+                        mo.SetShape(data.planetList[i]);
+                        mo.UpdateMesh();
+                        
                     }
-                    load=false;
-                }   
+                    load =false;
+                }
             }
-            else if (sceneIndex == 6){
+            else if (sceneIndex == 1){
                 PlanetData data = SaveLoadStarSystem.LoadPlanets();
                 if (data != null)
                 {
@@ -64,7 +71,7 @@ public class SaveLoadScenes : MonoBehaviour
                     obj.GetComponent<MotherPlanet>().enabled = true;
                     MotherPlanet mo = obj.GetComponent<MotherPlanet>();
                     mo.GeneratePlanet();
-                    mo.SetShape(data);
+                    mo.SetShape(data.planetData);
                     mo.UpdateMesh();
                     load = false;
                 }

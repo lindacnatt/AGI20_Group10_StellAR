@@ -58,29 +58,16 @@ public abstract class MotherPlanet: CelestialObject {
         collider.radius = this.shapeSettings.radius;
     }
 
-    public void SetShape(PlanetData data)
+    public void SetShape(_planet data)
     {
         List<CraterGenerator.Crater> cList = craterGenerator.craterList;
-        for (int i = 0; i < data.planetData.craterList.Count; i++)
+        for (int i = 0; i < data.craterList.Count; i++)
         {
-            _crater crater = data.planetData.craterList[i];
+            _crater crater = data.craterList[i];
             cList.Add(new CraterGenerator.Crater(crater.center, crater.radius,
                 crater.floor, crater.smoothness, crater.impact, crater.rimSteepness,
                 crater.rimWidth));
         }
-        Debug.Log("cList: " + cList);
     }
-
-    /*
-    public static void DestroyAll()
-    {
-        foreach (MotherPlanet mo in Objects)
-        {
-            Destroy(mo.gameObject);
-        }
-        //Objects.Clear(); //clearing the old planets
-        //Objects.TrimExcess();
-    }
-    */
 
 }

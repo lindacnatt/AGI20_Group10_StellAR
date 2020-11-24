@@ -116,6 +116,11 @@ public class CelestialObject : MonoBehaviour
     }
 
     public void SetState(_celestialObject data){
+        rigidBody = this.gameObject.GetComponent<Rigidbody>();
+        if (rigidBody == null)
+        {
+            rigidBody = this.gameObject.AddComponent<Rigidbody>();
+        }
         staticBody = data.staticBody;
         velocity = data.velocity;
         rigidBody.position = data.position;
@@ -136,9 +141,9 @@ public class CelestialObject : MonoBehaviour
     }
 
     public static void DestroyAll(){
-
-        foreach(CelestialObject co in Objects){
-            Destroy(co.gameObject);
+        for (int i = 0; i < Objects.Count; i++)
+        {
+            Destroy(Objects[i].gameObject);
         }
         Objects.Clear(); //clearing the old planets
         Objects.TrimExcess();
