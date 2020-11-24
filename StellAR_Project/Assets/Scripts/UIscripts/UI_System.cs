@@ -21,7 +21,7 @@ namespace Stellar.UI
         private UI_Screen previousScreen;
         public UI_Screen PreviousScreen{get{return previousScreen;}}
 
-        private UI_Screen currentScreen;
+        public UI_Screen currentScreen;
         public UI_Screen CurrentScreen{get{return currentScreen;}}
         public float transitionTime;
         

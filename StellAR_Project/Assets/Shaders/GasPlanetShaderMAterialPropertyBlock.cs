@@ -92,6 +92,26 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         BandColor3.r = value;
     }
 
+    public void SetMaterial(_gasSettings data)
+    {
+        BandColorStorm = data.BandColorStorm;
+        StormSize = data.StormSize;
+        StormSpeed = data.StormSpeed;
+        StormStrength = data.StormStrength;
+        StormPlacement = data.StormPlacement;
+        BandScale1 = data.BandScale1;
+        BandXSeed1 = data.BandXSeed1;
+        BandYSeed1 = data.BandYSeed1;
+        BandColor1 = data.BandColor1;
+        BandScale2 = data.BandScale2;
+        BandXSeed2 = data.BandXSeed2;
+        BandYSeed2 = data.BandYSeed2;
+        BandColor2 = data.BandColor2;
+        BandColor3 = data.BandColor3;
+
+
+
+    }
 
     private void Awake()
     {
