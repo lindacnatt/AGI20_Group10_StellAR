@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
+public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
 
     //The color of the object
     public Color BandColorStorm; 

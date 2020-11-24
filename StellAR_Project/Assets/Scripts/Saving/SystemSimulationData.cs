@@ -9,11 +9,13 @@ public class SystemSimulationData
     public _celestialObject[] physicsData;
     //public _planet planetData;
     public _planet[] planetList;
+    public _gasPlanet[] gasPlanetList;
     public int planetCount;
 
     public SystemSimulationData(int objectCount){
         physicsData = new _celestialObject[objectCount];
         planetList = new _planet[objectCount];
+        gasPlanetList = new _gasPlanet[objectCount];
         planetCount = objectCount;
         CollectData();
     }
@@ -24,6 +26,8 @@ public class SystemSimulationData
             physicsData[i] = new _celestialObject(co);
             MotherPlanet mp = co.GetComponentInChildren<MotherPlanet>();
             planetList[i] = new _planet(mp);
+            GasPlanetShaderMAterialPropertyBlock gp = co.GetComponentInChildren<GasPlanetShaderMAterialPropertyBlock>();
+            gasPlanetList[i] = new _gasPlanet(gp);
         }
     }
 }
