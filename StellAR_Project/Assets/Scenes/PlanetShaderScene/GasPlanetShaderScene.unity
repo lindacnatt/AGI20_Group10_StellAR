@@ -213,7 +213,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 45.37, z: 0}
 --- !u!114 &300978728
 MonoBehaviour:
@@ -227,20 +227,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64082dc636a5d3f439b2756b06e37350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BandColorStorm: {r: 0, g: 0, b: 0, a: 0}
-  StormSize: 0
-  StormSpeed: 0
-  StormStrength: {x: 0, y: 0}
-  StormPlacement: {x: 0, y: 0}
-  SpiralDefinition: {x: 0, y: 0}
-  BandScale1: 0
-  BandXSeed1: 0
-  BandYSeed1: 0
-  BandColor1: {r: 0, g: 0, b: 0, a: 0}
-  BandScale2: 0
-  BandXSeed2: 0
-  BandYSeed2: 0
-  BandColor2: {r: 0, g: 0, b: 0, a: 0}
+  BandColorStorm: {r: 0.2688679, g: 0.6985653, b: 1, a: 1}
+  StormSize: 6
+  StormSpeed: 4
+  StormStrength: 3
+  StormPlacement: 0
+  BandScale1: 0.37
+  BandXSeed1: 2
+  BandYSeed1: 4
+  BandColor1: {r: 0, g: 0.107963085, b: 1, a: 0}
+  BandScale2: 1.2
+  BandXSeed2: 3.66
+  BandYSeed2: 5
+  BandColor2: {r: 0.5484603, g: 0.7617376, b: 0.8018868, a: 0}
+  BandColor3: {r: 0.48900855, g: 0.5003181, b: 0.9339623, a: 0}
 --- !u!1 &836184050
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +331,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1752128786
 GameObject:
@@ -415,7 +415,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -15.1, z: 0}
 --- !u!114 &1752128790
 MonoBehaviour:
@@ -448,15 +448,33 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
-
 --- !u!1001 &4070371377160156817
-
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4099893984842514907, guid: e1136afbe978eea479ff200c6989c096,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099893984842514907, guid: e1136afbe978eea479ff200c6989c096,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099893984842514907, guid: e1136afbe978eea479ff200c6989c096,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099893984842514919, guid: e1136afbe978eea479ff200c6989c096,
+        type: 3}
+      propertyPath: m_Name
+      value: GasPlanetExample
+      objectReference: {fileID: 0}
     - target: {fileID: 4070371378038438093, guid: 031849818bdad14478d5d2b8b8df39ea,
         type: 3}
       propertyPath: m_Name
@@ -517,26 +535,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4099893984842514907, guid: e1136afbe978eea479ff200c6989c096,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4099893984842514907, guid: e1136afbe978eea479ff200c6989c096,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4099893984842514907, guid: e1136afbe978eea479ff200c6989c096,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4099893984842514919, guid: e1136afbe978eea479ff200c6989c096,
-        type: 3}
-      propertyPath: m_Name
-      value: GasPlanetExample
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1136afbe978eea479ff200c6989c096, type: 3}
-

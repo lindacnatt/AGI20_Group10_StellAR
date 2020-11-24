@@ -12,12 +12,19 @@ public class ShapeGenerator {
     public CraterGenerator craterGenerator;
     List<Dictionary<String, float>> masks;
 
+    public List<string> maskKeys;
+    public List<float> maskValues;
+
     public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction, CraterGenerator craterGenerator){
         this.settings = settings;
         noiseFilters = new NoiseInterface[settings.noiseLayers.Length];
         
         this.interaction = interaction;
-        this.masks = new List<Dictionary<string, float>>();
+        this.masks = new List<Dictionary<string, float>>(); 
+        //this.masks.Add(DataChanger.arraysToDict(maskKeys, maskValues));
+        
+        this.maskKeys = new List<string>();
+        this.maskValues = new List<float>();
 
         for (int i = 0; i < noiseFilters.Length; i++){
             masks.Add(new Dictionary<string, float>());
@@ -58,7 +65,7 @@ public class ShapeGenerator {
                                     masks[i][pointStr] += mask;
                                 }
                             }
-                            else {
+                            else{
                                 masks[i].Add(pointStr, mask);
                             }
                         }
@@ -116,5 +123,12 @@ public class ShapeGenerator {
 
     private float Sigmoid(float value){
         return 1.0f / (1.0f + (float) Math.Exp(-value));
+    }
+    public string[] getMaskKeys(){
+        return DataChanger.getKeysFromDict(masks[0]);
+    }
+
+    public float[] getMaskValues(){
+        return DataChanger.getValuesFromDict(masks[0]);
     }
 }

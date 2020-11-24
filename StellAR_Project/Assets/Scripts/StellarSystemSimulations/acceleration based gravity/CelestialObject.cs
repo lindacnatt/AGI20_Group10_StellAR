@@ -37,6 +37,7 @@ public class CelestialObject : MonoBehaviour
         {
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
         }
+
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
@@ -130,6 +131,8 @@ public class CelestialObject : MonoBehaviour
         if (staticBody)
         {
             rigidBody.isKinematic = true;
+            this.gameObject.transform.position = data.position;
+
         }
         else{
             rigidBody.isKinematic = false;
