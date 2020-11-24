@@ -32,17 +32,15 @@ public class CelestialObject : MonoBehaviour
 
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
-        
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
         if (rigidBody == null)
         {
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
         }
-     
+
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
-       
         mass = rigidBody.mass;
         if (staticBody)
         {
@@ -119,6 +117,11 @@ public class CelestialObject : MonoBehaviour
     }
 
     public void SetState(_celestialObject data){
+        rigidBody = this.gameObject.GetComponent<Rigidbody>();
+        if (rigidBody == null)
+        {
+            rigidBody = this.gameObject.AddComponent<Rigidbody>();
+        }
         staticBody = data.staticBody;
         velocity = data.velocity;
         rigidBody.position = data.position;
@@ -129,7 +132,7 @@ public class CelestialObject : MonoBehaviour
         {
             rigidBody.isKinematic = true;
             this.gameObject.transform.position = data.position;
-            
+
         }
         else{
             rigidBody.isKinematic = false;
@@ -141,9 +144,9 @@ public class CelestialObject : MonoBehaviour
     }
 
     public static void DestroyAll(){
-
-        foreach(CelestialObject co in Objects){
-            Destroy(co.gameObject);
+        for (int i = 0; i < Objects.Count; i++)
+        {
+            Destroy(Objects[i].gameObject);
         }
         Objects.Clear(); //clearing the old planets
         Objects.TrimExcess();

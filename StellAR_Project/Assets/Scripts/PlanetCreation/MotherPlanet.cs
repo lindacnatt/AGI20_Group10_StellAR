@@ -58,4 +58,16 @@ public abstract class MotherPlanet: CelestialObject {
         collider.radius = this.shapeSettings.radius;
     }
 
+    public void SetShape(_planet data)
+    {
+        List<CraterGenerator.Crater> cList = craterGenerator.craterList;
+        for (int i = 0; i < data.craterList.Count; i++)
+        {
+            _crater crater = data.craterList[i];
+            cList.Add(new CraterGenerator.Crater(crater.center, crater.radius,
+                crater.floor, crater.smoothness, crater.impact, crater.rimSteepness,
+                crater.rimWidth));
+        }
+    }
+
 }

@@ -7,7 +7,7 @@ public class CraterGenerator
 {
     //ShapeSettings setings;
     public CraterSettings craterSettings;
-    List<Crater> craterList;
+    public List<Crater> craterList;
 
     public CraterGenerator(CraterSettings craterSettings)
     {
@@ -29,8 +29,8 @@ public class CraterGenerator
         public float floor;
         public float smoothness;
         public float impact;
-        public float rimSteepness = 0.5f;
-        public float rimWidth = 0.5f;
+        public float rimSteepness;
+        public float rimWidth;
         public Crater(Vector3 center, float radius, float floor,
             float smoothness, float impact, float rimSteepness, float rimWidth)
         {
