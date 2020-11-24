@@ -7,7 +7,7 @@ public class SystemSimulationData
 {
     
     public _celestialObject[] physicsData;
-    public _planet planetData;
+    //public _planet planetData;
     public _planet[] planetList;
     public int planetCount;
 

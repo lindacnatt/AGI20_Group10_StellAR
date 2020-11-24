@@ -93,7 +93,7 @@ public class ShapeGenerator {
         {
             elevationMinMax.AddValue(Mathf.Max(elevation, settings.radius -1f));
         }
-        return pointOnUnitSphere *  elevation;
+        return pointOnUnitSphere * elevation;
     }
 
     private float checkIfmarked(List<Vector3> touchedPoints, Vector3 pointOnSphere, float radius){
