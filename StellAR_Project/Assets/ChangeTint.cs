@@ -15,10 +15,11 @@ public class ChangeTint : MonoBehaviour
 
     }
 
-
-    public void ChangeTintCol(float value){ 
-
-        planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = value;
+    public void ChangeTintCol(Vector3 weights){ 
+        planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = weights[0];
+        planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g = weights[1];
+        planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b = weights[2];
+        //planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = value;
         planet.GenerateColors(); 
 
     }

@@ -21,7 +21,7 @@ public class Triangle : MonoBehaviour{
 
     public Material material;
 
-    [Range(1,10)]
+    [Range(0,10)]
     public float size;
     RaycastHit hit2;
 
@@ -38,7 +38,8 @@ public class Triangle : MonoBehaviour{
             meshRenderer = gameObject.GetComponent<MeshRenderer>();
             col = gameObject.GetComponent<PolygonCollider2D>();
         }
-        planet = GetComponent<MotherPlanet>();
+        planet = FindObjectsOfType<MotherPlanet>()[0];
+        //GetComponent<MotherPlanet>();
         
         meshRenderer.material = material;
         mesh = new Mesh();
@@ -75,11 +76,12 @@ public class Triangle : MonoBehaviour{
             hit = Physics2D.GetRayIntersection(ray);
             //Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 5f);
             if(hit){
+                Debug.Log("Den funkar");
                 selection = hit.transform;
                 //selectionRenderer = selection.GetComponent<Renderer>();
                 handle.transform.position = hit.point;
                 //Debug.Log(BaryCentric.getWeights(handle.transform.position, vertices));
-                //UpdateColor(BaryCentric.getWeights(handle.transform.position, vertices));
+                UpdateTintColor(BaryCentric.getWeights(handle.transform.position, vertices));
             }
         }  
     }
@@ -90,7 +92,13 @@ public class Triangle : MonoBehaviour{
         meshRenderer.material.color = newColor;
     }
 
-    void UpdatePlanetColor(Vector3 weights){
-        Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
+    // void UpdatePlanetColor(Vector3 weights){
+    //     Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
+    // }
+    public void UpdateTintColor(Vector3 weights){ 
+        planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = weights[0];
+        planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g = weights[1];
+        planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b = weights[2];
+        planet.GenerateColors(); 
     }
 }
