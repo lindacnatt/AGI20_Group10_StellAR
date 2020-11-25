@@ -18,6 +18,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     void Awake()
     {
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
+        //objectToPlace.AddComponent(typeof(RotationSim));
     }
 
     void Update(){
@@ -32,7 +33,8 @@ public class ARPlacementTrajectory : MonoBehaviour
             TrajectoryVelocity.startSlingshot = true;
             TrajectoryVelocity.start = new Vector3(0f,0f,0f);
             TrajectorySimulation.destroyLine = false;
-            objectToPlace.GetComponent<SphereCollider>().enabled = false;
+            objectToPlace.GetComponent<SphereCollider>().enabled = true;
+            objectToPlace.GetComponent<RotationSim>().SetState(true);
             //objectToPlace = null;
         }
     }
@@ -50,5 +52,6 @@ public class ARPlacementTrajectory : MonoBehaviour
     public void PlaceNextObject(){
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
         placed = false;
+        //objectToPlace.AddComponent(typeof(RotationSim));
     }
 }
