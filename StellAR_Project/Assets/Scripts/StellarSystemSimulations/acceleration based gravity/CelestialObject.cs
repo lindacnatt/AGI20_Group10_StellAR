@@ -73,7 +73,7 @@ public class CelestialObject : MonoBehaviour
         if (otherRadius * otherX <= thisRadius * thisX / 2)
         {
             Vector3 testvar = collision.contacts[0].point - this.transform.localPosition;
-            if (this.gameObject.tag != "gasgiant")
+            if (this.gameObject.tag != "GasPlanet")
             {
                 IcoPlanet planet = this.GetComponent<IcoPlanet>();
                 planet.MakeCrater(collision, otherRadius* otherX);

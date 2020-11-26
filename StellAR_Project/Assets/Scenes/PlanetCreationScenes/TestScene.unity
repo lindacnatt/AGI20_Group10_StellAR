@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -587,6 +587,7 @@ MonoBehaviour:
   onSwitchedScreen:
     m_PersistentCalls:
       m_Calls: []
+  currentScreen: {fileID: 0}
   transitionTime: 0
 --- !u!4 &1484130844
 Transform:
@@ -859,7 +860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829102769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -14.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1022,7 +1023,7 @@ MonoBehaviour:
   load: 0
   delete: 0
   prefab: {fileID: 8862350030433163360, guid: 8f5956b71b64a465ea9782c29a076db6, type: 3}
-  prefab2: {fileID: 4102181827235804086, guid: df7ba2e713a35df4e99d2b128e1161a1, type: 3}
+  prefab2: {fileID: 4070371378038438093, guid: 031849818bdad14478d5d2b8b8df39ea, type: 3}
 --- !u!4 &1947582393
 Transform:
   m_ObjectHideFlags: 0

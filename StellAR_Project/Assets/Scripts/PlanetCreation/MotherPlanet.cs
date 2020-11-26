@@ -71,6 +71,10 @@ public abstract class MotherPlanet: CelestialObject {
         shapeGenerator.settings.radius = data.shape.radius;
         shapeGenerator.settings.zeroLvlIsOcean = data.shape.zeroLvlIsOcean;
         shapeGenerator.settings.noiseLayers = data.shape.noiseLayers;
+        for (int i = 0; i < data.shape.noisePoints.Length; i++)
+        {
+            shapeGenerator.masks[0][data.shape.noisePoints[i]] = data.shape.noiseValues[i];
+        }
     }
 
 }

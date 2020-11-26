@@ -9,11 +9,11 @@ public struct _shapeSettings
     public float radius;
     public bool zeroLvlIsOcean;
     public ShapeSettings.NoiseLayer[] noiseLayers;
-    public List<string> noisePoints;
-    public List<float> noiseValues;
+    public string[] noisePoints;
+    public float[] noiseValues;
 
     public _shapeSettings(float radius, bool zeroLvlIsOcean, ShapeSettings.NoiseLayer[] noiseLayers,
-            List<string> noisePoints, List<float> noiseValues)
+            string[] noisePoints, float[] noiseValues)
     {
         this.radius = radius;
         this.zeroLvlIsOcean = zeroLvlIsOcean;

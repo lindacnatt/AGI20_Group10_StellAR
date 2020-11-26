@@ -17,7 +17,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
+        //objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
     }
 
     void Update(){
@@ -42,13 +42,23 @@ public class ARPlacementTrajectory : MonoBehaviour
     {
         if (placed != true) //while it is not placed it will follow the cameras position
         {
-            objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera;
-            objectToPlace.transform.rotation = new Quaternion(0.0f, ARCamera.transform.rotation.y, 0.0f, ARCamera.transform.rotation.w);
+            if (objectToPlace != null)
+            {
+                objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera;
+                objectToPlace.transform.rotation = new Quaternion(0.0f, ARCamera.transform.rotation.y, 0.0f, ARCamera.transform.rotation.w);
+            }
         }
     }
 
     public void PlaceNextObject(){
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
         placed = false;
+    }
+
+    public void setGOtoInstantiate(GameObject go)
+    {
+        gameObjectToInstantiate = go;
+        Debug.Log(go.name);
+        PlaceNextObject();
     }
 }

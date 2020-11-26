@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public struct _gasPlanet
 {
+    public int id;
     public Color BandColorStorm;
     public float StormSize;
     public float StormSpeed;
     public float StormStrength;
     public float StormPlacement;
-    public Vector2 SpiralDefinition;
 
     public float BandScale1;
     public float BandXSeed1;
@@ -22,14 +22,17 @@ public struct _gasPlanet
     public float BandYSeed2;
     public Color BandColor2;
 
-    public _gasPlanet(GasPlanetShaderMAterialPropertyBlock gasPlanet)
+    public Color BandColor3;
+
+    public _gasPlanet(GasPlanetShaderMAterialPropertyBlock gasPlanet, int id)
     {
+        this.id = id;
+
         BandColorStorm = gasPlanet.BandColorStorm;
         StormSize = gasPlanet.StormSize;
         StormSpeed = gasPlanet.StormSpeed;
         StormStrength = gasPlanet.StormStrength;
         StormPlacement = gasPlanet.StormPlacement;
-        SpiralDefinition = gasPlanet.SpiralDefinition;
 
         BandScale1 = gasPlanet.BandScale1;
         BandXSeed1 = gasPlanet.BandXSeed1;
@@ -40,6 +43,8 @@ public struct _gasPlanet
         BandXSeed2 = gasPlanet.BandXSeed2;
         BandYSeed2 = gasPlanet.BandYSeed2;
         BandColor2 = gasPlanet.BandColor2;
-}
+
+        BandColor3 = gasPlanet.BandColor3;
+    }
 
 }

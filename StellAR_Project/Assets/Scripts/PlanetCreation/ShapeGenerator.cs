@@ -10,7 +10,7 @@ public class ShapeGenerator {
     List<Vector3> touchedPoints;
     public MinMax elevationMinMax;
     public CraterGenerator craterGenerator;
-    List<Dictionary<String, float>> masks;
+    public List<Dictionary<String, float>> masks;
 
     public List<string> maskKeys;
     public List<float> maskValues;
@@ -125,10 +125,27 @@ public class ShapeGenerator {
         return 1.0f / (1.0f + (float) Math.Exp(-value));
     }
     public string[] getMaskKeys(){
+        /*
+        string[] returnval = new string[0];
+        if (masks.Count < 0)
+        {
+            Debug.Log(masks[0]);
+            return DataChanger.getKeysFromDict(masks[0]);
+        }
+        return returnval;
+        */
         return DataChanger.getKeysFromDict(masks[0]);
     }
 
     public float[] getMaskValues(){
+        /*
+        float[] returnval = new float[0];
+        if (masks.Count < 0)
+        {
+            return DataChanger.getValuesFromDict(masks[0]);
+        }
+        return returnval;
+        */
         return DataChanger.getValuesFromDict(masks[0]);
     }
 }

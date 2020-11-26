@@ -6,18 +6,18 @@ using UnityEngine;
 public struct _planet
 {
     //This contains all shape data serialized for one planet
+    public int id;
     public List<_crater> craterList;
-    //public NoiseSettings noiseSettings;
     public _shapeSettings shape;
 
-    public _planet(MotherPlanet planet)
+    public _planet(MotherPlanet planet, int id)
     {
+        this.id = id;
         ShapeSettings shapeSettings;
         craterList = new List<_crater>();
-        List<string> noisePoints = new List<string>();
-        List<float> noiseValues = new List<float>();
+        string[] noisePoints = planet.shapeGenerator.getMaskKeys();
+        float[] noiseValues = planet.shapeGenerator.getMaskValues();
         shapeSettings = planet.shapeGenerator.settings;
-        //noiseSettings = planet.shapeGenerator.settings.noiseLayers[0].noiseSettings;
         shape = new _shapeSettings(shapeSettings.radius, shapeSettings.zeroLvlIsOcean,
             shapeSettings.noiseLayers, noisePoints, noiseValues);
         CollectCraters(planet);

@@ -92,7 +92,7 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
         BandColor3.r = value;
     }
 
-    public void SetMaterial(_gasSettings data)
+    public void SetMaterial(_gasPlanet data)
     {
         BandColorStorm = data.BandColorStorm;
         StormSize = data.StormSize;
