@@ -61,7 +61,7 @@ public class CreationStepManager : MonoBehaviour
                     Debug.Log("DESTROYROCK");
                 }
                 Instantiate(GasPrefab, new Vector3(0, 0.8f, 30), Quaternion.identity);
-                Debug.Log("MAKEGAS");
+                //Debug.Log("MAKEGAS");
             }
 
         }
@@ -81,7 +81,7 @@ public class CreationStepManager : MonoBehaviour
                     Debug.Log("DESTROYGAS");
                 }
                 Instantiate(RockPrefab, new Vector3(0, 0.8f, 30), Quaternion.identity);
-                Debug.Log("MAKEREOCK");
+                //Debug.Log("MAKEREOCK");
             }
         }
     }
@@ -90,8 +90,8 @@ public class CreationStepManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(ScreenSys._mStartScreen.GetType());
-        Debug.Log(Screen21.GetType());
+        //Debug.Log(ScreenSys._mStartScreen.GetType());
+        //Debug.Log(Screen21.GetType());
     }
 
     // Update is called once per frame

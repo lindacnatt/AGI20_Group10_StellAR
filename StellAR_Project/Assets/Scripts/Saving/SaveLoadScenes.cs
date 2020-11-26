@@ -22,7 +22,7 @@ public class SaveLoadScenes : MonoBehaviour
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (sceneIndex == 1)
         {
-            //load = true;
+            load = true;
             loadNewPlanet = true;
         }
     }
@@ -31,11 +31,13 @@ public class SaveLoadScenes : MonoBehaviour
     {
         if(save){
             if(sceneIndex == 2){
+                //Save one planet to newPlanet.data
                 SaveLoadStarSystem.SaveStarSystem(true);
                 save=false;
             }
             else if (sceneIndex == 1)
             {
+                //Save the entire system to system.data
                 SaveLoadStarSystem.SaveStarSystem(false);
                 save = false;
             }
@@ -55,6 +57,7 @@ public class SaveLoadScenes : MonoBehaviour
         }
         if(load){
             if(sceneIndex == 1){
+                //Load the entire system from system.data
                 SystemSimulationData data = SaveLoadStarSystem.LoadStarSystem(false);
                 if( data != null){
 
@@ -112,6 +115,8 @@ public class SaveLoadScenes : MonoBehaviour
         {
             if (sceneIndex == 1)
             {
+                loadNewPlanet = false;
+                //Load one planet from newPlanet data and p
                 SystemSimulationData data = SaveLoadStarSystem.LoadStarSystem(true);
                 if (data != null)
                 {
@@ -119,6 +124,7 @@ public class SaveLoadScenes : MonoBehaviour
                     CelestialObject.DestroyAll();
                     int rocky_i = 0;
                     int gasy_i = 0;
+                    /*
                     for (int i = 0; i < data.planetCount; i++)
                     {
                         GameObject obj = getPrefab(data, i);
@@ -139,13 +145,12 @@ public class SaveLoadScenes : MonoBehaviour
                             gp.SetMaterial(data.gasPlanetList[gasy_i]);
                             gasy_i += 1;
                         }
-
                         GameObject ARSessOrig = GameObject.Find("AR Session Origin");
                         ARPlacementTrajectory placement = ARSessOrig.GetComponent<ARPlacementTrajectory>();
+                        Debug.Log(obj);
                         placement.setGOtoInstantiate(obj);
 
-                    }
-                    loadNewPlanet = false;
+                    }*/
                 }
             }
         }

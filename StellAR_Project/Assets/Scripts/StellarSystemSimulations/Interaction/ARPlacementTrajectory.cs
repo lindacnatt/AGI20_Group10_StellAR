@@ -59,6 +59,6 @@ public class ARPlacementTrajectory : MonoBehaviour
     {
         gameObjectToInstantiate = go;
         Debug.Log(go.name);
-        PlaceNextObject();
+        //PlaceNextObject();
     }
 }

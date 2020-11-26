@@ -19,7 +19,7 @@ public static class SaveLoadStarSystem
 
         try{
             File.WriteAllText(path,content);
-            Debug.Log(content);
+            //Debug.Log(content);
             return true;
         }
         catch(System.Exception e){
@@ -57,6 +57,7 @@ public static class SaveLoadStarSystem
         }
         if(File.Exists(path)){
             string result = File.ReadAllText(path);
+            Debug.Log("loadResult: " + result);
             SystemSimulationData data = JsonUtility.FromJson<SystemSimulationData>(result);
             //Debug.Log(data.physicsData[1].position.ToString("F3"));
             
