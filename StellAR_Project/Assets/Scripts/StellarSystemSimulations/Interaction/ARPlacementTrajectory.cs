@@ -24,7 +24,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     void Update(){
         if (Input.touchCount == 2 && (placed != true))
         {
-            placed = true; 
+            placed = true;
             objectToPlace.GetComponent<CelestialObject>().enabled = true;
             simulationRunner.GetComponent<TrajectoryLineAnimation>().main = objectToPlace;
             simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;
@@ -53,5 +53,12 @@ public class ARPlacementTrajectory : MonoBehaviour
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
         placed = false;
         //objectToPlace.AddComponent(typeof(RotationSim));
+    }
+
+    public void setGOtoInstantiate(GameObject go)
+    {
+        gameObjectToInstantiate = go;
+        Debug.Log(go.name);
+        //PlaceNextObject();
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
+public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
 
     //The color of the object
     public Color BandColorStorm; 
@@ -92,7 +92,7 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         BandColor3.r = value;
     }
 
-    public void SetMaterial(_gasSettings data)
+    public void SetMaterial(_gasPlanet data)
     {
         BandColorStorm = data.BandColorStorm;
         StormSize = data.StormSize;

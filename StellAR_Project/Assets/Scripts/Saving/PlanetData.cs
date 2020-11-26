@@ -11,6 +11,6 @@ public class PlanetData
     public PlanetData(MotherPlanet planet)
     {
 
-        planetData = new _planet(planet);
+        planetData = new _planet(planet, 1);
     }
 }
