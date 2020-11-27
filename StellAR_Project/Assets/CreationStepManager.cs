@@ -20,7 +20,6 @@ public class CreationStepManager : MonoBehaviour
 
     public void ChangeScreen(UI_Screen nextScreen)
     {
-
         if (StartScreen)
         {
             StartScreen = false;
@@ -28,7 +27,6 @@ public class CreationStepManager : MonoBehaviour
             {
 
                 ScreenSys.SwitchScreens(aScreen: Screen21);
-                GetComponentInParent<Canvas>();
                 
             }
             else if(Rock == true)
