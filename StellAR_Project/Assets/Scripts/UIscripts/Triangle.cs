@@ -13,6 +13,7 @@ public class Triangle : MonoBehaviour{
     Renderer selectionRenderer;
     BaryCentric bary;
     GameObject handle;
+    float handleInitZ;
     PolygonCollider2D col;
     Vector2[] colPoints;
     Vector2 worldPos;
@@ -59,7 +60,7 @@ public class Triangle : MonoBehaviour{
         
         // set handle sprite
         handle = this.transform.GetChild(0).gameObject;
-
+        handleInitZ = handle.transform.localPosition.z;
         // create shape of collider 
         colPoints = new Vector2[3];
         for(int i = 0; i < 3; i++){
@@ -76,12 +77,14 @@ public class Triangle : MonoBehaviour{
             hit = Physics2D.GetRayIntersection(ray);
             //Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 5f);
             if(hit){
-                Debug.Log("Den funkar");
+                //Debug.Log("Den funkar");
                 selection = hit.transform;
                 //selectionRenderer = selection.GetComponent<Renderer>();
                 handle.transform.position = hit.point;
-                //Debug.Log(BaryCentric.getWeights(handle.transform.position, vertices));
+                Debug.Log("updated transform:"+handle.transform.position);
                 UpdateTintColor(BaryCentric.getWeights(handle.transform.position, vertices));
+                handle.transform.localPosition = new Vector3(handle.transform.localPosition.x, handle.transform.localPosition.y, handleInitZ);
+                //Debug.Log(BaryCentric.getWeights(handle.transform.position, vertices));
             }
         }  
     }

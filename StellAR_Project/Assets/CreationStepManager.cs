@@ -58,7 +58,7 @@ public class CreationStepManager : MonoBehaviour
                     Destroy(GameObject.FindGameObjectWithTag("Planet"));
                     Debug.Log("DESTROYROCK");
                 }
-                Instantiate(GasPrefab, new Vector3(0, 0.8f, 30), Quaternion.identity);
+                Instantiate(GasPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
                 Debug.Log("MAKEGAS");
             }
 
@@ -78,7 +78,7 @@ public class CreationStepManager : MonoBehaviour
                     Destroy(GameObject.FindGameObjectWithTag("GasPlanet"));
                     Debug.Log("DESTROYGAS");
                 }
-                Instantiate(RockPrefab, new Vector3(0, 0.8f, 30), Quaternion.identity);
+                Instantiate(RockPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
                 Debug.Log("MAKEREOCK");
             }
         }
