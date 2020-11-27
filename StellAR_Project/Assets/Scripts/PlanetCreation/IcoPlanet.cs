@@ -14,8 +14,10 @@ public class IcoPlanet : MotherPlanet{
 
     public override void Initialize(){
         if(shapeSettings == null || colorSettings == null){
-            shapeSettings = SettingSpawner.loadDefaultShape();
-            colorSettings = SettingSpawner.loadDefaultColor();
+            ShapeSettings tempShapeSettings = SettingSpawner.loadDefaultShape();
+            ColorSettings tempColSettings = SettingSpawner.loadDefaultColor();
+            shapeSettings = tempShapeSettings;
+            colorSettings = tempColSettings;
         }
 
         if(interaction == null){
@@ -27,7 +29,8 @@ public class IcoPlanet : MotherPlanet{
         }
 
         if(craterSettings == null){
-            craterSettings = SettingSpawner.loadDefaultCraters();
+            CraterSettings tempCraterSettings = SettingSpawner.loadDefaultCraters();
+            craterSettings = tempCraterSettings;
         }
 
         if(this.transform.Find("mesh") == null){ // no meshObj initialized yet

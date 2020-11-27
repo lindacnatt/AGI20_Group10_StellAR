@@ -11,29 +11,39 @@ public class NBodyPhysics : MonoBehaviour
     // Start is called before the first frame update
     void FixedUpdate(){
         if(!SimulationPauseControl.gameIsPaused){
-            
+            if (CelestialObject.Objects != null)
+            {
                 SimulateAcceleration();
                 SetPositions();
+            }
         
         }
        
     }
 
     void SimulateAcceleration(){
-        int length = CelestialObject.Objects.Count;
-        for(int j=0; j<length; j++){
-                CelestialObject current = CelestialObject.Objects[j];
-                if (!current.staticBody){
-                    if(ToggleGravityMode.nBodyGravity){
-                        AttractNBody(ref current);
+        if (CelestialObject.Objects != null)
+        {
+            int length = CelestialObject.Objects.Count;
+            if (length > 0)
+            {
+                for (int j = 0; j < length; j++)
+                {
+                    CelestialObject current = CelestialObject.Objects[j];
+                    if (!current.staticBody)
+                    {
+                        if (ToggleGravityMode.nBodyGravity)
+                        {
+                            AttractNBody(ref current);
                         }
-                    else
-                    {   
-                        AttractSource(ref current);
+                        else
+                        {
+                            AttractSource(ref current);
+                        }
                     }
                 }
             }
-        
+        }
     }
 
     void SetPositions(){

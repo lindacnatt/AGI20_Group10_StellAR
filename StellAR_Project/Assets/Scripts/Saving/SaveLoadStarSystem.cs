@@ -7,15 +7,19 @@ using System.IO;
 public static class SaveLoadStarSystem
 {
     
-    public static bool SaveStarSystem(){
-        SystemSimulationData simData = new SystemSimulationData(CelestialObject.Objects.Count);
+    public static bool SaveStarSystem(bool addNew){
+        SystemSimulationData simData = new SystemSimulationData(CelestialObject.Objects.Count, addNew);
 
         string path = Application.persistentDataPath +"/system.data";
+        if (addNew)
+        {
+            path = Application.persistentDataPath + "/newPlanet.data";
+        }
         string content = JsonUtility.ToJson(simData);
 
         try{
             File.WriteAllText(path,content);
-            Debug.Log(content);
+            //Debug.Log(content);
             return true;
         }
         catch(System.Exception e){
@@ -45,10 +49,15 @@ public static class SaveLoadStarSystem
 
     }
 
-    public static SystemSimulationData LoadStarSystem(){
+    public static SystemSimulationData LoadStarSystem(bool newPlanet){
         string path = Application.persistentDataPath + "/system.data";
+        if (newPlanet)
+        {
+            path = Application.persistentDataPath + "/newPlanet.data";
+        }
         if(File.Exists(path)){
             string result = File.ReadAllText(path);
+            Debug.Log("loadResult: " + result);
             SystemSimulationData data = JsonUtility.FromJson<SystemSimulationData>(result);
             //Debug.Log(data.physicsData[1].position.ToString("F3"));
             

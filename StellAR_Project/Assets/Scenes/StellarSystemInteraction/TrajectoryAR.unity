@@ -577,8 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5faaece5a97e14be2b9287465db0ac4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectToInstantiate: {fileID: 6550158357655270235, guid: c14270bed87c2ac46a1fa4938a1d8f1d,
-    type: 3}
+  gameObjectToInstantiate: {fileID: 0}
   simulationRunner: {fileID: 315051717}
   ARCamera: {fileID: 72423166}
   distanceFromCamera: 2
@@ -781,6 +780,58 @@ Transform:
   - {fileID: 72423170}
   m_Father: {fileID: 1000048372}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &666804564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 666804566}
+  - component: {fileID: 666804565}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &666804565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666804564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a73de72c6054257b56233c527d3cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIndex: 0
+  save: 0
+  load: 0
+  loadNewPlanet: 0
+  delete: 0
+  rockPrefab: {fileID: 3057556004749462269, guid: 2bc1c7983ffeb7747897587faca93e61,
+    type: 3}
+  gasPrefab: {fileID: 4070371378038438093, guid: 031849818bdad14478d5d2b8b8df39ea,
+    type: 3}
+--- !u!4 &666804566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666804564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.51, y: 1.61, z: -5.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &671629481
 GameObject:
@@ -1136,6 +1187,7 @@ MonoBehaviour:
   onSwitchedScreen:
     m_PersistentCalls:
       m_Calls: []
+  currentScreen: {fileID: 0}
   transitionTime: 0
 --- !u!4 &1115016360
 Transform:
@@ -1264,7 +1316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1468576915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,6 +1492,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Another Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970296990240870240, guid: 1a4a0e715951b3048aa1bb4176e152af,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8744246818739550032, guid: 1a4a0e715951b3048aa1bb4176e152af,
         type: 3}

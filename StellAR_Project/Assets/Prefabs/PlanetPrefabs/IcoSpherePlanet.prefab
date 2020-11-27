@@ -59,9 +59,9 @@ MonoBehaviour:
     type: 3}
   weightMultiplier: 8
   mass: 0
-  shapeSettings: {fileID: 11400000, guid: 6cb9985848348dd45a4189e7a9d2498e, type: 2}
+  shapeSettings: {fileID: 11400000, guid: c1a01c2fb9fd28a41b7c32bfb77964ca, type: 2}
   colorSettings: {fileID: 11400000, guid: 377c23a1db820164ba7e8b842025ea69, type: 2}
-  craterSettings: {fileID: 11400000, guid: b4e2abb1bc0bf4dcc941fba9f108c508, type: 2}
+  craterSettings: {fileID: 11400000, guid: 1b8ab40a7b2d14bf3a4aac12ceb7f208, type: 2}
   autoUpdate: 1
   clearCraters: 0
   shapeSettingsFoldout: 1
@@ -97,7 +97,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 5.08
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &-8722356361594104121
 AudioSource:

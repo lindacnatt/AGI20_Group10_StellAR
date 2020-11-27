@@ -48,7 +48,7 @@ public class SizeChanger : MonoBehaviour
         {
             Planet.GetComponent<IcoPlanet>().shapeSettings.radius = value;
             Planet.GetComponent<IcoPlanet>().UpdateMesh();
-            Debug.Log(Planet.GetComponent<IcoPlanet>().shapeSettings.radius);
+            //Debug.Log(Planet.GetComponent<IcoPlanet>().shapeSettings.radius);
 
             
         }
