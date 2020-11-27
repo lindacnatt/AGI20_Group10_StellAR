@@ -18,7 +18,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     void Awake()
     {
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
-        //objectToPlace.AddComponent(typeof(RotationSim));
+        objectToPlace.AddComponent(typeof(RotationSim));
     }
 
     void Update(){
@@ -52,6 +52,6 @@ public class ARPlacementTrajectory : MonoBehaviour
     public void PlaceNextObject(){
         objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
         placed = false;
-        //objectToPlace.AddComponent(typeof(RotationSim));
+        objectToPlace.AddComponent(typeof(RotationSim));
     }
 }

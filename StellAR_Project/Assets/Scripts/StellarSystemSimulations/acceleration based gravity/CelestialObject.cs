@@ -127,6 +127,12 @@ public class CelestialObject : MonoBehaviour
         rigidBody.position = data.position;
         mass = data.mass;
         rigidBody.mass=mass;
+        this.gameObject.GetComponent<RotationSim>().SetState(true);
+        this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
+        this.gameObject.GetComponent<RotationSim>().StartRotation(true);
+
+        
+
 
         if (staticBody)
         {

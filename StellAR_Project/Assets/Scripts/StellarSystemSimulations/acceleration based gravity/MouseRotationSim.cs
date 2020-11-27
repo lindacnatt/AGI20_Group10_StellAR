@@ -4,20 +4,14 @@ using UnityEngine;
 
 public class MouseRotationSim : MonoBehaviour
 {
-    private Quaternion rotation;
-    private Vector3 rotationVec;
-    private float startZ;
     private float rotSpeed = 30f;
     private bool rotationIsSet = false;
     private bool startRot = false;
     private Vector2 startPos;
     private Vector2 endPos;
     private Vector2 direction;
-
-    // Start is called before the first frame update
-    void Start(){
-        startZ = this.gameObject.transform.rotation.eulerAngles.z;
-    }
+    private float rotX;
+    private float rotY;
 
     void Update(){
         if(!rotationIsSet){
@@ -30,18 +24,14 @@ public class MouseRotationSim : MonoBehaviour
                 endPos = Input.mousePosition;
                 direction = endPos - startPos;
                 if(direction.magnitude>0.05f){
-                    float xDegree= Mathf.Rad2Deg*(Mathf.Acos(direction.x/direction.magnitude));
-                    float yDegree= Mathf.Rad2Deg*(Mathf.Asin(direction.y/direction.magnitude));
-                    rotationVec = new Vector3(xDegree, yDegree, 0f);
+                    rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
+                    rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
                 }
 
                 else{
-                    rotationVec = new Vector3(0f, 0f, 0f);
+                    rotX = 0f;
+                    rotY = 0f;
                 }
-
-                //rotation = Quaternion.Euler(xDegree, yDegree, 0f);
-                //Quaternion rotationX = Quaternion.Euler(, 0f, 0f);
-                //rotation = rotationY * rotationX;
                 startRot = true;
                 
             }
@@ -49,40 +39,35 @@ public class MouseRotationSim : MonoBehaviour
                 endPos = Input.mousePosition;
                 direction = endPos - startPos;
                 if(direction.magnitude>0.1f){
-                    float xDegree= Mathf.Rad2Deg*(Mathf.Acos(direction.x/direction.magnitude));
-                    float yDegree= Mathf.Rad2Deg*(Mathf.Asin(direction.y/direction.magnitude));
-                    rotationVec = new Vector3(xDegree, yDegree, 0f);
+                    rotX = Input.GetAxis("Mouse X")*rotSpeed*Mathf.Deg2Rad;
+                    rotY = Input.GetAxis("Mouse Y")*rotSpeed*Mathf.Deg2Rad;
                 }
 
                 else{
-                    rotationVec = new Vector3(0f, 0f, 0f);
+                    rotX = 0f;
+                    rotY = 0f;
                 }
                 
             }
-            /*if (touch.phase == TouchPhase.Moved)
-            {
-                
-                Quaternion rotationY = Quaternion.Euler(0f, touch.deltaPosition.y*touch.deltaPosition.magnitude , 0f);
-                Quaternion rotationX = Quaternion.Euler(touch.deltaPosition.x*touch.deltaPosition.magnitude, 0f, 0f);
-                rotation = rotationY * rotationX;
-                startRot = true;
-            }*/
+           
         }
     }
 
     void FixedUpdate(){
         if (startRot){
-            //this.gameObject.transform.Rotate(rotation.eulerAngles*Time.fixedDeltaTime);
-            this.gameObject.transform.Rotate(rotationVec*Time.fixedDeltaTime);
+            this.gameObject.transform.RotateAround(Vector3.up, -rotX);
+            this.gameObject.transform.RotateAround(Vector3.right, rotY);
         }
     }
 
-    public Quaternion GetRotation(){
-        return rotation;
+    public float[] GetRotation(){
+        float[] rot = new float[] {rotX, rotY};
+        return rot;
     }
 
-    public void SetRotation( Quaternion rot){
-        rotation = rot;
+    public void SetRotation( float x, float y){
+        rotX = x;
+        rotY = y;
     }
 
     public float GetRotSpeed(){
