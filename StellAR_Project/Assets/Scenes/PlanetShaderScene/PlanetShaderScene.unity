@@ -3703,7 +3703,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ad403fe5cb1141c4db962f01954ad170, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -11142,6 +11142,7 @@ MonoBehaviour:
   sceneIndex: 0
   save: 0
   load: 0
+  loadNewPlanet: 0
   delete: 0
   rockPrefab: {fileID: 0}
   gasPrefab: {fileID: 0}

@@ -22,7 +22,7 @@ public class SaveLoadScenes : MonoBehaviour
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (sceneIndex == 1)
         {
-            load = true;
+            //load = true;
             loadNewPlanet = true;
         }
     }
@@ -124,7 +124,6 @@ public class SaveLoadScenes : MonoBehaviour
                     CelestialObject.DestroyAll();
                     int rocky_i = 0;
                     int gasy_i = 0;
-                    /*
                     for (int i = 0; i < data.planetCount; i++)
                     {
                         GameObject obj = getPrefab(data, i);
@@ -147,10 +146,10 @@ public class SaveLoadScenes : MonoBehaviour
                         }
                         GameObject ARSessOrig = GameObject.Find("AR Session Origin");
                         ARPlacementTrajectory placement = ARSessOrig.GetComponent<ARPlacementTrajectory>();
-                        Debug.Log(obj);
+                        //Debug.Log(obj);
                         placement.setGOtoInstantiate(obj);
 
-                    }*/
+                    }
                 }
             }
         }

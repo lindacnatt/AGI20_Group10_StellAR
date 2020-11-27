@@ -85,6 +85,7 @@ public class CelestialObject : MonoBehaviour
             {
                 if (!hasExploded)
                 {
+                    Debug.Log("Explode");
                     if (this.transform.localScale.x >= 1)
                     {
                         explosionEffect = Resources.Load<GameObject>("Explosions/BigExplosionEffect");
@@ -144,12 +145,16 @@ public class CelestialObject : MonoBehaviour
     }
 
     public static void DestroyAll(){
-        for (int i = 0; i < Objects.Count; i++)
+        if(Objects != null)
         {
-            Destroy(Objects[i].gameObject);
+            for (int i = 0; i < Objects.Count; i++)
+            {
+                Destroy(Objects[i].gameObject);
+            }
+            Objects.Clear(); //clearing the old planets
+            Objects.TrimExcess();
         }
-        Objects.Clear(); //clearing the old planets
-        Objects.TrimExcess();
+
     }
 
 }

@@ -17,35 +17,41 @@ public class ARPlacementTrajectory : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
+        //objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
         //objectToPlace.AddComponent(typeof(RotationSim));
     }
 
     void Update(){
-        if (Input.touchCount == 2 && (placed != true))
+        if (objectToPlace != null)
         {
-            placed = true;
-            objectToPlace.GetComponent<CelestialObject>().enabled = true;
-            simulationRunner.GetComponent<TrajectoryLineAnimation>().main = objectToPlace;
-            simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;
-            simulationRunner.transform.GetChild(0).gameObject.GetComponent<TrajectoryVelocity>().mainObject = objectToPlace;
-            SimulationPauseControl.gameIsPaused = true;
-            TrajectoryVelocity.startSlingshot = true;
-            TrajectoryVelocity.start = new Vector3(0f,0f,0f);
-            TrajectorySimulation.destroyLine = false;
-            objectToPlace.GetComponent<SphereCollider>().enabled = true;
-            objectToPlace.GetComponent<RotationSim>().SetState(true);
-            //objectToPlace = null;
+            if (Input.touchCount == 2 && (placed != true))
+            {
+                placed = true;
+                objectToPlace.GetComponent<CelestialObject>().enabled = true;
+                simulationRunner.GetComponent<TrajectoryLineAnimation>().main = objectToPlace;
+                simulationRunner.GetComponent<TrajectorySimulation>().mainObject = objectToPlace;
+                simulationRunner.transform.GetChild(0).gameObject.GetComponent<TrajectoryVelocity>().mainObject = objectToPlace;
+                SimulationPauseControl.gameIsPaused = true;
+                TrajectoryVelocity.startSlingshot = true;
+                TrajectoryVelocity.start = new Vector3(0f, 0f, 0f);
+                TrajectorySimulation.destroyLine = false;
+                objectToPlace.GetComponent<SphereCollider>().enabled = true;
+                objectToPlace.GetComponent<RotationSim>().SetState(true);
+                //objectToPlace = null;
+            }
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (placed != true) //while it is not placed it will follow the cameras position
+        if (objectToPlace != null)
         {
-            objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera;
-            //objectToPlace.transform.rotation = new Quaternion(0.0f, ARCamera.transform.rotation.y, 0.0f, ARCamera.transform.rotation.w);
+            if (placed != true) //while it is not placed it will follow the cameras position
+            {
+                objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera;
+                //objectToPlace.transform.rotation = new Quaternion(0.0f, ARCamera.transform.rotation.y, 0.0f, ARCamera.transform.rotation.w);
+            }
         }
     }
 
@@ -59,6 +65,10 @@ public class ARPlacementTrajectory : MonoBehaviour
     {
         gameObjectToInstantiate = go;
         Debug.Log(go.name);
+        SphereCollider collider = gameObjectToInstantiate.GetComponent<SphereCollider>();
+        collider.enabled = false;
+        objectToPlace = gameObjectToInstantiate;
+        //objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera, ARCamera.transform.rotation);
         //PlaceNextObject();
     }
 }
