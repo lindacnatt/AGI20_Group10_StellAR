@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
+public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
 
     //The color of the object
     public Color BandColorStorm; 
@@ -52,7 +52,7 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
     }
     public void ChangeStormPlacement(float value)
     {
-
+       
         StormPlacement = value;
     }
     public void ChangeBandScale1(float value)
@@ -65,18 +65,14 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         BandScale2 = value;
 
     }
-    public void ReSeed(bool value)
+    public void ReSeed()
     {
-        if (value != SeedToggle)
-        {
+        
             BandXSeed1 = UnityEngine.Random.Range(0, 10);
             BandXSeed2 = UnityEngine.Random.Range(0, 10);
             BandYSeed1 = UnityEngine.Random.Range(0, 10);
             BandYSeed2 = UnityEngine.Random.Range(0, 10);
 
-
-
-        }
 
     }
     public void ChangeBandColor1(float value)
@@ -92,7 +88,7 @@ public class GasPlanetShaderMAterialPropertyBlock : MonoBehaviour {
         BandColor3.r = value;
     }
 
-    public void SetMaterial(_gasSettings data)
+    public void SetMaterial(_gasPlanet data)
     {
         BandColorStorm = data.BandColorStorm;
         StormSize = data.StormSize;
