@@ -75,18 +75,32 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
 
 
     }
-    public void ChangeBandColor1(float value)
+    public void ChangeBandColor1(Vector3 colors)
     {
-        BandColor1.r = value;
+        BandColor1.r = colors.x;
+        BandColor1.g = colors.y;
+        BandColor1.b = colors.z;
     }
-    public void ChangeBandColor2(float value)
+    public void ChangeBandColor2(Vector3 colors)
     {
-        BandColor2.r = value;
+        BandColor2.r = colors.x;
+        BandColor2.g = colors.y;
+        BandColor2.b = colors.z;
     }
-    public void ChangeBandColor3(float value)
+    public void ChangeBandColor3(Vector3 colors)
     {
-        BandColor3.r = value;
+        BandColor3.r = colors.x;
+        BandColor3.g = colors.y;
+        BandColor3.b = colors.z;
     }
+
+    public void ChangeStormColor(Vector3 colors) 
+    {
+        BandColorStorm.r = colors.x;
+        BandColorStorm.g = colors.y;
+        BandColorStorm.b = colors.z;
+    }
+    
 
     public void SetMaterial(_gasPlanet data)
     {

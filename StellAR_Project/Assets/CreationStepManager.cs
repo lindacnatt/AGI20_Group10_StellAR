@@ -88,8 +88,7 @@ public class CreationStepManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(ScreenSys._mStartScreen.GetType());
-        Debug.Log(Screen21.GetType());
+        
     }
 
     // Update is called once per frame
