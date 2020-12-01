@@ -45,6 +45,8 @@ namespace Stellar.UI
                 onScreenStart.Invoke();
             }
             HandleAnimator("show");
+
+            gameObject.SetActive(true);
         }
         public virtual void CloseScreen()
         {
@@ -53,6 +55,7 @@ namespace Stellar.UI
                 onScreenClose.Invoke();
             }
             HandleAnimator("hide");
+            gameObject.SetActive(false);
            
         }
 

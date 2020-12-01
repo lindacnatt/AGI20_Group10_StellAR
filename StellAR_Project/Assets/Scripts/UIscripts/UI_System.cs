@@ -47,6 +47,7 @@ namespace Stellar.UI
             {
                 if(currentScreen)
                 {
+                   
                     currentScreen.CloseScreen();
                     previousScreen = currentScreen;
                 }
