@@ -107,6 +107,7 @@ public class Triangle : MonoBehaviour{
         }
         if(Input.GetMouseButton(0)){
 
+
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             //worldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane)) * -1f;
             hit = Physics2D.GetRayIntersection(ray);
@@ -116,16 +117,24 @@ public class Triangle : MonoBehaviour{
                 selection = hit.transform;
                 //selectionRenderer = selection.GetComponent<Renderer>();
                 handle.transform.position = hit.point;
-                Vector3 colorWeights = BaryCentric.getWeights(handle.transform.position, vertices);
+                for (int i = 0; i < 3; i++) 
+                { 
+                    vertices[i] = mesh.vertices[i] / size; 
+                }
+                
+                handle.transform.localPosition = new Vector3(handle.transform.localPosition.x, handle.transform.localPosition.y, handleInitZ);
+                Vector3 colorWeights = BaryCentric.getWeights(handle.transform.localPosition/size, vertices);
+                
                 UpdateTintColor(colorWeights);
                 //the following line makes sure that the handle does not fuck off into oblivion on the z axis.
-                handle.transform.localPosition = new Vector3(handle.transform.localPosition.x, handle.transform.localPosition.y, handleInitZ);
+               
                 UpdateColor(colorWeights);
             }
         }  
     }
     void UpdateColor(Vector3 weights){
         float mult = 1f;
+        //Debug.Log(weights);
         Color newColor = new Color(weights.x*mult, weights.y*mult, weights.z*mult, 1f*mult);
         //Debug.Log(meshRenderer);
         meshRenderer.material.color = newColor;

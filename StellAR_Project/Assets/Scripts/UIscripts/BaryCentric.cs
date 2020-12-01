@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaryCentric {
     public static Vector3 getWeights(Vector3 pos, Vector3[] triangle){ //calculate barycentric weights from pos
+        Debug.Log("pos:"+pos);
         float A =  HeronsArea(triangle[0], triangle[1], triangle[2]);
         float w1, w2, w3;
         w1 = HeronsArea(pos, triangle[0], triangle[1]) / A;
