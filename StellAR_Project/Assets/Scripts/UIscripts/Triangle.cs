@@ -121,12 +121,12 @@ public class Triangle : MonoBehaviour{
                 { 
                     vertices[i] = mesh.vertices[i] / size; 
                 }
-                
+                //the following line makes sure that the handle does not fuck off into oblivion on the z axis.
                 handle.transform.localPosition = new Vector3(handle.transform.localPosition.x, handle.transform.localPosition.y, handleInitZ);
                 Vector3 colorWeights = BaryCentric.getWeights(handle.transform.localPosition/size, vertices);
                 
                 UpdateTintColor(colorWeights);
-                //the following line makes sure that the handle does not fuck off into oblivion on the z axis.
+                
                
                 UpdateColor(colorWeights);
             }
