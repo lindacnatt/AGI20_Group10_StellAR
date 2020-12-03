@@ -4,17 +4,16 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class ShapeSettings : ScriptableObject{
-    public float radius;
-    public bool zeroLvlIsOcean;
+    public float radius = 1f;
+    public bool zeroLvlIsOcean = true;
     public NoiseLayer[] noiseLayers;
-
 
     [System.Serializable]
     public class NoiseLayer{
         public bool enabled = true;
         public bool useFirstLayerAsMask = false;
-        public bool useMouseAsMask = false;
-        public NoiseSettings  noiseSettings;
+        public bool useMouseAsMask = true;
+        public NoiseSettings noiseSettings;
     }
 
 }
