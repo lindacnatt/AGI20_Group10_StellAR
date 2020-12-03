@@ -18,6 +18,9 @@ public class CreationStepManager : MonoBehaviour
     public GameObject GasPrefab;
     public GameObject RockPrefab;
 
+    
+    public string[] types = new string[]{"Rock", "Gas"};
+
     public void ChangeScreen(UI_Screen nextScreen)
     {
         if (StartScreen)
@@ -82,6 +85,12 @@ public class CreationStepManager : MonoBehaviour
                 Debug.Log("MAKEREOCK");
             }
         }
+    }
+
+    public void RandomType()
+    {
+        var randType = types[Random.Range(0, types.Length)];
+        ToggleType(randType);
     }
 
 

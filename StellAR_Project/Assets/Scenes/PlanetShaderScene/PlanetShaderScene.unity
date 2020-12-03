@@ -193,7 +193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -97, y: -784}
+  m_AnchoredPosition: {x: -231, y: -808}
   m_SizeDelta: {x: 313.7954, y: 93.275925}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44773574
@@ -238,7 +238,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 44773575}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 309276295}
+        m_MethodName: RandomType
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &44773575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,6 +1620,9 @@ MonoBehaviour:
     type: 3}
   RockPrefab: {fileID: 3057556004749462269, guid: 2bc1c7983ffeb7747897587faca93e61,
     type: 3}
+  types:
+  - Rock
+  - Gas
 --- !u!1 &317934598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,7 +1853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -181, y: 683}
+  m_AnchoredPosition: {x: -163, y: 683}
   m_SizeDelta: {x: 450, y: 635}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362461729
@@ -10116,7 +10130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 189, y: 683}
+  m_AnchoredPosition: {x: 169, y: 683}
   m_SizeDelta: {x: 450, y: 635}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1738262897
