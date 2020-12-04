@@ -12,6 +12,7 @@ public class SystemSimulationData
     public _gasPlanet[] gasPlanetList;
     public int planetCount;
     public bool addNew = false;
+    public bool gravityState;
 
     public SystemSimulationData(int objectCount, bool addNew){
         physicsData = new _celestialObject[objectCount];
@@ -33,6 +34,7 @@ public class SystemSimulationData
         gasPlanetList = new _gasPlanet[gasyplanetcount];
         planetCount = objectCount;
         this.addNew = addNew;
+        gravityState = ToggleGravityMode.nBodyGravity;
         CollectData();
     }
 

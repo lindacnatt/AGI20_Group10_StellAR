@@ -68,6 +68,7 @@ public static class SaveLoadStarSystem
             TrajectorySimulation.destroyLine = false;
             TrajectorySimulation.freeze = false;
             TrajectorySimulation.shoot = false;
+            ToggleGravityMode.nBodyGravity = data.gravityState;
 
             return data;
         }

@@ -1556,7 +1556,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d6802ad75dad6499b89f912fc151cb1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1587,39 +1587,21 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.90340805
-        value: 0.032040328
-        inSlope: Infinity
-        outSlope: Infinity
+        time: 0.008522034
+        value: 0.07051277
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.9062493
-        value: 0.20512663
-        inSlope: -1.6199632
-        outSlope: -1.6199632
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 1
-        outWeight: 0.6190488
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -0.8920684
-        outSlope: -0.8920684
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.68253756
-        outWeight: 0
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.1534259, b: 0.9716981, a: 0.75686276}
-      key1: {r: 0, g: 0.1534259, b: 0.9716981, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0.0627451, g: 0.15294118, b: 0.9725491, a: 0}
       key3: {r: 1, g: 1, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1634,7 +1616,7 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 5012
+      atime0: 0
       atime1: 65535
       atime2: 65535
       atime3: 65535
@@ -2331,9 +2313,10 @@ MonoBehaviour:
   sceneIndex: 0
   save: 0
   load: 0
+  loadNewPlanet: 0
   delete: 0
-  prefab: {fileID: 6550158357655270235, guid: c14270bed87c2ac46a1fa4938a1d8f1d, type: 3}
-  prefab2: {fileID: 0}
+  rockPrefab: {fileID: 0}
+  gasPrefab: {fileID: 0}
 --- !u!4 &1787281138
 Transform:
   m_ObjectHideFlags: 0
