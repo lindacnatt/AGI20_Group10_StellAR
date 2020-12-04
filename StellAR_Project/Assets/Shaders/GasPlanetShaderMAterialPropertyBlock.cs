@@ -75,30 +75,46 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
 
 
     }
-    public void ChangeBandColor1(Vector3 colors)
+    public void ChangeBandColor1(Vector3 weigths, float factor)
     {
-        BandColor1.r = colors.x;
-        BandColor1.g = colors.y;
-        BandColor1.b = colors.z;
+        //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+        BandColor1.r = weigths.x;
+        BandColor1.g = weigths.y;
+        BandColor1.b = weigths.z;
+        BandColor1.r *= factor;
+        BandColor1.g *= factor;
+        BandColor1.b *= factor;
     }
-    public void ChangeBandColor2(Vector3 colors)
+    public void ChangeBandColor2(Vector3 weights, float factor)
     {
-        BandColor2.r = colors.x;
-        BandColor2.g = colors.y;
-        BandColor2.b = colors.z;
+        //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+        BandColor2.r = weights.x;
+        BandColor2.g = weights.y;
+        BandColor2.b = weights.z;
+        BandColor2.r *= factor;
+        BandColor2.g *= factor;
+        BandColor2.b*= factor;
     }
-    public void ChangeBandColor3(Vector3 colors)
+    public void ChangeBandColor3(Vector3 weights, float factor)
     {
-        BandColor3.r = colors.x;
-        BandColor3.g = colors.y;
-        BandColor3.b = colors.z;
+        //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+        BandColor3.r = weights.x;
+        BandColor3.g = weights.y;
+        BandColor3.b = weights.z;
+        BandColor3.r *= factor;
+        BandColor3.g *= factor;
+        BandColor3.b *= factor;
     }
 
-    public void ChangeStormColor(Vector3 colors) 
+    public void ChangeStormColor(Vector3 weights, float factor) 
     {
-        BandColorStorm.r = colors.x;
-        BandColorStorm.g = colors.y;
-        BandColorStorm.b = colors.z;
+        //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+        BandColorStorm.r = weights.x;
+        BandColorStorm.g = weights.y;
+        BandColorStorm.b = weights.z;
+        BandColorStorm.r *= factor;
+        BandColorStorm.g *= factor;
+        BandColorStorm.b *= factor;
     }
     
 
