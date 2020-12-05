@@ -20,6 +20,11 @@ public class CreationStepManager : MonoBehaviour
 
     
     public string[] types = new string[]{"Rock", "Gas"};
+    public float ShakeDetectionThreshold;
+    public float MinShakeInterval;
+ 
+    private float sqrShakeDetectionThreshold;
+    private float timeSinceLastShake;
 
     public void ChangeScreen(UI_Screen nextScreen)
     {
@@ -94,15 +99,23 @@ public class CreationStepManager : MonoBehaviour
     }
 
 
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        sqrShakeDetectionThreshold = Mathf.Pow(ShakeDetectionThreshold, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Screen1){
+             if (Input.acceleration.sqrMagnitude >= sqrShakeDetectionThreshold && Time.unscaledTime >= timeSinceLastShake + MinShakeInterval)
+            {
+                RandomType();
+                Debug.Log("Shaken not stirred");
+                timeSinceLastShake = Time.unscaledTime;
+            }
+        } 
     }
 }

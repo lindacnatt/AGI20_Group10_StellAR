@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random=UnityEngine.Random;
 
 public class Triangle : MonoBehaviour{
     Mesh mesh;
@@ -140,9 +141,6 @@ public class Triangle : MonoBehaviour{
         meshRenderer.material.color = newColor;
     }
 
-    // void UpdatePlanetColor(Vector3 weights){
-    //     Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
-    // }
     public void UpdateTintColor(Vector3 weights){
         if (planet)
         {
@@ -173,6 +171,12 @@ public class Triangle : MonoBehaviour{
             bandPos[currBand] = handle.transform.localPosition;
             bandWeights[currBand] = weights;
         }
+        
+    }
+    
+    public void UpdateRandomTintColor(Vector3 weights){
+        Vector3 randomVector = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0f, 1f));
+        UpdateTintColor(randomVector);
         
     }
 
