@@ -19,7 +19,7 @@ namespace Stellar.UI
 
         [Header("Screen Events")]
         public UnityEvent onScreenStart = new UnityEvent();
-        public UnityEvent onScreenClose = new UnityEvent(); 
+        public UnityEvent onScreenClose = new UnityEvent();
 
         private Animator animator;
         #endregion
@@ -35,6 +35,7 @@ namespace Stellar.UI
                 EventSystem.current.SetSelectedGameObject(m_StartSelectable.gameObject);
             }
         }
+
         #endregion
 
         #region Helper Methods

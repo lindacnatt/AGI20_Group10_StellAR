@@ -16,6 +16,8 @@ public class SaveLoadScenes : MonoBehaviour
     bool gasy = false;
     bool rocky = false;
     int startingIndex = 0;
+    bool saveSpecific;
+    string systemName;
 
     private void Start()
     {
@@ -32,13 +34,21 @@ public class SaveLoadScenes : MonoBehaviour
         if(save){
             if(sceneIndex == 2){
                 //Save one planet to newPlanet.data
-                SaveLoadStarSystem.SaveStarSystem(true);
+                SaveLoadStarSystem.SaveStarSystem(true, "/newPlanet.data");
                 save=false;
             }
             else if (sceneIndex == 1)
             {
                 //Save the entire system to system.data
-                SaveLoadStarSystem.SaveStarSystem(false);
+                if (saveSpecific)
+                {
+                    SaveLoadStarSystem.SaveStarSystem(false, "/" + systemName + ".data");
+                    saveSpecific = false;
+                }
+                else
+                {
+                    SaveLoadStarSystem.SaveStarSystem(false, "/system.data");
+                }
                 save = false;
             }
             /*
@@ -195,9 +205,15 @@ public class SaveLoadScenes : MonoBehaviour
         delete = !delete;
     }
 
+    public void saveSpecificSystem(string name)
+    {
+        saveSpecific = true;
+        systemName = name;
+    }
+
     public void NextScene()
     {
-        SaveLoadStarSystem.SaveStarSystem(true);
+        SaveLoadStarSystem.SaveStarSystem(true, "/newPlanet.data");
         save = false;
         SceneManager.LoadScene(1);
     }
