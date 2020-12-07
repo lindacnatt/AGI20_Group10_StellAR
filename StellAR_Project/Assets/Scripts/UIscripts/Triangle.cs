@@ -209,9 +209,9 @@ public class Triangle : MonoBehaviour{
         
     }
     
-    public void UpdateRandomTintColor(Vector3 weights){
+    public void UpdateRandomTintColor(){
         Vector3 randomVector = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0f, 1f));
-        UpdateTintColor(randomVector);
+        UpdateTintColor(randomVector, 0.5f);
         
     }
 
