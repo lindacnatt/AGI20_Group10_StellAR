@@ -9,17 +9,21 @@ public struct _planet
     public int id;
     public List<_crater> craterList;
     public _shapeSettings shape;
+    public _colorSettings color;
 
     public _planet(MotherPlanet planet, int id)
     {
         this.id = id;
         ShapeSettings shapeSettings;
+        ColorSettings colorSettings;
         craterList = new List<_crater>();
         string[] noisePoints = planet.shapeGenerator.getMaskKeys();
         float[] noiseValues = planet.shapeGenerator.getMaskValues();
         shapeSettings = planet.shapeGenerator.settings;
         shape = new _shapeSettings(shapeSettings.radius, shapeSettings.zeroLvlIsOcean,
             shapeSettings.noiseLayers, noisePoints, noiseValues);
+        colorSettings = planet.colorGenerator.settings;
+        color = new _colorSettings(colorSettings.planetMaterial, colorSettings.biomeColorSettings);
         CollectCraters(planet);
     }
 

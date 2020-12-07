@@ -26,7 +26,9 @@ public class Triangle : MonoBehaviour{
     Vector3[] bandWeights = new Vector3[4];
     Vector3[] bandPos = new Vector3[4];
     MotherPlanet planet;
-    
+
+    float intensityLevel = 0;
+    Vector3 colorWeights;
 
     public Material material;
 
@@ -34,16 +36,14 @@ public class Triangle : MonoBehaviour{
     public float size;
     RaycastHit hit2;
 
-    void Awake(){
+    void Start(){
         if(gameObject.GetComponent<MeshFilter>() == null){
-            Debug.Log("adding");
             gameObject.AddComponent<MeshFilter>();
             meshRenderer = gameObject.AddComponent<MeshRenderer>();
             col = gameObject.AddComponent<PolygonCollider2D>();
         }
         else{
-            Debug.Log("getting");
-            //gameObject.AddComponent<MeshFilter>();
+             //gameObject.AddComponent<MeshFilter>();
             meshRenderer = gameObject.GetComponent<MeshRenderer>();
             col = gameObject.GetComponent<PolygonCollider2D>();
         }
@@ -62,9 +62,13 @@ public class Triangle : MonoBehaviour{
                 child.onClick.AddListener(() => bandButtonClick(bandButtons.IndexOf(child)));
                 
             }
+            
         }
+
+
+        GetComponentInChildren<Slider>().onValueChanged.AddListener(intensityOnChange);
         //GetComponent<MotherPlanet>();
-        
+
         meshRenderer.material = material;
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
@@ -83,8 +87,14 @@ public class Triangle : MonoBehaviour{
         
         // set handle sprite
         handle = this.transform.GetChild(0).gameObject;
+        
+        handle.transform.localPosition = new Vector3(2, 1, handle.transform.localPosition.z);
         handleInitZ = handle.transform.localPosition.z;
-        Array.ForEach(bandPos, p => p = handle.transform.localPosition);
+        for (int i = 0; i < 3; i++)
+        {
+            bandPos[i] = handle.transform.localPosition;
+        }
+     
         // create shape of collider 
         colPoints = new Vector2[3];
         for(int i = 0; i < 3; i++){
@@ -92,19 +102,27 @@ public class Triangle : MonoBehaviour{
         }
         col.pathCount = 1;
         col.SetPath(0, colPoints);
-
+        for (int i = 0; i < 3; i++)
+        {
+            vertices[i] = mesh.vertices[i] / size;
+        }
         //get initialweights
-        Vector3 initWeights = BaryCentric.getWeights(handle.transform.position, vertices);
-        Array.ForEach(bandWeights, w => w = initWeights);
+        Vector3 initWeights = BaryCentric.getWeights(handle.transform.localPosition / size, vertices);
+        for (int i = 0; i < 3; i++)
+        {
+            bandWeights[i] = initWeights;
+        }
     }
   
     void Update(){
-
+        
         if (gasPlanet)
         {
             //makes sure that each band keeps the color that was selected before switching to other band, and that the handle reflects that color
+           
             handle.transform.localPosition = new Vector3(bandPos[currBand].x, bandPos[currBand].y, handleInitZ);
-            UpdateColor(bandWeights[currBand]);
+           
+            UpdateColor(bandWeights[currBand], intensityLevel);
         }
         if(Input.GetMouseButton(0)){
 
@@ -118,35 +136,52 @@ public class Triangle : MonoBehaviour{
                 selection = hit.transform;
                 //selectionRenderer = selection.GetComponent<Renderer>();
                 handle.transform.position = hit.point;
-                for (int i = 0; i < 3; i++) 
-                { 
-                    vertices[i] = mesh.vertices[i] / size; 
-                }
+                
                 //the following line makes sure that the handle does not fuck off into oblivion on the z axis.
                 handle.transform.localPosition = new Vector3(handle.transform.localPosition.x, handle.transform.localPosition.y, handleInitZ);
-                Vector3 colorWeights = BaryCentric.getWeights(handle.transform.localPosition/size, vertices);
+               
+                colorWeights = BaryCentric.getWeights(handle.transform.localPosition/size, vertices);
                 
-                UpdateTintColor(colorWeights);
+                UpdateTintColor(colorWeights, intensityLevel);
                 
                
-                UpdateColor(colorWeights);
+                UpdateColor(colorWeights, intensityLevel);
             }
         }  
     }
-    void UpdateColor(Vector3 weights){
-        float mult = 1f;
+    void UpdateColor(Vector3 weights, float power){
+
+        float intensity = (weights.x + weights.y + weights.z) / 3f;
+        float factor = Mathf.Pow(intensity, power);
+        
         //Debug.Log(weights);
-        Color newColor = new Color(weights.x*mult, weights.y*mult, weights.z*mult, 1f*mult);
+        Color newColor = new Color(weights.x, weights.y, weights.z, 1f);
+        newColor.r *= factor;
+        newColor.g *= factor;
+        newColor.b *= factor;
+        //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
         //Debug.Log(meshRenderer);
+
         meshRenderer.material.color = newColor;
+
     }
 
-    public void UpdateTintColor(Vector3 weights){
+    // void UpdatePlanetColor(Vector3 weights){
+    //     Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
+    // }
+    public void UpdateTintColor(Vector3 weights, float power){
+        float intensity = (weights.x + weights.y + weights.z) / 3f;
+        float factor = Mathf.Pow(intensity, power);
         if (planet)
         {
+            
             planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = weights[0];
             planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g = weights[1];
             planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b = weights[2];
+            //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r *= factor;
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g *= factor;
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b *= factor;
             planet.GenerateColors();
         }
         else
@@ -154,19 +189,19 @@ public class Triangle : MonoBehaviour{
             //makes sure that each band keeps the color that was selected before switching to other band, and that the handle reflects that color
             if (currBand == 0)
             {
-                gasPlanet.ChangeBandColor1(weights);
+                gasPlanet.ChangeBandColor1(weights, factor);
             }
             else if (currBand == 1)
             {
-                gasPlanet.ChangeBandColor2(weights);
+                gasPlanet.ChangeBandColor2(weights, factor);
             }
             else if (currBand == 2)
             {
-                gasPlanet.ChangeBandColor3(weights);
+                gasPlanet.ChangeBandColor3(weights, factor);
             }
             else
             {
-                gasPlanet.ChangeStormColor(weights);
+                gasPlanet.ChangeStormColor(weights, factor);
             }
             bandPos[currBand] = handle.transform.localPosition;
             bandWeights[currBand] = weights;
@@ -183,7 +218,13 @@ public class Triangle : MonoBehaviour{
     public void bandButtonClick(int idx)
     {
         currBand = idx;
-        Debug.Log(currBand);
+    }
+
+    public void intensityOnChange(float value)
+    {
+        intensityLevel = value;
+        UpdateTintColor(colorWeights, intensityLevel);
+        UpdateColor(colorWeights, intensityLevel);
     }
 
 }

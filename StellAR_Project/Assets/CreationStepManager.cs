@@ -30,15 +30,17 @@ public class CreationStepManager : MonoBehaviour
     {
         if (StartScreen)
         {
-            StartScreen = false;
+            
             if(Gas == true)
             {
+                StartScreen = false;
 
                 ScreenSys.SwitchScreens(aScreen: Screen21);
                 
             }
             else if(Rock == true)
             {
+                StartScreen = false;
                 ScreenSys.SwitchScreens(aScreen: Screen22);
             }
 

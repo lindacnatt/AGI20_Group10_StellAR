@@ -75,6 +75,9 @@ public abstract class MotherPlanet: CelestialObject {
         {
             shapeGenerator.masks[0][data.shape.noisePoints[i]] = data.shape.noiseValues[i];
         }
+
+        //colorGenerator.settings.planetMaterial = data.color.planetMaterial;
+        colorGenerator.settings.biomeColorSettings = data.color.biomeColorSettings;
     }
 
 }

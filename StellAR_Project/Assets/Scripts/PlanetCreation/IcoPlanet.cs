@@ -10,27 +10,41 @@ public class IcoPlanet : MotherPlanet{
     IcoSphere icoSphere;
     [SerializeField, HideInInspector]
     MeshFilter meshFilter;
-    MouseInteraction interaction;
+    //MouseInteraction interaction;
+    Interactor interaction;
 
     public override void Initialize(){
         if(shapeSettings == null || colorSettings == null){
+            /*
             ShapeSettings tempShapeSettings = SettingSpawner.loadDefaultShape();
             ColorSettings tempColSettings = SettingSpawner.loadDefaultColor();
             shapeSettings = tempShapeSettings;
             colorSettings = tempColSettings;
+            */
+            shapeSettings = SettingSpawner.CopyShapeSettings();
+            colorSettings = SettingSpawner.CopyColorSettings();
         }
-
+        shapeSettings = SettingSpawner.CopyShapeSettings();
+        colorSettings = SettingSpawner.CopyColorSettings();
+        
+        if(craterSettings == null){
+            /*
+            CraterSettings tempCraterSettings = SettingSpawner.loadDefaultCraters();
+            craterSettings = tempCraterSettings;
+            */
+            craterSettings = SettingSpawner.CopyCraterSettings();
+        }
+        
+        /*
         if(interaction == null){
             interaction = GetComponent<MouseInteraction>();
         }
 
+        */
+        interaction = (Interactor) GameObject.Find("Interactor").GetComponent<Interactor>();
+
         if(this.GetComponent<SphereCollider>() == null){
             this.gameObject.AddComponent<SphereCollider>();
-        }
-
-        if(craterSettings == null){
-            CraterSettings tempCraterSettings = SettingSpawner.loadDefaultCraters();
-            craterSettings = tempCraterSettings;
         }
 
         if(this.transform.Find("mesh") == null){ // no meshObj initialized yet
@@ -47,7 +61,6 @@ public class IcoPlanet : MotherPlanet{
             meshObj.GetComponent<MeshRenderer>(); //.material = (Material) Resources.Load("defaultMat");
             meshFilter.sharedMesh = new Mesh();
             meshObj.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
-
         }
 
         craterGenerator = new CraterGenerator(craterSettings);
@@ -57,7 +70,7 @@ public class IcoPlanet : MotherPlanet{
         colorGenerator.UpdateSettings(colorSettings);
 
         icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, LOD, meshFilter.sharedMesh); 
-        icoSphere.UpdateUVs();   
+        icoSphere.SetUVs(colorGenerator);   
     }
 
     public override void GenerateMesh(){
@@ -77,12 +90,8 @@ public class IcoPlanet : MotherPlanet{
     }
 
     public override void GenerateColors(){   
-        //Debug.Log(colorGenerator);
-        //icoSphere.UpdateUVs();
         colorGenerator.UpdateColors();
-        if(meshFilter.gameObject.activeSelf){
-            //icoSphere.UpdateUVs();
-        }
+        icoSphere.SetUVs(colorGenerator);
     }
     
     public override void OnCraterSettingsUpdated(){ //Rebuild planet when color is updated
