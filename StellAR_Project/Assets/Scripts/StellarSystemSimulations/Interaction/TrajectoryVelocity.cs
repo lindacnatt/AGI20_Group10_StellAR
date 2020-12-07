@@ -42,8 +42,11 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         vertices = 20;
         this.GetComponent<LineRenderer>().enabled = false;
-        arrow = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        arrow.enabled = false;
+        if (this.transform.childCount > 0)
+        {
+            arrow = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+            arrow.enabled = false;
+        }
         //rb=this.GetComponent<Rigidbody>();
 
         
