@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu()]
 public class ShapeSettings : ScriptableObject{
-    public float radius = 1f;
+    public float radius = 0.5f;
     public bool zeroLvlIsOcean = true;
     public NoiseLayer[] noiseLayers;
 

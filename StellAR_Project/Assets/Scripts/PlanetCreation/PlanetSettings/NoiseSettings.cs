@@ -13,8 +13,7 @@ public class NoiseSettings {
     public float freqPower = 2f;
     public float freq = 1f;
     public float minValue = .5f;
-    public int clampSteps = 3;
     [Range(0, 3)]
-    public float amplitude = 1.0f;
+    public float amplitude = 0.55f;
     public Vector3 noiseCenter = Vector3.zero;
 }
