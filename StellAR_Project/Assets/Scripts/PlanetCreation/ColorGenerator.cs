@@ -27,7 +27,7 @@ public class ColorGenerator
     }
 
     public float BiomePercentFromPoint(Vector3 pointOnUnitSphere) {
-        float heightPercent = (pointOnUnitSphere.y +1) /2f;
+        float heightPercent = (pointOnUnitSphere.y + 1) /2f;
         heightPercent += (biomeNoiseFilter.Evaluate(pointOnUnitSphere) - settings.biomeColorSettings.noiseOffset) * settings.biomeColorSettings.noiseStrength;
 
         float biomeIndex = 0;
@@ -37,7 +37,7 @@ public class ColorGenerator
         for (int i = 0; i < numBiomes; i++){
            float distance = heightPercent - settings.biomeColorSettings.biomes[i].startHeight;
            float weight = Mathf.InverseLerp(-blendRange, blendRange, distance);
-           biomeIndex *= (1- weight);
+           biomeIndex *= (1 - weight);
            biomeIndex += i * weight;
         }
         return biomeIndex / Mathf.Max(1, numBiomes -1);
