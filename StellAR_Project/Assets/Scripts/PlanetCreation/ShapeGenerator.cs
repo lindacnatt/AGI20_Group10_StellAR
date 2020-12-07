@@ -55,7 +55,7 @@ public class ShapeGenerator {
                         if (dist <= interaction.brushSize) {
                             // the mask is the distance from point to brush
                             mask = (interaction.brushSize - dist) / interaction.brushSize;
-                            mask *= 0.1f;
+                            mask *= 0.05f;
                             if (masks[i].ContainsKey(pointStr)) {
                                 masks[i][pointStr] += mask;
                                 if (masks[i][pointStr] >= 1f) {

@@ -2570,11 +2570,15 @@ PrefabInstance:
       objectReference: {fileID: 1131135164}
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 631087887, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 935008049, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2614,6 +2618,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1897572977, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897572977, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
+      propertyPath: m_Direction
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1961535090, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
@@ -7816,6 +7824,75 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &1450428527
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3212414677813848830, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_Name
+      value: Interactor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 301.616
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 590.7311
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 237.62558
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724376924406502234, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93ced0444428b204aa90f2316fadfa66, type: 3}
 --- !u!1 &1480543165
 GameObject:
   m_ObjectHideFlags: 0
