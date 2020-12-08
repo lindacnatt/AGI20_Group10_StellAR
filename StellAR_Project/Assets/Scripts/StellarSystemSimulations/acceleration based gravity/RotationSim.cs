@@ -16,20 +16,22 @@ public class RotationSim : MonoBehaviour
     
     void Update(){
         if(!rotationIsSet){
-            if (Input.touchCount == 2)
-            {
+            
+            if(Input.touchCount == 1){
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Moved)
                 {
+                    if(touch.deltaPosition.magnitude > 0.02f){
                     rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
                     rotY = Input.GetAxis("Mouse Y") * rotSpeed * Mathf.Deg2Rad;
 
                     startRot = true;
+                    }
                 }
             }
-            
         }
     }
+
 
     void FixedUpdate(){
         if (startRot){

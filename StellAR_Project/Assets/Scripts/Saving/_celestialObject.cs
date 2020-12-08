@@ -11,6 +11,7 @@ public struct _celestialObject
     public bool staticBody;
     public float mass;
     public float[] rotation;
+    public string name;
 
     public _celestialObject(CelestialObject planet, int id){
         this.id = id;
@@ -19,6 +20,7 @@ public struct _celestialObject
         staticBody=planet.staticBody;
         mass =planet.mass;
         rotation = planet.gameObject.GetComponent<RotationSim>().GetRotation();
+        name=planet.GetName();
 
     }
 }
