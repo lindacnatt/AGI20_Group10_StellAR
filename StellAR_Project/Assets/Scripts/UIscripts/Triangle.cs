@@ -94,7 +94,7 @@ public class Triangle : MonoBehaviour{
         
         handle.transform.localPosition = new Vector3(2, 1, handle.transform.localPosition.z);
         handleInitZ = handle.transform.localPosition.z;
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 4; i++){
             bandPos[i] = handle.transform.localPosition;
         }
      
@@ -112,7 +112,7 @@ public class Triangle : MonoBehaviour{
 
         //get initial weights
         Vector3 initWeights = BaryCentric.getWeights(handle.transform.localPosition / size, vertices);
-        for (int i = 0; i < 3; i++){
+        for (int i = 0; i < 4; i++){
             bandWeights[i] = initWeights;
         }
     }
@@ -182,7 +182,7 @@ public class Triangle : MonoBehaviour{
             {
                 gasPlanet.ChangeBandColor3(weights, factor);
             }
-            else
+            else if (currBand ==3)
             {
                 gasPlanet.ChangeStormColor(weights, factor);
             }
