@@ -42,11 +42,6 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         vertices = 20;
         this.GetComponent<LineRenderer>().enabled = false;
-        if (this.transform.childCount > 0)
-        {
-            arrow = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-            arrow.enabled = false;
-        }
         //rb=this.GetComponent<Rigidbody>();
 
         
@@ -85,14 +80,20 @@ public class TrajectoryVelocity : MonoBehaviour
 
             }
         }
+        else{
+            viewDir.positionCount = 0;
+            viewDir.enabled = false;
+            start = new Vector3(0f,0f,0f);
+
+        }
         
         if(TrajectorySimulation.destroyLine){
             mainObject = null;
             viewDir.positionCount = 0;
             viewDir.enabled = false;
             start = new Vector3(0f,0f,0f);
-            arrow.enabled=false;
-            arrow.size=new Vector2(0f,0f);
+            //arrow.enabled=false;
+            //arrow.size=new Vector2(0f,0f);
         }
         
     }
