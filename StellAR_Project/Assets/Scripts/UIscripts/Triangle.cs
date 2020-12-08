@@ -76,7 +76,7 @@ public class Triangle : MonoBehaviour{
         };
 
         // create mesh and assign material
-        //tex = InitTexture();
+        //InitTexture();
         meshRenderer.material = material;
         meshRenderer.material.SetTexture("_MainTex", tex);
         mesh = new Mesh();
@@ -220,7 +220,7 @@ public class Triangle : MonoBehaviour{
                 weights = BaryCentric.getWeights(new Vector3(vertices[2].x * x, vertices[1].y * y, 0f), vertices);
                 color = new Color(weights.x, weights.y, weights.z);
                 for(int index = 0; index < 3; index++){
-                    if(weights[index] < 0.1){
+                    if(weights[index] < 0.01){
                         color = new Color(0, 0, 0);
                     }
                 }
@@ -230,13 +230,13 @@ public class Triangle : MonoBehaviour{
         tex.SetPixels(colors);
         tex.Apply();
         SaveTextureAsPNG(tex, "Assets/Materials/PlanetMaterials/Materials/colorMapTex.png");
+        Debug.Log("saving");
         return tex;
     }
 
     public static void SaveTextureAsPNG(Texture2D _texture, string _fullPath){
         byte[] _bytes =_texture.EncodeToPNG();
         System.IO.File.WriteAllBytes(_fullPath, _bytes);
-        Debug.Log(_bytes.Length/1024  + "Kb was saved as: " + _fullPath);
     }
 
 
