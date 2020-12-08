@@ -9,6 +9,8 @@ TagManager:
   - Simulation
   - Asteroid
   - GasPlanet
+  - SaveUI
+  - LoadUI
   layers:
   - Default
   - TransparentFX
