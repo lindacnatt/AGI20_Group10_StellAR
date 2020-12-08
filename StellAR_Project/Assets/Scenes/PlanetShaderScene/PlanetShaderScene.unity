@@ -8843,6 +8843,7 @@ GameObject:
   - component: {fileID: 1547775473}
   - component: {fileID: 1547775472}
   - component: {fileID: 1547775471}
+  - component: {fileID: 1547775474}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -8927,9 +8928,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: set_text
-        m_Mode: 0
+      - m_Target: {fileID: 1547775474}
+        m_MethodName: SetName
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8993,6 +8994,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547775469}
   m_CullTransparentMesh: 0
+--- !u!114 &1547775474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547775469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac378ee8a00ca43138ad9e4f7d6b377a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  field: {fileID: 0}
 --- !u!1 &1586981900
 GameObject:
   m_ObjectHideFlags: 0

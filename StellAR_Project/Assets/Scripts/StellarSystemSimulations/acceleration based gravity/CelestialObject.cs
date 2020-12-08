@@ -157,10 +157,14 @@ public class CelestialObject : MonoBehaviour
         this.gameObject.GetComponent<RotationSim>().Deploy();
         
         name = data.name;
-        if(name != null){
+       if(name != null){
         txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
-        txt = Instantiate(txt, this.gameObject.transform);
-        txt.transform.SetParent(this.gameObject.transform, false);
+        Vector3 newpos= this.gameObject.transform.position;
+        newpos = newpos+ new Vector3(0f,0.2f,0f);
+        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
+        //txt.transform.SetParent(this.gameObject.transform, false);
+        txt.AddComponent<PlanetNameMovement>();
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
         txt.GetComponent<TextMesh>().text = name;
         }
         
@@ -201,9 +205,16 @@ public class CelestialObject : MonoBehaviour
     }
 
     public void SetName(string input){
-        if(txt != null){
         name = input;
-        txt.GetComponent<TextMesh>().name = name;
+        if(name != null){
+        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
+        Vector3 newpos= this.gameObject.transform.position;
+        newpos = newpos + new Vector3(0f,0.2f,0f);
+        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
+        //txt.transform.SetParent(this.gameObject.transform, false);
+        txt.AddComponent<PlanetNameMovement>();
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        txt.GetComponent<TextMesh>().text = name;
         }
     }
 

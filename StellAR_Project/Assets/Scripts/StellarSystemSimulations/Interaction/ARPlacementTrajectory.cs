@@ -68,7 +68,9 @@ public class ARPlacementTrajectory : MonoBehaviour
         SphereCollider collider = gameObjectToInstantiate.GetComponent<SphereCollider>();
         collider.enabled = false;
         objectToPlace = gameObjectToInstantiate;
-        //objectToPlace.AddComponent(typeof(RotationSim));
+        objectToPlace.AddComponent(typeof(RotationSim));
+        
+        placed=false;
         //objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera, ARCamera.transform.rotation);
         //PlaceNextObject();
     }
