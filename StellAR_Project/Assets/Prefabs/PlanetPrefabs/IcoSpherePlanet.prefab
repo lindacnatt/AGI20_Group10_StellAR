@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3057556004749462257}
   - component: {fileID: 3057556004749462256}
-  - component: {fileID: 3057556004749462259}
   - component: {fileID: 3057556004749462258}
   - component: {fileID: -8722356361594104121}
   - component: {fileID: 1120766313}
@@ -69,23 +68,6 @@ MonoBehaviour:
   craterSettingsFoldout: 0
   LOD: 3
   meshFilter: {fileID: 3057556005515888492}
---- !u!114 &3057556004749462259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3057556004749462269}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c89b0e7c82d397d41b22f02be0abc60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitCoords: []
-  craterPlacement: 0
-  brushSize: 0.2
-  interactionPoint: {x: 0, y: 0, z: 0}
-  noiseType: 0
 --- !u!135 &3057556004749462258
 SphereCollider:
   m_ObjectHideFlags: 0

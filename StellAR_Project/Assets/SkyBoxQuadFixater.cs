@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetSettingsUpdater : MonoBehaviour
+public class SkyBoxQuadFixater : MonoBehaviour
 {
+    public Transform Quad;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+ 
     // Update is called once per frame
     void Update()
     {
+
+        Quad.rotation = transform.rotation;
+        Quad.position = transform.position+transform.forward*29;
+        
         
     }
 }

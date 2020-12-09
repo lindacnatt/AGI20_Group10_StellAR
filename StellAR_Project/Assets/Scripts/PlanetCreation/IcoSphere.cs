@@ -125,12 +125,14 @@ public class IcoSphere {
     public void UpdateMesh(){
         Vector3[] updatedVertices = new Vector3[this.vertices.Count];
         int[] tempTriangles = mesh.triangles;
+        Vector2[] uvs = mesh.uv;
         for(int i = 0; i < this.vertices.Count; i++){
             updatedVertices[i] = shapeGenerator.CalculatePointOnPlanet(this.vertices[i]);
         }
         mesh.Clear();
         mesh.vertices = updatedVertices;
         mesh.triangles = tempTriangles;
+        mesh.uv = uvs;
         mesh.RecalculateNormals();
     }
 
@@ -146,6 +148,14 @@ public class IcoSphere {
             u = 0.5f + (Mathf.Atan2(vertice.z, vertice.x) / (2f * Mathf.PI));
             v = 0.5f - (Mathf.Asin(vertice.y) / Mathf.PI);
             uvs[i] = new Vector2(u, v);
+        }
+        mesh.uv = uvs;
+    }
+
+    public void SetUVs(ColorGenerator colorGenerator){
+        Vector2[] uvs = new Vector2[vertices.Count];
+        for(int i = 0; i < vertices.Count; i++){
+            uvs[i] = new Vector2(colorGenerator.BiomePercentFromPoint(vertices[i]), 0);
         }
         mesh.uv = uvs;
     }

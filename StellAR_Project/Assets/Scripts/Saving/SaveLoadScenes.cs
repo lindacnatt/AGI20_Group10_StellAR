@@ -119,7 +119,13 @@ public class SaveLoadScenes : MonoBehaviour
                     for (int i = 0; i < data.planetCount; i++)
                     {
                         GameObject obj = getPrefab(data, i);
-                        obj.GetComponent<CelestialObject>().enabled = true;
+                        CelestialObject co = GetComponent<CelestialObject>();
+                        if(co != null){
+                            obj.AddComponent(typeof(CelestialObject));
+                        }
+                        string newPlanetName = PlayerPrefs.GetString("NewPlanetName", "Unknown Planet");
+                        obj.GetComponent<CelestialObject>().SetName(newPlanetName);
+                        obj.GetComponent<CelestialObject>().enabled = false;
 
                         MotherPlanet mp = obj.GetComponentInChildren<MotherPlanet>();
                         if (mp != null)

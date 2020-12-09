@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/StellarSystemInteraction/PlanetRotationTesting.unity
     guid: 5103e2a2535df4635b67464e985070ca
+  - enabled: 0
+    path: Assets/Scenes/StellarSystemInteraction/TestingARParameters.unity
+    guid: d473b28f304624e29b7a56eb2823351a
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 2008e36f073572d4b9faf9a30e8df97d,
       type: 2}

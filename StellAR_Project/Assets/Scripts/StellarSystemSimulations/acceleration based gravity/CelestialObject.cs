@@ -22,6 +22,9 @@ public class CelestialObject : MonoBehaviour
     //public float weightMultiplier = 2;
     [HideInInspector]
     public float mass;
+    public string name;
+    public GameObject txt = null;
+
 
 
 
@@ -30,6 +33,24 @@ public class CelestialObject : MonoBehaviour
 
     public static List<CelestialObject> Objects;
 
+    void Awake(){
+        if (staticBody){
+            name=null;
+        }
+        if(name != null){
+        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
+        Vector3 newpos= this.gameObject.transform.position;
+        newpos = newpos+ new Vector3(0f,0.2f,0f);
+        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
+        //txt.transform.SetParent(this.gameObject.transform, false);
+        txt.AddComponent<PlanetNameMovement>();
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        txt.GetComponent<TextMesh>().text = name;
+        }
+
+    }
+
+    
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
@@ -37,6 +58,7 @@ public class CelestialObject : MonoBehaviour
         {
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
         }
+        
 
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
@@ -45,8 +67,8 @@ public class CelestialObject : MonoBehaviour
         if (staticBody)
         {
             rigidBody.isKinematic = true;
+            
         }
-
 
     }
 
@@ -128,9 +150,24 @@ public class CelestialObject : MonoBehaviour
         rigidBody.position = data.position;
         mass = data.mass;
         rigidBody.mass=mass;
+        name=data.name;
         this.gameObject.GetComponent<RotationSim>().SetState(true);
         this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
         this.gameObject.GetComponent<RotationSim>().StartRotation(true);
+        this.gameObject.GetComponent<RotationSim>().Deploy();
+        
+        name = data.name;
+       if(name != null){
+        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
+        Vector3 newpos= this.gameObject.transform.position;
+        newpos = newpos+ new Vector3(0f,0.2f,0f);
+        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
+        //txt.transform.SetParent(this.gameObject.transform, false);
+        txt.AddComponent<PlanetNameMovement>();
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        txt.GetComponent<TextMesh>().text = name;
+        }
+        
 
         
 
@@ -161,6 +198,24 @@ public class CelestialObject : MonoBehaviour
             Objects.TrimExcess();
         }
 
+    }
+
+    public string GetName(){
+        return name;
+    }
+
+    public void SetName(string input){
+        name = input;
+        if(name != null){
+        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
+        Vector3 newpos= this.gameObject.transform.position;
+        newpos = newpos + new Vector3(0f,0.2f,0f);
+        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
+        //txt.transform.SetParent(this.gameObject.transform, false);
+        txt.AddComponent<PlanetNameMovement>();
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        txt.GetComponent<TextMesh>().text = name;
+        }
     }
 
 }

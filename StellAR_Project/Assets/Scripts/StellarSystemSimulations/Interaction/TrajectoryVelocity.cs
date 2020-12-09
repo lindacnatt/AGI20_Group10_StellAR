@@ -11,7 +11,7 @@ public class TrajectoryVelocity : MonoBehaviour
     public static Vector3 direction = new Vector3(0f,0f,0f);
     public SpriteRenderer arrow;
     [HideInInspector]
-    public static float magnitude = 4f;
+    public static float magnitude = 4f*0.5f; //*0.1 for slow, *0.5 for medium and *1.0 for fast
 
 
     public LineRenderer viewDir;
@@ -42,11 +42,6 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         vertices = 20;
         this.GetComponent<LineRenderer>().enabled = false;
-        if (this.transform.childCount > 0)
-        {
-            arrow = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-            arrow.enabled = false;
-        }
         //rb=this.GetComponent<Rigidbody>();
 
         
@@ -65,14 +60,6 @@ public class TrajectoryVelocity : MonoBehaviour
                 if(startSlingshot & !TrajectorySimulation.freeze ){
                     SlingShot();
                     mainObject.transform.position = end;
-                    /*if((end-oldEnd).magnitude > 0.01f){
-                        oldEnd = Vector3.Lerp(oldEnd, end, 0.5f);
-                        mainObject.transform.position = oldEnd;
-                    }
-                    else{
-                        mainObject.transform.position = oldEnd;
-                    }*/
-                    //rb.MovePosition(end);
                 }
                 else if (!startSlingshot & !TrajectorySimulation.freeze){
                     mainObject.transform.position = start;
@@ -93,14 +80,20 @@ public class TrajectoryVelocity : MonoBehaviour
 
             }
         }
+        else{
+            viewDir.positionCount = 0;
+            viewDir.enabled = false;
+            start = new Vector3(0f,0f,0f);
+
+        }
         
         if(TrajectorySimulation.destroyLine){
             mainObject = null;
             viewDir.positionCount = 0;
             viewDir.enabled = false;
             start = new Vector3(0f,0f,0f);
-            arrow.enabled=false;
-            arrow.size=new Vector2(0f,0f);
+            //arrow.enabled=false;
+            //arrow.size=new Vector2(0f,0f);
         }
         
     }

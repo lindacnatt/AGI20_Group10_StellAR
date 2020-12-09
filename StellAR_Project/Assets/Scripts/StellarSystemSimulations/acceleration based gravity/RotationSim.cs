@@ -7,6 +7,7 @@ public class RotationSim : MonoBehaviour
     private float rotSpeed = 0.5f;
     private bool rotationIsSet = false;
     private bool startRot = false;
+    private bool deployed = false;
     private Vector2 startPos;
     private Vector2 endPos;
     private Vector2 direction;
@@ -16,25 +17,29 @@ public class RotationSim : MonoBehaviour
     
     void Update(){
         if(!rotationIsSet){
-            if (Input.touchCount == 2)
-            {
+            
+            if(Input.touchCount == 1){
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Moved)
                 {
+                    if(touch.deltaPosition.magnitude > 0.02f){
                     rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
                     rotY = Input.GetAxis("Mouse Y") * rotSpeed * Mathf.Deg2Rad;
 
                     startRot = true;
+                    }
                 }
             }
-            
         }
     }
 
+
     void FixedUpdate(){
         if (startRot){
-            this.gameObject.transform.RotateAround(Vector3.up, -rotX);
-            this.gameObject.transform.RotateAround(Vector3.right, rotY);
+            if(!rotationIsSet || !SimulationPauseControl.gameIsPaused || !deployed){
+                this.gameObject.transform.RotateAround(Vector3.up, -rotX);
+                this.gameObject.transform.RotateAround(Vector3.right, rotY);
+            }
         }
     }
 
@@ -66,5 +71,9 @@ public class RotationSim : MonoBehaviour
 
     public void StartRotation(bool state){
         startRot = state;
+    }
+
+    public void Deploy(){
+        deployed = true;
     }
 }
