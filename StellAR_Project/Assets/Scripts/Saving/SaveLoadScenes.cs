@@ -125,7 +125,7 @@ public class SaveLoadScenes : MonoBehaviour
                         }
                         string newPlanetName = PlayerPrefs.GetString("NewPlanetName", "Unknown Planet");
                         obj.GetComponent<CelestialObject>().SetName(newPlanetName);
-                        obj.GetComponent<CelestialObject>().enabled = false;
+                        //obj.GetComponent<CelestialObject>().enabled = true;
 
                         MotherPlanet mp = obj.GetComponentInChildren<MotherPlanet>();
                         if (mp != null)
@@ -133,6 +133,8 @@ public class SaveLoadScenes : MonoBehaviour
                             mp.GeneratePlanet();
                             mp.SetShape(data.planetList[rocky_i]);
                             mp.UpdateMesh();
+                            mp.GetComponent<IcoPlanet>().staticBody=false;
+                            mp.GetComponent<IcoPlanet>().enabled=false;
 
                             rocky_i += 1;
                         }
@@ -140,6 +142,7 @@ public class SaveLoadScenes : MonoBehaviour
                         if (gp != null)
                         {
                             gp.SetMaterial(data.gasPlanetList[gasy_i]);
+                            gp.GetComponent<GasPlanetShaderMAterialPropertyBlock>().enabled = true;
                             gasy_i += 1;
                         }
                         GameObject ARSessOrig = GameObject.Find("AR Session Origin");

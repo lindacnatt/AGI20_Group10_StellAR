@@ -53,7 +53,7 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   acceleration: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
-  staticBody: 1
+  staticBody: 0
   explosionEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
     type: 3}
   weightMultiplier: 8
