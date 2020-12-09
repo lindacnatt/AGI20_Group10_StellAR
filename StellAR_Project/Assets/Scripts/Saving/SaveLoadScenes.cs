@@ -151,6 +151,7 @@ public class SaveLoadScenes : MonoBehaviour
                             mp.GeneratePlanet();
                             mp.SetShape(data.planetList[rocky_i]);
                             mp.UpdateMesh();
+                            mp.GenerateColors();
                             mp.GetComponent<IcoPlanet>().staticBody=false;
                             mp.GetComponent<IcoPlanet>().enabled=false;
 
