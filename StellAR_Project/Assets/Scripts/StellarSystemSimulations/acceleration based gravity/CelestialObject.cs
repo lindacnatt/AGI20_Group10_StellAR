@@ -179,10 +179,21 @@ public class CelestialObject : MonoBehaviour
         mass = data.mass;
         rigidBody.mass=mass;
         name=data.name;
-        this.gameObject.GetComponent<RotationSim>().SetState(true);
-        this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
-        this.gameObject.GetComponent<RotationSim>().StartRotation(true);
-        this.gameObject.GetComponent<RotationSim>().Deploy();
+        RotationSim rot = this.gameObject.GetComponent<RotationSim>();
+        if(rot != null){
+            this.gameObject.GetComponent<RotationSim>().SetState(true);
+            this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
+            this.gameObject.GetComponent<RotationSim>().StartRotation(true);
+            this.gameObject.GetComponent<RotationSim>().Deploy();
+        }
+        else{
+            this.gameObject.AddComponent<RotationSim>();
+            this.gameObject.GetComponent<RotationSim>().SetState(true);
+            this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
+            this.gameObject.GetComponent<RotationSim>().StartRotation(true);
+            this.gameObject.GetComponent<RotationSim>().Deploy();
+        }
+        
 
         name = data.name;
        if(name != null){
