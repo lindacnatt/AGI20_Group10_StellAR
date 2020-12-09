@@ -143,6 +143,7 @@ public class SaveLoadScenes : MonoBehaviour
                         }
                         string newPlanetName = PlayerPrefs.GetString("NewPlanetName", "Unknown Planet");
                         obj.GetComponent<CelestialObject>().SetName(newPlanetName);
+                        PlayerPrefs.SetString("NewPlanetName", "Unknown Planet");
                         //obj.GetComponent<CelestialObject>().enabled = true;
 
                         MotherPlanet mp = obj.GetComponentInChildren<MotherPlanet>();

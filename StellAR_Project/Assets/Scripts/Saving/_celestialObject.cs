@@ -12,6 +12,7 @@ public struct _celestialObject
     public float mass;
     public float[] rotation;
     public string name;
+    public float textTranslation;
 
     public _celestialObject(CelestialObject planet, int id){
         this.id = id;
@@ -29,6 +30,7 @@ public struct _celestialObject
         }
 
         name=planet.GetName();
+        textTranslation = planet.textTranslation;
 
     }
 }

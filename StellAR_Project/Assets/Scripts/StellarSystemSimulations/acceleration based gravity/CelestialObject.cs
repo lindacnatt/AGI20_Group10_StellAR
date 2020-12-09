@@ -23,6 +23,8 @@ public class CelestialObject : MonoBehaviour
     public float mass;
     public string name;
     public GameObject txt = null;
+    [HideInInspector]
+    public float textTranslation = 0.7f;
 
 
 
@@ -36,35 +38,41 @@ public class CelestialObject : MonoBehaviour
         if (staticBody){
             name=null;
         }
-        if(name != null){
-        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
-        Vector3 newpos= this.gameObject.transform.position;
-        newpos = newpos+ new Vector3(0f,0.2f,0f);
-        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
-        //txt.transform.SetParent(this.gameObject.transform, false);
-        txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
-        txt.GetComponent<TextMesh>().text = name;
-        }
 
         IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
+        
         if(type != null){
             if(type.IsRocky){
-                weightMultiplier = 10;
-                var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
+                weightMultiplier = 18;
+                var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
                 //float interval = (0.599485f-0.3692803f);
-                float scaling = 2f -(0.5f-setting.radius);
+                float scaling = 2f -(0.5f-RockSetting.radius);
                 weightMultiplier *= scaling;
+                textTranslation = RockSetting.radius;
             }
 
             if(type.IsGassy){
-                weightMultiplier = 18;
-                float interval = 1.573064f-1.19897f;
-                float value=this.gameObject.transform.localScale.x;
-                float scaling = 1f+value/interval;
+                weightMultiplier = 10;
+                float GasInterval = 1.573064f-1.19897f;
+                float GasValue = this.gameObject.transform.localScale.x;
+                float scaling = 1f+GasValue/GasInterval;
                 weightMultiplier *= scaling;
+                textTranslation = GasValue-0.4f;
 
             }
+        }
+
+        if(name != null){
+        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
+        Vector3 newpos= this.gameObject.transform.position;
+
+
+        newpos = newpos+ new Vector3(0f,textTranslation,0f); //0.2f
+        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
+        //txt.transform.SetParent(this.gameObject.transform, false);
+        txt.AddComponent<PlanetNameMovement>();
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, textTranslation);
+        txt.GetComponent<TextMesh>().text = name;
         }
 
     }
@@ -184,7 +192,8 @@ public class CelestialObject : MonoBehaviour
         txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
         //txt.transform.SetParent(this.gameObject.transform, false);
         txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        textTranslation= data.textTranslation;
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, data.textTranslation);
         txt.GetComponent<TextMesh>().text = name;
         }
         
@@ -227,6 +236,22 @@ public class CelestialObject : MonoBehaviour
     }
 
     public void SetName(string input){
+        IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
+        
+        if(type != null){
+            if(type.IsRocky){
+                var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
+                textTranslation = RockSetting.radius+0.1f;
+            }
+
+            if(type.IsGassy){
+                float GasValue = this.gameObject.transform.localScale.x;
+                textTranslation = GasValue-0.4f;
+
+            }
+        }
+
+
         name = input;
         if(name != null){
         txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
@@ -235,7 +260,7 @@ public class CelestialObject : MonoBehaviour
         txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
         //txt.transform.SetParent(this.gameObject.transform, false);
         txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, textTranslation);
         txt.GetComponent<TextMesh>().text = name;
         }
     }
