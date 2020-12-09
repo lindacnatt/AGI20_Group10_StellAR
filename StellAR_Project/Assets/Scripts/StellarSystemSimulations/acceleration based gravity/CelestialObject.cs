@@ -18,8 +18,7 @@ public class CelestialObject : MonoBehaviour
 
     public GameObject explosionEffect;
     bool hasExploded = false;
-    public float weightMultiplier = 8;
-    //public float weightMultiplier = 2;
+    public float weightMultiplier;
     [HideInInspector]
     public float mass;
     public string name;
@@ -46,6 +45,19 @@ public class CelestialObject : MonoBehaviour
         txt.AddComponent<PlanetNameMovement>();
         txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
         txt.GetComponent<TextMesh>().text = name;
+        }
+
+        IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
+
+        if(type.IsRocky){
+            weightMultiplier = 10;
+            var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
+            float interval = (0.599485f-0.3692803f);
+            float scaling = 1f -(0.5f-setting.radius)/interval;
+        }
+
+        if(type.IsGassy){
+            weightMultiplier = 2;
         }
 
     }
