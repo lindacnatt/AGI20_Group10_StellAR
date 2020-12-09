@@ -83,6 +83,8 @@ public class CreationStepManager : MonoBehaviour
                     Debug.Log("DESTROYGAS");
                 }
                 Instantiate(RockPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
+                Interactor interactor = GameObject.Find("Interactor").gameObject.GetComponent<Interactor>();
+                interactor.planet = GameObject.FindGameObjectWithTag("Planet").gameObject.GetComponent<MotherPlanet>();
                 //Debug.Log("MAKEREOCK");
             }
         }
