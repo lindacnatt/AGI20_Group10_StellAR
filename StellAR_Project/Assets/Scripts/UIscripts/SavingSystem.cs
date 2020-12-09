@@ -34,7 +34,7 @@ public class SavingSystem : MonoBehaviour
         sceneMngr = GameObject.Find("SceneManager").GetComponent<SaveLoadScenes>(); ;
     }
 
-    //Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButton(0))
@@ -66,7 +66,7 @@ public class SavingSystem : MonoBehaviour
             systemNameGO.SetActive(false);
         }
 
-        else if (saveState == 1)
+        if (saveState == 1)
         {
             buttonImg.color = saveState1Col;
             if (systemName.text.Length >= 3)
@@ -75,7 +75,7 @@ public class SavingSystem : MonoBehaviour
             }
         }
 
-        else if (saveState == 2)
+        if (saveState == 2)
         {
             buttonImg.color = saveState2Col;
             if (systemName.text.Length < 3)
@@ -84,14 +84,15 @@ public class SavingSystem : MonoBehaviour
             }
         }
 
-        else if (saveState == 3)
+        if (saveState == 3)
         {
             btnTxt.text = "Saving";
             sceneMngr.saveSpecificSystem(systemName.text);
+            sceneMngr.ToggleSave();
             saveState = 4;
         }
 
-        else if (saveState == 4)
+        if (saveState == 4)
         {
             btnTxt.text = "Saved";
             timer += Time.deltaTime;
