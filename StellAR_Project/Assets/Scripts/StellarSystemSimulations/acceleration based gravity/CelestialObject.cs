@@ -49,15 +49,20 @@ public class CelestialObject : MonoBehaviour
 
         IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
 
-        if(type.IsRocky){
-            weightMultiplier = 10;
-            var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
-            float interval = (0.599485f-0.3692803f);
-            float scaling = 1f -(0.5f-setting.radius)/interval;
-        }
+        if (type)
+        {
+            if (type.IsRocky)
+            {
+                weightMultiplier = 10;
+                var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
+                float interval = (0.599485f - 0.3692803f);
+                float scaling = 1f - (0.5f - setting.radius) / interval;
+            }
 
-        if(type.IsGassy){
-            weightMultiplier = 2;
+            if (type.IsGassy)
+            {
+                weightMultiplier = 2;
+            }
         }
 
     }
