@@ -9,19 +9,34 @@ public class Interactor : MonoBehaviour{
     Transform selection;
     Renderer selectionRenderer;
  
-    MotherPlanet planet;
+    public MotherPlanet planet;
 
     // planet shape stuff
-    public bool craterPlacement;
     public float brushSize = 0.2f;
+    [Range(-1, 2)]
     public int noiseType = 0;
     public Vector3 interactionPoint;
+
+    // states
+    bool canPaint;
+    public bool craterPlacement;
 
     // sound stuff
     bool paintAudioPlaying;
     AudioSource paSource;
 
+    //craterModeUIStuff & OceanToggleUIStuff
+    Button craterBtn;
+    Text craterBtnTxt;
+    Color toggledTxtColor = new Color(1.0f, 1.0f, 1.0f);
+    Color untoggledTxtColor = new Color(0.5f, 0.5f, 0.5f);
+    Color toggledColor = new Color(0.1f, 0.0f, 0.7f);
+    Color untoggledColor = new Color(0.2f, 0.2f, 0.5f);
+    Button oceanBtn;
+    Text oceanBtnTxt;
+
     void Start(){
+        canPaint = false;
         craterPlacement = false;        
         GameObject paGO = GameObject.Find("PaintPlanetAudio");
         if (paGO == null){
@@ -30,6 +45,10 @@ public class Interactor : MonoBehaviour{
         else{
             paSource = paGO.GetComponent<AudioSource>();
         }
+        //GameObject MpGO = GameObject.Find("IcoSpherePlanet(Clone)");
+        //Debug.Log(MpGO);
+        //planet = GameObject.Find("IcoSpherePlanet(Clone)").GetComponent<MotherPlanet>();
+        //Debug.Log(planet);
     }
 
     void Update(){
@@ -47,21 +66,24 @@ public class Interactor : MonoBehaviour{
                 // add cases for your tag and do stuff
                 switch(selection.gameObject.tag){
                     case "Planet":{
-                        // Play audio
-                        if(!paSource.isPlaying){
-                            paSource.Play(0);
+                        canPaint = (GameObject.Find("2ModifyMeshPlanetColorScreen") != null);
+                        if(canPaint){
+                            // Play audio
+                            if(!paSource.isPlaying){
+                                paSource.Play(0);
+                            }
+                            // place crater
+                            if(craterPlacement){
+                                selection.gameObject.GetComponent<MotherPlanet>().shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
+                            }
+                            // place noise
+                            else{
+                                interactionPoint = selection.InverseTransformPoint(hit.point);
+                            }
+                            // update mesh 
+                            selection.gameObject.GetComponent<MotherPlanet>().UpdateMesh();
+                            paintAudioPlaying = true;
                         }
-                        // place crater
-                        if(craterPlacement){
-                            selection.gameObject.GetComponent<MotherPlanet>().shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
-                        }
-                        // place noise
-                        else{
-                            interactionPoint = selection.InverseTransformPoint(hit.point);
-                        }
-                        // update mesh 
-                        selection.gameObject.GetComponent<MotherPlanet>().UpdateMesh();
-                        paintAudioPlaying = true;
                         break;
                     }
                     case "GasPlanet": {
@@ -76,6 +98,46 @@ public class Interactor : MonoBehaviour{
             paSource.Pause();
         }
         
+    }
+
+    public void craterMode()
+    {
+        craterBtn = GameObject.Find("ToggleCraterMode").GetComponent<Button>();
+        craterBtnTxt = craterBtn.GetComponentInChildren<Text>();
+        craterPlacement ^= true;
+        if (craterPlacement)
+        {
+            craterBtn.GetComponent<Image>().color = toggledColor;
+            craterBtnTxt.color = toggledTxtColor;
+        }
+        else
+        {
+            craterBtn.GetComponent<Image>().color = untoggledColor;
+            craterBtnTxt.color = untoggledTxtColor;
+        }
+
+    }
+
+    public void toggleOcean()
+    {
+        planet.shapeSettings.zeroLvlIsOcean ^= true;
+        oceanBtn = GameObject.Find("ToggleWater").GetComponent<Button>();
+        oceanBtnTxt = oceanBtn.GetComponentInChildren<Text>();
+        if (planet.shapeSettings.zeroLvlIsOcean)
+        {
+            oceanBtn.GetComponent<Image>().color = toggledColor;
+            oceanBtnTxt.color = toggledTxtColor;
+        }
+        else
+        {
+            oceanBtn.GetComponent<Image>().color = untoggledColor;
+            oceanBtnTxt.color = untoggledTxtColor;
+        }
+        planet.shapeGenerator.elevationMinMax = new MinMax();
+        Debug.Log("Min: " + planet.shapeGenerator.elevationMinMax.Min);
+        Debug.Log("Max: " + planet.shapeGenerator.elevationMinMax.Max);
+        planet.UpdateMesh();
+        planet.GenerateColors();
     }
 
     private void AddSound()

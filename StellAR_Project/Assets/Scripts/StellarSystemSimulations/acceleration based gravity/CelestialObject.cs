@@ -77,7 +77,7 @@ public class CelestialObject : MonoBehaviour
 
     }
 
-    
+
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
@@ -85,7 +85,7 @@ public class CelestialObject : MonoBehaviour
         {
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
         }
-        
+
 
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
@@ -95,7 +95,7 @@ public class CelestialObject : MonoBehaviour
         if (staticBody)
         {
             rigidBody.isKinematic = true;
-            
+
         }
 
     }
@@ -183,7 +183,7 @@ public class CelestialObject : MonoBehaviour
         this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
         this.gameObject.GetComponent<RotationSim>().StartRotation(true);
         this.gameObject.GetComponent<RotationSim>().Deploy();
-        
+
         name = data.name;
        if(name != null){
         txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
@@ -196,9 +196,9 @@ public class CelestialObject : MonoBehaviour
         txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, data.textTranslation);
         txt.GetComponent<TextMesh>().text = name;
         }
-        
 
-        
+
+
 
 
         if (staticBody)

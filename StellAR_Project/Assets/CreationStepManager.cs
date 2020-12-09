@@ -24,15 +24,14 @@ public class CreationStepManager : MonoBehaviour
     {
         if (StartScreen)
         {
-            
-            if(Gas == true)
+            if(Gas)
             {
                 StartScreen = false;
 
                 ScreenSys.SwitchScreens(aScreen: Screen21);
                 
             }
-            else if(Rock == true)
+            else if(Rock)
             {
                 StartScreen = false;
                 ScreenSys.SwitchScreens(aScreen: Screen22);
@@ -64,7 +63,7 @@ public class CreationStepManager : MonoBehaviour
                 }
                 Instantiate(GasPrefab, new Vector3(0, yaxis, distcam), Quaternion.identity);
 
-                Debug.Log("MAKEGAS");
+                //Debug.Log("MAKEGAS");
             }
 
         }
@@ -84,7 +83,9 @@ public class CreationStepManager : MonoBehaviour
                     Debug.Log("DESTROYGAS");
                 }
                 Instantiate(RockPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
-                Debug.Log("MAKEREOCK");
+                Interactor interactor = GameObject.Find("Interactor").gameObject.GetComponent<Interactor>();
+                interactor.planet = GameObject.FindGameObjectWithTag("Planet").gameObject.GetComponent<MotherPlanet>();
+                //Debug.Log("MAKEREOCK");
             }
         }
     }
