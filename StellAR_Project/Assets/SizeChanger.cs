@@ -9,7 +9,7 @@ public class SizeChanger : MonoBehaviour
     private GameObject Planet = null;
     private bool Gas = false;
     public Slider SizeSlider;
-    private float Scaler = 2.5f / Mathf.Log(100);
+    private float scaler = 2.5f / Mathf.Log(100);
     //float solidScaler, gasScaler = 1f;
     // Start is called before the first frame update
     void Start()
@@ -50,15 +50,15 @@ public class SizeChanger : MonoBehaviour
         value = Mathf.Log(value*100)/5;
         if (Gas)
         {
-            value *= Scaler/* * 0.5f*/;
+            value *= scaler/* * 0.5f*/;
             Planet.transform.localScale = new Vector3(value * 2, value * 2, value * 2); //localscale adjusts diameter, to keep consistency with rocky icospheres we halve it to get a radius
             
         }
         else
         {
-           
-            Planet.GetComponent<IcoPlanet>().shapeSettings.radius = value * Scaler;
-            Planet.GetComponent<IcoPlanet>().UpdateMesh();
+            IcoPlanet ico = Planet.GetComponent<IcoPlanet>();
+            ico.shapeSettings.radius = value * scaler;
+            ico.UpdateMesh();
         }
     }
 }
