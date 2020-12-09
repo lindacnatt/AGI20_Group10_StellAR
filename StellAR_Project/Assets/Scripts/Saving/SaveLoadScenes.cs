@@ -16,7 +16,8 @@ public class SaveLoadScenes : MonoBehaviour
     bool gasy = false;
     bool rocky = false;
     int startingIndex = 0;
-    bool saveSpecific;
+    bool saveSpecific = false;
+    bool loadSpecific = false;
     string systemName;
 
     private void Start()
@@ -42,7 +43,7 @@ public class SaveLoadScenes : MonoBehaviour
                 //Save the entire system to system.data
                 if (saveSpecific)
                 {
-                    SaveLoadStarSystem.SaveStarSystem(false, "/" + systemName + ".data");
+                    SaveLoadStarSystem.SaveSpecificStarSystem(false, systemName + ".data");
                     saveSpecific = false;
                 }
                 else
@@ -51,25 +52,21 @@ public class SaveLoadScenes : MonoBehaviour
                 }
                 save = false;
             }
-            /*
-            else if (sceneIndex == 8)
-                //Maybe use for going from planet creation to solar system when there's just one planet in the scene.
-            {
-                GameObject[] planets = GameObject.FindGameObjectsWithTag("Planet");
-                if (planets.Length > 0)
-                {
-                    MotherPlanet mp = planets[0].GetComponent<MotherPlanet>();
-                    SaveLoadStarSystem.SavePlanet(mp);
-                }
-                save = false;
-            }
-            */
         }
         if(load){
             if(sceneIndex == 1){
                 //Load the entire system from system.data
-                SystemSimulationData data = SaveLoadStarSystem.LoadStarSystem(false);
-                if( data != null){
+                SystemSimulationData data;
+                if (loadSpecific)
+                {
+                    data = SaveLoadStarSystem.LoadSavedStarSystem(systemName);
+                    loadSpecific = false;
+                }
+                else
+                {
+                    data = SaveLoadStarSystem.LoadStarSystem(false);
+                }
+                if ( data != null){
 
                     CelestialObject.DestroyAll();
                     int rocky_i = 0;
@@ -99,22 +96,6 @@ public class SaveLoadScenes : MonoBehaviour
                     load =false;
                 }
             }
-            /*
-            else if (sceneIndex == 8){
-                PlanetData data = SaveLoadStarSystem.LoadPlanets();
-                if (data != null)
-                {
-                    CelestialObject.DestroyAll();
-                    GameObject obj = Instantiate(rockPrefab);
-                    obj.GetComponent<MotherPlanet>().enabled = true;
-                    MotherPlanet mo = obj.GetComponent<MotherPlanet>();
-                    mo.GeneratePlanet();
-                    mo.SetShape(data.planetData);
-                    mo.UpdateMesh();
-                    load = false;
-                }
-            }
-            */
             else{
                 load=false;
                 Debug.Log("failed to load");
@@ -217,7 +198,15 @@ public class SaveLoadScenes : MonoBehaviour
 
     public void saveSpecificSystem(string name)
     {
+        save = true;
         saveSpecific = true;
+        systemName = name;
+    }
+
+    public void loadSpecificSystem(string name)
+    {
+        load = true;
+        loadSpecific = true;
         systemName = name;
     }
 
