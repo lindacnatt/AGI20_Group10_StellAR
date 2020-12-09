@@ -12,16 +12,21 @@ public class Interactor : MonoBehaviour{
     MotherPlanet planet;
 
     // planet shape stuff
-    public bool craterPlacement;
     public float brushSize = 0.2f;
+    [Range(-1, 2)]
     public int noiseType = 0;
     public Vector3 interactionPoint;
+
+    // states
+    bool canPaint;
+    public bool craterPlacement;
 
     // sound stuff
     bool paintAudioPlaying;
     AudioSource paSource;
 
     void Start(){
+        canPaint = false;
         craterPlacement = false;        
         GameObject paGO = GameObject.Find("PaintPlanetAudio");
         if (paGO == null){
@@ -47,21 +52,24 @@ public class Interactor : MonoBehaviour{
                 // add cases for your tag and do stuff
                 switch(selection.gameObject.tag){
                     case "Planet":{
-                        // Play audio
-                        if(!paSource.isPlaying){
-                            paSource.Play(0);
+                        canPaint = (GameObject.Find("2ModifyMeshPlanetColorScreen") != null);
+                        if(canPaint){
+                            // Play audio
+                            if(!paSource.isPlaying){
+                                paSource.Play(0);
+                            }
+                            // place crater
+                            if(craterPlacement){
+                                selection.gameObject.GetComponent<MotherPlanet>().shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
+                            }
+                            // place noise
+                            else{
+                                interactionPoint = selection.InverseTransformPoint(hit.point);
+                            }
+                            // update mesh 
+                            selection.gameObject.GetComponent<MotherPlanet>().UpdateMesh();
+                            paintAudioPlaying = true;
                         }
-                        // place crater
-                        if(craterPlacement){
-                            selection.gameObject.GetComponent<MotherPlanet>().shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
-                        }
-                        // place noise
-                        else{
-                            interactionPoint = selection.InverseTransformPoint(hit.point);
-                        }
-                        // update mesh 
-                        selection.gameObject.GetComponent<MotherPlanet>().UpdateMesh();
-                        paintAudioPlaying = true;
                         break;
                     }
                     case "GasPlanet": {

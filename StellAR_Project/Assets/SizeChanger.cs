@@ -53,9 +53,9 @@ public class SizeChanger : MonoBehaviour
         }
         else
         {
-            Debug.Log(value);
-            Planet.GetComponent<IcoPlanet>().shapeSettings.radius = value * solidScaler;
-            Planet.GetComponent<IcoPlanet>().UpdateMesh();     
+            IcoPlanet ico = Planet.GetComponent<IcoPlanet>();
+            ico.shapeSettings.radius = value * solidScaler;
+            ico.UpdateMesh();
         }
     }
 }
