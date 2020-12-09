@@ -22,10 +22,14 @@ public class Triangle : MonoBehaviour{
     Vector2 worldPos;
     GasPlanetShaderMAterialPropertyBlock gasPlanet;
     List<Button> bandButtons = new List<Button>();
+    List<Button> biomeButtons = new List<Button>();
     int currBand = 0;
+    int biomeIndex = 0;
     Vector3[] bandWeights = new Vector3[4];
     Vector3[] bandPos = new Vector3[4];
     MotherPlanet planet;
+    public GameObject buttonGroup;
+    public GameObject buttonGroupGAS;
 
     float intensityLevel = 0;
     Vector3 colorWeights;
@@ -37,6 +41,9 @@ public class Triangle : MonoBehaviour{
     RaycastHit hit2;
 
     void Start(){
+        buttonGroup = GameObject.FindGameObjectWithTag("ButtonGroupS");
+        buttonGroupGAS = GameObject.FindGameObjectWithTag("ButtonGroupG");
+
         if(gameObject.GetComponent<MeshFilter>() == null){
             gameObject.AddComponent<MeshFilter>();
             meshRenderer = gameObject.AddComponent<MeshRenderer>();
@@ -51,10 +58,21 @@ public class Triangle : MonoBehaviour{
         if(GameObject.FindGameObjectWithTag("Planet"))
         {
             planet = FindObjectsOfType<MotherPlanet>()[0];
+            
+            buttonGroup.SetActive(true);
+            buttonGroupGAS.SetActive(false);
+            foreach (Button child in buttonGroup.GetComponentsInChildren<Button>(true))
+            {
+                child.gameObject.SetActive(true);
+                biomeButtons.Add(child);
+                child.onClick.AddListener(() => biomeButtonClick(biomeButtons.IndexOf(child)));
+            }
         }
         else
         {
             gasPlanet = FindObjectsOfType<GasPlanetShaderMAterialPropertyBlock>()[0];
+            buttonGroup.SetActive(false);
+            buttonGroupGAS.SetActive(true);
             foreach (Button child in GetComponentsInChildren<Button>(true))
             {
                 child.gameObject.SetActive(true);
@@ -90,7 +108,7 @@ public class Triangle : MonoBehaviour{
         
         handle.transform.localPosition = new Vector3(2, 1, handle.transform.localPosition.z);
         handleInitZ = handle.transform.localPosition.z;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             bandPos[i] = handle.transform.localPosition;
         }
@@ -108,7 +126,7 @@ public class Triangle : MonoBehaviour{
         }
         //get initialweights
         Vector3 initWeights = BaryCentric.getWeights(handle.transform.localPosition / size, vertices);
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             bandWeights[i] = initWeights;
         }
@@ -166,23 +184,20 @@ public class Triangle : MonoBehaviour{
 
     }
 
-    // void UpdatePlanetColor(Vector3 weights){
-    //     Color newColor = new Color(weights.x, weights.y, weights.z, 0.5f);
-    // }
     public void UpdateTintColor(Vector3 weights, float power){
         float intensity = (weights.x + weights.y + weights.z) / 3f;
         float factor = Mathf.Pow(intensity, power);
         if (planet)
-        {
-            
-            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = weights[0];
-            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g = weights[1];
-            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b = weights[2];
-            //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
-            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r *= factor;
-            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g *= factor;
-            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b *= factor;
-            planet.GenerateColors();
+        { 
+                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.r = weights[0];
+                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.g = weights[1];
+                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.b = weights[2];
+                //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.r *= factor;
+                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.g *= factor;
+                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.b *= factor;
+                planet.GenerateColors();
+           
         }
         else
         {
@@ -218,6 +233,9 @@ public class Triangle : MonoBehaviour{
     public void bandButtonClick(int idx)
     {
         currBand = idx;
+    }
+    public void biomeButtonClick(int idx){
+        biomeIndex = idx;
     }
 
     public void intensityOnChange(float value)
