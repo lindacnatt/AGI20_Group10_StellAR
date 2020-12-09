@@ -12,7 +12,6 @@ public static class SaveLoadStarSystem
 
         string path = Application.persistentDataPath + fileName;
         string content = JsonUtility.ToJson(simData);
-
         return SaveToFile(path, content);
     }
 
@@ -26,7 +25,6 @@ public static class SaveLoadStarSystem
         }
         path += fileName;
         string content = JsonUtility.ToJson(simData);
-
         return SaveToFile(path, content);
     }
 

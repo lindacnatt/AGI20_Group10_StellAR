@@ -63,7 +63,7 @@ public class CreationStepManager : MonoBehaviour
                 }
                 Instantiate(GasPrefab, new Vector3(0, yaxis, distcam), Quaternion.identity);
 
-                Debug.Log("MAKEGAS");
+                //Debug.Log("MAKEGAS");
             }
 
         }
@@ -83,7 +83,7 @@ public class CreationStepManager : MonoBehaviour
                     Debug.Log("DESTROYGAS");
                 }
                 Instantiate(RockPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
-                Debug.Log("MAKEREOCK");
+                //Debug.Log("MAKEREOCK");
             }
         }
     }

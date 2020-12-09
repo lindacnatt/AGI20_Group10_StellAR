@@ -20,19 +20,21 @@ public class SaveLoadScenes : MonoBehaviour
     bool loadSpecific = false;
     string systemName;
 
+    private static bool firstGenSystemSaved = false;
+
     private void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (sceneIndex == 1)
         {
-            //load = true;
+            load = true;
             loadNewPlanet = true;
         }
     }
 
     void Update()
     {
-        if(save){
+        if (save){
             if(sceneIndex == 2){
                 //Save one planet to newPlanet.data
                 SaveLoadStarSystem.SaveStarSystem(true, "/newPlanet.data");
@@ -49,6 +51,10 @@ public class SaveLoadScenes : MonoBehaviour
                 else
                 {
                     SaveLoadStarSystem.SaveStarSystem(false, "/system.data");
+                    if (!firstGenSystemSaved)
+                    {
+                        firstGenSystemSaved = true;
+                    }
                 }
                 save = false;
             }
@@ -64,7 +70,16 @@ public class SaveLoadScenes : MonoBehaviour
                 }
                 else
                 {
-                    data = SaveLoadStarSystem.LoadStarSystem(false);
+                    if (firstGenSystemSaved)
+                    {
+                        data = SaveLoadStarSystem.LoadStarSystem(false);
+
+                    }
+                    else
+                    {
+                        data = null;
+                    }
+                    load = false;
                 }
                 if ( data != null){
 
@@ -95,12 +110,12 @@ public class SaveLoadScenes : MonoBehaviour
                     }
                     load =false;
                 }
-            }
-            else{
-                load=false;
-                Debug.Log("failed to load");
-            }
-                
+                else
+                {
+                    load = false;
+                    Debug.Log("failed to load");
+                }
+            } 
         }
         if (loadNewPlanet)
         {
@@ -112,7 +127,7 @@ public class SaveLoadScenes : MonoBehaviour
                 if (data != null)
                 {
 
-                    CelestialObject.DestroyAll();
+                    //CelestialObject.DestroyAll();
                     int rocky_i = 0;
                     int gasy_i = 0;
                     for (int i = 0; i < data.planetCount; i++)
@@ -147,7 +162,6 @@ public class SaveLoadScenes : MonoBehaviour
                         }
                         GameObject ARSessOrig = GameObject.Find("AR Session Origin");
                         ARPlacementTrajectory placement = ARSessOrig.GetComponent<ARPlacementTrajectory>();
-                        //Debug.Log(obj);
                         placement.setGOtoInstantiate(obj);
 
                     }
