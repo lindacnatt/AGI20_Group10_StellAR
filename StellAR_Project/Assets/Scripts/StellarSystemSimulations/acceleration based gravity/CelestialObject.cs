@@ -18,7 +18,7 @@ public class CelestialObject : MonoBehaviour
 
     public GameObject explosionEffect;
     bool hasExploded = false;
-    public float weightMultiplier = 8;
+    public float weightMultiplier;
     //public float weightMultiplier = 2;
     [HideInInspector]
     public float mass;
@@ -48,6 +48,14 @@ public class CelestialObject : MonoBehaviour
         txt.GetComponent<TextMesh>().text = name;
         }
 
+        IsTypeOfPlanet type = this.gameObject.GetComponent<IsTypeOfPlanet>();
+        if(type.IsGassy){
+            weightMultiplier = 2.0f;
+        }
+        if(type.IsRocky){
+            weightMultiplier = 5.0f;
+        }
+
     }
 
     
@@ -56,7 +64,8 @@ public class CelestialObject : MonoBehaviour
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
         if (rigidBody == null)
         {
-            rigidBody = this.gameObject.AddComponent<Rigidbody>();
+            this.gameObject.AddComponent(typeof(Rigidbody));
+            rigidBody = this.gameObject.GetComponent<Rigidbody>();
         }
         
 
