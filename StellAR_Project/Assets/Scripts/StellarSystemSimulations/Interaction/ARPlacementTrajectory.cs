@@ -69,6 +69,8 @@ public class ARPlacementTrajectory : MonoBehaviour
         collider.enabled = false;
         objectToPlace = gameObjectToInstantiate;
         objectToPlace.AddComponent(typeof(RotationSim));
+        GameObject parent = GameObject.Find("SceneObjects");
+        objectToPlace.transform.SetParent(parent.transform);
         
         placed=false;
         //objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera, ARCamera.transform.rotation);
