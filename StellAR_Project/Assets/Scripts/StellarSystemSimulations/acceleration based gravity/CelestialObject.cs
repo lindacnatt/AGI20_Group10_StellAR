@@ -18,7 +18,7 @@ public class CelestialObject : MonoBehaviour
 
     public GameObject explosionEffect;
     bool hasExploded = false;
-    public float weightMultiplier;
+    public float weightMultiplier = 1f;
     [HideInInspector]
     public float mass;
     public string name;
@@ -52,12 +52,18 @@ public class CelestialObject : MonoBehaviour
         if(type.IsRocky){
             weightMultiplier = 10;
             var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
-            float interval = (0.599485f-0.3692803f);
-            float scaling = 1f -(0.5f-setting.radius)/interval;
+            //float interval = (0.599485f-0.3692803f);
+            float scaling = 2f -(0.5f-setting.radius);
+            weightMultiplier *= scaling;
         }
 
         if(type.IsGassy){
-            weightMultiplier = 2;
+            weightMultiplier = 18;
+            float interval = 1.573064f-1.19897f;
+            float value=this.gameObject.transform.localScale.x;
+            float scaling = 1f+value/interval;
+            weightMultiplier *= scaling;
+
         }
 
     }
@@ -75,6 +81,7 @@ public class CelestialObject : MonoBehaviour
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
+        rigidBody.mass *= weightMultiplier;
         mass = rigidBody.mass;
         if (staticBody)
         {
