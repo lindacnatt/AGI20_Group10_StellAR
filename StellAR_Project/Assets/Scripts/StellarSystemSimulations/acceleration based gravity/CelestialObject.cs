@@ -48,22 +48,23 @@ public class CelestialObject : MonoBehaviour
         }
 
         IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
+        if(type != null){
+            if(type.IsRocky){
+                weightMultiplier = 10;
+                var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
+                //float interval = (0.599485f-0.3692803f);
+                float scaling = 2f -(0.5f-setting.radius);
+                weightMultiplier *= scaling;
+            }
 
-        if(type.IsRocky){
-            weightMultiplier = 10;
-            var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
-            //float interval = (0.599485f-0.3692803f);
-            float scaling = 2f -(0.5f-setting.radius);
-            weightMultiplier *= scaling;
-        }
+            if(type.IsGassy){
+                weightMultiplier = 18;
+                float interval = 1.573064f-1.19897f;
+                float value=this.gameObject.transform.localScale.x;
+                float scaling = 1f+value/interval;
+                weightMultiplier *= scaling;
 
-        if(type.IsGassy){
-            weightMultiplier = 18;
-            float interval = 1.573064f-1.19897f;
-            float value=this.gameObject.transform.localScale.x;
-            float scaling = 1f+value/interval;
-            weightMultiplier *= scaling;
-
+            }
         }
 
     }
