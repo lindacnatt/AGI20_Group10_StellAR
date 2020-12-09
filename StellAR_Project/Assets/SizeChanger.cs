@@ -52,14 +52,13 @@ public class SizeChanger : MonoBehaviour
         {
             value *= Scaler/* * 0.5f*/;
             Planet.transform.localScale = new Vector3(value * 2, value * 2, value * 2); //localscale adjusts diameter, to keep consistency with rocky icospheres we halve it to get a radius
-            Debug.Log(Planet.transform.localScale.x/2);
+            
         }
         else
         {
-            Debug.Log(value);
+           
             Planet.GetComponent<IcoPlanet>().shapeSettings.radius = value * Scaler;
             Planet.GetComponent<IcoPlanet>().UpdateMesh();
-            Debug.Log(Planet.GetComponent<IcoPlanet>().shapeSettings.radius);
         }
     }
 }

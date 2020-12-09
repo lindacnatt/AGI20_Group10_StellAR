@@ -31,7 +31,7 @@ public class Scaling : MonoBehaviour
         {
             curDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //current distance between finger touches
 
-            prevDist = ((Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition) - (Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition)); //difference in previous locations using delta positions
+            prevDist = ((Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition) - (Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition));
 
             touchDelta = curDist.magnitude - prevDist.magnitude;
 
