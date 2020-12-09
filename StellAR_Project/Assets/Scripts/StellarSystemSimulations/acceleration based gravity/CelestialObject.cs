@@ -192,9 +192,11 @@ public class CelestialObject : MonoBehaviour
         {
             for (int i = 0; i < Objects.Count; i++)
             {
+                if(!Objects[i].staticBody){
                 Destroy(Objects[i].gameObject);
+                }
             }
-            Objects.Clear(); //clearing the old planets
+            //Objects.Clear(); //clearing the old planets
             Objects.TrimExcess();
         }
 
