@@ -17,6 +17,8 @@ public class CreationStepManager : MonoBehaviour
     public UI_Screen Screen5;
     public GameObject GasPrefab;
     public GameObject RockPrefab;
+    public float distcam;
+    public float yaxis;
 
     public void ChangeScreen(UI_Screen nextScreen)
     {
@@ -60,7 +62,8 @@ public class CreationStepManager : MonoBehaviour
                     Destroy(GameObject.FindGameObjectWithTag("Planet"));
                     Debug.Log("DESTROYROCK");
                 }
-                Instantiate(GasPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
+                Instantiate(GasPrefab, new Vector3(0, yaxis, distcam), Quaternion.identity);
+
                 Debug.Log("MAKEGAS");
             }
 
