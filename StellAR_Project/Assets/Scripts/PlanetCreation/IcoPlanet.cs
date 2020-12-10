@@ -78,6 +78,7 @@ public class IcoPlanet : MotherPlanet{
     }
 
     public override void UpdateMesh(){
+        shapeGenerator.elevationMinMax = new MinMax();
         if(icoSphere == null){
             Initialize();
             icoSphere.ConstructMesh();
@@ -91,7 +92,7 @@ public class IcoPlanet : MotherPlanet{
 
     public override void GenerateColors(){   
         colorGenerator.UpdateColors();
-        icoSphere.SetUVs(colorGenerator);
+        //icoSphere.SetUVs(colorGenerator);
     }
     
     public override void OnCraterSettingsUpdated(){ //Rebuild planet when color is updated
