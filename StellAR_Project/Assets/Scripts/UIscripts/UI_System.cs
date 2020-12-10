@@ -51,7 +51,7 @@ namespace Stellar.UI
                     currentScreen.CloseScreen();
                     previousScreen = currentScreen;
                 }
-                Debug.Log("Prev:", previousScreen);
+
                 currentScreen = aScreen;
                 currentScreen.gameObject.SetActive(true);
                 currentScreen.StartScreen();

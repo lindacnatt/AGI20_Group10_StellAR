@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random=UnityEngine.Random;
 
 public class Triangle : MonoBehaviour{
     // triangle stuff
@@ -31,14 +30,10 @@ public class Triangle : MonoBehaviour{
     Vector2 worldPos;
     GasPlanetShaderMAterialPropertyBlock gasPlanet;
     List<Button> bandButtons = new List<Button>();
-    List<Button> biomeButtons = new List<Button>();
     int currBand = 0;
-    int biomeIndex = 0;
     Vector3[] bandWeights = new Vector3[4];
     Vector3[] bandPos = new Vector3[4];
     MotherPlanet planet;
-    public GameObject buttonGroup;
-    public GameObject buttonGroupGAS;
 
     float intensityLevel = 0;
     Vector3 colorWeights;
@@ -46,9 +41,6 @@ public class Triangle : MonoBehaviour{
    
 
     void Start(){
-        buttonGroup = GameObject.FindGameObjectWithTag("ButtonGroupS");
-        buttonGroupGAS = GameObject.FindGameObjectWithTag("ButtonGroupG");
-
         if(gameObject.GetComponent<MeshFilter>() == null){
             gameObject.AddComponent<MeshFilter>();
             meshRenderer = gameObject.AddComponent<MeshRenderer>();
@@ -62,20 +54,9 @@ public class Triangle : MonoBehaviour{
         
         if(GameObject.FindGameObjectWithTag("Planet")){
             planet = FindObjectsOfType<MotherPlanet>()[0];
-            
-            buttonGroup.SetActive(true);
-            buttonGroupGAS.SetActive(false);
-            foreach (Button child in buttonGroup.GetComponentsInChildren<Button>(true))
-            {
-                child.gameObject.SetActive(true);
-                biomeButtons.Add(child);
-                child.onClick.AddListener(() => biomeButtonClick(biomeButtons.IndexOf(child)));
-            }
         }
         else{
             gasPlanet = FindObjectsOfType<GasPlanetShaderMAterialPropertyBlock>()[0];
-            buttonGroup.SetActive(false);
-            buttonGroupGAS.SetActive(true);
             foreach (Button child in GetComponentsInChildren<Button>(true))
             {
                 child.gameObject.SetActive(true);
@@ -176,15 +157,15 @@ public class Triangle : MonoBehaviour{
         float intensity = (weights.x + weights.y + weights.z) / 3f;
         float factor = Mathf.Pow(intensity, power);
         if (planet)
-        { 
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.r = weights[0];
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.g = weights[1];
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.b = weights[2];
-                //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.r *= factor;
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.g *= factor;
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.b *= factor;
-                planet.GenerateColors();
+        {
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = weights[0];
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g = weights[1];
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b = weights[2];
+            //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r *= factor;
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g *= factor;
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b *= factor;
+            planet.GenerateColors();
         }
         else
         {
@@ -210,19 +191,10 @@ public class Triangle : MonoBehaviour{
         }
         
     }
-    
-    public void UpdateRandomTintColor(){
-        Vector3 randomVector = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0f, 1f));
-        UpdateTintColor(randomVector, 0.5f);
-        
-    }
 
     public void bandButtonClick(int idx)
     {
         currBand = idx;
-    }
-    public void biomeButtonClick(int idx){
-        biomeIndex = idx;
     }
 
     public void intensityOnChange(float value){
