@@ -209,6 +209,7 @@ public class TrajectorySimulation : MonoBehaviour
                 {
                     SetInitialVel();
                     mainObject.GetComponent<SphereCollider>().enabled = true;
+                    mainObject.GetComponent<RotationSim>().Deploy();
                     destroyLine = true;
                     SimulationPauseControl.gameIsPaused = false;
                     mainObject = null;

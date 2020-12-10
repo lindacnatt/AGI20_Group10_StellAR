@@ -88,7 +88,6 @@ public class SavingSystem : MonoBehaviour
         {
             btnTxt.text = "Saving";
             sceneMngr.saveSpecificSystem(systemName.text);
-            sceneMngr.ToggleSave();
             saveState = 4;
         }
 
