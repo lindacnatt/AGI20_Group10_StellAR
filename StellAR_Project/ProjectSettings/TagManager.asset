@@ -9,9 +9,6 @@ TagManager:
   - Simulation
   - Asteroid
   - GasPlanet
-  - ButtonGroup
-  - ButtonGroupG
-  - ButtonGroupS
   - UtilityObjectHolder
   layers:
   - Default
