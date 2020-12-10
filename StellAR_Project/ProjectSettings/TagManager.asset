@@ -12,7 +12,6 @@ TagManager:
   - ButtonGroup
   - ButtonGroupG
   - ButtonGroupS
-  - UtilityObjectHolder
   layers:
   - Default
   - TransparentFX

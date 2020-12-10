@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4070371378038438093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.121, y: -0.079, z: 1.233}
-  m_LocalScale: {x: 1.524609, y: 1.524609, z: 1.524609}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,15 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64082dc636a5d3f439b2756b06e37350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
-  acceleration: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
-  staticBody: 0
-  explosionEffect: {fileID: 0}
-  weightMultiplier: 8
-  mass: 0
-  name: 
-  txt: {fileID: 0}
   BandColorStorm: {r: 1, g: 0.9712303, b: 0.9575472, a: 0}
   StormSize: 8.54
   StormSpeed: 1

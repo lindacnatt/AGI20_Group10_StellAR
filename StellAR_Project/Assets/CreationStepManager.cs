@@ -1,4 +1,4 @@
-﻿using Stellar.UI;
+using Stellar.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,21 +17,28 @@ public class CreationStepManager : MonoBehaviour
     public UI_Screen Screen5;
     public GameObject GasPrefab;
     public GameObject RockPrefab;
-    public float distcam;
-    public float yaxis;
+
+    
+    public string[] types = new string[]{"Rock", "Gas"};
+    public float ShakeDetectionThreshold;
+    public float MinShakeInterval;
+ 
+    private float sqrShakeDetectionThreshold;
+    private float timeSinceLastShake;
 
     public void ChangeScreen(UI_Screen nextScreen)
     {
         if (StartScreen)
         {
-            if(Gas)
+            
+            if(Gas == true)
             {
                 StartScreen = false;
 
                 ScreenSys.SwitchScreens(aScreen: Screen21);
                 
             }
-            else if(Rock)
+            else if(Rock == true)
             {
                 StartScreen = false;
                 ScreenSys.SwitchScreens(aScreen: Screen22);
@@ -61,9 +68,8 @@ public class CreationStepManager : MonoBehaviour
                     Destroy(GameObject.FindGameObjectWithTag("Planet"));
                     Debug.Log("DESTROYROCK");
                 }
-                Instantiate(GasPrefab, new Vector3(0, yaxis, distcam), Quaternion.identity);
-
-                //Debug.Log("MAKEGAS");
+                Instantiate(GasPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
+                Debug.Log("MAKEGAS");
             }
 
         }
@@ -83,23 +89,35 @@ public class CreationStepManager : MonoBehaviour
                     Debug.Log("DESTROYGAS");
                 }
                 Instantiate(RockPrefab, new Vector3(0, 0.8f, 0), Quaternion.identity);
-                Interactor interactor = GameObject.Find("Interactor").gameObject.GetComponent<Interactor>();
-                interactor.planet = GameObject.FindGameObjectWithTag("Planet").gameObject.GetComponent<MotherPlanet>();
-                //Debug.Log("MAKEREOCK");
+                Debug.Log("MAKEREOCK");
             }
         }
     }
+
+    public void RandomType()
+    {
+        var randType = types[Random.Range(0, types.Length)];
+        ToggleType(randType);
+    }
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        sqrShakeDetectionThreshold = Mathf.Pow(ShakeDetectionThreshold, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Screen1){
+             if (Input.acceleration.sqrMagnitude >= sqrShakeDetectionThreshold && Time.unscaledTime >= timeSinceLastShake + MinShakeInterval)
+            {
+                RandomType();
+                Debug.Log("Shaken not stirred");
+                timeSinceLastShake = Time.unscaledTime;
+            }
+        } 
     }
 }

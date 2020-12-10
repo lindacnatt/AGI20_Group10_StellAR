@@ -18,14 +18,10 @@ public class CelestialObject : MonoBehaviour
 
     public GameObject explosionEffect;
     bool hasExploded = false;
-    public float weightMultiplier = 1f;
+    public float weightMultiplier = 8;
+    //public float weightMultiplier = 2;
     [HideInInspector]
     public float mass;
-    public string name;
-    public GameObject txt = null;
-    [HideInInspector]
-    public float textTranslation = 0.7f;
-
 
 
 
@@ -33,50 +29,6 @@ public class CelestialObject : MonoBehaviour
 
 
     public static List<CelestialObject> Objects;
-
-    void Awake(){
-        if (staticBody){
-            name=null;
-        }
-
-        IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
-        
-        if(type != null){
-            if(type.IsRocky){
-                weightMultiplier = 18;
-                var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
-                //float interval = (0.599485f-0.3692803f);
-                float scaling = 2f -(0.5f-RockSetting.radius);
-                weightMultiplier *= scaling;
-                textTranslation = RockSetting.radius;
-            }
-
-            if(type.IsGassy){
-                weightMultiplier = 10;
-                float GasInterval = 1.573064f-1.19897f;
-                float GasValue = this.gameObject.transform.localScale.x;
-                float scaling = 1f+GasValue/GasInterval;
-                weightMultiplier *= scaling;
-                textTranslation = GasValue-0.4f;
-
-            }
-        }
-
-        if(name != null){
-        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
-        Vector3 newpos= this.gameObject.transform.position;
-
-
-        newpos = newpos+ new Vector3(0f,textTranslation,0f); //0.2f
-        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
-        //txt.transform.SetParent(this.gameObject.transform, false);
-        txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, textTranslation);
-        txt.GetComponent<TextMesh>().text = name;
-        }
-
-    }
-
 
     // Update call for the attractor. Runs through the static attractors list.
     void Start(){
@@ -86,17 +38,15 @@ public class CelestialObject : MonoBehaviour
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
         }
 
-
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
-        rigidBody.mass *= weightMultiplier;
         mass = rigidBody.mass;
         if (staticBody)
         {
             rigidBody.isKinematic = true;
-
         }
+
 
     }
 
@@ -178,38 +128,11 @@ public class CelestialObject : MonoBehaviour
         rigidBody.position = data.position;
         mass = data.mass;
         rigidBody.mass=mass;
-        name=data.name;
-        RotationSim rot = this.gameObject.GetComponent<RotationSim>();
-        if(rot != null){
-            this.gameObject.GetComponent<RotationSim>().SetState(true);
-            this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
-            this.gameObject.GetComponent<RotationSim>().StartRotation(true);
-            this.gameObject.GetComponent<RotationSim>().Deploy();
-        }
-        else{
-            this.gameObject.AddComponent<RotationSim>();
-            this.gameObject.GetComponent<RotationSim>().SetState(true);
-            this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
-            this.gameObject.GetComponent<RotationSim>().StartRotation(true);
-            this.gameObject.GetComponent<RotationSim>().Deploy();
-        }
+        this.gameObject.GetComponent<RotationSim>().SetState(true);
+        this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
+        this.gameObject.GetComponent<RotationSim>().StartRotation(true);
+
         
-
-        name = data.name;
-       if(name != null){
-        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
-        Vector3 newpos= this.gameObject.transform.position;
-        newpos = newpos+ new Vector3(0f,0.2f,0f);
-        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
-        //txt.transform.SetParent(this.gameObject.transform, false);
-        txt.AddComponent<PlanetNameMovement>();
-        textTranslation= data.textTranslation;
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, data.textTranslation);
-        txt.GetComponent<TextMesh>().text = name;
-        }
-
-
-
 
 
         if (staticBody)
@@ -232,48 +155,12 @@ public class CelestialObject : MonoBehaviour
         {
             for (int i = 0; i < Objects.Count; i++)
             {
-                if(!Objects[i].staticBody){
                 Destroy(Objects[i].gameObject);
-                }
             }
-            //Objects.Clear(); //clearing the old planets
+            Objects.Clear(); //clearing the old planets
             Objects.TrimExcess();
         }
 
-    }
-
-    public string GetName(){
-        return name;
-    }
-
-    public void SetName(string input){
-        IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
-        
-        if(type != null){
-            if(type.IsRocky){
-                var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
-                textTranslation = RockSetting.radius+0.1f;
-            }
-
-            if(type.IsGassy){
-                float GasValue = this.gameObject.transform.localScale.x;
-                textTranslation = GasValue-0.4f;
-
-            }
-        }
-
-
-        name = input;
-        if(name != null){
-        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
-        Vector3 newpos= this.gameObject.transform.position;
-        newpos = newpos + new Vector3(0f,0.2f,0f);
-        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
-        //txt.transform.SetParent(this.gameObject.transform, false);
-        txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, textTranslation);
-        txt.GetComponent<TextMesh>().text = name;
-        }
     }
 
 }

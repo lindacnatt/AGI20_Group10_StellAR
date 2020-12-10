@@ -11,6 +11,22 @@ public class LandmassNoise : NoiseInterface{
     }
     public float Evaluate(Vector3 point){
         float amplitude = settings.amplitude;
+
+        /*
+        float freq = settings.freq;
+        float noiseValue = 0;
+
+        for(int i = 0; i < settings.numLayers; i++){ // add noise of increasing frequencies 
+            float v = (noise.Evaluate((point+this.settings.noiseCenter)*freq)+1)*0.5f;
+            v = 1/(1 + Mathf.Exp(-v)); // sigmooid function to push down edges
+            noiseValue += v*amplitude;
+            
+            freq *= settings.freqPower;
+            amplitude *= settings.fallof; 
+        }
+        noiseValue = Mathf.Max(0, noiseValue - settings.minValue); // create a "floor" for the planet
+        return noiseValue;
+        */
         return 1f*amplitude;
     }
 }

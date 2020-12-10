@@ -63,18 +63,11 @@ public class TrajectoryLineAnimation : MonoBehaviour
                     if (count < length-1) //otherwise the linepos array thingy above got out of range as it became 2000 - 2001
                     {
                         
-                        if (distance <= 0.1f)
+                        if (distance <= 1.0f)
                         {
                            
                             traj.positionCount -= 1;
                             count++;
-                        }
-
-                        else{
-                            TrajectorySimulation.destroyLine = false;
-                            count = 0;
-                            this.GetComponent<LineRenderer>().enabled = false;
-
                         }
                     }
 

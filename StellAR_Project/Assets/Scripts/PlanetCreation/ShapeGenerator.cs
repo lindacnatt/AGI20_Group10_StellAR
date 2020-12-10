@@ -79,18 +79,6 @@ public class ShapeGenerator {
                 noiseelevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
         }
-        if(interaction.noiseType == -1){
-            if (masks[0].ContainsKey(pointStr)) {
-                if(masks[0][pointStr] > 0.01){
-                    dist = (pointOnUnitSphere * settings.radius - interaction.interactionPoint).magnitude;
-                    if (dist <= interaction.brushSize) {
-                        mask = (interaction.brushSize - dist) / interaction.brushSize;
-                        masks[0][pointStr] *= 1 - mask;
-                    }
-                }
-            }
-        }
-
         elevation += noiseelevation;
         elevation += craterHeight;
         if (craterHeight < 0)
