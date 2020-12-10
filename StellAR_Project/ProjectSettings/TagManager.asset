@@ -9,7 +9,8 @@ TagManager:
   - Simulation
   - Asteroid
   - GasPlanet
-  - ButtonGroup
+  - ButtonGroupG
+  - ButtonGroupS
   layers:
   - Default
   - TransparentFX
