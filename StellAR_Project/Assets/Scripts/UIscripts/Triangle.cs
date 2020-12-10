@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random=UnityEngine.Random;
 
 public class Triangle : MonoBehaviour{
+    // triangle stuff
     Mesh mesh;
     MeshRenderer meshRenderer;
     Vector3[] vertices;
@@ -15,6 +15,14 @@ public class Triangle : MonoBehaviour{
     Renderer selectionRenderer;
     BaryCentric bary;
     GameObject handle;
+    
+    // triangle visuals
+    public Material material;
+    public Texture2D tex;
+    [Range(0,10)]
+    public float size;
+
+    // planet stuff
     float handleInitZ;
     Vector3 handleInitPos;
     PolygonCollider2D col;
@@ -22,28 +30,17 @@ public class Triangle : MonoBehaviour{
     Vector2 worldPos;
     GasPlanetShaderMAterialPropertyBlock gasPlanet;
     List<Button> bandButtons = new List<Button>();
-    List<Button> biomeButtons = new List<Button>();
     int currBand = 0;
-    int biomeIndex = 0;
     Vector3[] bandWeights = new Vector3[4];
     Vector3[] bandPos = new Vector3[4];
     MotherPlanet planet;
-    public GameObject buttonGroup;
-    public GameObject buttonGroupGAS;
 
     float intensityLevel = 0;
     Vector3 colorWeights;
 
-    public Material material;
-
-    [Range(0,10)]
-    public float size;
-    RaycastHit hit2;
+   
 
     void Start(){
-        buttonGroup = GameObject.FindGameObjectWithTag("ButtonGroupS");
-        buttonGroupGAS = GameObject.FindGameObjectWithTag("ButtonGroupG");
-
         if(gameObject.GetComponent<MeshFilter>() == null){
             gameObject.AddComponent<MeshFilter>();
             meshRenderer = gameObject.AddComponent<MeshRenderer>();
@@ -54,25 +51,12 @@ public class Triangle : MonoBehaviour{
             meshRenderer = gameObject.GetComponent<MeshRenderer>();
             col = gameObject.GetComponent<PolygonCollider2D>();
         }
-         
-        if(GameObject.FindGameObjectWithTag("Planet"))
-        {
+        
+        if(GameObject.FindGameObjectWithTag("Planet")){
             planet = FindObjectsOfType<MotherPlanet>()[0];
-            
-            buttonGroup.SetActive(true);
-            buttonGroupGAS.SetActive(false);
-            foreach (Button child in buttonGroup.GetComponentsInChildren<Button>(true))
-            {
-                child.gameObject.SetActive(true);
-                biomeButtons.Add(child);
-                child.onClick.AddListener(() => biomeButtonClick(biomeButtons.IndexOf(child)));
-            }
         }
-        else
-        {
+        else{
             gasPlanet = FindObjectsOfType<GasPlanetShaderMAterialPropertyBlock>()[0];
-            buttonGroup.SetActive(false);
-            buttonGroupGAS.SetActive(true);
             foreach (Button child in GetComponentsInChildren<Button>(true))
             {
                 child.gameObject.SetActive(true);
@@ -82,24 +66,26 @@ public class Triangle : MonoBehaviour{
             }
             
         }
-
-
         GetComponentInChildren<Slider>().onValueChanged.AddListener(intensityOnChange);
-        //GetComponent<MotherPlanet>();
 
-        meshRenderer.material = material;
-        mesh = new Mesh();
-        GetComponent<MeshFilter>().mesh = mesh;
-
+        // create triangle
         vertices = new Vector3[] {
             new Vector3(0,0,0),
             new Vector3(0.5f,0.866025404f,0)*size,
             new Vector3(1,0,0)*size
         };
 
+        // create mesh and assign material
+        //InitTexture();
+        meshRenderer.material = material;
+        meshRenderer.material.SetTexture("_MainTex", tex);
+        mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+        Vector2[] uvs = new []{new Vector2(0,0), new Vector2(1, 0.5f), new Vector2(0, 1)};
+
         triangles = new[]{0,1,2};
-        
-        mesh.vertices = vertices;
+        mesh.vertices = vertices;  
+        mesh.uv = uvs;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
         
@@ -108,8 +94,7 @@ public class Triangle : MonoBehaviour{
         
         handle.transform.localPosition = new Vector3(2, 1, handle.transform.localPosition.z);
         handleInitZ = handle.transform.localPosition.z;
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++){
             bandPos[i] = handle.transform.localPosition;
         }
      
@@ -120,55 +105,43 @@ public class Triangle : MonoBehaviour{
         }
         col.pathCount = 1;
         col.SetPath(0, colPoints);
-        for (int i = 0; i < 3; i++)
-        {
+
+        for (int i = 0; i < 3; i++){
             vertices[i] = mesh.vertices[i] / size;
         }
-        //get initialweights
+
+        //get initial weights
         Vector3 initWeights = BaryCentric.getWeights(handle.transform.localPosition / size, vertices);
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++){
             bandWeights[i] = initWeights;
         }
     }
   
     void Update(){
-        
-        if (gasPlanet)
-        {
+        if (gasPlanet){
             //makes sure that each band keeps the color that was selected before switching to other band, and that the handle reflects that color
-           
             handle.transform.localPosition = new Vector3(bandPos[currBand].x, bandPos[currBand].y, handleInitZ);
-           
             UpdateColor(bandWeights[currBand], intensityLevel);
         }
         if(Input.GetMouseButton(0)){
-
-
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             //worldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane)) * -1f;
             hit = Physics2D.GetRayIntersection(ray);
             //Debug.DrawRay(Camera.main.transform.position, hit.point, Color.blue, 5f);
             if(hit){
-                //Debug.Log("Den funkar");
                 selection = hit.transform;
-                //selectionRenderer = selection.GetComponent<Renderer>();
                 handle.transform.position = hit.point;
                 
                 //the following line makes sure that the handle does not fuck off into oblivion on the z axis.
                 handle.transform.localPosition = new Vector3(handle.transform.localPosition.x, handle.transform.localPosition.y, handleInitZ);
-               
+
                 colorWeights = BaryCentric.getWeights(handle.transform.localPosition/size, vertices);
-                
                 UpdateTintColor(colorWeights, intensityLevel);
-                
-               
-                UpdateColor(colorWeights, intensityLevel);
+                //UpdateColor(colorWeights, intensityLevel);
             }
         }  
     }
     void UpdateColor(Vector3 weights, float power){
-
         float intensity = (weights.x + weights.y + weights.z) / 3f;
         float factor = Mathf.Pow(intensity, power);
         
@@ -178,26 +151,21 @@ public class Triangle : MonoBehaviour{
         newColor.g *= factor;
         newColor.b *= factor;
         //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
-        //Debug.Log(meshRenderer);
-
-        meshRenderer.material.color = newColor;
-
     }
 
     public void UpdateTintColor(Vector3 weights, float power){
         float intensity = (weights.x + weights.y + weights.z) / 3f;
         float factor = Mathf.Pow(intensity, power);
         if (planet)
-        { 
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.r = weights[0];
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.g = weights[1];
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.b = weights[2];
-                //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.r *= factor;
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.g *= factor;
-                planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.b *= factor;
-                planet.GenerateColors();
-           
+        {
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r = weights[0];
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g = weights[1];
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b = weights[2];
+            //this way was weirdly different than just multiplying the weights first, and it is more stable across color assignments.
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.r *= factor;
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.g *= factor;
+            planet.colorGenerator.settings.biomeColorSettings.biomes[0].tint.b *= factor;
+            planet.GenerateColors();
         }
         else
         {
@@ -214,7 +182,7 @@ public class Triangle : MonoBehaviour{
             {
                 gasPlanet.ChangeBandColor3(weights, factor);
             }
-            else
+            else if (currBand ==3)
             {
                 gasPlanet.ChangeStormColor(weights, factor);
             }
@@ -223,26 +191,53 @@ public class Triangle : MonoBehaviour{
         }
         
     }
-    
-    public void UpdateRandomTintColor(){
-        Vector3 randomVector = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0f, 1f));
-        UpdateTintColor(randomVector, 0.5f);
-        
-    }
 
     public void bandButtonClick(int idx)
     {
         currBand = idx;
     }
-    public void biomeButtonClick(int idx){
-        biomeIndex = idx;
-    }
 
-    public void intensityOnChange(float value)
-    {
+    public void intensityOnChange(float value){
         intensityLevel = value;
         UpdateTintColor(colorWeights, intensityLevel);
         UpdateColor(colorWeights, intensityLevel);
     }
+
+    public Texture2D InitTexture(){
+        int resolution = 256;
+        Color[] colors = new Color[resolution*resolution];
+        Texture2D tex = new Texture2D(resolution, resolution);
+        Vector2 texCoord;
+        Color color;
+        Vector3 weights;
+        float x, y;
+
+        for(int i = 0; i < resolution; i++){
+            for(int j = 0; j < resolution; j++){
+                x = i / (float) resolution;
+                y = j / (float) resolution;
+                texCoord = new Vector2(x, y);
+                weights = BaryCentric.getWeights(new Vector3(vertices[2].x * x, vertices[1].y * y, 0f), vertices);
+                color = new Color(weights.x, weights.y, weights.z);
+                for(int index = 0; index < 3; index++){
+                    if(weights[index] < 0.01){
+                        color = new Color(0, 0, 0);
+                    }
+                }
+                colors[i * resolution + j] = color;
+            }
+        }
+        tex.SetPixels(colors);
+        tex.Apply();
+        SaveTextureAsPNG(tex, "Assets/Materials/PlanetMaterials/Materials/colorMapTex.png");
+        Debug.Log("saving");
+        return tex;
+    }
+
+    public static void SaveTextureAsPNG(Texture2D _texture, string _fullPath){
+        byte[] _bytes =_texture.EncodeToPNG();
+        System.IO.File.WriteAllBytes(_fullPath, _bytes);
+    }
+
 
 }

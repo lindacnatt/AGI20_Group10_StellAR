@@ -130,3 +130,5 @@ MonoBehaviour:
   explosionEffect: {fileID: 0}
   weightMultiplier: 8
   mass: 0
+  name: Testing
+  txt: {fileID: 0}

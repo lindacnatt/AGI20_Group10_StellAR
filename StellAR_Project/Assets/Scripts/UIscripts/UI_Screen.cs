@@ -28,7 +28,7 @@ namespace Stellar.UI
         // Start is called before the first frame update
         void Start()
         {
-            //animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
 
             if(m_StartSelectable)
             {
@@ -45,7 +45,7 @@ namespace Stellar.UI
             {
                 onScreenStart.Invoke();
             }
-            //HandleAnimator("show");
+            HandleAnimator("show");
 
             gameObject.SetActive(true);
         }
@@ -55,17 +55,17 @@ namespace Stellar.UI
             {
                 onScreenClose.Invoke();
             }
-            //HandleAnimator("hide");
+            HandleAnimator("hide");
             gameObject.SetActive(false);
            
         }
 
-        // void HandleAnimator(string aTrigger)
-        // {
-        //      if(animator){
-        //         animator.SetTrigger(aTrigger);
-        //     }
-        // }
+        void HandleAnimator(string aTrigger)
+        {
+             if(animator){
+                animator.SetTrigger(aTrigger);
+            }
+        }
         #endregion
     }
 }
