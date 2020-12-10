@@ -2668,7 +2668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &468070332
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2904,10 +2904,15 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1131135164}
+    - target: {fileID: 4286983279141948711, guid: 83f8d3230f5eeef4fa48e42b53164303,
+        type: 3}
+      propertyPath: m_TagString
+      value: ButtonGroupS
+      objectReference: {fileID: 0}
     - target: {fileID: 5137273975284837134, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.89
+      value: 3.48
       objectReference: {fileID: 0}
     - target: {fileID: 6304962087788153323, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
@@ -2992,7 +2997,7 @@ PrefabInstance:
     - target: {fileID: 9168597844424507771, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
       propertyPath: m_TagString
-      value: ButtonGroup
+      value: ButtonGroupG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}

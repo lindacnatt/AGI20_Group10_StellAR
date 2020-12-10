@@ -10,6 +10,8 @@ TagManager:
   - Asteroid
   - GasPlanet
   - ButtonGroup
+  - ButtonGroupG
+  - ButtonGroupS
   layers:
   - Default
   - TransparentFX
