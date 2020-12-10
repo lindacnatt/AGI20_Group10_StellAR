@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random=UnityEngine.Random;
 
 public class SizeChanger : MonoBehaviour
 {
@@ -61,4 +62,10 @@ public class SizeChanger : MonoBehaviour
             ico.UpdateMesh();
         }
     }
+    public void RandomSize(){
+        float randomSize = Random.Range(0, 1);
+        SizeUpdate(randomSize);
+    }
+       
+
 }
