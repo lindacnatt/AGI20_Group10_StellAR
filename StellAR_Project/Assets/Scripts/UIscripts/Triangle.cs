@@ -168,7 +168,7 @@ void Update(){
             UpdateTintColor(colorWeights, intensityLevel);
             
             
-           // UpdateColor(colorWeights, intensityLevel);
+           UpdateColor(colorWeights, intensityLevel);
         }
     }  
 }
@@ -176,9 +176,9 @@ void UpdateColor(Vector3 weights, float power){
 
     float intensity = (weights.x + weights.y + weights.z) / 3f;
     float factor = Mathf.Pow(intensity, power);
-    
-    //Debug.Log(weights);
-    Color newColor = new Color(weights.x, weights.y, weights.z, 1f);
+
+        //Debug.Log(weights);
+    Color newColor = Color.white;
     newColor.r *= factor;
     newColor.g *= factor;
     newColor.b *= factor;
@@ -188,6 +188,24 @@ void UpdateColor(Vector3 weights, float power){
     meshRenderer.material.color = newColor;
 
 }
+public void RandomColor()
+    {
+        int prevBiomeIndex = 1 * biomeIndex;
+        int prevcurrBand = 1 * currBand;
+        for (int i = 0; i < 4; i++)
+        {
+            biomeIndex = i;
+            currBand = i;
+            intensityLevel = Random.Range(-1.5f, 1.5f);
+            GetComponentInChildren<Slider>().value = intensityLevel;
+            Vector3 rndmHandle = new Vector3(Random.Range(0, 1 * size), Random.Range(0, 1 * size), handleInitZ);
+            handle.transform.localPosition = rndmHandle;
+            colorWeights = BaryCentric.getWeights(handle.transform.localPosition / size, vertices);
+            UpdateTintColor(colorWeights, intensityLevel);
+        }
+        biomeIndex = prevBiomeIndex;
+        currBand = prevcurrBand;
+    }
 
 public void UpdateTintColor(Vector3 weights, float power){
     float intensity = (weights.x + weights.y + weights.z) / 3f;
@@ -247,7 +265,7 @@ public void intensityOnChange(float value)
 {
     intensityLevel = value;
     UpdateTintColor(colorWeights, intensityLevel);
-    //UpdateColor(colorWeights, intensityLevel);
+    UpdateColor(colorWeights, intensityLevel);
 }
 
 

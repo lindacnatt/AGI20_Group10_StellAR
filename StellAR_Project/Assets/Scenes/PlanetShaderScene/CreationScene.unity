@@ -358,6 +358,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1253988909}
     m_Modifications:
+    - target: {fileID: 1897572977, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
+      propertyPath: m_MinValue
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897572977, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
+      propertyPath: m_MaxValue
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6304962087788153323, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
       propertyPath: m_Name
@@ -426,12 +434,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 98931228}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &98931230 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6304962087788153323, guid: 83f8d3230f5eeef4fa48e42b53164303,
+--- !u!114 &98931231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6304962087788153324, guid: 83f8d3230f5eeef4fa48e42b53164303,
     type: 3}
   m_PrefabInstance: {fileID: 98931228}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a39d02ca30543c8b8f8d1af04be385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &128117293
 GameObject:
   m_ObjectHideFlags: 0
@@ -5779,8 +5793,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 98931230}
-        m_MethodName: 
+      - m_Target: {fileID: 98931231}
+        m_MethodName: RandomColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
