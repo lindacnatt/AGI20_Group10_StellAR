@@ -360,27 +360,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1596520991, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1596520991, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1596520991, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6304962087788153323, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
@@ -2824,8 +2824,8 @@ MonoBehaviour:
     type: 3}
   RockPrefab: {fileID: 3057556004749462269, guid: 2bc1c7983ffeb7747897587faca93e61,
     type: 3}
-  distcam: 4
-  yaxis: 1
+  distcam: 5.5
+  yaxis: 1.2
 --- !u!114 &466948417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6631,7 +6631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1253988904
 MonoBehaviour:
   m_ObjectHideFlags: 0
