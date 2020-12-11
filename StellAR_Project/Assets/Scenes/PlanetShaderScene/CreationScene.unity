@@ -2393,7 +2393,7 @@ MonoBehaviour:
   RockPrefab: {fileID: 3057556004749462269, guid: 2bc1c7983ffeb7747897587faca93e61,
     type: 3}
   distcam: 4
-  yaxis: 1.1
+  yaxis: 1
 --- !u!114 &466948417
 MonoBehaviour:
   m_ObjectHideFlags: 0
