@@ -26,8 +26,8 @@ public class ColorGenerator
         settings.planetMaterial.SetVector("_elevationMinMax", new Vector4(elevationMinMax.Min, elevationMinMax.Max));
     }
 
-    public float BiomePercentFromPoint(Vector3 pointOnUnitSphere) {
-        float heightPercent = (pointOnUnitSphere.y + 1) /2f;
+    public float BiomePercentFromPoint(Vector3 pointOnUnitSphere){
+        float heightPercent = (pointOnUnitSphere.y + 1) / 2f;
         heightPercent += (biomeNoiseFilter.Evaluate(pointOnUnitSphere) - settings.biomeColorSettings.noiseOffset) * settings.biomeColorSettings.noiseStrength;
 
         float biomeIndex = 0;
@@ -51,7 +51,7 @@ public class ColorGenerator
           for (int i= 0; i < textureResolution; i++){
             Color gradientCol = biome.gradient.Evaluate(i/(textureResolution - 1f));
             Color tintCol = biome.tint;
-            colors[colorIndex] = gradientCol * (1-biome.tintPercent) + tintCol * biome.tintPercent;
+            colors[colorIndex] = gradientCol * (1 - biome.tintPercent) + tintCol * biome.tintPercent;
             colorIndex++;
             }  
         }
