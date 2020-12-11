@@ -192,13 +192,27 @@ public void RandomColor()
     {
         int prevBiomeIndex = 1 * biomeIndex;
         int prevcurrBand = 1 * currBand;
+        float degree = Mathf.Atan(0.85f / 0.5f);
         for (int i = 0; i < 4; i++)
         {
             biomeIndex = i;
             currBand = i;
             intensityLevel = Random.Range(-1.5f, 1.5f);
             GetComponentInChildren<Slider>().value = intensityLevel;
-            Vector3 rndmHandle = new Vector3(Random.Range(0, 1 * size), Random.Range(0, 1 * size), handleInitZ);
+            float x = Random.Range(0.1f, 0.9f);
+            Debug.Log(x);
+            float y;
+            if(x < 0.5f)
+            {
+                y = Random.Range(0.1f, Mathf.Tan(degree) * x); //to make sure the handle stays within triangle
+            }
+            else
+            {
+                y = Random.Range(0.1f, Mathf.Tan(degree)*(0.9f-x)); //to make sure the handle stays within triangle
+            }
+
+
+            Vector3 rndmHandle = new Vector3(x*size, y*size, handleInitZ);
             handle.transform.localPosition = rndmHandle;
             colorWeights = BaryCentric.getWeights(handle.transform.localPosition / size, vertices);
             UpdateTintColor(colorWeights, intensityLevel);
