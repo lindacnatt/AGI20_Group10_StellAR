@@ -113,7 +113,7 @@ public class SaveLoadScenes : MonoBehaviour
                 else
                 {
                     load = false;
-                    Debug.Log("failed to load");
+                    Debug.Log("failed to load entire system");
                 }
             } 
         }
@@ -137,9 +137,6 @@ public class SaveLoadScenes : MonoBehaviour
                         if(co != null){
                             obj.AddComponent(typeof(CelestialObject));
                         }
-                        string newPlanetName = PlayerPrefs.GetString("NewPlanetName", "Unknown Planet");
-                        obj.GetComponent<CelestialObject>().SetName(newPlanetName);
-                        PlayerPrefs.SetString("NewPlanetName", "Unknown Planet");
                         //obj.GetComponent<CelestialObject>().enabled = true;
 
                         MotherPlanet mp = obj.GetComponentInChildren<MotherPlanet>();
@@ -161,6 +158,11 @@ public class SaveLoadScenes : MonoBehaviour
                             gp.GetComponent<GasPlanetShaderMAterialPropertyBlock>().enabled = true;
                             gasy_i += 1;
                         }
+                        string newPlanetName = PlayerPrefs.GetString("NewPlanetName", "Unknown Planet");
+                        obj.GetComponent<CelestialObject>().SetName(newPlanetName);
+                        PlayerPrefs.SetString("NewPlanetName", "Unknown Planet");
+                        
+                        obj.GetComponent<CelestialObject>().SetMass();
                         GameObject ARSessOrig = GameObject.Find("AR Session Origin");
                         ARPlacementTrajectory placement = ARSessOrig.GetComponent<ARPlacementTrajectory>();
                         placement.setGOtoInstantiate(obj);

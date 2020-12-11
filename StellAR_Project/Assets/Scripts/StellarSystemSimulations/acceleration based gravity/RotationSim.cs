@@ -22,7 +22,7 @@ public class RotationSim : MonoBehaviour
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Moved)
                 {
-                    if(touch.deltaPosition.magnitude > 0.02f){
+                    if(touch.deltaPosition.magnitude > 0.03f){
                     rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
                     rotY = Input.GetAxis("Mouse Y") * rotSpeed * Mathf.Deg2Rad;
 

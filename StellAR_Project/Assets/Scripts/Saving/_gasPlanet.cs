@@ -24,6 +24,8 @@ public struct _gasPlanet
 
     public Color BandColor3;
 
+    public float planetScale;
+
     public _gasPlanet(GasPlanetShaderMAterialPropertyBlock gasPlanet, int id)
     {
         this.id = id;
@@ -45,6 +47,8 @@ public struct _gasPlanet
         BandColor2 = gasPlanet.BandColor2;
 
         BandColor3 = gasPlanet.BandColor3;
+
+        planetScale=gasPlanet.gameObject.transform.localScale.x;
     }
 
 }

@@ -135,6 +135,8 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
         BandColor2 = data.BandColor2;
         BandColor3 = data.BandColor3;
 
+        this.gameObject.transform.localScale = new Vector3(data.planetScale,data.planetScale,data.planetScale);
+
 
 
     }

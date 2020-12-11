@@ -51,7 +51,7 @@ public class ARPlacementTrajectory : MonoBehaviour
         {
             if (placed != true) //while it is not placed it will follow the cameras position
             {
-                objectToPlace.transform.position = ARCamera.transform.position + new Vector3(0f,-0.9f,distanceFromCamera);//* distanceFromCamera; //ARCamera.transform.forward
+                objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera+new Vector3(0f,-0.9f,0f);//* distanceFromCamera; //ARCamera.transform.forward
                 //objectToPlace.transform.rotation = new Quaternion(0.0f, ARCamera.transform.rotation.y, 0.0f, ARCamera.transform.rotation.w);
                 //objectToPlace.transform.localPosition = go.transform.position + go.transform.forward * distanceFromCamera; //ARCamera.transform.forward
 

@@ -11,6 +11,7 @@ public class PlanetNameMovement : MonoBehaviour
     void FixedUpdate(){
         if(planet != null){
             this.transform.position = planet.transform.position + new Vector3(0f,translation, 0f);
+            this.transform.rotation = Camera.main.transform.rotation;
         }
         else{
             Destroy(this.gameObject);

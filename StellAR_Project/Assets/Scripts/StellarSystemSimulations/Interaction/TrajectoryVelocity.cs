@@ -42,6 +42,7 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         vertices = 20;
         this.GetComponent<LineRenderer>().enabled = false;
+        this.GetComponent<LineRenderer>().SetWidth(0.045f, 0.040f);
         //rb=this.GetComponent<Rigidbody>();
 
         
@@ -75,8 +76,8 @@ public class TrajectoryVelocity : MonoBehaviour
                 viewDir.enabled = false;
                 start = new Vector3(0f,0f,0f);
                 startSlingshot = false;
-                arrow.enabled=false;
-                arrow.size=new Vector2(0f,0f);
+                //arrow.enabled=false;
+                //arrow.size=new Vector2(0f,0f);
 
             }
         }
@@ -108,7 +109,7 @@ public class TrajectoryVelocity : MonoBehaviour
     void DrawDirection(Vector3 end){
         float s = direction.magnitude / (float) viewDir.positionCount;
         for (int i=0; i<viewDir.positionCount; i++){
-            viewDir.SetPosition(i,end+direction*s*i);
+            viewDir.SetPosition(i,end+3f*direction*s*i);
         }
 
     }
@@ -137,7 +138,7 @@ public class TrajectoryVelocity : MonoBehaviour
     void SlingShot(){
             viewDir.enabled = true;
             viewDir.positionCount = vertices;
-            end = Camera.main.transform.position + 2.0f*Camera.main.transform.forward;//cam.transform.position+2.0f*cam.transform.forward;
+            end = Camera.main.transform.position + Camera.main.transform.forward*4.5f+new Vector3(0f,-0.9f,0f);//cam.transform.position+2.0f*cam.transform.forward;
             CheckPositionChange();
             direction = (start-end);
             
