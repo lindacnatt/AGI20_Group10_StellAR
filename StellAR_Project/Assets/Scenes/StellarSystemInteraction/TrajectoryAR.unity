@@ -813,7 +813,6 @@ MonoBehaviour:
   gameObjectToInstantiate: {fileID: 0}
   simulationRunner: {fileID: 315051717}
   ARCamera: {fileID: 72423166}
-  distanceFromCamera: 2
   go: {fileID: 452272754}
 --- !u!114 &452272756
 MonoBehaviour:
@@ -1350,6 +1349,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedSystemPrefab: {fileID: 617256918493558102, guid: 8c31125b323694578bd30de1a6d3d4c6,
+    type: 3}
+  delSystemPrefab: {fileID: 5591182603033744302, guid: 74346f72bd82d4cbd8c8cc0f294f99f0,
     type: 3}
 --- !u!1001 &754440101
 PrefabInstance:
@@ -1966,7 +1967,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 0}
   - {fileID: 1425179269}
   m_Father: {fileID: 0}
   m_RootOrder: 4
