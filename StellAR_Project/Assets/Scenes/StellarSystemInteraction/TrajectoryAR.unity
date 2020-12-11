@@ -813,7 +813,6 @@ MonoBehaviour:
   gameObjectToInstantiate: {fileID: 0}
   simulationRunner: {fileID: 315051717}
   ARCamera: {fileID: 72423166}
-  distanceFromCamera: 2
   go: {fileID: 452272754}
 --- !u!114 &452272756
 MonoBehaviour:
@@ -1966,7 +1965,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 0}
   - {fileID: 1425179269}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -2114,13 +2112,13 @@ PrefabInstance:
     - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 452272755}
+      objectReference: {fileID: 666804565}
     - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2149,6 +2147,36 @@ PrefabInstance:
     - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleSave
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843935850843, guid: 1386f97e98c2d410c9ab00718c253a22,

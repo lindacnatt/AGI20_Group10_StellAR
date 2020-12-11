@@ -134,10 +134,12 @@ public class CelestialObject : MonoBehaviour
         rigidBody = this.gameObject.GetComponent<Rigidbody>();
         if (rigidBody == null)
         {
-            rigidBody = this.gameObject.AddComponent<Rigidbody>();
+            rigidBody = this.gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
         }
         staticBody = data.staticBody;
         velocity = data.velocity;
+        //rigidBody.position = data.position;
+        transform.position = data.position;
         rigidBody.position = data.position;
         
         RotationSim rot = this.gameObject.GetComponent<RotationSim>();
@@ -148,7 +150,7 @@ public class CelestialObject : MonoBehaviour
             this.gameObject.GetComponent<RotationSim>().Deploy();
         }
         else{
-            this.gameObject.AddComponent<RotationSim>();
+            this.gameObject.AddComponent(typeof(RotationSim));
             this.gameObject.GetComponent<RotationSim>().SetState(true);
             this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
             this.gameObject.GetComponent<RotationSim>().StartRotation(true);

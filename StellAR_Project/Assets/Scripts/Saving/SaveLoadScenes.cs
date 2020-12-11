@@ -83,14 +83,21 @@ public class SaveLoadScenes : MonoBehaviour
                 }
                 if ( data != null){
 
-                    CelestialObject.DestroyAll();
+                    //CelestialObject.DestroyAll();
+
+                    var planets = FindObjectsOfType<CelestialObject>();
+                    foreach(CelestialObject co in planets){
+                        if(!co.staticBody){
+                            Destroy(co.gameObject);
+                        }
+                    }
+
                     int rocky_i = 0;
                     int gasy_i = 0;
+                    GameObject parent = GameObject.Find("SceneObjects");
                     for (int i=0; i<data.planetCount; i++){
                         GameObject obj = getPrefab(data, i);
-                        obj.GetComponent<CelestialObject>().enabled = true;
-                        CelestialObject co = obj.GetComponent<CelestialObject>();
-                        co.SetState(data.physicsData[i]);
+                        
 
                         MotherPlanet mp = obj.GetComponentInChildren<MotherPlanet>();
                         if (mp != null)
@@ -100,12 +107,24 @@ public class SaveLoadScenes : MonoBehaviour
                             mp.UpdateMesh();
                             rocky_i += 1;
                         }
-                        GasPlanetShaderMAterialPropertyBlock gp = co.GetComponentInChildren<GasPlanetShaderMAterialPropertyBlock>();
+                        //GasPlanetShaderMAterialPropertyBlock gp = co.GetComponentInChildren<GasPlanetShaderMAterialPropertyBlock>();
+                        GasPlanetShaderMAterialPropertyBlock gp = obj.GetComponent<GasPlanetShaderMAterialPropertyBlock>();
                         if (gp != null)
-                        {
+                        {   
                             gp.SetMaterial(data.gasPlanetList[gasy_i]);
                             gasy_i += 1;
                         }
+                        //obj.GetComponent<SphereCollider>().enabled=false;
+
+                        obj.GetComponent<CelestialObject>().enabled = true;
+                        
+                        CelestialObject co = obj.GetComponent<CelestialObject>();
+                        print("position");
+                        print(data.physicsData[i].position);
+                        print("----------");
+                        co.SetState(data.physicsData[i]);
+                        obj.transform.SetParent(parent.transform);
+                        
 
                     }
                     load =false;
@@ -137,7 +156,7 @@ public class SaveLoadScenes : MonoBehaviour
                         if(co != null){
                             obj.AddComponent(typeof(CelestialObject));
                         }
-                        //obj.GetComponent<CelestialObject>().enabled = true;
+                        //obj.GetComponent<IcoPlanet>().enabled = true;
 
                         MotherPlanet mp = obj.GetComponentInChildren<MotherPlanet>();
                         if (mp != null)
@@ -147,7 +166,7 @@ public class SaveLoadScenes : MonoBehaviour
                             mp.UpdateMesh();
                             mp.GenerateColors();
                             mp.GetComponent<IcoPlanet>().staticBody=false;
-                            mp.GetComponent<IcoPlanet>().enabled=false;
+                            mp.GetComponent<IcoPlanet>().enabled=true;
 
                             rocky_i += 1;
                         }

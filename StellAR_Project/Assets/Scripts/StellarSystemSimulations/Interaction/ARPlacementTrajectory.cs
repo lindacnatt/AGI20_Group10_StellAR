@@ -80,6 +80,7 @@ public class ARPlacementTrajectory : MonoBehaviour
         objectToPlace.transform.SetParent(parent.transform);
         
         placed=false;
+        SimulationPauseControl.gameIsPaused = true;
         //objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera, ARCamera.transform.rotation);
         //PlaceNextObject();
     }
