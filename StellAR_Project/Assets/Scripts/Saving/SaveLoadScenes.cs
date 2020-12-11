@@ -120,9 +120,9 @@ public class SaveLoadScenes : MonoBehaviour
                         obj.GetComponent<CelestialObject>().enabled = true;
                         
                         CelestialObject co = obj.GetComponent<CelestialObject>();
-                        print("position");
-                        print(data.physicsData[i].position);
-                        print("----------");
+                        //print("position");
+                        //print(data.physicsData[i].position);
+                        //print("----------");
                         co.SetState(data.physicsData[i]);
                         obj.transform.SetParent(parent.transform);
                         
