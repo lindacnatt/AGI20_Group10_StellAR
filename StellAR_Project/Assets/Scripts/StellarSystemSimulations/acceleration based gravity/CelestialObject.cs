@@ -20,9 +20,11 @@ public class CelestialObject : MonoBehaviour
     bool hasExploded = false;
     public float weightMultiplier = 1f;
     [HideInInspector]
-    public float mass;
+    public float mass=1f;
     public string name;
     public GameObject txt = null;
+    [HideInInspector]
+    public float textTranslation = 0.7f;
 
 
 
@@ -36,36 +38,6 @@ public class CelestialObject : MonoBehaviour
         if (staticBody){
             name=null;
         }
-        if(name != null){
-        txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
-        Vector3 newpos= this.gameObject.transform.position;
-        newpos = newpos+ new Vector3(0f,0.2f,0f);
-        txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
-        //txt.transform.SetParent(this.gameObject.transform, false);
-        txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
-        txt.GetComponent<TextMesh>().text = name;
-        }
-
-        IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
-        if(type != null){
-            if(type.IsRocky){
-                weightMultiplier = 10;
-                var setting = this.gameObject.GetComponent<ShapeGenerator>().settings;
-                //float interval = (0.599485f-0.3692803f);
-                float scaling = 2f -(0.5f-setting.radius);
-                weightMultiplier *= scaling;
-            }
-
-            if(type.IsGassy){
-                weightMultiplier = 18;
-                float interval = 1.573064f-1.19897f;
-                float value=this.gameObject.transform.localScale.x;
-                float scaling = 1f+value/interval;
-                weightMultiplier *= scaling;
-
-            }
-        }
 
     }
 
@@ -78,12 +50,11 @@ public class CelestialObject : MonoBehaviour
             rigidBody = this.gameObject.AddComponent<Rigidbody>();
         }
 
-
         //rigidBody.mass = this.gameObject.transform.localScale.x *
         //    this.GetComponent<SphereCollider>().radius * weightMultiplier;
         rigidBody.useGravity = false;
-        rigidBody.mass *= weightMultiplier;
         mass = rigidBody.mass;
+        
         if (staticBody)
         {
             rigidBody.isKinematic = true;
@@ -168,13 +139,24 @@ public class CelestialObject : MonoBehaviour
         staticBody = data.staticBody;
         velocity = data.velocity;
         rigidBody.position = data.position;
+        
+        RotationSim rot = this.gameObject.GetComponent<RotationSim>();
+        if(rot != null){
+            this.gameObject.GetComponent<RotationSim>().SetState(true);
+            this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
+            this.gameObject.GetComponent<RotationSim>().StartRotation(true);
+            this.gameObject.GetComponent<RotationSim>().Deploy();
+        }
+        else{
+            this.gameObject.AddComponent<RotationSim>();
+            this.gameObject.GetComponent<RotationSim>().SetState(true);
+            this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
+            this.gameObject.GetComponent<RotationSim>().StartRotation(true);
+            this.gameObject.GetComponent<RotationSim>().Deploy();
+        }
+
         mass = data.mass;
         rigidBody.mass=mass;
-        name=data.name;
-        this.gameObject.GetComponent<RotationSim>().SetState(true);
-        this.gameObject.GetComponent<RotationSim>().SetRotation(data.rotation[0],data.rotation[1]);
-        this.gameObject.GetComponent<RotationSim>().StartRotation(true);
-        this.gameObject.GetComponent<RotationSim>().Deploy();
 
         name = data.name;
        if(name != null){
@@ -184,13 +166,10 @@ public class CelestialObject : MonoBehaviour
         txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
         //txt.transform.SetParent(this.gameObject.transform, false);
         txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        textTranslation= data.textTranslation;
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, data.textTranslation);
         txt.GetComponent<TextMesh>().text = name;
         }
-
-
-
-
 
         if (staticBody)
         {
@@ -227,17 +206,77 @@ public class CelestialObject : MonoBehaviour
     }
 
     public void SetName(string input){
+        IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
+        
+        if(type != null){
+            if(type.IsRocky){
+                var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
+                textTranslation = RockSetting.radius+0.1f;
+            }
+
+            if(type.IsGassy){
+                float GasValue = this.gameObject.transform.localScale.x;
+                textTranslation = GasValue/1.7f;
+
+            }
+        }
+
+
         name = input;
         if(name != null){
         txt = Resources.Load("PlanetNameText/PlanetName") as GameObject;
         Vector3 newpos= this.gameObject.transform.position;
-        newpos = newpos + new Vector3(0f,0.2f,0f);
+        //newpos = newpos + new Vector3(0f,0.2f,0f);
         txt = Instantiate(txt, newpos,this.gameObject.transform.rotation);
         //txt.transform.SetParent(this.gameObject.transform, false);
         txt.AddComponent<PlanetNameMovement>();
-        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject);
+        txt.GetComponent<PlanetNameMovement>().SetPlanet(this.gameObject, textTranslation);
         txt.GetComponent<TextMesh>().text = name;
         }
+    }
+
+    public void SetMass(){
+
+        IsTypeOfPlanet type =this.gameObject.GetComponent<IsTypeOfPlanet>();
+        
+        if(type != null){
+            if(type.IsRocky){
+                weightMultiplier = 18f;
+                var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
+                //float interval = (0.599485f-0.3692803f);
+                float scaling = 2f -(0.5f-RockSetting.radius)*4f;
+                scaling = scaling < 0f ? 0.1f : scaling;
+                weightMultiplier *= scaling;
+            }
+
+            if(type.IsGassy){
+                weightMultiplier = 5f;
+                float GasInterval = 1.573064f-1.19897f;
+                float GasValue = this.gameObject.transform.localScale.x;
+                print(GasValue);
+                float scaling = Mathf.Exp((GasValue-GasInterval)/GasInterval)/3f;
+                weightMultiplier *= scaling;
+
+            }
+        }
+
+       
+        rigidBody = this.gameObject.GetComponent<Rigidbody>();
+        if (rigidBody == null)
+        {
+            rigidBody = this.gameObject.AddComponent<Rigidbody>();
+        }
+        rigidBody.useGravity = false;
+        mass = rigidBody.mass;
+        rigidBody.mass *= weightMultiplier;
+        mass *= weightMultiplier;
+        print("Setmass:");
+        print(mass);
+        print(rigidBody.mass);
+        print(weightMultiplier);
+
+        
+
     }
 
 }

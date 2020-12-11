@@ -10,9 +10,11 @@ public class ARPlacementTrajectory : MonoBehaviour
     public GameObject gameObjectToInstantiate; //this is a reference to the prefab we are placing
     public GameObject simulationRunner;
     public Camera ARCamera; //the camera
-    public float distanceFromCamera; //as of now a set distance
+    [HideInInspector]
+    private float distanceFromCamera = 4.5f; //as of now a set distance
     private GameObject objectToPlace;//this is the object that is placed
     private bool placed = false;//of the object is placed or not
+    public GameObject go;
 
     // Start is called before the first frame update
     void Awake()
@@ -49,25 +51,30 @@ public class ARPlacementTrajectory : MonoBehaviour
         {
             if (placed != true) //while it is not placed it will follow the cameras position
             {
-                objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward * distanceFromCamera;
+                objectToPlace.transform.position = ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera+new Vector3(0f,-0.9f,0f);//* distanceFromCamera; //ARCamera.transform.forward
                 //objectToPlace.transform.rotation = new Quaternion(0.0f, ARCamera.transform.rotation.y, 0.0f, ARCamera.transform.rotation.w);
+                //objectToPlace.transform.localPosition = go.transform.position + go.transform.forward * distanceFromCamera; //ARCamera.transform.forward
+
             }
         }
     }
 
     public void PlaceNextObject(){
-        objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
+        /*objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
         placed = false;
-        objectToPlace.AddComponent(typeof(RotationSim));
+        objectToPlace.AddComponent(typeof(RotationSim));*/
     }
 
     public void setGOtoInstantiate(GameObject go)
     {
-        gameObjectToInstantiate = go;
-        //Debug.Log(go.name);
-        SphereCollider collider = gameObjectToInstantiate.GetComponent<SphereCollider>();
+         //gameObjectToInstantiate;
+        Debug.Log(go.name);
+        SphereCollider collider = go.GetComponent<SphereCollider>();
         collider.enabled = false;
-        objectToPlace = gameObjectToInstantiate;
+
+        gameObjectToInstantiate = go;
+        objectToPlace = go;
+        
         objectToPlace.AddComponent(typeof(RotationSim));
         GameObject parent = GameObject.Find("SceneObjects");
         objectToPlace.transform.SetParent(parent.transform);
