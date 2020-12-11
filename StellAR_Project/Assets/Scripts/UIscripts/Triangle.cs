@@ -105,6 +105,8 @@ void Start(){
     mesh.vertices = vertices;
     mesh.triangles = triangles;
     mesh.RecalculateNormals();
+    Vector2[] uvs = new []{new Vector2(0,0), new Vector2(1, 0.5f), new Vector2(0, 1)};
+    mesh.uv = uvs;
     
     // set handle sprite
     handle = this.transform.GetChild(0).gameObject;
@@ -143,7 +145,7 @@ void Update(){
         
         handle.transform.localPosition = new Vector3(bandPos[currBand].x, bandPos[currBand].y, handleInitZ);
         
-        UpdateColor(bandWeights[currBand], intensityLevel);
+        //UpdateColor(bandWeights[currBand], intensityLevel);
     }
     if(Input.GetMouseButton(0)){
 
@@ -166,7 +168,7 @@ void Update(){
             UpdateTintColor(colorWeights, intensityLevel);
             
             
-            UpdateColor(colorWeights, intensityLevel);
+           // UpdateColor(colorWeights, intensityLevel);
         }
     }  
 }
@@ -245,7 +247,7 @@ public void intensityOnChange(float value)
 {
     intensityLevel = value;
     UpdateTintColor(colorWeights, intensityLevel);
-    UpdateColor(colorWeights, intensityLevel);
+    //UpdateColor(colorWeights, intensityLevel);
 }
 
 
