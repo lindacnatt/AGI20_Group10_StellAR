@@ -145,7 +145,7 @@ void Update(){
         
         handle.transform.localPosition = new Vector3(bandPos[currBand].x, bandPos[currBand].y, handleInitZ);
         
-        //UpdateColor(bandWeights[currBand], intensityLevel);
+        UpdateColor(bandWeights[currBand], intensityLevel);
     }
     if(Input.GetMouseButton(0)){
 
@@ -277,6 +277,8 @@ public void biomeButtonClick(int idx){
 
 public void intensityOnChange(float value)
 {
+    colorWeights = BaryCentric.getWeights(handle.transform.localPosition / size, vertices);
+
     intensityLevel = value;
     UpdateTintColor(colorWeights, intensityLevel);
     UpdateColor(colorWeights, intensityLevel);
