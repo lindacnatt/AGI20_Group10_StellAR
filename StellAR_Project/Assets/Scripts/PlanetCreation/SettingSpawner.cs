@@ -53,18 +53,16 @@ public class SettingSpawner {
         newSettings.biomeColorSettings.noiseStrength = defaultColor.biomeColorSettings.noiseStrength;
         newSettings.biomeColorSettings.blendAmount = defaultColor.biomeColorSettings.blendAmount;
 
-        // init first biome
+        // biomes
         for(int i = 0; i < newSettings.biomeColorSettings.biomes.Length; i++){
             newSettings.biomeColorSettings.biomes[i] = new ColorSettings.BiomeColorSettings.Biome();
             newSettings.biomeColorSettings.biomes[i].gradient = defaultColor.biomeColorSettings.biomes[i].gradient;
             newSettings.biomeColorSettings.biomes[i].tint = defaultColor.biomeColorSettings.biomes[i].tint;
             newSettings.biomeColorSettings.biomes[i].tintPercent = defaultColor.biomeColorSettings.biomes[i].tintPercent; 
-            //newSettings.biomeColorSettings.biomes[i].tintPercent = 0.4f; 
             newSettings.biomeColorSettings.biomes[i].startHeight = defaultColor.biomeColorSettings.biomes[i].startHeight; 
         }
         return newSettings;
     }
-
 
     public static CraterSettings CopyCraterSettings(){
         CraterSettings newSettings = (CraterSettings) ScriptableObject.CreateInstance("CraterSettings");

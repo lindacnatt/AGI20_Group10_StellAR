@@ -160,4 +160,11 @@ public class Interactor : MonoBehaviour{
         AudioDistortionFilter dist = paGO.GetComponent<AudioDistortionFilter>();
         dist.distortionLevel = 0.85f;
     }
+
+    public void UpdateNoiseType(int type){
+        noiseType = type;
+    }
+    public void ToggleCraterPlacement(){
+        craterPlacement = !craterPlacement;
+    }
 }

@@ -10,17 +10,11 @@ public class IcoPlanet : MotherPlanet{
     IcoSphere icoSphere;
     [SerializeField, HideInInspector]
     MeshFilter meshFilter;
-    //MouseInteraction interaction;
+    
     Interactor interaction;
 
     public override void Initialize(){
         if(shapeSettings == null || colorSettings == null){
-            /*
-            ShapeSettings tempShapeSettings = SettingSpawner.loadDefaultShape();
-            ColorSettings tempColSettings = SettingSpawner.loadDefaultColor();
-            shapeSettings = tempShapeSettings;
-            colorSettings = tempColSettings;
-            */
             shapeSettings = SettingSpawner.CopyShapeSettings();
             colorSettings = SettingSpawner.CopyColorSettings();
         }
@@ -28,19 +22,9 @@ public class IcoPlanet : MotherPlanet{
         colorSettings = SettingSpawner.CopyColorSettings();
         
         if(craterSettings == null){
-            /*
-            CraterSettings tempCraterSettings = SettingSpawner.loadDefaultCraters();
-            craterSettings = tempCraterSettings;
-            */
             craterSettings = SettingSpawner.CopyCraterSettings();
         }
-        
-        /*
-        if(interaction == null){
-            interaction = GetComponent<MouseInteraction>();
-        }
-
-        */
+    
         interaction = (Interactor) GameObject.Find("Interactor").GetComponent<Interactor>();
 
         if(this.GetComponent<SphereCollider>() == null){
