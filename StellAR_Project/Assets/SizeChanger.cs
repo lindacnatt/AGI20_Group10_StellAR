@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random=UnityEngine.Random;
 
 public class SizeChanger : MonoBehaviour
 {
@@ -60,5 +61,16 @@ public class SizeChanger : MonoBehaviour
             ico.shapeSettings.radius = value * scaler;
             ico.UpdateMesh();
         }
+    }
+    public void RandomSize(){
+        if (Gas){
+            float number = Random.Range(2.50f, 14.00f);
+            SizeUpdate(number);
+        }
+        else {
+            float number = Random.Range(0.3f, 2.50f);
+            SizeUpdate(number);
+        }
+        
     }
 }
