@@ -46,20 +46,19 @@ public class SettingSpawner {
         // init some stuff
         newSettings.biomeColorSettings = new ColorSettings.BiomeColorSettings();
         newSettings.biomeColorSettings.noise = new NoiseSettings();
-        newSettings.biomeColorSettings.biomes = new ColorSettings.BiomeColorSettings.Biome[3];
+        newSettings.biomeColorSettings.biomes = new ColorSettings.BiomeColorSettings.Biome[defaultColor.biomeColorSettings.biomes.Length];
 
         // set biomeColorSettingw
         newSettings.biomeColorSettings.noiseOffset = defaultColor.biomeColorSettings.noiseOffset;
         newSettings.biomeColorSettings.noiseStrength = defaultColor.biomeColorSettings.noiseStrength;
         newSettings.biomeColorSettings.blendAmount = defaultColor.biomeColorSettings.blendAmount;
 
-        // init first biome
+        // biomes
         for(int i = 0; i < newSettings.biomeColorSettings.biomes.Length; i++){
             newSettings.biomeColorSettings.biomes[i] = new ColorSettings.BiomeColorSettings.Biome();
             newSettings.biomeColorSettings.biomes[i].gradient = defaultColor.biomeColorSettings.biomes[i].gradient;
             newSettings.biomeColorSettings.biomes[i].tint = defaultColor.biomeColorSettings.biomes[i].tint;
-            //newSettings.biomeColorSettings.biomes[i].tintPercent = defaultColor.biomeColorSettings.biomes[i].tintPercent; 
-            newSettings.biomeColorSettings.biomes[i].tintPercent = 0.4f; 
+            newSettings.biomeColorSettings.biomes[i].tintPercent = defaultColor.biomeColorSettings.biomes[i].tintPercent; 
             newSettings.biomeColorSettings.biomes[i].startHeight = defaultColor.biomeColorSettings.biomes[i].startHeight; 
         }
         return newSettings;
