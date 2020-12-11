@@ -65,10 +65,12 @@ public class SizeChanger : MonoBehaviour
     public void RandomSize(){
         if (Gas){
             float number = Random.Range(2.50f, 14.00f);
+            SizeSlider.value = number;
             SizeUpdate(number);
         }
         else {
             float number = Random.Range(0.3f, 2.50f);
+            SizeSlider.value = number;
             SizeUpdate(number);
         }
         
