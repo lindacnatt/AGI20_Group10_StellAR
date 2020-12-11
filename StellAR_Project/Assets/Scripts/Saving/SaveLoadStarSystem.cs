@@ -98,8 +98,8 @@ public static class SaveLoadStarSystem
     }
 
 
-    public static void DeleteStarSystem(){
-        string path = Application.persistentDataPath + "/system.data";
+    public static void DeleteStarSystem(string name){
+        string path = Application.persistentDataPath + "/savedSystems/" + name + ".data";
         if(File.Exists(path)){
             File.Delete(path);
         }

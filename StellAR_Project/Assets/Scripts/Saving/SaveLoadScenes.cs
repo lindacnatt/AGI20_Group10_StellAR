@@ -19,6 +19,7 @@ public class SaveLoadScenes : MonoBehaviour
     bool saveSpecific = false;
     bool loadSpecific = false;
     string systemName;
+    string delSystemName;
 
     private static bool firstGenSystemSaved = false;
 
@@ -191,8 +192,8 @@ public class SaveLoadScenes : MonoBehaviour
             }
         }
         if(delete){
-            if(sceneIndex == 0){
-                SaveLoadStarSystem.DeleteStarSystem();
+            if(sceneIndex == 1){
+                SaveLoadStarSystem.DeleteStarSystem(delSystemName);
                 delete=false;
             }
         }
@@ -244,6 +245,12 @@ public class SaveLoadScenes : MonoBehaviour
         load = true;
         loadSpecific = true;
         systemName = name;
+    }
+
+    public void delSpecificSystem(string name)
+    {
+        delete = true;
+        delSystemName = name;
     }
 
     public void NextScene()

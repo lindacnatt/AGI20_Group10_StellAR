@@ -17,6 +17,7 @@ public class LoadingSystem : MonoBehaviour
     string path;
     GameObject loadContentGO;
     public GameObject savedSystemPrefab;
+    public GameObject delSystemPrefab;
     GameObject noCont;
 
     GraphicRaycaster m_Raycaster;
@@ -89,6 +90,13 @@ public class LoadingSystem : MonoBehaviour
                 button.transform.Find("Text").tag = "LoadUI";
                 string name = button.GetComponentInChildren<Text>().text.ToString();
                 button.onClick.AddListener(() => sceneMngr.loadSpecificSystem(name));
+
+                var delButton = Instantiate(delSystemPrefab.GetComponent<Button>(), loadContentGO.transform);
+                var delrectTransform = delButton.GetComponent<RectTransform>();
+                delrectTransform.localScale = new Vector3(1, 1, 1);
+                delButton.tag = "LoadUI";
+                delButton.transform.Find("Text").tag = "LoadUI";
+                delButton.onClick.AddListener(() => sceneMngr.delSpecificSystem(name));
             }
             if (noFiles == 0)
             {

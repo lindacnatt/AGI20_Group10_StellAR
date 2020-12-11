@@ -29,6 +29,8 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
 
     private bool SeedToggle;
 
+    private bool MaterialUpdate = false;
+
 
     
     //The material property block we pass to the GPU
@@ -38,31 +40,37 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
     public void ChangeStormSize(float value)
     {
         StormSize = value;
+        MaterialUpdate = true;
       
     }
     public void ChangeStormSpeed(float value)
     {
         StormSpeed = value;
+        MaterialUpdate = true;
 
     }
     public void ChangeStormStrength(float value)
     {
 
         StormStrength = value;
+        MaterialUpdate = true;
     }
     public void ChangeStormPlacement(float value)
     {
        
         StormPlacement = value;
+        MaterialUpdate = true;
     }
     public void ChangeBandScale1(float value)
     {
         BandScale1 = value;
+        MaterialUpdate = true;
 
     }
     public void ChangeBandScale2(float value)
     {
         BandScale2 = value;
+        MaterialUpdate = true;
 
     }
     public void ReSeed()
@@ -72,6 +80,7 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
             BandXSeed2 = UnityEngine.Random.Range(0, 10);
             BandYSeed1 = UnityEngine.Random.Range(0, 10);
             BandYSeed2 = UnityEngine.Random.Range(0, 10);
+        MaterialUpdate = true;
 
 
     }
@@ -84,6 +93,7 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
         BandColor1.r *= factor;
         BandColor1.g *= factor;
         BandColor1.b *= factor;
+        MaterialUpdate = true;
     }
     public void ChangeBandColor2(Vector3 weights, float factor)
     {
@@ -94,6 +104,7 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
         BandColor2.r *= factor;
         BandColor2.g *= factor;
         BandColor2.b*= factor;
+        MaterialUpdate = true;
     }
     public void ChangeBandColor3(Vector3 weights, float factor)
     {
@@ -104,6 +115,7 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
         BandColor3.r *= factor;
         BandColor3.g *= factor;
         BandColor3.b *= factor;
+        MaterialUpdate = true;
     }
 
     public void ChangeStormColor(Vector3 weights, float factor) 
@@ -115,6 +127,7 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
         BandColorStorm.r *= factor;
         BandColorStorm.g *= factor;
         BandColorStorm.b *= factor;
+        MaterialUpdate = true;
     }
     
 
@@ -136,6 +149,7 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
         BandColor3 = data.BandColor3;
 
         this.gameObject.transform.localScale = new Vector3(data.planetScale,data.planetScale,data.planetScale);
+        MaterialUpdate = true;
 
 
 
@@ -148,8 +162,9 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
             propertyBlock = new MaterialPropertyBlock();
         //Get a renderer component either of the own gameobject or of a child
         TheRenderer = GetComponentInChildren<Renderer>();
+        ApplyMaterial();
     }
-    void Update()
+    void ApplyMaterial()
     {
        
         //set the color property
@@ -175,5 +190,13 @@ public class GasPlanetShaderMAterialPropertyBlock : CelestialObject {
 
         //apply propertyBlock to renderer
         TheRenderer.SetPropertyBlock(propertyBlock);
+        MaterialUpdate = false;
+    }
+    private void Update()
+    {
+        if (MaterialUpdate)
+        {
+            ApplyMaterial();
+        }
     }
 } 
