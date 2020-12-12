@@ -261,11 +261,6 @@ public void UpdateTintColor(Vector3 weights, float power){
     
 }
 
-public void UpdateRandomTintColor(){
-    Vector3 randomVector = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0f, 1f));
-    UpdateTintColor(randomVector, 0.5f);
-    
-}
 
 public void bandButtonClick(int idx)
 {
