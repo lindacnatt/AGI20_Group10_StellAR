@@ -23,6 +23,7 @@ public class SettingSpawner {
     public static ShapeSettings CopyShapeSettings(){
         ShapeSettings newSettings = (ShapeSettings) ScriptableObject.CreateInstance("ShapeSettings");
         newSettings.noiseLayers = new ShapeSettings.NoiseLayer[2];
+        newSettings.zeroLvlIsOcean = false;
         for(int i = 0; i < newSettings.noiseLayers.Length; i++){
             newSettings.noiseLayers[i] = new ShapeSettings.NoiseLayer();
             newSettings.noiseLayers[i].noiseSettings = new NoiseSettings();

@@ -163,6 +163,7 @@ public class Interactor : MonoBehaviour{
 
     public void UpdateNoiseType(int type){
         noiseType = type;
+        craterPlacement = false;
     }
     public void ToggleCraterPlacement(){
         craterPlacement = !craterPlacement;

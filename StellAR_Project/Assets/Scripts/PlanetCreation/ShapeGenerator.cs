@@ -41,12 +41,11 @@ public class ShapeGenerator {
         float craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
         float elevation = 0;
         float noiseelevation = 0;
-        float mask; 
+        float mask = 1; 
         float dist;
         String pointStr = pointOnUnitSphere.ToString();
 
         for (int i = 0; i < noiseFilters.Length; i++) {
-            mask = 0f;
             if (settings.noiseLayers[i].enabled) {
                 if (settings.noiseLayers[i].useMouseAsMask) {
                     if (interaction.noiseType == i) {
@@ -67,18 +66,12 @@ public class ShapeGenerator {
                                 masks[i].Add(pointStr, mask);
                             }
                         }
-                        else {
-                            // if dictionary contains value set to value otherwise 0
-                            mask = (masks[i].ContainsKey(pointStr) ? masks[i][pointStr] : 0f);
-                        }
                     }
-                    else {
-                        mask = (masks[i].ContainsKey(pointStr) ? masks[i][pointStr] : 0f);
-                    }
+                noiseelevation += noiseFilters[i].Evaluate(pointOnUnitSphere);
                 }
-                noiseelevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
         }
+        // this is the erase filter
         if(interaction.noiseType == -1){
             if (masks[0].ContainsKey(pointStr)) {
                 if(masks[0][pointStr] > 0.01){
@@ -91,11 +84,13 @@ public class ShapeGenerator {
             }
         }
 
-        elevation += noiseelevation;
+        mask = (masks[0].ContainsKey(pointStr) ? masks[0][pointStr] : 0);
+        elevation += noiseelevation * mask;
         elevation += craterHeight;
+     
         if (craterHeight < 0)
         {
-            elevation += -noiseelevation*0.8f;
+            //elevation += -noiseelevation*0.8f;
         }
         elevation = settings.radius * (1 + elevation);
         if (elevation < settings.radius && settings.zeroLvlIsOcean)
