@@ -35,6 +35,13 @@ public class Interactor : MonoBehaviour{
     Button oceanBtn;
     Text oceanBtnTxt;
 
+
+    private Touch touch;
+    private Vector2 _startingPos;
+    private Quaternion rotationY;
+
+    private float rotateSpeedMod = 1f;
+
     void Start(){
         canPaint = false;
         craterPlacement = false;        
@@ -97,6 +104,8 @@ public class Interactor : MonoBehaviour{
         if(!paintAudioPlaying){
             paSource.Pause();
         }
+
+       
         
     }
 
