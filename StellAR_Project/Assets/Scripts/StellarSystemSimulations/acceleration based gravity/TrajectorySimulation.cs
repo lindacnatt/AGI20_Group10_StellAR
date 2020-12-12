@@ -216,6 +216,7 @@ public class TrajectorySimulation : MonoBehaviour
                     shoot = !shoot;
                     TrajectoryVelocity.startSlingshot = false;
                     freeze = false;
+                    mainObject.GetComponent<CelestialObject>().isShot = true;
                     //this.GetComponent<TrajectoryLineAnimation>().main = null;
 
                 }

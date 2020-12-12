@@ -157,6 +157,7 @@ public class SaveLoadScenes : MonoBehaviour
                         if(co != null){
                             obj.AddComponent(typeof(CelestialObject));
                         }
+                        obj.GetComponent<CelestialObject>().isShot = false;
                         //obj.GetComponent<IcoPlanet>().enabled = true;
 
                         MotherPlanet mp = obj.GetComponentInChildren<MotherPlanet>();

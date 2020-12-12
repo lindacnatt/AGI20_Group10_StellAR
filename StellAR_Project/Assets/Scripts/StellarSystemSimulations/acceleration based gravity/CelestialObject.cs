@@ -27,9 +27,7 @@ public class CelestialObject : MonoBehaviour
     public float textTranslation = 0.7f;
 
 
-
-
-
+    public bool isShot;
 
 
     public static List<CelestialObject> Objects;
@@ -60,7 +58,6 @@ public class CelestialObject : MonoBehaviour
             rigidBody.isKinematic = true;
 
         }
-
     }
 
     // For adding attractors to the attractors list
@@ -182,6 +179,7 @@ public class CelestialObject : MonoBehaviour
         else{
             rigidBody.isKinematic = false;
         }
+        isShot = true;
     }
 
     public Vector3 GetPosition(){
@@ -272,11 +270,12 @@ public class CelestialObject : MonoBehaviour
         mass = rigidBody.mass;
         rigidBody.mass *= weightMultiplier;
         mass *= weightMultiplier;
+        /*
         print("Setmass:");
         print(mass);
         print(rigidBody.mass);
         print(weightMultiplier);
-
+        */
         
 
     }

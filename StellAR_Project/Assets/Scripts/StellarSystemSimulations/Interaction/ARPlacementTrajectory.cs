@@ -68,7 +68,7 @@ public class ARPlacementTrajectory : MonoBehaviour
     public void setGOtoInstantiate(GameObject go)
     {
          //gameObjectToInstantiate;
-        Debug.Log(go.name);
+        //Debug.Log(go.name);
         SphereCollider collider = go.GetComponent<SphereCollider>();
         collider.enabled = false;
 
