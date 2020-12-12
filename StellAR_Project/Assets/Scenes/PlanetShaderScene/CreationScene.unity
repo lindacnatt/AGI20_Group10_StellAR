@@ -387,6 +387,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Triangle
       objectReference: {fileID: 0}
+    - target: {fileID: 6304962087788153324, guid: 83f8d3230f5eeef4fa48e42b53164303,
+        type: 3}
+      propertyPath: buttonGroupGAS
+      value: 
+      objectReference: {fileID: 578476795}
+    - target: {fileID: 6304962087788153324, guid: 83f8d3230f5eeef4fa48e42b53164303,
+        type: 3}
+      propertyPath: buttonGroup
+      value: 
+      objectReference: {fileID: 1676839085}
     - target: {fileID: 6304962087788153325, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -542,7 +552,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 124089682}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466948416}
+        m_MethodName: ChangeScreen
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 188645615}
+          m_ObjectArgumentAssemblyTypeName: Stellar.UI.UI_Screen, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &124089682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2358,7 +2379,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 389939688}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466948416}
+        m_MethodName: ChangeScreen
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2054166663}
+          m_ObjectArgumentAssemblyTypeName: Stellar.UI.UI_Screen, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &389939688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3353,6 +3385,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575315775}
   m_CullTransparentMesh: 0
+--- !u!1 &578476795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4096009084440331805, guid: 83f8d3230f5eeef4fa48e42b53164303,
+    type: 3}
+  m_PrefabInstance: {fileID: 98931228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &622875985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,7 +4025,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 766551268}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466948415}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &766551268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8654,7 +8703,7 @@ MonoBehaviour:
         m_MethodName: ChangeScreen
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2054166663}
+          m_ObjectArgument: {fileID: 188645615}
           m_ObjectArgumentAssemblyTypeName: Stellar.UI.UI_Screen, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -9391,6 +9440,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672723045}
   m_CullTransparentMesh: 0
+--- !u!1 &1676839085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8486892812328579474, guid: 83f8d3230f5eeef4fa48e42b53164303,
+    type: 3}
+  m_PrefabInstance: {fileID: 98931228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1677978171
 GameObject:
   m_ObjectHideFlags: 0
@@ -11492,7 +11547,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2057753625}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466948416}
+        m_MethodName: ChangeScreen
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1253988904}
+          m_ObjectArgumentAssemblyTypeName: Stellar.UI.UI_Screen, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2057753625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11720,7 +11786,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2071953303}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 466948416}
+        m_MethodName: ChangeScreen
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2054166663}
+          m_ObjectArgumentAssemblyTypeName: Stellar.UI.UI_Screen, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2071953303
 MonoBehaviour:
   m_ObjectHideFlags: 0

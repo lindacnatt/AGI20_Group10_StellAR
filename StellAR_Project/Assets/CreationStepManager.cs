@@ -24,23 +24,24 @@ public class CreationStepManager : MonoBehaviour
 
     public void ChangeScreen(UI_Screen nextScreen)
     {
-        if (StartScreen)
+        
+        if ((nextScreen == Screen21) && (Gas || Rock))
         {
             if(Gas)
             {
-                StartScreen = false;
+                
 
                 ScreenSys.SwitchScreens(aScreen: Screen21);
                 
             }
             else if(Rock)
             {
-                StartScreen = false;
+              
                 ScreenSys.SwitchScreens(aScreen: Screen22);
             }
 
         }
-        else
+        else if((Gas || Rock))
         {
             ScreenSys.SwitchScreens(nextScreen);
         }

@@ -21,14 +21,15 @@ Vector3 handleInitPos;
 PolygonCollider2D col;
 Vector2[] colPoints;
 Vector2 worldPos;
-GasPlanetShaderMAterialPropertyBlock gasPlanet;
+public GasPlanetShaderMAterialPropertyBlock gasPlanet;
 List<Button> bandButtons = new List<Button>();
 List<Button> biomeButtons = new List<Button>();
 int currBand = 0;
 int biomeIndex = 0;
 Vector3[] bandWeights = new Vector3[4];
 Vector3[] bandPos = new Vector3[4];
-MotherPlanet planet;
+float[] bandIntensity = new float[4];
+public MotherPlanet planet;
 public GameObject buttonGroup;
 public GameObject buttonGroupGAS;
 
@@ -43,10 +44,8 @@ public Texture2D tex;
 public float size;
 RaycastHit hit2;
 
-void Start(){
-    buttonGroup = GameObject.FindGameObjectWithTag("ButtonGroupS");
-    buttonGroupGAS = GameObject.FindGameObjectWithTag("ButtonGroupG");
-
+void OnEnable(){
+    
     if(gameObject.GetComponent<MeshFilter>() == null){
         gameObject.AddComponent<MeshFilter>();
         meshRenderer = gameObject.AddComponent<MeshRenderer>();
@@ -71,12 +70,12 @@ void Start(){
             child.onClick.AddListener(() => biomeButtonClick(biomeButtons.IndexOf(child)));
         }
     }
-    else
+    else if(GameObject.FindGameObjectWithTag("GasPlanet"))
     {
         gasPlanet = FindObjectsOfType<GasPlanetShaderMAterialPropertyBlock>()[0];
         buttonGroup.SetActive(false);
         buttonGroupGAS.SetActive(true);
-        foreach (Button child in GetComponentsInChildren<Button>(true))
+        foreach (Button child in buttonGroupGAS.GetComponentsInChildren<Button>(true))
         {
             child.gameObject.SetActive(true);
             bandButtons.Add(child);
@@ -134,18 +133,27 @@ void Start(){
     for (int i = 0; i < 4; i++)
     {
         bandWeights[i] = initWeights;
+            bandIntensity[i] = intensityLevel; 
     }
 }
+  
 
-void Update(){
+    void Update(){
     
+
     if (gasPlanet)
     {
         //makes sure that each band keeps the color that was selected before switching to other band, and that the handle reflects that color
         
         handle.transform.localPosition = new Vector3(bandPos[currBand].x, bandPos[currBand].y, handleInitZ);
-        
-        UpdateColor(bandWeights[currBand], intensityLevel);
+        GetComponentInChildren<Slider>().value = bandIntensity[currBand];
+        UpdateColor(bandWeights[currBand], bandIntensity[currBand]);
+    }
+    else
+    {
+        handle.transform.localPosition = new Vector3(bandPos[biomeIndex].x, bandPos[biomeIndex].y, handleInitZ);
+        GetComponentInChildren<Slider>().value = bandIntensity[biomeIndex];
+        UpdateColor(bandWeights[biomeIndex], bandIntensity[biomeIndex]);
     }
     if(Input.GetMouseButton(0)){
 
@@ -234,8 +242,10 @@ public void UpdateTintColor(Vector3 weights, float power){
             planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.g *= factor;
             planet.colorGenerator.settings.biomeColorSettings.biomes[biomeIndex].tint.b *= factor;
             planet.GenerateColors();
-        
-    }
+            bandPos[biomeIndex] = handle.transform.localPosition;
+            bandWeights[biomeIndex] = weights;
+            bandIntensity[currBand] = power;
+        }
     else
     {
         //makes sure that each band keeps the color that was selected before switching to other band, and that the handle reflects that color
@@ -257,6 +267,7 @@ public void UpdateTintColor(Vector3 weights, float power){
         }
         bandPos[currBand] = handle.transform.localPosition;
         bandWeights[currBand] = weights;
+        bandIntensity[currBand] = power;
     }
     
 }
