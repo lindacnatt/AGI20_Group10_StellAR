@@ -280,4 +280,18 @@ public class CelestialObject : MonoBehaviour
 
     }
 
+    public void AdjustVelocityToGravity(){
+        float factor;
+        if(NBodyPhysics.slow){
+
+        }
+        else if(NBodyPhysics.medium){
+            
+        }
+        else if(NBodyPhysics.medium){
+
+        }
+
+    }
+
 }

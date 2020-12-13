@@ -71,9 +71,12 @@ public class ARPlacementTrajectory : MonoBehaviour
         //Debug.Log(go.name);
         SphereCollider collider = go.GetComponent<SphereCollider>();
         collider.enabled = false;
+        Destroy(go.GetComponent<RotatePlanet>());
 
         gameObjectToInstantiate = go;
         objectToPlace = go;
+
+        
         
         objectToPlace.AddComponent(typeof(RotationSim));
         GameObject parent = GameObject.Find("SceneObjects");

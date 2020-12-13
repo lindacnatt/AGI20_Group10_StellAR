@@ -14,7 +14,7 @@ public class TrajectorySimulation : MonoBehaviour
     public static Vector3[] linePositions;
     public static bool destroyLine;
     public static bool drawLine;
-    public int lineVertices;
+    public int lineVertices = 2000;
 
     private Vector3[] velosities;
     private Vector3[] positions;
@@ -43,11 +43,13 @@ public class TrajectorySimulation : MonoBehaviour
   void Awake(){
       Time.fixedDeltaTime = 0.02f;
       linePositions = new Vector3[lineVertices];
+      
   } 
 
 
     void CopyObjects(){
-       
+
+        
         length=CelestialObject.Objects.Count;
        
         velosities=new Vector3[length];
@@ -210,13 +212,14 @@ public class TrajectorySimulation : MonoBehaviour
                     SetInitialVel();
                     mainObject.GetComponent<SphereCollider>().enabled = true;
                     mainObject.GetComponent<RotationSim>().Deploy();
+                    mainObject.GetComponent<CelestialObject>().isShot = true;
                     destroyLine = true;
                     SimulationPauseControl.gameIsPaused = false;
-                    mainObject = null;
                     shoot = !shoot;
                     TrajectoryVelocity.startSlingshot = false;
                     freeze = false;
-                    mainObject.GetComponent<CelestialObject>().isShot = true;
+                    mainObject = null;
+                    
                     //this.GetComponent<TrajectoryLineAnimation>().main = null;
 
                 }

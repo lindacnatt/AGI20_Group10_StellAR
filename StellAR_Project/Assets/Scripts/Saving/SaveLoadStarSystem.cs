@@ -63,6 +63,8 @@ public static class SaveLoadStarSystem
             TrajectorySimulation.freeze = false;
             TrajectorySimulation.shoot = false;
             ToggleGravityMode.nBodyGravity = data.gravityState;
+            var gToggle = Object.FindObjectOfType<ToggleGravityMode>();
+            gToggle.ChangeToggleStart();
 
             return data;
         }
@@ -88,6 +90,8 @@ public static class SaveLoadStarSystem
             TrajectorySimulation.freeze = false;
             TrajectorySimulation.shoot = false;
             ToggleGravityMode.nBodyGravity = data.gravityState;
+            var gToggle = Object.FindObjectOfType<ToggleGravityMode>();
+            gToggle.ChangeToggleStart();
 
             return data;
         }
