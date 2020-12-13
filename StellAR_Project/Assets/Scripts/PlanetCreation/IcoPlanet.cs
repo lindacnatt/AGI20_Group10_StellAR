@@ -100,9 +100,9 @@ public class IcoPlanet : MotherPlanet{
         position = rotation * position;
 
         float velocity = collision.relativeVelocity.magnitude;
-        craterSettings.impact = Mathf.Min(0.1f + velocity / 2, 1.6f);
-        craterSettings.radius = otherRadius * 0.6f;
-        shapeGenerator.craterGenerator.CreateCrater(position.normalized, 1f);
+        float impact = Mathf.Min(0.2f + velocity*1.2f, 1.6f);
+        float radius = otherRadius * 1.2f;
+        shapeGenerator.craterGenerator.CreateDynaCrater(position.normalized, impact, radius);
         UpdateMesh();
     }
 

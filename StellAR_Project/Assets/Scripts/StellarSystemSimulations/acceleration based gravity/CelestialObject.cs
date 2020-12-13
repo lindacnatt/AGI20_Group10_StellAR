@@ -96,7 +96,6 @@ public class CelestialObject : MonoBehaviour
             {
                 if (!hasExploded)
                 {
-                    Debug.Log("Explode");
                     if (this.transform.localScale.x >= 1)
                     {
                         explosionEffect = Resources.Load<GameObject>("Explosions/BigExplosionEffect");

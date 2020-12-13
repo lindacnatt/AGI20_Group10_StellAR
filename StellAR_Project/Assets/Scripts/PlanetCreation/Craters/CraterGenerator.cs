@@ -107,6 +107,16 @@ public class CraterGenerator
 
     }
 
+    public void CreateDynaCrater(Vector3 pos, float impact, float radius)
+    {
+        //Debug.Log("crater created at pos: " + pos);
+        craterList.Add(new Crater(pos, radius,
+            craterSettings.floorHeight, craterSettings.smoothness,
+            impact, craterSettings.rimSteepness,
+            craterSettings.rimWidth));
+
+    }
+
     float smoothMin(float a, float b, float k)
     {
         float h = Mathf.Clamp01((b - a + k) / (2 * k));
