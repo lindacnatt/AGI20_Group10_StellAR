@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 9176566806944075986}
   - component: {fileID: 2969788671417960416}
   - component: {fileID: 178002775538175930}
-  - component: {fileID: 651821624217768598}
   - component: {fileID: 6383500548202173263}
   - component: {fileID: 6383500548202173252}
   - component: {fileID: -2376165183363421620}
@@ -115,20 +114,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0075477
   m_Center: {x: -0.07376047, y: 0.095864035, z: 0.055760607}
---- !u!114 &651821624217768598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7230892676355551495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30494ca1e6b9646988d624c63ad798f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  thrust: 1
 --- !u!96 &6383500548202173263
 TrailRenderer:
   serializedVersion: 2
@@ -257,6 +242,7 @@ MonoBehaviour:
   name: Asteroid
   txt: {fileID: 0}
   textTranslation: 0.7
+  isAsteroid: 0
   isShot: 0
 --- !u!82 &-2376165183363421620
 AudioSource:
