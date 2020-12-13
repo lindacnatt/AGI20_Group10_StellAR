@@ -95,7 +95,7 @@ public class ShapeGenerator {
         elevation += craterHeight;
         if (craterHeight < 0)
         {
-            elevation += -noiseelevation*0.8f;
+            elevation += -noiseelevation*0.65f;
         }
         elevation = settings.radius * (1 + elevation);
         if (elevation < settings.radius && settings.zeroLvlIsOcean)

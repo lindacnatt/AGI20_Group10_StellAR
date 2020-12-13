@@ -258,6 +258,7 @@ MonoBehaviour:
   name: Asteroid
   txt: {fileID: 0}
   textTranslation: 0.7
+  isShot: 0
 --- !u!82 &-2376165183363421620
 AudioSource:
   m_ObjectHideFlags: 0
