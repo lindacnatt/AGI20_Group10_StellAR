@@ -81,14 +81,14 @@ public class AddCOs : MonoBehaviour
 
     public void AddAsteroid()
     {
-        /*var planets = FindObjectsOfType<CelestialObject>();
+        var planets = FindObjectsOfType<CelestialObject>();
         foreach (CelestialObject co in planets)
         {
             if (!co.staticBody && !co.isShot)
             {
                 Destroy(co.gameObject);
             }
-        }*/
+        }
         GameObject asteroidGO = Instantiate(asteroid);
         asteroidGO.GetComponent<CelestialObject>().SetName("Asteroid");
 
