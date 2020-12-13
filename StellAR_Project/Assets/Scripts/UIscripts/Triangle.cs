@@ -208,7 +208,7 @@ public void RandomColor()
             intensityLevel = Random.Range(-1.5f, 1.5f);
             GetComponentInChildren<Slider>().value = intensityLevel;
             float x = Random.Range(0.1f, 0.9f);
-            Debug.Log(x);
+       
             float y;
             if(x < 0.5f)
             {
@@ -244,7 +244,7 @@ public void UpdateTintColor(Vector3 weights, float power){
             planet.GenerateColors();
             bandPos[biomeIndex] = handle.transform.localPosition;
             bandWeights[biomeIndex] = weights;
-            bandIntensity[currBand] = power;
+            bandIntensity[biomeIndex] = power;
         }
     else
     {
