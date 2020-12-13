@@ -24,7 +24,7 @@ public class SystemSimulationData
         for (int i = 0; i < objectCount; i++)
         {
             CelestialObject co = CelestialObject.Objects[i];
-            if(!co.staticBody){
+            if(!co.staticBody && co.tag != "Asteroid"){
 
                 if (co.tag == "Planet")
                 {
