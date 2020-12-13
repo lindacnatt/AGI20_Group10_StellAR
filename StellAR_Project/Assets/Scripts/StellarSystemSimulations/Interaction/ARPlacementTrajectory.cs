@@ -60,9 +60,14 @@ public class ARPlacementTrajectory : MonoBehaviour
     }
 
     public void PlaceNextObject(){
-        /*objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera, ARCamera.transform.rotation);
+        objectToPlace = Instantiate(gameObjectToInstantiate, ARCamera.transform.position + ARCamera.transform.forward*distanceFromCamera+new Vector3(0f,-0.9f,0f), ARCamera.transform.rotation);
         placed = false;
-        objectToPlace.AddComponent(typeof(RotationSim));*/
+        string name = objectToPlace.GetComponent<CelestialObject>().name;
+        objectToPlace.GetComponent<CelestialObject>().SetName(name);
+        objectToPlace.AddComponent(typeof(RotationSim));
+        GameObject parent = GameObject.Find("SceneObjects");
+        objectToPlace.transform.SetParent(parent.transform);
+        SimulationPauseControl.gameIsPaused = true;
     }
 
     public void setGOtoInstantiate(GameObject go)

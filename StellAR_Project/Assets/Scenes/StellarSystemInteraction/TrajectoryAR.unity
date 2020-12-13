@@ -1606,7 +1606,7 @@ PrefabInstance:
     - target: {fileID: 4581594767077507195, guid: 723aeb69374224c30acc55872a22eddb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -200
+      value: -177.1
       objectReference: {fileID: 0}
     - target: {fileID: 4581594767077507195, guid: 723aeb69374224c30acc55872a22eddb,
         type: 3}
@@ -1636,7 +1636,7 @@ PrefabInstance:
     - target: {fileID: 4581594767077507195, guid: 723aeb69374224c30acc55872a22eddb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4581594767077507195, guid: 723aeb69374224c30acc55872a22eddb,
         type: 3}
@@ -2242,6 +2242,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2147212892, guid: 1386f97e98c2d410c9ab00718c253a22, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 57.75414
+      objectReference: {fileID: 0}
     - target: {fileID: 52109892238353212, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_RootOrder
@@ -2307,6 +2311,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_Text
+      value: Move with one finger to rotate the planet. Tap with two fingers to set
+        position and rotation.
+      objectReference: {fileID: 0}
     - target: {fileID: 2978458843046202285, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2330,7 +2340,7 @@ PrefabInstance:
     - target: {fileID: 2978458843342764357, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843501498622, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
@@ -2347,6 +2357,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2978458843771082265, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_Text
+      value: Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843904116678, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2978458843904116680, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2355,11 +2375,16 @@ PrefabInstance:
     - target: {fileID: 2978458843904116681, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 51.30078
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843904116681, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843904116681, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843935850842, guid: 1386f97e98c2d410c9ab00718c253a22,
@@ -2444,9 +2469,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843978045313, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843978045313, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 315051720}
+      objectReference: {fileID: 452272755}
+    - target: {fileID: 2978458843978045313, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaceNextObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843978045313, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2978458843978045314, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2456,6 +2496,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843978045315, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_Name
+      value: ReSpawn
       objectReference: {fileID: 0}
     - target: {fileID: 2978458844002778099, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
@@ -2587,6 +2632,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -243.7998
       objectReference: {fileID: 0}
+    - target: {fileID: 2978458844835891695, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_Text
+      value: Set trajectory
+      objectReference: {fileID: 0}
     - target: {fileID: 2978458845064829203, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_RootOrder
@@ -2595,12 +2645,12 @@ PrefabInstance:
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -194.3
+      value: -177.3
       objectReference: {fileID: 0}
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20.2
+      value: -18.7
       objectReference: {fileID: 0}
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}

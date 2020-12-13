@@ -6,7 +6,7 @@ public class NBodyPhysics : MonoBehaviour
 {
 
     //public const float gravityConstant = 667.408f; //StellarSystemSim scene
-    //public const float gravityConstant = 0.6667408f; //ARScene - fast setting
+    //public static float gravityConstant = 0.6667408f; //ARScene - fast setting
     public static float gravityConstant = 0.06667408f; //medium setting
     //public const float gravityConstant = 0.006667408f; // slow setting
 
@@ -131,6 +131,8 @@ public class NBodyPhysics : MonoBehaviour
         slow=false;
         fast=false;
         TrajectoryVelocity.magnitude = 4f*0.5f;
+        //Time.timeScale=0.5f;
+        //Time.fixedDeltaTime = 0.02f*0.75f; //* Time.timeScale;
         //TrajectorySimulation.lineVertices=2000;
 
     }
@@ -140,6 +142,8 @@ public class NBodyPhysics : MonoBehaviour
         slow=true;
         fast=false;
         TrajectoryVelocity.magnitude = 4f*0.1f;
+        //Time.timeScale=0.1f;
+        //Time.fixedDeltaTime = 0.02f*0.5f; //* Time.timeScale;
         //TrajectorySimulation.lineVertices=3000;
     }
 
@@ -148,6 +152,8 @@ public class NBodyPhysics : MonoBehaviour
         slow=false;
         fast=true;
         TrajectoryVelocity.magnitude = 4f;
+        //Time.timeScale=1.0f;
+        //Time.fixedDeltaTime = 0.02f; //* Time.timeScale;
         //TrajectorySimulation.lineVertices=1000;
     }
 
@@ -176,7 +182,7 @@ public class NBodyPhysics : MonoBehaviour
                     Debug.Log("The function is broken");
                     break;
             }
-        print(gravityConstant);
+        //print(gravityConstant);
 
     }
 }
