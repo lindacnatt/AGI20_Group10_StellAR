@@ -20,25 +20,28 @@ public class CreationStepManager : MonoBehaviour
     public float distcam;
     public float yaxis;
 
+    string[] types = new string[]{"Rock", "Gas"};
+
     public void ChangeScreen(UI_Screen nextScreen)
     {
-        if (StartScreen)
+        
+        if ((nextScreen == Screen21) && (Gas || Rock))
         {
             if(Gas)
             {
-                StartScreen = false;
+                
 
                 ScreenSys.SwitchScreens(aScreen: Screen21);
                 
             }
             else if(Rock)
             {
-                StartScreen = false;
+              
                 ScreenSys.SwitchScreens(aScreen: Screen22);
             }
 
         }
-        else
+        else if((Gas || Rock))
         {
             ScreenSys.SwitchScreens(nextScreen);
         }
@@ -90,6 +93,11 @@ public class CreationStepManager : MonoBehaviour
         }
     }
 
+    public void RandomType()
+    {
+        var randType = types[Random.Range(0, types.Length)];
+        ToggleType(randType);
+    }
 
     // Start is called before the first frame update
     void Start()
