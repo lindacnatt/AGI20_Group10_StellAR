@@ -24,11 +24,11 @@ public class AddCOs : MonoBehaviour
         {
             newAbtn.SetActive(true);
             newPbtn.SetActive(true);
-            iTween.MoveBy(newPbtn, iTween.Hash("y", 120, "easeType", "easeInOutExpo", "time", 0.3));
+            iTween.MoveBy(newPbtn, iTween.Hash("y", 200, "easeType", "easeInOutExpo", "time", 0.3));
             iTween.ScaleBy(newPbtn, iTween.Hash("amount", new Vector3(5, 5, 5), "easeType", "easeInOutExpo", "time", 0.3));
             iTween.FadeTo(newPbtn, iTween.Hash("alpha", 1, "easeType", "easeInOutExpo", "time", 0.3));
 
-            iTween.MoveBy(newAbtn, iTween.Hash("y", 240, "easeType", "easeInOutExpo", "time", 0.3));
+            iTween.MoveBy(newAbtn, iTween.Hash("y", 400, "easeType", "easeInOutExpo", "time", 0.3));
             iTween.ScaleBy(newAbtn, iTween.Hash("amount", new Vector3(5, 5, 5), "easeType", "easeInOutExpo", "time", 0.3));
             iTween.FadeTo(newAbtn, iTween.Hash("alpha", 1, "easeType", "easeInOutExpo", "time", 0.3));
             showing = true;
@@ -46,7 +46,7 @@ public class AddCOs : MonoBehaviour
 
     private void minimize(double delay)
     {
-        iTween.MoveBy(newPbtn, iTween.Hash("y", -120, "easeType", "easeInOutExpo", "time", 0.3, "delay", delay));
+        iTween.MoveBy(newPbtn, iTween.Hash("y", -200, "easeType", "easeInOutExpo", "time", 0.3, "delay", delay));
         iTween.ScaleBy(newPbtn,
             iTween.Hash(
                 "amount", new Vector3(0.2f, 0.2f, 0.2f),
@@ -59,7 +59,7 @@ public class AddCOs : MonoBehaviour
             );
         iTween.FadeTo(newPbtn, iTween.Hash("alpha", 0, "easeType", "easeInOutExpo", "time", 0.3, "delay", delay));
 
-        iTween.MoveBy(newAbtn, iTween.Hash("y", -240, "easeType", "easeInOutExpo", "time", 0.3, "delay", delay));
+        iTween.MoveBy(newAbtn, iTween.Hash("y", -400, "easeType", "easeInOutExpo", "time", 0.3, "delay", delay));
         iTween.ScaleBy(newAbtn,
             iTween.Hash(
                 "amount", new Vector3(0.2f, 0.2f, 0.2f),
