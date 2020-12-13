@@ -25,6 +25,7 @@ public class CelestialObject : MonoBehaviour
     public GameObject txt = null;
     [HideInInspector]
     public float textTranslation = 0.7f;
+    public bool isAsteroid = false;
 
 
     public bool isShot;

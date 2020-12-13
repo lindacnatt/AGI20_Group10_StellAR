@@ -5,6 +5,7 @@ using UnityEngine;
 public class Asteroid : CelestialObject
 {
     TrailRenderer trail;
+    
     // Start is called before the first frame update
     /*
     void Start()
@@ -17,4 +18,8 @@ public class Asteroid : CelestialObject
         //trail.colorGradient
         trail.material = Resources.Load<Material>("unity_builtin_extra/Default-Particle.mat");
     }*/
+
+    void Awake(){
+        isAsteroid = true;
+    }
 }

@@ -182,8 +182,9 @@ public class SaveLoadScenes : MonoBehaviour
                         string newPlanetName = PlayerPrefs.GetString("NewPlanetName", "Unknown Planet");
                         obj.GetComponent<CelestialObject>().SetName(newPlanetName);
                         PlayerPrefs.SetString("NewPlanetName", "Unknown Planet");
-                        
-                        obj.GetComponent<CelestialObject>().SetMass();
+                        if(!obj.GetComponent<CelestialObject>().isAsteroid){
+                            obj.GetComponent<CelestialObject>().SetMass();
+                        }
                         GameObject ARSessOrig = GameObject.Find("AR Session Origin");
                         ARPlacementTrajectory placement = ARSessOrig.GetComponent<ARPlacementTrajectory>();
                         placement.setGOtoInstantiate(obj);
