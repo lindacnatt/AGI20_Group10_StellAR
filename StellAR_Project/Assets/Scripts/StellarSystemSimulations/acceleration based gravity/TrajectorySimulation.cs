@@ -68,13 +68,16 @@ public class TrajectorySimulation : MonoBehaviour
         massess[0] = rb.mass;
         //velosities[0] = rb.velocity;
         //radius[0] = T.localScale.x;
-        if (mainObject.GetComponent<IcoPlanet>())
+        if (mainObject.GetComponent<IcoPlanet>() != null)
         {
             radius[0] = mainObject.GetComponent<IcoPlanet>().shapeSettings.radius;
         }
-        else if (mainObject.GetComponent<GasPlanetShaderMAterialPropertyBlock>())
+        else if (mainObject.GetComponent<GasPlanetShaderMAterialPropertyBlock>() != null)
         {
-            radius[0] = sc.radius*mainObject.transform.localScale.x / 2;
+            radius[0] = sc.radius*mainObject.transform.localScale.x;//2f;
+        }
+        else{
+            radius[0] = sc.radius*T.localScale.x;
         }
         //radius[0] = sc.radius*T.localScale.x;
 
@@ -104,7 +107,21 @@ public class TrajectorySimulation : MonoBehaviour
             //velosities[count] = rbi.velocity;
             SphereCollider sci = (SphereCollider) mainObject.GetComponent(typeof(SphereCollider));
             //radius[count] = Ti.localScale.x;
-            radius[count] = sci.radius*Ti.localScale.x;
+
+            if (mainObject.GetComponent<IcoPlanet>() != null)
+            {
+                radius[count] = mainObject.GetComponent<IcoPlanet>().shapeSettings.radius;
+            }
+            else if (mainObject.GetComponent<GasPlanetShaderMAterialPropertyBlock>() != null)
+            {
+                radius[count] = sc.radius*mainObject.transform.localScale.x / 2;
+            }
+            else{
+                radius[count] = sci.radius*Ti.localScale.x;
+            }
+
+
+            //radius[count] = sci.radius*Ti.localScale.x;
 
             CelestialObject ai = (CelestialObject) go.GetComponent(typeof(CelestialObject));
             if(ai.staticBody)
