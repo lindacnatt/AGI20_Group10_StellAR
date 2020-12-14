@@ -673,18 +673,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.5}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 465925372498c4381b0ebb1c0b7a870c, type: 3}
+    m_FontSize: 10
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name your system
+  m_Text: Name your stellar system
 --- !u!222 &326360652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -758,8 +758,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: bec3de88cfc1647eb8a93bb8fe82c54f, type: 3}
-    m_FontSize: 120
+    m_Font: {fileID: 12800000, guid: 465925372498c4381b0ebb1c0b7a870c, type: 3}
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1242,7 +1242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 73.665665, y: 204.99998}
+  m_AnchoredPosition: {x: 53.000008, y: 204.99998}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &704348991
@@ -1586,7 +1586,7 @@ PrefabInstance:
     - target: {fileID: 4581594767077507195, guid: 723aeb69374224c30acc55872a22eddb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4581594767077507195, guid: 723aeb69374224c30acc55872a22eddb,
         type: 3}
@@ -1637,6 +1637,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700538829560291396, guid: 723aeb69374224c30acc55872a22eddb,
+        type: 3}
+      propertyPath: m_Text
+      value: Add Planet
       objectReference: {fileID: 0}
     - target: {fileID: 5766515530564707113, guid: 723aeb69374224c30acc55872a22eddb,
         type: 3}
@@ -1761,7 +1766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4392157}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2319,24 +2324,29 @@ PrefabInstance:
     - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_Text
-      value: "1.Flick planet with one finger to spin the planet. \n2.Tap screen with
-        two fingers and release to fix position and spin.\n3.Move phone around, then
-        press shoot to slingshot planet."
+      value: "1. Flick planet with one finger to spin the planet. \n2. Tap screen
+        with two fingers and release to fix position and spin.\n3. Move phone around,
+        then press shoot to slingshot planet."
       objectReference: {fileID: 0}
     - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_FontData.m_FontStyle
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_FontData.m_Alignment
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.59607846
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843046202285, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
@@ -2676,12 +2686,12 @@ PrefabInstance:
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -149.2
+      value: -155
       objectReference: {fileID: 0}
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.19
+      value: -16.81
       objectReference: {fileID: 0}
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
@@ -2691,7 +2701,7 @@ PrefabInstance:
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 250
+      value: 209.99243
       objectReference: {fileID: 0}
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
@@ -3004,6 +3014,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -27.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5926016749946488156, guid: 30c76702e9fff417baab4c5cad18a072,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926016749946488156, guid: 30c76702e9fff417baab4c5cad18a072,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 175.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5926016749946488159, guid: 30c76702e9fff417baab4c5cad18a072,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3013,6 +3033,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926016750026630144, guid: 30c76702e9fff417baab4c5cad18a072,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 465925372498c4381b0ebb1c0b7a870c,
+        type: 3}
+    - target: {fileID: 5926016750026630144, guid: 30c76702e9fff417baab4c5cad18a072,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 5926016750259206283, guid: 30c76702e9fff417baab4c5cad18a072,
         type: 3}

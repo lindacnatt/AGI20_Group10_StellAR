@@ -360,19 +360,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 455805955, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 631087887, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 988889590, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_RootOrder
@@ -380,19 +380,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1596520991, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1596520991, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1596520991, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1896522348, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1897572976, guid: 83f8d3230f5eeef4fa48e42b53164303, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -451,12 +451,17 @@ PrefabInstance:
     - target: {fileID: 2302115820542386374, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 65
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2302115820542386374, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
       propertyPath: m_Text
       value: Brightness
+      objectReference: {fileID: 0}
+    - target: {fileID: 2302115820542386374, guid: 83f8d3230f5eeef4fa48e42b53164303,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 6304962087788153323, guid: 83f8d3230f5eeef4fa48e42b53164303,
         type: 3}
@@ -6949,7 +6954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1253988904
 MonoBehaviour:
   m_ObjectHideFlags: 0
