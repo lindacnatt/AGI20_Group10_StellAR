@@ -176,4 +176,11 @@ public class Interactor : MonoBehaviour{
     public void ToggleCraterPlacement(){
         craterPlacement = !craterPlacement;
     }
+    public void RandomMesh(){
+        for (var i = 0; i <= 10; i++){
+            interactionPoint = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+            GameObject.Find("IcoSpherePlanet(Clone)").GetComponent<MotherPlanet>().UpdateMesh();
+        }
+        
+    }
 }
