@@ -26,6 +26,7 @@ public class CelestialObject : MonoBehaviour
     [HideInInspector]
     public float textTranslation = 0.7f;
     public bool isAsteroid = false;
+    //public float radius;
 
 
     public bool isShot;
@@ -244,16 +245,17 @@ public class CelestialObject : MonoBehaviour
                 weightMultiplier = 18f;
                 var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
                 //float interval = (0.599485f-0.3692803f);
-                float scaling = 2f -(0.25f-RockSetting.radius)*4f; //ändra startpunkten, den är 0.5f nu.
+                float scaling = 2f -(0.25f-RockSetting.radius)*4f; 
                 scaling = scaling < 0f ? 0.1f : scaling;
                 weightMultiplier *= scaling;
                 Debug.Log("Rock" + weightMultiplier);
+                
             }
 
             if(type.IsGassy){
                 //jupiter är genomsnittligt 1/4 av jordens densitet
                 weightMultiplier = 5f;
-                float GasInterval = 0.599485f - 0.786532f; // ändra intervallet här
+                float GasInterval = 0.599485f - 0.786532f; 
                 float GasValue = this.gameObject.transform.localScale.x;
                 print(GasValue);
                 float scaling = Mathf.Exp((GasValue-GasInterval)/GasInterval)/3f;
