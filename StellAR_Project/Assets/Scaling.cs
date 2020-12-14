@@ -16,12 +16,14 @@ public class Scaling : MonoBehaviour
     private ARSessionOrigin SessionOrigin;
     public Transform ContentHolder;
     public Text debug;
+    private GameObject ARCamera;
 
     // Start is called before the first frame update
     void Awake()
     {
+        ARCamera = GameObject.FindGameObjectWithTag("MainCamera");
         SessionOrigin = GetComponent<ARSessionOrigin>();
-        SessionOrigin.MakeContentAppearAt(ContentHolder, ContentHolder.position, Quaternion.identity);
+        SessionOrigin.MakeContentAppearAt(SessionOrigin.transform, ContentHolder.position, ContentHolder.rotation);
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class Scaling : MonoBehaviour
     {
         if (Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved)
         {
+            
             curDist = Input.GetTouch(0).position - Input.GetTouch(1).position; //current distance between finger touches
 
             prevDist = ((Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition) - (Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition));
