@@ -7999,6 +7999,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2933621228887654532, guid: 93ced0444428b204aa90f2316fadfa66,
+        type: 3}
+      propertyPath: brushSize
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3212414677813848830, guid: 93ced0444428b204aa90f2316fadfa66,
         type: 3}
       propertyPath: m_Name
