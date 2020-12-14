@@ -785,8 +785,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_CustomCaretColor: 0
+      - m_Target: {fileID: 419714542}
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0}
+  m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
   m_Text: 
   m_CaretBlinkRate: 0.85
@@ -841,7 +852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac378ee8a00ca43138ad9e4f7d6b377a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  field: {fileID: 0}
+  field: {fileID: 128117295}
 --- !u!1 &161745122
 GameObject:
   m_ObjectHideFlags: 0
@@ -8356,7 +8367,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -201, y: 0}
-  m_SizeDelta: {x: 920, y: 110}
+  m_SizeDelta: {x: 920, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1507365827
 MonoBehaviour:
