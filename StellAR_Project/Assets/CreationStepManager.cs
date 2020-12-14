@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreationStepManager : MonoBehaviour
 {
@@ -19,6 +20,17 @@ public class CreationStepManager : MonoBehaviour
     public GameObject RockPrefab;
     public float distcam;
     public float yaxis;
+
+    public Triangle TriangleRandomize;
+    public Button ReseedButton;
+    public Button RandomizeSize;
+    public Button RandomizeMesh;
+
+
+    public float ShakeDetectionThreshold;
+    public float minShakeInterval;
+    private float sqrShaheDetectionThreshold;
+    private float timeSinceLastShake;
 
     string[] types = new string[]{"Rock", "Gas"};
 
@@ -102,12 +114,36 @@ public class CreationStepManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        sqrShaheDetectionThreshold = Mathf.Pow(ShakeDetectionThreshold, 2);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.acceleration.sqrMagnitude >= sqrShaheDetectionThreshold && Time.unscaledTime >= timeSinceLastShake + minShakeInterval){
+            
+           
+            if (Screen1.gameObject.activeInHierarchy){
+                RandomType();
+                timeSinceLastShake = Time.unscaledTime;
+            }
+            if(Screen21.gameObject.activeInHierarchy){
+                ReseedButton.onClick.Invoke();
+                timeSinceLastShake = Time.unscaledTime;
+            }
+            if(Screen22.gameObject.activeInHierarchy){
+                RandomizeMesh.onClick.Invoke();
+                timeSinceLastShake = Time.unscaledTime;
+            }
+            if(Screen3.gameObject.activeInHierarchy){
+                TriangleRandomize.RandomColor();
+                timeSinceLastShake = Time.unscaledTime;
+            }
+            if (Screen4.gameObject.activeInHierarchy){
+                RandomizeSize.onClick.Invoke();
+                timeSinceLastShake = Time.unscaledTime;
+            }
+            
+        }
     }
 }
