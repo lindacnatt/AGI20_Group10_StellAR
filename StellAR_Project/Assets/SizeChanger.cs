@@ -13,12 +13,18 @@ public class SizeChanger : MonoBehaviour
     private float scaler = 2.5f / Mathf.Log(100);
     //float solidScaler, gasScaler = 1f;
     // Start is called before the first frame update
-    void Start()
+    private void OnDisable()
+    {
+        Planet = null;
+        Gas = false;
+    }
+    void OnEnable()
     {
         
         if (Planet == null)
         {
             Planet = GameObject.FindGameObjectWithTag("Planet");
+            
             if(Planet == null)
             {
                 Planet = GameObject.FindGameObjectWithTag("GasPlanet");
@@ -52,13 +58,13 @@ public class SizeChanger : MonoBehaviour
         if (Gas)
         {
             value *= scaler/* * 0.5f*/;
-            Planet.transform.localScale = new Vector3(value * 2, value * 2, value * 2); //localscale adjusts diameter, to keep consistency with rocky icospheres we halve it to get a radius
+            Planet.transform.localScale = new Vector3(value, value, value); //localscale adjusts diameter, to keep consistency with rocky icospheres we halve it to get a radius
             
         }
         else
         {
             IcoPlanet ico = Planet.GetComponent<IcoPlanet>();
-            ico.shapeSettings.radius = value * scaler;
+            ico.shapeSettings.radius = value/2 * scaler;
             ico.UpdateMesh();
         }
     }
