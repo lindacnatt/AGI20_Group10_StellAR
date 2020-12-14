@@ -244,14 +244,14 @@ public class CelestialObject : MonoBehaviour
                 weightMultiplier = 18f;
                 var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
                 //float interval = (0.599485f-0.3692803f);
-                float scaling = 2f -(0.5f-RockSetting.radius)*4f;
+                float scaling = 2f -(0.5f-RockSetting.radius)*4f; //ändra startpunkten, den är 0.5f nu.
                 scaling = scaling < 0f ? 0.1f : scaling;
                 weightMultiplier *= scaling;
             }
 
             if(type.IsGassy){
                 weightMultiplier = 5f;
-                float GasInterval = 1.573064f-1.19897f;
+                float GasInterval = 1.573064f-1.19897f; // ändra intervallet här
                 float GasValue = this.gameObject.transform.localScale.x;
                 print(GasValue);
                 float scaling = Mathf.Exp((GasValue-GasInterval)/GasInterval)/3f;
