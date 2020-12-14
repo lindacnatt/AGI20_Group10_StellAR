@@ -692,7 +692,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Name
+  m_Text: Name your system
 --- !u!222 &326360652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2319,8 +2319,24 @@ PrefabInstance:
     - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_Text
-      value: Move with one finger to rotate the planet. Tap with two fingers to set
-        position and rotation.
+      value: "1.Flick planet with one finger to spin the planet. \n2.Tap screen with
+        two fingers and release to fix position and spin.\n3.Move phone around, then
+        press shoot to slingshot planet."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942555807465486933, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843046202285, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
@@ -2365,7 +2381,17 @@ PrefabInstance:
     - target: {fileID: 2978458843771082265, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_Text
-      value: Spawn
+      value: Clone last planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843771082266, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 426.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978458843771082266, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 446.6
       objectReference: {fileID: 0}
     - target: {fileID: 2978458843904116678, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
@@ -2650,17 +2676,27 @@ PrefabInstance:
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -177.3
+      value: -149.2
       objectReference: {fileID: 0}
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -18.7
+      value: -27.2
       objectReference: {fileID: 0}
     - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240179942896728807, guid: 1386f97e98c2d410c9ab00718c253a22,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 81.1
       objectReference: {fileID: 0}
     - target: {fileID: 3931601841081425426, guid: 1386f97e98c2d410c9ab00718c253a22,
         type: 3}

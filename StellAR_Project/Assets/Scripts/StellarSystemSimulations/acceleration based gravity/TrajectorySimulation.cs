@@ -68,7 +68,15 @@ public class TrajectorySimulation : MonoBehaviour
         massess[0] = rb.mass;
         //velosities[0] = rb.velocity;
         //radius[0] = T.localScale.x;
-        radius[0] = sc.radius*T.localScale.x;
+        if (mainObject.GetComponent<IcoPlanet>())
+        {
+            radius[0] = mainObject.GetComponent<IcoPlanet>().shapeSettings.radius;
+        }
+        else if (mainObject.GetComponent<GasPlanetShaderMAterialPropertyBlock>())
+        {
+            radius[0] = sc.radius*mainObject.transform.localScale.x / 2;
+        }
+        //radius[0] = sc.radius*T.localScale.x;
 
     
         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
