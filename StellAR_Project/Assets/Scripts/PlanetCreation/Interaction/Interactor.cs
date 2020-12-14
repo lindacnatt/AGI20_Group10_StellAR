@@ -73,6 +73,7 @@ public class Interactor : MonoBehaviour{
                 // add cases for your tag and do stuff
                 switch(selection.gameObject.tag){
                     case "Planet":{
+                        MotherPlanet planet = selection.gameObject.GetComponent<MotherPlanet>();
                         canPaint = (GameObject.Find("2ModifyMeshPlanetColorScreen") != null);
                         if(canPaint){
                             // Play audio
@@ -81,11 +82,13 @@ public class Interactor : MonoBehaviour{
                             }
                             // place crater
                             if(craterPlacement){
-                                selection.gameObject.GetComponent<MotherPlanet>().shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
+                                    planet.shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
                             }
                             // place noise
-                            else{
-                                interactionPoint = selection.InverseTransformPoint(hit.point);
+                            else
+                            {
+                                    interactionPoint = selection.InverseTransformPoint(hit.point);
+                                    planet.shapeGenerator.craterGenerator.checkIfCrater(interactionPoint/planet.shapeGenerator.settings.radius);
                             }
                             // update mesh 
                             selection.gameObject.GetComponent<MotherPlanet>().UpdateMesh();
@@ -172,6 +175,7 @@ public class Interactor : MonoBehaviour{
 
     public void UpdateNoiseType(int type){
         noiseType = type;
+        craterPlacement = false;
     }
     public void ToggleCraterPlacement(){
         craterPlacement = !craterPlacement;
