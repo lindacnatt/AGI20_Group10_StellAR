@@ -28,6 +28,7 @@ public class CelestialObject : MonoBehaviour
     public bool isAsteroid = false;
     //public float radius;
 
+    private AudioSource audio;
 
     public bool isShot;
 
@@ -38,7 +39,7 @@ public class CelestialObject : MonoBehaviour
         if (staticBody){
             name=null;
         }
-
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
 
@@ -180,6 +181,7 @@ public class CelestialObject : MonoBehaviour
         else{
             rigidBody.isKinematic = false;
         }
+        gameObject.GetComponent<AudioSource>().Play();
         isShot = true;
     }
 

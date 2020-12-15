@@ -238,6 +238,7 @@ public class TrajectorySimulation : MonoBehaviour
                     mainObject.GetComponent<SphereCollider>().enabled = true;
                     mainObject.GetComponent<RotationSim>().Deploy();
                     mainObject.GetComponent<CelestialObject>().isShot = true;
+                    mainObject.GetComponent<AudioSource>().Play();
                     destroyLine = true;
                     SimulationPauseControl.gameIsPaused = false;
                     shoot = !shoot;
