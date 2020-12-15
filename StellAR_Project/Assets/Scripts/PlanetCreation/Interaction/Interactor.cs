@@ -66,7 +66,7 @@ public class Interactor : MonoBehaviour{
         }
 
         // only do stuff if mouse is down
-        if(Input.GetMouseButton(0)){
+        if(Input.GetMouseButton(0) && Input.touchCount < 2){
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out hit)){
                 selection = hit.transform;    
