@@ -138,7 +138,7 @@ public class TrajectoryVelocity : MonoBehaviour
     void SlingShot(){
             viewDir.enabled = true;
             viewDir.positionCount = vertices;
-            end = Camera.main.transform.position + Camera.main.transform.forward*4.5f+new Vector3(0f,-0.9f,0f);//cam.transform.position+2.0f*cam.transform.forward;
+            end = Camera.main.transform.position + Camera.main.transform.forward*2.5f+new Vector3(0f,-0.5f,0f);//cam.transform.position+2.0f*cam.transform.forward;
             CheckPositionChange();
             direction = (start-end);
             
