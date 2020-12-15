@@ -27,13 +27,11 @@ public class Interactor : MonoBehaviour{
 
     //craterModeUIStuff & OceanToggleUIStuff
     Button craterBtn;
-    Text craterBtnTxt;
-    Color toggledTxtColor = new Color(1.0f, 1.0f, 1.0f);
-    Color untoggledTxtColor = new Color(0.5f, 0.5f, 0.5f);
-    Color toggledColor = new Color(0.1f, 0.0f, 0.7f);
-    Color untoggledColor = new Color(0.2f, 0.2f, 0.5f);
-    Button oceanBtn;
-    Text oceanBtnTxt;
+    Button mountainBtn;
+    Button flattenBtn;
+    Color toggledColor = new Color(0.2f, 0.1f, 0.6f, 1);
+    Color untoggledColor = new Color(0.5f, 0.5f, 0.5f, 1);
+    Toggle oceanToggle;
 
 
     private Touch touch;
@@ -41,6 +39,8 @@ public class Interactor : MonoBehaviour{
     private Quaternion rotationY;
 
     private float rotateSpeedMod = 1f;
+
+    private bool colorsSet = false;
 
     void Start(){
         canPaint = false;
@@ -52,10 +52,6 @@ public class Interactor : MonoBehaviour{
         else{
             paSource = paGO.GetComponent<AudioSource>();
         }
-        //GameObject MpGO = GameObject.Find("IcoSpherePlanet(Clone)");
-        //Debug.Log(MpGO);
-        //planet = GameObject.Find("IcoSpherePlanet(Clone)").GetComponent<MotherPlanet>();
-        //Debug.Log(planet);
     }
 
     void Update(){
@@ -64,9 +60,45 @@ public class Interactor : MonoBehaviour{
         {
             craterPlacement ^= true;
         }
+        if (!colorsSet)
+        {
+            if (craterBtn != null)
+            {
+                if (craterPlacement)
+                {
+                    craterBtn.GetComponent<Image>().color = toggledColor;
+                }
+                else
+                {
+                    craterBtn.GetComponent<Image>().color = untoggledColor;
+                }
+            }
+            if (mountainBtn != null && flattenBtn != null)
+            {
+                if (!craterPlacement)
+                {
+                    if (noiseType == 0)
+                    {
+                        mountainBtn.GetComponent<Image>().color = toggledColor;
+                        flattenBtn.GetComponent<Image>().color = untoggledColor;
+                    }
+                    else
+                    {
+                        mountainBtn.GetComponent<Image>().color = untoggledColor;
+                        flattenBtn.GetComponent<Image>().color = toggledColor;
+                    }
+                }
+                else
+                {
+                    mountainBtn.GetComponent<Image>().color = untoggledColor;
+                    flattenBtn.GetComponent<Image>().color = untoggledColor;
+                }
+            }
 
+            colorsSet = true;
+        }
         // only do stuff if mouse is down
-        if(Input.GetMouseButton(0) && Input.touchCount < 2){
+        if (Input.GetMouseButton(0) && Input.touchCount < 2){
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out hit)){
                 selection = hit.transform;    
@@ -112,42 +144,19 @@ public class Interactor : MonoBehaviour{
         
     }
 
-    public void craterMode()
-    {
-        craterBtn = GameObject.Find("ToggleCraterMode").GetComponent<Button>();
-        craterBtnTxt = craterBtn.GetComponentInChildren<Text>();
-        craterPlacement ^= true;
-        if (craterPlacement)
-        {
-            craterBtn.GetComponent<Image>().color = toggledColor;
-            craterBtnTxt.color = toggledTxtColor;
-        }
-        else
-        {
-            craterBtn.GetComponent<Image>().color = untoggledColor;
-            craterBtnTxt.color = untoggledTxtColor;
-        }
-
-    }
-
     public void toggleOcean()
     {
         planet.shapeSettings.zeroLvlIsOcean ^= true;
-        oceanBtn = GameObject.Find("ToggleWater").GetComponent<Button>();
-        oceanBtnTxt = oceanBtn.GetComponentInChildren<Text>();
+        oceanToggle = GameObject.Find("ToggleWater").GetComponent<Toggle>();
         if (planet.shapeSettings.zeroLvlIsOcean)
         {
-            oceanBtn.GetComponent<Image>().color = toggledColor;
-            oceanBtnTxt.color = toggledTxtColor;
+            oceanToggle.isOn = true;
         }
         else
         {
-            oceanBtn.GetComponent<Image>().color = untoggledColor;
-            oceanBtnTxt.color = untoggledTxtColor;
+            oceanToggle.isOn = false;
         }
         planet.shapeGenerator.elevationMinMax = new MinMax();
-        Debug.Log("Min: " + planet.shapeGenerator.elevationMinMax.Min);
-        Debug.Log("Max: " + planet.shapeGenerator.elevationMinMax.Max);
         planet.UpdateMesh();
         planet.GenerateColors();
     }
@@ -173,12 +182,24 @@ public class Interactor : MonoBehaviour{
         dist.distortionLevel = 0.85f;
     }
 
+    public void setBtns()
+    {
+        if (GameObject.Find("ToggleMountain") != null)
+        {
+            mountainBtn = GameObject.Find("ToggleMountain").GetComponent<Button>();
+            flattenBtn = GameObject.Find("ToggleFlatten").GetComponent<Button>();
+            craterBtn = GameObject.Find("ToggleCraterMode").GetComponent<Button>();
+        }
+    }
+
     public void UpdateNoiseType(int type){
         noiseType = type;
         craterPlacement = false;
+        colorsSet = false;
     }
     public void ToggleCraterPlacement(){
         craterPlacement = !craterPlacement;
+        colorsSet = false;
     }
     public void RandomMesh(){
         for (var i = 0; i <= 10; i++){
