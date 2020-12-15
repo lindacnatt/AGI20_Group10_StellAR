@@ -92,7 +92,7 @@ public class AddCOs : MonoBehaviour
         GameObject asteroidGO = Instantiate(asteroid);
         asteroidGO.GetComponent<CelestialObject>().SetName("Asteroid");
 
-        asteroidGO.GetComponent<CelestialObject>().SetMass();
+        //asteroidGO.GetComponent<CelestialObject>().SetMass();
         GameObject ARSessOrig = GameObject.Find("AR Session Origin");
         ARPlacementTrajectory placement = ARSessOrig.GetComponent<ARPlacementTrajectory>();
         placement.setGOtoInstantiate(asteroidGO);

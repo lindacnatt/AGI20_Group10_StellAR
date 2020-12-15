@@ -35,6 +35,13 @@ public class Interactor : MonoBehaviour{
     Button oceanBtn;
     Text oceanBtnTxt;
 
+
+    private Touch touch;
+    private Vector2 _startingPos;
+    private Quaternion rotationY;
+
+    private float rotateSpeedMod = 1f;
+
     void Start(){
         canPaint = false;
         craterPlacement = false;        
@@ -66,6 +73,7 @@ public class Interactor : MonoBehaviour{
                 // add cases for your tag and do stuff
                 switch(selection.gameObject.tag){
                     case "Planet":{
+                        MotherPlanet planet = selection.gameObject.GetComponent<MotherPlanet>();
                         canPaint = (GameObject.Find("2ModifyMeshPlanetColorScreen") != null);
                         if(canPaint){
                             // Play audio
@@ -74,11 +82,13 @@ public class Interactor : MonoBehaviour{
                             }
                             // place crater
                             if(craterPlacement){
-                                selection.gameObject.GetComponent<MotherPlanet>().shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
+                                    planet.shapeGenerator.craterGenerator.PlaceCrater(selection.InverseTransformPoint(hit.point));
                             }
                             // place noise
-                            else{
-                                interactionPoint = selection.InverseTransformPoint(hit.point);
+                            else
+                            {
+                                    interactionPoint = selection.InverseTransformPoint(hit.point);
+                                    planet.shapeGenerator.craterGenerator.checkIfCrater(interactionPoint/planet.shapeGenerator.settings.radius);
                             }
                             // update mesh 
                             selection.gameObject.GetComponent<MotherPlanet>().UpdateMesh();
@@ -97,6 +107,8 @@ public class Interactor : MonoBehaviour{
         if(!paintAudioPlaying){
             paSource.Pause();
         }
+
+       
         
     }
 
@@ -163,8 +175,16 @@ public class Interactor : MonoBehaviour{
 
     public void UpdateNoiseType(int type){
         noiseType = type;
+        craterPlacement = false;
     }
     public void ToggleCraterPlacement(){
         craterPlacement = !craterPlacement;
+    }
+    public void RandomMesh(){
+        for (var i = 0; i <= 10; i++){
+            interactionPoint = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+            GameObject.Find("IcoSpherePlanet(Clone)").GetComponent<MotherPlanet>().UpdateMesh();
+        }
+        
     }
 }

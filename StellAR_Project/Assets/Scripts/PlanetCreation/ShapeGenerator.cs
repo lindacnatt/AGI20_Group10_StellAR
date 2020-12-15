@@ -120,4 +120,9 @@ public class ShapeGenerator {
     public float[] getMaskValues(){
         return DataChanger.getValuesFromDict(masks[0]);
     }
+
+    public void checkIfCrater(Vector3 point)
+    {
+
+    }
 }

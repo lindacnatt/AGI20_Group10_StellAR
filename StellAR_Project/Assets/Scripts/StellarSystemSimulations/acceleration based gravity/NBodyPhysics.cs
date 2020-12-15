@@ -6,9 +6,14 @@ public class NBodyPhysics : MonoBehaviour
 {
 
     //public const float gravityConstant = 667.408f; //StellarSystemSim scene
-    //public const float gravityConstant = 0.6667408f; //ARScene - original - fast setting?
-    public const float gravityConstant = 0.06667408f; //medium setting?
-    //public const float gravityConstant = 0.006667408f; // slow setting?
+    //public static float gravityConstant = 0.6667408f; //ARScene - fast setting
+    public static float gravityConstant = 0.06667408f; //medium setting
+    //public const float gravityConstant = 0.006667408f; // slow setting
+
+    public static bool slow = false;
+    public static bool medium = true;
+    public static bool fast = false;
+
 
     // Start is called before the first frame update
     void FixedUpdate(){
@@ -118,7 +123,66 @@ public class NBodyPhysics : MonoBehaviour
             }
 
         }
-
         
+    }
+
+    public void ToggleMedium(){
+        medium = true;
+        slow=false;
+        fast=false;
+        TrajectoryVelocity.magnitude = 4f*0.5f;
+        //Time.timeScale=0.5f;
+        //Time.fixedDeltaTime = 0.02f*0.75f; //* Time.timeScale;
+        //TrajectorySimulation.lineVertices=2000;
+
+    }
+
+    public void ToggleSlow(){
+        medium =false;
+        slow=true;
+        fast=false;
+        TrajectoryVelocity.magnitude = 4f*0.1f;
+        //Time.timeScale=0.1f;
+        //Time.fixedDeltaTime = 0.02f*0.5f; //* Time.timeScale;
+        //TrajectorySimulation.lineVertices=3000;
+    }
+
+    public void ToggleFast(){
+        medium =false;
+        slow=false;
+        fast=true;
+        TrajectoryVelocity.magnitude = 4f;
+        //Time.timeScale=1.0f;
+        //Time.fixedDeltaTime = 0.02f; //* Time.timeScale;
+        //TrajectorySimulation.lineVertices=1000;
+    }
+
+    public void ChangeSpeed(){
+        switch (gravityConstant)
+            {
+                case 0.06667408f: // medium 
+                    if(fast){
+                        gravityConstant =0.6667408f;}
+                    else if(slow){
+                        gravityConstant =0.006667408f;}
+                    break;
+                case 0.6667408f: // fast
+                    if(medium){
+                        gravityConstant =0.06667408f;}
+                    else if(slow){
+                        gravityConstant =0.006667408f;}
+                    break;
+                case 0.006667408f: //slow
+                    if(fast){
+                        gravityConstant =0.6667408f;}
+                    else if(medium){
+                        gravityConstant =0.06667408f;}
+                    break;
+                default:
+                    Debug.Log("The function is broken");
+                    break;
+            }
+        //print(gravityConstant);
+
     }
 }

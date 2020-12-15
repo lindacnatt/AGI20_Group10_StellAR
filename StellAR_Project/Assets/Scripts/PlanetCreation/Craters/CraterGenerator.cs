@@ -130,4 +130,15 @@ public class CraterGenerator
         return a * h + b * (1 - h) - k * h * (1 - h);
     }
 
+    public void checkIfCrater(Vector3 point)
+    {
+        foreach (Crater crater in craterList.ToArray())
+        {
+            if ((point - crater.center).magnitude < crater.radius)
+            {
+                craterList.Remove(crater);
+            }
+        }
+    }
+
 }

@@ -25,6 +25,8 @@ public class CelestialObject : MonoBehaviour
     public GameObject txt = null;
     [HideInInspector]
     public float textTranslation = 0.7f;
+    public bool isAsteroid = false;
+    //public float radius;
 
 
     public bool isShot;
@@ -243,18 +245,22 @@ public class CelestialObject : MonoBehaviour
                 weightMultiplier = 18f;
                 var RockSetting = this.gameObject.GetComponent<MotherPlanet>().shapeGenerator.settings;
                 //float interval = (0.599485f-0.3692803f);
-                float scaling = 2f -(0.5f-RockSetting.radius)*4f;
+                float scaling = 2f -(0.25f-RockSetting.radius)*4f; 
                 scaling = scaling < 0f ? 0.1f : scaling;
                 weightMultiplier *= scaling;
+                Debug.Log("Rock" + weightMultiplier);
+                
             }
 
             if(type.IsGassy){
+                //jupiter är genomsnittligt 1/4 av jordens densitet
                 weightMultiplier = 5f;
-                float GasInterval = 1.573064f-1.19897f;
+                float GasInterval = 0.599485f - 0.786532f; 
                 float GasValue = this.gameObject.transform.localScale.x;
                 print(GasValue);
                 float scaling = Mathf.Exp((GasValue-GasInterval)/GasInterval)/3f;
-                weightMultiplier *= scaling;
+                weightMultiplier *= scaling * 400;
+                Debug.Log("Gas" + weightMultiplier);
 
             }
         }
@@ -276,6 +282,20 @@ public class CelestialObject : MonoBehaviour
         print(weightMultiplier);
         */
         
+
+    }
+
+    public void AdjustVelocityToGravity(){
+        float factor;
+        if(NBodyPhysics.slow){
+
+        }
+        else if(NBodyPhysics.medium){
+            
+        }
+        else if(NBodyPhysics.medium){
+
+        }
 
     }
 

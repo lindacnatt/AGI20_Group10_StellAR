@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1120766311}
   - component: {fileID: 1120766312}
   - component: {fileID: 1120766317}
+  - component: {fileID: 7315035658100449213}
   m_Layer: 0
   m_Name: IcoSpherePlanet
   m_TagString: Planet
@@ -60,6 +61,9 @@ MonoBehaviour:
   mass: 0
   name: 
   txt: {fileID: 0}
+  textTranslation: 0.7
+  isAsteroid: 0
+  isShot: 0
   shapeSettings: {fileID: 0}
   colorSettings: {fileID: 0}
   craterSettings: {fileID: 11400000, guid: 1b8ab40a7b2d14bf3a4aac12ceb7f208, type: 2}
@@ -240,6 +244,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d22e3b62e8514730bcbe1fc59242b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7315035658100449213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057556004749462269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515f0475d2dd84a98a303a096782a773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3057556005515888495
