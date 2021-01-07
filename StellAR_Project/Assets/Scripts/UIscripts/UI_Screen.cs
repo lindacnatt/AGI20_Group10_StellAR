@@ -19,22 +19,23 @@ namespace Stellar.UI
 
         [Header("Screen Events")]
         public UnityEvent onScreenStart = new UnityEvent();
-        public UnityEvent onScreenClose = new UnityEvent(); 
+        public UnityEvent onScreenClose = new UnityEvent();
 
-        private Animator animator;
+        //private Animator animator;
         #endregion
 
         #region Main Methods
         // Start is called before the first frame update
         void Start()
         {
-            animator = GetComponent<Animator>();
+            //animator = GetComponent<Animator>();
 
             if(m_StartSelectable)
             {
                 EventSystem.current.SetSelectedGameObject(m_StartSelectable.gameObject);
             }
         }
+
         #endregion
 
         #region Helper Methods
@@ -44,7 +45,9 @@ namespace Stellar.UI
             {
                 onScreenStart.Invoke();
             }
-            HandleAnimator("show");
+            //HandleAnimator("show");
+
+            gameObject.SetActive(true);
         }
         public virtual void CloseScreen()
         {
@@ -52,16 +55,17 @@ namespace Stellar.UI
             {
                 onScreenClose.Invoke();
             }
-            HandleAnimator("hide");
+            //HandleAnimator("hide");
+            gameObject.SetActive(false);
            
         }
 
-        void HandleAnimator(string aTrigger)
-        {
-             if(animator){
-                animator.SetTrigger(aTrigger);
-            }
-        }
+        // void HandleAnimator(string aTrigger)
+        // {
+        //      if(animator){
+        //         animator.SetTrigger(aTrigger);
+        //     }
+        // }
         #endregion
     }
 }

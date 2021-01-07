@@ -7,7 +7,7 @@ public class CraterGenerator
 {
     //ShapeSettings setings;
     public CraterSettings craterSettings;
-    List<Crater> craterList;
+    public List<Crater> craterList;
 
     public CraterGenerator(CraterSettings craterSettings)
     {
@@ -29,8 +29,8 @@ public class CraterGenerator
         public float floor;
         public float smoothness;
         public float impact;
-        public float rimSteepness = 0.5f;
-        public float rimWidth = 0.5f;
+        public float rimSteepness;
+        public float rimWidth;
         public Crater(Vector3 center, float radius, float floor,
             float smoothness, float impact, float rimSteepness, float rimWidth)
         {
@@ -107,6 +107,16 @@ public class CraterGenerator
 
     }
 
+    public void CreateDynaCrater(Vector3 pos, float impact, float radius)
+    {
+        //Debug.Log("crater created at pos: " + pos);
+        craterList.Add(new Crater(pos, radius,
+            craterSettings.floorHeight, craterSettings.smoothness,
+            impact, craterSettings.rimSteepness,
+            craterSettings.rimWidth));
+
+    }
+
     float smoothMin(float a, float b, float k)
     {
         float h = Mathf.Clamp01((b - a + k) / (2 * k));
@@ -118,6 +128,17 @@ public class CraterGenerator
         k = k * (-1);
         float h = Mathf.Clamp01((b - a + k) / (2 * k));
         return a * h + b * (1 - h) - k * h * (1 - h);
+    }
+
+    public void checkIfCrater(Vector3 point)
+    {
+        foreach (Crater crater in craterList.ToArray())
+        {
+            if ((point - crater.center).magnitude < crater.radius)
+            {
+                craterList.Remove(crater);
+            }
+        }
     }
 
 }

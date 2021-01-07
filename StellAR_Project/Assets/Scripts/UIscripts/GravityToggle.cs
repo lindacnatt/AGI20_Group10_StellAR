@@ -9,7 +9,6 @@ public class GravityToggle : MonoBehaviour
    private string  nbody = "Change to Nbody";
    private string source = "Change to Source";
    private Text txt;
-   private int count = 0;
  
      private void Start()
      {

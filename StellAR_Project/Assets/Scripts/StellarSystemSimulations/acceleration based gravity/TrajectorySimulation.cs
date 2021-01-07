@@ -14,7 +14,7 @@ public class TrajectorySimulation : MonoBehaviour
     public static Vector3[] linePositions;
     public static bool destroyLine;
     public static bool drawLine;
-    public int lineVertices;
+    public int lineVertices = 2000;
 
     private Vector3[] velosities;
     private Vector3[] positions;
@@ -43,11 +43,13 @@ public class TrajectorySimulation : MonoBehaviour
   void Awake(){
       Time.fixedDeltaTime = 0.02f;
       linePositions = new Vector3[lineVertices];
+      
   } 
 
 
     void CopyObjects(){
-       
+
+        
         length=CelestialObject.Objects.Count;
        
         velosities=new Vector3[length];
@@ -66,7 +68,18 @@ public class TrajectorySimulation : MonoBehaviour
         massess[0] = rb.mass;
         //velosities[0] = rb.velocity;
         //radius[0] = T.localScale.x;
-        radius[0] = sc.radius*T.localScale.x;
+        if (mainObject.GetComponent<IcoPlanet>() != null)
+        {
+            radius[0] = mainObject.GetComponent<IcoPlanet>().shapeSettings.radius;
+        }
+        else if (mainObject.GetComponent<GasPlanetShaderMAterialPropertyBlock>() != null)
+        {
+            radius[0] = sc.radius*mainObject.transform.localScale.x;//2f;
+        }
+        else{
+            radius[0] = sc.radius*T.localScale.x;
+        }
+        //radius[0] = sc.radius*T.localScale.x;
 
     
         CelestialObject a = (CelestialObject) mainObject.GetComponent(typeof(CelestialObject));
@@ -94,7 +107,21 @@ public class TrajectorySimulation : MonoBehaviour
             //velosities[count] = rbi.velocity;
             SphereCollider sci = (SphereCollider) mainObject.GetComponent(typeof(SphereCollider));
             //radius[count] = Ti.localScale.x;
-            radius[count] = sci.radius*Ti.localScale.x;
+
+            if (mainObject.GetComponent<IcoPlanet>() != null)
+            {
+                radius[count] = mainObject.GetComponent<IcoPlanet>().shapeSettings.radius;
+            }
+            else if (mainObject.GetComponent<GasPlanetShaderMAterialPropertyBlock>() != null)
+            {
+                radius[count] = sc.radius*mainObject.transform.localScale.x / 2;
+            }
+            else{
+                radius[count] = sci.radius*Ti.localScale.x;
+            }
+
+
+            //radius[count] = sci.radius*Ti.localScale.x;
 
             CelestialObject ai = (CelestialObject) go.GetComponent(typeof(CelestialObject));
             if(ai.staticBody)
@@ -209,12 +236,16 @@ public class TrajectorySimulation : MonoBehaviour
                 {
                     SetInitialVel();
                     mainObject.GetComponent<SphereCollider>().enabled = true;
+                    mainObject.GetComponent<RotationSim>().Deploy();
+                    mainObject.GetComponent<CelestialObject>().isShot = true;
+                    mainObject.GetComponent<AudioSource>().Play();
                     destroyLine = true;
                     SimulationPauseControl.gameIsPaused = false;
-                    mainObject = null;
                     shoot = !shoot;
                     TrajectoryVelocity.startSlingshot = false;
                     freeze = false;
+                    mainObject = null;
+                    
                     //this.GetComponent<TrajectoryLineAnimation>().main = null;
 
                 }

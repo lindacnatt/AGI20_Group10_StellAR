@@ -161,8 +161,18 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.xr.arkit": {
+      "version": "4.0.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.arsubsystems": "4.0.9",
+        "com.unity.xr.management": "3.2.13"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.xr.arsubsystems": {
-      "version": "4.0.8",
+      "version": "4.0.9",
       "depth": 1,
       "source": "registry",
       "dependencies": {

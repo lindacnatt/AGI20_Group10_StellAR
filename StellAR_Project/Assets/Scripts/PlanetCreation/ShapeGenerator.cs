@@ -4,21 +4,28 @@ using UnityEngine;
 using System;
 
 public class ShapeGenerator {
-    ShapeSettings settings;
+    public ShapeSettings settings;
     NoiseInterface[] noiseFilters;
-    MouseInteraction interaction;
+    //MouseInteraction interaction;
+    Interactor interaction;
     List<Vector3> touchedPoints;
     public MinMax elevationMinMax;
     public CraterGenerator craterGenerator;
-    List<Dictionary<String, float>> masks;
-    public bool zerolvlIsOcean = true;
+    public List<Dictionary<String, float>> masks;
 
-    public ShapeGenerator(ShapeSettings settings, MouseInteraction interaction, CraterGenerator craterGenerator){
+    public List<string> maskKeys;
+    public List<float> maskValues;
+
+    public ShapeGenerator(ShapeSettings settings, Interactor interaction, CraterGenerator craterGenerator){
         this.settings = settings;
         noiseFilters = new NoiseInterface[settings.noiseLayers.Length];
         
         this.interaction = interaction;
-        this.masks = new List<Dictionary<string, float>>();
+        this.masks = new List<Dictionary<string, float>>(); 
+        //this.masks.Add(DataChanger.arraysToDict(maskKeys, maskValues));
+        
+        this.maskKeys = new List<string>();
+        this.maskValues = new List<float>();
 
         for (int i = 0; i < noiseFilters.Length; i++){
             masks.Add(new Dictionary<string, float>());
@@ -27,38 +34,36 @@ public class ShapeGenerator {
 
         elevationMinMax = new MinMax();
         this.craterGenerator = craterGenerator;
+        settings.zeroLvlIsOcean = true;
     }
 
     public Vector3 CalculatePointOnPlanet(Vector3 pointOnUnitSphere) {
         float craterHeight = craterGenerator.CalculateCraterDepth(pointOnUnitSphere);
-        //Debug.Log(craterHeight);
-        //float firstLayerValue = noiseFilters[0].Evaluate(pointOnUnitSphere);
         float elevation = 0;
         float noiseelevation = 0;
-        float mask;//should be changed depending on maskType
+        float mask; 
         float dist;
         String pointStr = pointOnUnitSphere.ToString();
 
         for (int i = 0; i < noiseFilters.Length; i++) {
-            mask = 1.0f;
+            mask = 0f;
             if (settings.noiseLayers[i].enabled) {
                 if (settings.noiseLayers[i].useMouseAsMask) {
                     if (interaction.noiseType == i) {
                         // check if the point is in radius of the painted vertices 
                         dist = (pointOnUnitSphere * settings.radius - interaction.interactionPoint).magnitude;
-                        if (dist < interaction.brushSize) {
+                        if (dist <= interaction.brushSize) {
                             // the mask is the distance from point to brush
                             mask = (interaction.brushSize - dist) / interaction.brushSize;
-                            mask *= 0.2f;
+                            mask *= 0.05f;
                             if (masks[i].ContainsKey(pointStr)) {
+                                masks[i][pointStr] += mask;
                                 if (masks[i][pointStr] >= 1f) {
                                     masks[i][pointStr] = 1f;
                                 }
-                                else {
-                                    masks[i][pointStr] += mask;
-                                }
+                                mask = masks[i][pointStr];
                             }
-                            else {
+                            else{
                                 masks[i].Add(pointStr, mask);
                             }
                         }
@@ -74,11 +79,23 @@ public class ShapeGenerator {
                 noiseelevation += noiseFilters[i].Evaluate(pointOnUnitSphere) * mask;
             }
         }
+        if(interaction.noiseType == -1){
+            if (masks[0].ContainsKey(pointStr)) {
+                if(masks[0][pointStr] > 0.01){
+                    dist = (pointOnUnitSphere * settings.radius - interaction.interactionPoint).magnitude;
+                    if (dist <= interaction.brushSize) {
+                        mask = (interaction.brushSize - dist) / interaction.brushSize;
+                        masks[0][pointStr] *= 1 - mask;
+                    }
+                }
+            }
+        }
+
         elevation += noiseelevation;
         elevation += craterHeight;
         if (craterHeight < 0)
         {
-            elevation += -elevation / 2;
+            elevation += -noiseelevation*0.65f;
         }
         elevation = settings.radius * (1 + elevation);
         if (elevation < settings.radius && settings.zeroLvlIsOcean)
@@ -91,30 +108,21 @@ public class ShapeGenerator {
         }
         else
         {
-            elevationMinMax.AddValue(elevation);
+            elevationMinMax.AddValue(Mathf.Max(elevation, settings.radius -1f));
         }
-        return pointOnUnitSphere *  elevation;
+        return pointOnUnitSphere * elevation;
+    }
+    
+    public string[] getMaskKeys(){
+        return DataChanger.getKeysFromDict(masks[0]);
     }
 
-    private float checkIfmarked(List<Vector3> touchedPoints, Vector3 pointOnSphere, float radius){
-        float minDist = radius;
-        float tempDist;
-        foreach (Vector3 point in touchedPoints){
-            tempDist = (point-pointOnSphere).magnitude;
-            if(tempDist < minDist){ // if point is within a certain area
-                minDist = tempDist;
-            }
-        }
-        return minDist;
+    public float[] getMaskValues(){
+        return DataChanger.getValuesFromDict(masks[0]);
     }
 
-    private float StepFunction(int numSteps, float value){ // clamps the value, assumes value [0, 1]
-        value = Mathf.Round(value*numSteps);
-        value /= numSteps;
-        return value;
-    }
+    public void checkIfCrater(Vector3 point)
+    {
 
-    private float Sigmoid(float value){
-        return 1.0f / (1.0f + (float) Math.Exp(-value));
-    }      
+    }
 }

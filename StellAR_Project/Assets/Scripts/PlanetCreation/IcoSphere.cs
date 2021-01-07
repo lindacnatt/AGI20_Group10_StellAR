@@ -11,7 +11,6 @@ public class IcoSphere {
     List<Vector3> vertices;
     List<Vector2> uvCoords;
     float theta;
-    Vector2[] uv;
 
     public IcoSphere(ShapeGenerator shapeGenerator, float radius, int detail, Mesh mesh){
         this.shapeGenerator = shapeGenerator;
@@ -29,8 +28,7 @@ public class IcoSphere {
   
         float r = 1.0f/Mathf.Sqrt((1 + theta*theta));
         theta = theta/Mathf.Sqrt((1 + theta*theta));
-        uv = mesh.uv;
-
+        
         // construct base vertices
         AddVertex((new Vector3(-r, theta, 0)));
         AddVertex((new Vector3(r, theta, 0)));
@@ -103,7 +101,7 @@ public class IcoSphere {
         mesh.Clear();
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangleIndices.ToArray();
-        mesh.uv = uv;
+        UpdateUVs();
         mesh.RecalculateNormals(); 
     }
 
@@ -127,13 +125,14 @@ public class IcoSphere {
     public void UpdateMesh(){
         Vector3[] updatedVertices = new Vector3[this.vertices.Count];
         int[] tempTriangles = mesh.triangles;
-
+        Vector2[] uvs = mesh.uv;
         for(int i = 0; i < this.vertices.Count; i++){
             updatedVertices[i] = shapeGenerator.CalculatePointOnPlanet(this.vertices[i]);
         }
         mesh.Clear();
         mesh.vertices = updatedVertices;
         mesh.triangles = tempTriangles;
+        mesh.uv = uvs;
         mesh.RecalculateNormals();
     }
 
@@ -153,13 +152,12 @@ public class IcoSphere {
         mesh.uv = uvs;
     }
 
-    public void UpdateBiomeUVs(ColorGenerator colorgenerator){
-        Vector2[] uv = new Vector2[vertices.Count];
+    public void SetUVs(ColorGenerator colorGenerator){
+        Vector2[] uvs = new Vector2[vertices.Count];
         for(int i = 0; i < vertices.Count; i++){
-            Vector3 point = vertices[i];
-            uv[i] = new Vector2(colorgenerator.BiomePercentFromPoint(point), 0);
+            uvs[i] = new Vector2(colorGenerator.BiomePercentFromPoint(vertices[i]), 0);
         }
-        mesh.uv = uv;
+        mesh.uv = uvs;
     }
 
 }

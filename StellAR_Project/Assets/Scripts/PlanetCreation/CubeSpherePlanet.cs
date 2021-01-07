@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class CubeSpherePlanet : MotherPlanet{
-    
+ 
     // Resolution of every terrainFace
     [Range(2, 100)]
     public int resolution = 10;
@@ -108,4 +109,6 @@ public class CubeSpherePlanet : MotherPlanet{
             GenerateMesh();
         }
     }
+    
 }
+*/

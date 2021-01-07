@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ToggleGravityMode : MonoBehaviour
 {
-   public static bool nBodyGravity;
+   public static bool nBodyGravity = true;
+   public Toggle tgl;
 
-  void Awake(){
-      nBodyGravity=true;
+  
+  public void ChangeToggleStart(){
+      tgl.isOn=nBodyGravity;
   }
+
+  
    public void Toggle(){
        nBodyGravity = !nBodyGravity;
        TrajectoryLineAnimation.traj.enabled=false;

@@ -55,7 +55,7 @@ public class TestController : MonoBehaviour
             if (mouseY != 0)
             {
                 //position.y += mouseY;
-                rb.AddForce(transform.up * mouseY * 10);
+                rb.AddForce(transform.forward * mouseY * 10);
             }
         }
     }

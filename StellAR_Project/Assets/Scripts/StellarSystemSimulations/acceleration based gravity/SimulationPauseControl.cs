@@ -16,7 +16,7 @@ public class SimulationPauseControl : MonoBehaviour
         }
     }*/
 
-    public void Toggle(){
+    public void PauseToggle(){
         gameIsPaused = !gameIsPaused;
     }
 
@@ -32,4 +32,13 @@ public class SimulationPauseControl : MonoBehaviour
         ToggleGravityMode.nBodyGravity=true;
 
     }
+
+    public void Pause(){
+        gameIsPaused = true;
+    }
+
+    public void UnPause(){
+        gameIsPaused = false;
+    }
+
 }

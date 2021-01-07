@@ -8,7 +8,8 @@ public class BaryCentric {
         float w1, w2, w3;
         w1 = HeronsArea(pos, triangle[0], triangle[1]) / A;
         w2 = HeronsArea(pos, triangle[1], triangle[2]) / A;
-        w3 = HeronsArea(pos, triangle[2], triangle[0]) / A;
+        //w3 = HeronsArea(pos, triangle[2], triangle[0]) / A;
+        w3 = 1f - w1 -w2;
 
         return new Vector3(w1, w2, w3);
     }

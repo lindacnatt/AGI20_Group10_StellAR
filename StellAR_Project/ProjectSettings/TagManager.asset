@@ -8,7 +8,8 @@ TagManager:
   - Sun
   - Simulation
   - Asteroid
-
+  - GasPlanet
+  - UtilityObjectHolder
   layers:
   - Default
   - TransparentFX

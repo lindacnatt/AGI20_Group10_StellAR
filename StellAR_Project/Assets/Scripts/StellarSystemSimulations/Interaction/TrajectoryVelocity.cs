@@ -11,7 +11,7 @@ public class TrajectoryVelocity : MonoBehaviour
     public static Vector3 direction = new Vector3(0f,0f,0f);
     public SpriteRenderer arrow;
     [HideInInspector]
-    public static float magnitude = 4f;
+    public static float magnitude = 4f*0.5f; //*0.1 for slow, *0.5 for medium and *1.0 for fast
 
 
     public LineRenderer viewDir;
@@ -42,8 +42,7 @@ public class TrajectoryVelocity : MonoBehaviour
     {   
         vertices = 20;
         this.GetComponent<LineRenderer>().enabled = false;
-        arrow=this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        arrow.enabled=false;
+        this.GetComponent<LineRenderer>().SetWidth(0.045f, 0.040f);
         //rb=this.GetComponent<Rigidbody>();
 
         
@@ -62,14 +61,6 @@ public class TrajectoryVelocity : MonoBehaviour
                 if(startSlingshot & !TrajectorySimulation.freeze ){
                     SlingShot();
                     mainObject.transform.position = end;
-                    /*if((end-oldEnd).magnitude > 0.01f){
-                        oldEnd = Vector3.Lerp(oldEnd, end, 0.5f);
-                        mainObject.transform.position = oldEnd;
-                    }
-                    else{
-                        mainObject.transform.position = oldEnd;
-                    }*/
-                    //rb.MovePosition(end);
                 }
                 else if (!startSlingshot & !TrajectorySimulation.freeze){
                     mainObject.transform.position = start;
@@ -85,10 +76,16 @@ public class TrajectoryVelocity : MonoBehaviour
                 viewDir.enabled = false;
                 start = new Vector3(0f,0f,0f);
                 startSlingshot = false;
-                arrow.enabled=false;
-                arrow.size=new Vector2(0f,0f);
+                //arrow.enabled=false;
+                //arrow.size=new Vector2(0f,0f);
 
             }
+        }
+        else{
+            viewDir.positionCount = 0;
+            viewDir.enabled = false;
+            start = new Vector3(0f,0f,0f);
+
         }
         
         if(TrajectorySimulation.destroyLine){
@@ -96,8 +93,8 @@ public class TrajectoryVelocity : MonoBehaviour
             viewDir.positionCount = 0;
             viewDir.enabled = false;
             start = new Vector3(0f,0f,0f);
-            arrow.enabled=false;
-            arrow.size=new Vector2(0f,0f);
+            //arrow.enabled=false;
+            //arrow.size=new Vector2(0f,0f);
         }
         
     }
@@ -112,7 +109,7 @@ public class TrajectoryVelocity : MonoBehaviour
     void DrawDirection(Vector3 end){
         float s = direction.magnitude / (float) viewDir.positionCount;
         for (int i=0; i<viewDir.positionCount; i++){
-            viewDir.SetPosition(i,end+direction*s*i);
+            viewDir.SetPosition(i,end+3f*direction*s*i);
         }
 
     }
@@ -141,7 +138,7 @@ public class TrajectoryVelocity : MonoBehaviour
     void SlingShot(){
             viewDir.enabled = true;
             viewDir.positionCount = vertices;
-            end = Camera.main.transform.position + 2.0f*Camera.main.transform.forward;//cam.transform.position+2.0f*cam.transform.forward;
+            end = Camera.main.transform.position + Camera.main.transform.forward*2.5f+new Vector3(0f,-0.5f,0f);//cam.transform.position+2.0f*cam.transform.forward;
             CheckPositionChange();
             direction = (start-end);
             

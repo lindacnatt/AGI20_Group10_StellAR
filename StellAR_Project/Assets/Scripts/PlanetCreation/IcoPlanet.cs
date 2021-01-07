@@ -10,24 +10,25 @@ public class IcoPlanet : MotherPlanet{
     IcoSphere icoSphere;
     [SerializeField, HideInInspector]
     MeshFilter meshFilter;
-    MouseInteraction interaction;
+    
+    Interactor interaction;
 
     public override void Initialize(){
         if(shapeSettings == null || colorSettings == null){
-            shapeSettings = SettingSpawner.loadDefaultShape();
-            colorSettings = SettingSpawner.loadDefaultColor();
+            shapeSettings = SettingSpawner.CopyShapeSettings();
+            colorSettings = SettingSpawner.CopyColorSettings();
         }
-
-        if(interaction == null){
-            interaction = GetComponent<MouseInteraction>();
+        shapeSettings = SettingSpawner.CopyShapeSettings();
+        colorSettings = SettingSpawner.CopyColorSettings();
+        
+        if(craterSettings == null){
+            craterSettings = SettingSpawner.CopyCraterSettings();
         }
+    
+        interaction = (Interactor) GameObject.Find("Interactor").GetComponent<Interactor>();
 
         if(this.GetComponent<SphereCollider>() == null){
             this.gameObject.AddComponent<SphereCollider>();
-        }
-
-        if(craterSettings == null){
-            craterSettings = SettingSpawner.loadDefaultCraters();
         }
 
         if(this.transform.Find("mesh") == null){ // no meshObj initialized yet
@@ -44,7 +45,6 @@ public class IcoPlanet : MotherPlanet{
             meshObj.GetComponent<MeshRenderer>(); //.material = (Material) Resources.Load("defaultMat");
             meshFilter.sharedMesh = new Mesh();
             meshObj.GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
-
         }
 
         craterGenerator = new CraterGenerator(craterSettings);
@@ -54,7 +54,7 @@ public class IcoPlanet : MotherPlanet{
         colorGenerator.UpdateSettings(colorSettings);
 
         icoSphere = new IcoSphere(shapeGenerator, shapeSettings.radius, LOD, meshFilter.sharedMesh); 
-        icoSphere.UpdateBiomeUVs(colorGenerator);   
+        icoSphere.SetUVs(colorGenerator);   
     }
 
     public override void GenerateMesh(){
@@ -62,6 +62,7 @@ public class IcoPlanet : MotherPlanet{
     }
 
     public override void UpdateMesh(){
+        shapeGenerator.elevationMinMax = new MinMax();
         if(icoSphere == null){
             Initialize();
             icoSphere.ConstructMesh();
@@ -74,11 +75,8 @@ public class IcoPlanet : MotherPlanet{
     }
 
     public override void GenerateColors(){   
-        if(colorGenerator == null){
-            Initialize();
-        }
         colorGenerator.UpdateColors();
-        icoSphere.UpdateBiomeUVs(colorGenerator);
+        icoSphere.SetUVs(colorGenerator);
     }
     
     public override void OnCraterSettingsUpdated(){ //Rebuild planet when color is updated
@@ -102,9 +100,10 @@ public class IcoPlanet : MotherPlanet{
         position = rotation * position;
 
         float velocity = collision.relativeVelocity.magnitude;
-        craterSettings.impact = Mathf.Min(0.1f + velocity / 3, 1.6f);
-        craterSettings.radius = otherRadius * 0.6f;
-        shapeGenerator.craterGenerator.CreateCrater(position.normalized, 1f);
+        float impact = Mathf.Min(0.2f + velocity*1.2f, 1.6f);
+        float radius = otherRadius * 1.2f;
+        shapeGenerator.craterGenerator.CreateDynaCrater(position.normalized, impact, radius);
         UpdateMesh();
     }
+
 }
